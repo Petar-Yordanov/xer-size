@@ -19,21 +19,19 @@ jobs:
       - name: Install MAUI + Android workloads
         run: dotnet workload install maui android --ignore-failed-sources
 
-      - name: Verify secrets presence
+      - name: Generate temporary Android keystore
         shell: pwsh
         run: |
-          if ("${{ secrets.ANDROID_KEYSTORE_BASE64 }}" -eq "") { throw "ANDROID_KEYSTORE_BASE64 is empty or missing" }
-          if ("${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" -eq "") { throw "ANDROID_KEYSTORE_PASSWORD is empty or missing" }
-          if ("${{ secrets.ANDROID_KEY_ALIAS }}" -eq "") { throw "ANDROID_KEY_ALIAS is empty or missing" }
-          if ("${{ secrets.ANDROID_KEY_PASSWORD }}" -eq "") { throw "ANDROID_KEY_PASSWORD is empty or missing" }
-
-      - name: Decode keystore
-        shell: pwsh
-        run: |
-          [IO.File]::WriteAllBytes(
-            "$env:GITHUB_WORKSPACE\android-signing.keystore",
-            [Convert]::FromBase64String("${{ secrets.ANDROID_KEYSTORE_BASE64 }}")
-          )
+          keytool -genkeypair `
+            -v `
+            -keystore "$env:GITHUB_WORKSPACE\android-signing.keystore" `
+            -storepass "temp-store-pass-123" `
+            -keypass "temp-key-pass-123" `
+            -alias "xersize" `
+            -keyalg RSA `
+            -keysize 2048 `
+            -validity 10000 `
+            -dname "CN=XerSize, OU=CI, O=XerSize, L=NA, S=NA, C=US"
 
       - name: Publish signed Release APK
         shell: pwsh
@@ -44,9 +42,9 @@ jobs:
           -p:AndroidPackageFormats=apk
           -p:AndroidKeyStore=true
           -p:AndroidSigningKeyStore="$env:GITHUB_WORKSPACE\android-signing.keystore"
-          -p:AndroidSigningStorePass="${{ secrets.ANDROID_KEYSTORE_PASSWORD }}"
-          -p:AndroidSigningKeyAlias="${{ secrets.ANDROID_KEY_ALIAS }}"
-          -p:AndroidSigningKeyPass="${{ secrets.ANDROID_KEY_PASSWORD }}"
+          -p:AndroidSigningStorePass="temp-store-pass-123"
+          -p:AndroidSigningKeyAlias="xersize"
+          -p:AndroidSigningKeyPass="temp-key-pass-123"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
