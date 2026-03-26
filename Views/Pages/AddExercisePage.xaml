@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.AddExercisePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Routines"
+    x:DataType="viewModels:AddExercisePageViewModel"
+    Title="{Binding PageTitle}">
+
+    <ScrollView>
+        <Grid Style="{StaticResource PageRootGridStyle}" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+            <Label Grid.Row="0" Text="{Binding PageTitle}" Style="{StaticResource PageTitleLabelStyle}" />
+
+            <Border Grid.Row="1" Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Exercise Source" Style="{StaticResource BodyLabelStyle}" />
+                    <Label Text="{Binding SourceSummary}" Style="{StaticResource MutedLabelStyle}" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button
+                            Text="Custom Exercise"
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Command="{Binding UseCustomCommand}" />
+
+                        <Button
+                            Grid.Column="1"
+                            Text="Choose From Catalog"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Command="{Binding OpenCatalogCommand}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Row="2" Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <Entry Placeholder="Name" Text="{Binding Name}" />
+                    <Entry Placeholder="Force" Text="{Binding Force}" />
+                    <Entry Placeholder="Body category" Text="{Binding BodyCategory}" />
+                    <Entry Placeholder="Mechanic" Text="{Binding Mechanic}" />
+                    <Entry Placeholder="Equipment" Text="{Binding Equipment}" />
+                    <Entry Placeholder="Limb involvement" Text="{Binding LimbInvolvement}" />
+                    <Entry Placeholder="Movement pattern" Text="{Binding MovementPattern}" />
+                    <Entry Placeholder="Primary muscle categories (comma separated)" Text="{Binding PrimaryMuscleCategoriesText}" />
+                    <Entry Placeholder="Secondary muscle categories (comma separated)" Text="{Binding SecondaryMuscleCategoriesText}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Row="3" Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <Entry Placeholder="Rest seconds" Keyboard="Numeric" Text="{Binding RestSecondsText}" />
+                    <Entry Placeholder="Notes" Text="{Binding Notes}" />
+                    <Entry Placeholder="Image path or URL" Text="{Binding ImagePath}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Row="4" Style="{StaticResource CardBorderStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <Picker
+                        Title="Template type"
+                        ItemsSource="{Binding SetModes}"
+                        SelectedItem="{Binding SelectedSetMode}" />
+
+                    <Entry Placeholder="Strength sets: 10x60, 8x70, 6x80" Text="{Binding StrengthSetsText}" />
+                    <Entry Placeholder="Duration sets: 30s, 30s, 45s" Text="{Binding DurationSetsText}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Grid.Row="5"
+                Text="{Binding SaveButtonText}"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Command="{Binding SaveCommand}" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

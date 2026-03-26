@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Settings"
+    x:DataType="viewModels:SettingsPageViewModel"
+    Title="Settings">
+
+    <Grid Style="{StaticResource PageRootGridStyle}">
+        <Border Style="{StaticResource CardBorderStyle}">
+            <VerticalStackLayout Spacing="12">
+                <Label Text="Theme" Style="{StaticResource PageTitleLabelStyle}" />
+                <Label Text="{Binding CurrentTheme, StringFormat='Current theme: {0}'}" Style="{StaticResource BodyLabelStyle}" />
+
+                <HorizontalStackLayout Spacing="10">
+                    <Button
+                        Text="Light"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Command="{Binding ApplyLightThemeCommand}" />
+                    <Button
+                        Text="Dark"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Command="{Binding ApplyDarkThemeCommand}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

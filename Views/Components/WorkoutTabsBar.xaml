@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="XerSize.Views.Components.WorkoutTabsBar"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:models="clr-namespace:XerSize.Models"
+    x:Name="This">
+
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+        <CollectionView
+            ItemsSource="{Binding Source={x:Reference This}, Path=ItemsSource}"
+            SelectedItem="{Binding Source={x:Reference This}, Path=SelectedItem, Mode=TwoWay}"
+            SelectionMode="Single"
+            HeightRequest="58">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Workout">
+                    <Border
+                        Padding="14,8"
+                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                        Stroke="{DynamicResource BorderColor}"
+                        StrokeThickness="1"
+                        MinimumWidthRequest="110">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16" />
+                        </Border.StrokeShape>
+
+                        <Border.Behaviors>
+                            <toolkit:TouchBehavior
+                                LongPressDuration="650"
+                                LongPressCommand="{Binding Source={x:Reference This}, Path=LongPressCommand}"
+                                LongPressCommandParameter="{Binding .}" />
+                        </Border.Behaviors>
+
+                        <Label
+                            Text="{Binding Name}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Style="{StaticResource BodyLabelStyle}" />
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button
+            Grid.Column="1"
+            Text="+ Workout"
+            Style="{StaticResource PrimaryButtonStyle}"
+            Command="{Binding Source={x:Reference This}, Path=AddCommand}" />
+    </Grid>
+</ContentView>

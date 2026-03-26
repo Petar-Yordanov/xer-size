@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.HistoryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.History"
+    xmlns:models="clr-namespace:XerSize.Models"
+    x:DataType="viewModels:HistoryPageViewModel"
+    x:Name="PageRoot"
+    Title="History">
+
+    <Grid
+        Style="{StaticResource PageRootGridStyle}"
+        RowDefinitions="Auto,*">
+
+        <Border
+            Grid.Row="0"
+            Style="{StaticResource CardBorderStyle}">
+            <VerticalStackLayout Spacing="10">
+                <Label
+                    Text="History"
+                    Style="{StaticResource PageTitleLabelStyle}" />
+
+                <Picker
+                    Title="Routine"
+                    ItemsSource="{Binding Routines}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedRoutine}" />
+
+                <Picker
+                    Title="Workout"
+                    ItemsSource="{Binding Workouts}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedWorkout}" />
+            </VerticalStackLayout>
+        </Border>
+
+        <CollectionView
+            Grid.Row="1"
+            Margin="0,12,0,0"
+            ItemsSource="{Binding Sessions}"
+            SelectionMode="None"
+            EmptyView="No history yet for this filter.">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:HistorySessionRow">
+                    <Border
+                        x:DataType="{x:Null}"
+                        Margin="0,0,0,12"
+                        Style="{StaticResource CardBorderStyle}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                            Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.OpenSessionCommand}"
+                            CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="{Binding Title}"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="{Binding Subtitle}"
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="6">
+                                <Label Text="{Binding DateText}" Style="{StaticResource MutedLabelStyle}" />
+                                <Label Grid.Column="1" Text="{Binding DurationText, StringFormat='Duration: {0}'}" Style="{StaticResource MutedLabelStyle}" />
+
+                                <Label Grid.Row="1" Text="{Binding CaloriesText, StringFormat='Calories: {0}'}" Style="{StaticResource MutedLabelStyle}" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding BodyWeightText, StringFormat='Bodyweight: {0}'}" Style="{StaticResource MutedLabelStyle}" />
+                            </Grid>
+
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                                <Border Padding="10" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="Volume" Style="{StaticResource MutedLabelStyle}" />
+                                        <Label Text="{Binding VolumeText}" Style="{StaticResource BodyLabelStyle}" />
+                                    </VerticalStackLayout>
+                                </Border>
+
+                                <Border Grid.Column="1" Padding="10" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="Sets" Style="{StaticResource MutedLabelStyle}" />
+                                        <Label Text="{Binding SetsText}" Style="{StaticResource BodyLabelStyle}" />
+                                    </VerticalStackLayout>
+                                </Border>
+
+                                <Border Grid.Column="2" Padding="10" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="Reps" Style="{StaticResource MutedLabelStyle}" />
+                                        <Label Text="{Binding RepsText}" Style="{StaticResource BodyLabelStyle}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                                <Label
+                                    Text="{Binding VolumeDeltaText}"
+                                    Style="{StaticResource MutedLabelStyle}">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsVolumeUp}" Value="True">
+                                            <Setter Property="TextColor" Value="#16A34A" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsVolumeDown}" Value="True">
+                                            <Setter Property="TextColor" Value="{DynamicResource DangerColor}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding RepsDeltaText}"
+                                    Style="{StaticResource MutedLabelStyle}">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsRepsUp}" Value="True">
+                                            <Setter Property="TextColor" Value="#16A34A" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsRepsDown}" Value="True">
+                                            <Setter Property="TextColor" Value="{DynamicResource DangerColor}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

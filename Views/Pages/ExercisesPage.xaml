@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.ExercisesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Exercises"
+    xmlns:models="clr-namespace:XerSize.Models"
+    x:DataType="viewModels:ExercisesPageViewModel"
+    Title="Exercises">
+
+    <Grid Style="{StaticResource PageRootGridStyle}">
+        <CollectionView ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ExerciseCatalogItem">
+                    <Border Margin="0,0,0,10" Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding Name}" Style="{StaticResource BodyLabelStyle}" />
+                            <Label Text="{Binding Equipment}" Style="{StaticResource MutedLabelStyle}" />
+                            <Label Text="{Binding Mechanic}" Style="{StaticResource MutedLabelStyle}" />
+                            <Label Text="{Binding BodyCategory}" Style="{StaticResource MutedLabelStyle}" />
+                            <Label Text="{Binding PrimaryMuscleCategories[0]}" Style="{StaticResource MutedLabelStyle}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

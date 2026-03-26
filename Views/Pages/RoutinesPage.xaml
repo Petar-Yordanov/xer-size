@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.RoutinesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Routines"
+    xmlns:models="clr-namespace:XerSize.Models"
+    x:DataType="viewModels:RoutinesPageViewModel"
+    x:Name="PageRoot"
+    Title="Routines">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Settings"
+            Command="{Binding OpenSettingsCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <ScrollView>
+            <Grid
+                Style="{StaticResource PageRootGridStyle}"
+                RowDefinitions="Auto,Auto,Auto,Auto,*,Auto">
+
+                <Label
+                    Grid.Row="0"
+                    Text="Routines"
+                    Style="{StaticResource PageTitleLabelStyle}" />
+
+                <components:RoutineDropdown
+                    Grid.Row="1"
+                    ItemsSource="{Binding Routines}"
+                    SelectedItem="{Binding SelectedRoutine}"
+                    ManageCommand="{Binding ManageRoutineCommand}" />
+
+                <Label
+                    Grid.Row="2"
+                    Text="Workouts"
+                    Style="{StaticResource BodyLabelStyle}" />
+
+                <components:WorkoutTabsBar
+                    Grid.Row="3"
+                    ItemsSource="{Binding VisibleWorkouts}"
+                    SelectedItem="{Binding SelectedWorkout}"
+                    AddCommand="{Binding AddWorkoutCommand}"
+                    LongPressCommand="{Binding HandleWorkoutLongPressCommand}" />
+
+                <Border
+                    Grid.Row="4"
+                    Style="{StaticResource CardBorderStyle}">
+                    <CollectionView
+                        ItemsSource="{Binding VisibleExercises}"
+                        EmptyView="No exercises in this workout yet.">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:WorkoutExercise">
+                                <Grid
+                                    Padding="0,8"
+                                    ColumnDefinitions="*,Auto,Auto"
+                                    RowDefinitions="Auto,Auto">
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="{Binding Name}"
+                                        Style="{StaticResource BodyLabelStyle}" />
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Text="{Binding Notes}"
+                                        Style="{StaticResource MutedLabelStyle}" />
+
+                                    <Button
+                                        x:DataType="{x:Null}"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="1"
+                                        Margin="0,0,8,0"
+                                        Text="Edit"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.EditExerciseCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                    <Button
+                                        x:DataType="{x:Null}"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="2"
+                                        Text="Delete"
+                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.DeleteExerciseCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Border>
+
+                <BoxView
+                    Grid.Row="5"
+                    HeightRequest="90"
+                    Opacity="0" />
+            </Grid>
+        </ScrollView>
+
+        <Grid
+            x:DataType="{x:Null}"
+            IsVisible="{Binding IsQuickActionsOpen}"
+            InputTransparent="False">
+            <BoxView
+                BackgroundColor="#33000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding CloseQuickActionsCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+        </Grid>
+
+        <VerticalStackLayout
+            x:DataType="{x:Null}"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Margin="0,0,20,20"
+            Spacing="12">
+
+            <Border
+                IsVisible="{Binding IsQuickActionsOpen}"
+                BackgroundColor="{DynamicResource SurfaceColor}"
+                Stroke="{DynamicResource BorderColor}"
+                StrokeThickness="1"
+                Padding="14,10">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding StartWorkoutCommand}" />
+                </Border.GestureRecognizers>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Label
+                        Text="▶"
+                        FontSize="16"
+                        VerticalOptions="Center"
+                        TextColor="{DynamicResource PrimaryTextColor}" />
+                    <Label
+                        Text="Start Workout"
+                        Style="{StaticResource BodyLabelStyle}"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <Border
+                IsVisible="{Binding IsQuickActionsOpen}"
+                BackgroundColor="{DynamicResource SurfaceColor}"
+                Stroke="{DynamicResource BorderColor}"
+                StrokeThickness="1"
+                Padding="14,10">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddExerciseCommand}" />
+                </Border.GestureRecognizers>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Label
+                        Text="+"
+                        FontSize="18"
+                        VerticalOptions="Center"
+                        TextColor="{DynamicResource PrimaryTextColor}" />
+                    <Label
+                        Text="Add Exercise"
+                        Style="{StaticResource BodyLabelStyle}"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <Button
+                WidthRequest="62"
+                HeightRequest="62"
+                CornerRadius="31"
+                FontSize="26"
+                Text="{Binding IsQuickActionsOpen, Converter={StaticResource BoolToFabGlyphConverter}}"
+                BackgroundColor="{DynamicResource PrimaryColor}"
+                TextColor="{DynamicResource OnPrimaryColor}"
+                Command="{Binding ToggleQuickActionsCommand}" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
