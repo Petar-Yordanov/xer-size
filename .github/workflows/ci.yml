@@ -2,6 +2,7 @@ name: CI
 
 on:
   push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -9,16 +10,22 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
 
       - name: Install MAUI + Android workloads
         run: dotnet workload install maui android --ignore-failed-sources
+
+      - name: Verify secrets presence
+        shell: pwsh
+        run: |
+          if ("${{ secrets.ANDROID_KEYSTORE_BASE64 }}" -eq "") { throw "ANDROID_KEYSTORE_BASE64 is empty or missing" }
+          if ("${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" -eq "") { throw "ANDROID_KEYSTORE_PASSWORD is empty or missing" }
+          if ("${{ secrets.ANDROID_KEY_ALIAS }}" -eq "") { throw "ANDROID_KEY_ALIAS is empty or missing" }
+          if ("${{ secrets.ANDROID_KEY_PASSWORD }}" -eq "") { throw "ANDROID_KEY_PASSWORD is empty or missing" }
 
       - name: Decode keystore
         shell: pwsh
