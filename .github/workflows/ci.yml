@@ -26,12 +26,11 @@ jobs:
             -v `
             -keystore "$env:GITHUB_WORKSPACE\android-signing.keystore" `
             -storepass "temp-store-pass-123" `
-            -keypass "temp-key-pass-123" `
             -alias "xersize" `
             -keyalg RSA `
             -keysize 2048 `
             -validity 10000 `
-            -dname "CN=XerSize, OU=CI, O=XerSize, L=NA, S=NA, C=US"
+            -dname "CN=XerSize, OU=CI, O=XerSize, L=NA, ST=NA, C=US"
 
       - name: Publish signed Release APK
         shell: pwsh
@@ -44,7 +43,7 @@ jobs:
           -p:AndroidSigningKeyStore="$env:GITHUB_WORKSPACE\android-signing.keystore"
           -p:AndroidSigningStorePass="temp-store-pass-123"
           -p:AndroidSigningKeyAlias="xersize"
-          -p:AndroidSigningKeyPass="temp-key-pass-123"
+          -p:AndroidSigningKeyPass="temp-store-pass-123"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
