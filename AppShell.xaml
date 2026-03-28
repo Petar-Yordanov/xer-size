@@ -6,7 +6,7 @@
     xmlns:pages="clr-namespace:XerSize.Views.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <TabBar>
+    <TabBar Shell.NavBarIsVisible="False">
         <ShellContent
             Title="Routines"
             Icon="routines.png"
@@ -30,5 +30,11 @@
             Icon="statistics.png"
             Route="statistics"
             ContentTemplate="{DataTemplate pages:StatisticsPage}" />
+
+        <ShellContent
+            Title="Settings"
+            Icon="settings.png"
+            Route="settingsTab"
+            ContentTemplate="{DataTemplate pages:SettingsPage}" />
     </TabBar>
 </Shell>

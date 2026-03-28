@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using XerSize.Models;
 using XerSize.Services.Interfaces;
 using XerSize.Views.Pages;
@@ -10,18 +9,27 @@ namespace XerSize.ViewModels.Routines;
 public partial class RoutinesPageViewModel : ObservableObject
 {
     private readonly IRoutineService _routineService;
-    private bool _isLoaded;
 
     public ObservableCollection<Routine> Routines { get; } = new();
     public ObservableCollection<Workout> VisibleWorkouts { get; } = new();
-    public ObservableCollection<WorkoutExercise> VisibleExercises { get; } = new();
+    public ObservableCollection<WorkoutExerciseCardRow> VisibleExercises { get; } = new();
 
     [ObservableProperty]
     public partial bool IsQuickActionsOpen { get; set; }
-    [ObservableProperty] public partial Routine? SelectedRoutine { get; set; }
-    [ObservableProperty] public partial Workout? SelectedWorkout { get; set; }
-    [ObservableProperty] public partial bool IsBusy { get; set; }
 
+    [ObservableProperty]
+    public partial bool IsRoutineSheetOpen { get; set; }
+
+    [ObservableProperty]
+    public partial Routine? SelectedRoutine { get; set; }
+
+    [ObservableProperty]
+    public partial Workout? SelectedWorkout { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsBusy { get; set; }
+
+    public string SelectedRoutineName => SelectedRoutine?.Name ?? "Select routine";
     public string SelectedWorkoutName => SelectedWorkout?.Name ?? "None";
 
     public RoutinesPageViewModel(IRoutineService routineService)
@@ -42,13 +50,48 @@ public partial class RoutinesPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task LoadAsync()
+    private void ToggleRoutineSheet()
     {
-        if (_isLoaded)
+        IsRoutineSheetOpen = !IsRoutineSheetOpen;
+    }
+
+    [RelayCommand]
+    private void CloseRoutineSheet()
+    {
+        IsRoutineSheetOpen = false;
+    }
+
+    [RelayCommand]
+    private void SelectRoutine(Routine? routine)
+    {
+        if (routine is null)
             return;
 
+        SelectedRoutine = routine;
+        IsRoutineSheetOpen = false;
+    }
+
+    [RelayCommand]
+    public async Task LoadAsync()
+    {
         await ReloadAsync(SelectedRoutine?.Id, SelectedWorkout?.Id);
-        _isLoaded = true;
+    }
+
+    [RelayCommand]
+    private async Task AddRoutineAsync()
+    {
+        IsRoutineSheetOpen = false;
+
+        var page = Shell.Current?.CurrentPage ?? Application.Current?.Windows.FirstOrDefault()?.Page;
+        if (page is null)
+            return;
+
+        var name = await page.DisplayPromptAsync("New Routine", "Routine name:");
+        if (string.IsNullOrWhiteSpace(name))
+            return;
+
+        var created = await _routineService.CreateRoutineAsync(name);
+        await ReloadAsync(created.Id, null);
     }
 
     [RelayCommand]
@@ -57,7 +100,7 @@ public partial class RoutinesPageViewModel : ObservableObject
         if (SelectedRoutine is null)
             return;
 
-        var page = Application.Current?.Windows.FirstOrDefault()?.Page;
+        var page = Shell.Current?.CurrentPage ?? Application.Current?.Windows.FirstOrDefault()?.Page;
         if (page is null)
             return;
 
@@ -70,87 +113,19 @@ public partial class RoutinesPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task ManageRoutineAsync()
+    private Task HandleRoutineLongPressAsync()
     {
-        if (SelectedRoutine is null)
-            return;
-
-        var page = Application.Current?.Windows.FirstOrDefault()?.Page;
-        if (page is null)
-            return;
-
-        var action = await page.DisplayActionSheetAsync(
-            SelectedRoutine.Name,
-            "Cancel",
-            null,
-            "Rename Routine",
-            "Duplicate Routine",
-            "Delete Routine");
-
-        if (action == "Rename Routine")
-        {
-            var newName = await page.DisplayPromptAsync("Rename Routine", "New name:", initialValue: SelectedRoutine.Name);
-            if (!string.IsNullOrWhiteSpace(newName))
-                await _routineService.RenameRoutineAsync(SelectedRoutine.Id, newName);
-        }
-        else if (action == "Duplicate Routine")
-        {
-            await _routineService.DuplicateRoutineAsync(SelectedRoutine.Id);
-        }
-        else if (action == "Delete Routine")
-        {
-            var confirm = await page.DisplayAlertAsync("Delete Routine", $"Delete '{SelectedRoutine.Name}'?", "Delete", "Cancel");
-            if (confirm)
-                await _routineService.DeleteRoutineAsync(SelectedRoutine.Id);
-        }
-        else
-        {
-            return;
-        }
-
-        await ReloadAsync();
+        IsRoutineSheetOpen = false;
+        return Shell.Current.GoToAsync(nameof(RoutineManagerPage));
     }
 
     [RelayCommand]
-    private async Task HandleWorkoutLongPressAsync(Workout? workout)
+    private Task HandleWorkoutLongPressAsync(Workout? workout)
     {
         if (SelectedRoutine is null || workout is null)
-            return;
+            return Task.CompletedTask;
 
-        var page = Application.Current?.Windows.FirstOrDefault()?.Page;
-        if (page is null)
-            return;
-
-        var action = await page.DisplayActionSheetAsync(
-            workout.Name,
-            "Cancel",
-            null,
-            "Rename Workout",
-            "Duplicate Workout",
-            "Delete Workout");
-
-        if (action == "Rename Workout")
-        {
-            var newName = await page.DisplayPromptAsync("Rename Workout", "New name:", initialValue: workout.Name);
-            if (!string.IsNullOrWhiteSpace(newName))
-                await _routineService.RenameWorkoutAsync(SelectedRoutine.Id, workout.Id, newName);
-        }
-        else if (action == "Duplicate Workout")
-        {
-            await _routineService.DuplicateWorkoutAsync(SelectedRoutine.Id, workout.Id);
-        }
-        else if (action == "Delete Workout")
-        {
-            var confirm = await page.DisplayAlertAsync("Delete Workout", $"Delete '{workout.Name}'?", "Delete", "Cancel");
-            if (confirm)
-                await _routineService.DeleteWorkoutAsync(SelectedRoutine.Id, workout.Id);
-        }
-        else
-        {
-            return;
-        }
-
-        await ReloadAsync(SelectedRoutine.Id, SelectedWorkout?.Id);
+        return Shell.Current.GoToAsync($"{nameof(WorkoutManagerPage)}?routineId={SelectedRoutine.Id}");
     }
 
     [RelayCommand]
@@ -158,7 +133,7 @@ public partial class RoutinesPageViewModel : ObservableObject
     {
         IsQuickActionsOpen = false;
 
-        var page = Application.Current?.Windows.FirstOrDefault()?.Page;
+        var page = Shell.Current?.CurrentPage ?? Application.Current?.Windows.FirstOrDefault()?.Page;
         if (page is null || SelectedWorkout is null)
             return;
 
@@ -166,13 +141,34 @@ public partial class RoutinesPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task OpenWorkoutMoreAsync()
+    private void ToggleExerciseExpanded(WorkoutExerciseCardRow? row)
     {
-        var page = Application.Current?.Windows.FirstOrDefault()?.Page;
-        if (page is null || SelectedWorkout is null)
+        if (row is null)
             return;
 
-        await page.DisplayAlert("Workout Options", $"More options for '{SelectedWorkout.Name}' are not implemented yet.", "OK");
+        row.IsExpanded = !row.IsExpanded;
+    }
+
+    [RelayCommand]
+    private async Task EditExerciseAsync(WorkoutExerciseCardRow? row)
+    {
+        if (row is null || SelectedRoutine is null || SelectedWorkout is null)
+            return;
+
+        await Shell.Current.GoToAsync(
+            $"{nameof(AddExercisePage)}?routineId={SelectedRoutine.Id}&workoutId={SelectedWorkout.Id}&exerciseId={row.Exercise.Id}");
+    }
+
+    [RelayCommand]
+    private async Task OpenWorkoutStatisticsAsync()
+    {
+        IsQuickActionsOpen = false;
+
+        if (SelectedRoutine is null || SelectedWorkout is null)
+            return;
+
+        await Shell.Current.GoToAsync(
+            $"//statistics?routineId={SelectedRoutine.Id}&workoutId={SelectedWorkout.Id}&tab=preferences");
     }
 
     private async Task ReloadAsync(Guid? routineId = null, Guid? workoutId = null)
@@ -204,6 +200,7 @@ public partial class RoutinesPageViewModel : ObservableObject
             SelectedWorkout = resolvedWorkout;
 
             RefreshExercises();
+            OnPropertyChanged(nameof(SelectedRoutineName));
             OnPropertyChanged(nameof(SelectedWorkoutName));
         }
         finally
@@ -220,6 +217,7 @@ public partial class RoutinesPageViewModel : ObservableObject
             SelectedWorkout = value.Workouts.FirstOrDefault();
 
         RefreshExercises();
+        OnPropertyChanged(nameof(SelectedRoutineName));
         OnPropertyChanged(nameof(SelectedWorkoutName));
     }
 
@@ -236,7 +234,7 @@ public partial class RoutinesPageViewModel : ObservableObject
         if (SelectedRoutine is null)
             return;
 
-        foreach (var workout in SelectedRoutine.Workouts.OrderBy(x => x.Name))
+        foreach (var workout in SelectedRoutine.Workouts)
             VisibleWorkouts.Add(workout);
     }
 
@@ -248,7 +246,7 @@ public partial class RoutinesPageViewModel : ObservableObject
             return;
 
         foreach (var exercise in SelectedWorkout.Exercises.OrderBy(x => x.SortOrder))
-            VisibleExercises.Add(exercise);
+            VisibleExercises.Add(new WorkoutExerciseCardRow(exercise));
     }
 
     [RelayCommand]
@@ -267,74 +265,124 @@ public partial class RoutinesPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private Task EditExerciseAsync(WorkoutExercise exercise)
+    private async Task DeleteExerciseAsync(WorkoutExerciseCardRow? row)
     {
-        if (SelectedRoutine is null || SelectedWorkout is null)
-            return Task.CompletedTask;
-
-        return Shell.Current.GoToAsync(
-            $"{nameof(AddExercisePage)}?routineId={SelectedRoutine.Id}&workoutId={SelectedWorkout.Id}&exerciseId={exercise.Id}");
-    }
-
-    [RelayCommand]
-    private async Task DeleteExerciseAsync(WorkoutExercise exercise)
-    {
-        if (SelectedRoutine is null || SelectedWorkout is null)
+        if (row is null || SelectedRoutine is null || SelectedWorkout is null)
             return;
 
-        var page = Application.Current?.Windows.FirstOrDefault()?.Page;
+        var page = Shell.Current?.CurrentPage ?? Application.Current?.Windows.FirstOrDefault()?.Page;
         if (page is null)
             return;
 
-        var confirm = await page.DisplayAlertAsync("Delete Exercise", $"Delete '{exercise.Name}'?", "Delete", "Cancel");
+        var confirm = await page.DisplayAlert("Delete Exercise", $"Delete '{row.Name}'?", "Delete", "Cancel");
         if (!confirm)
             return;
 
-        await _routineService.DeleteExerciseAsync(SelectedRoutine.Id, SelectedWorkout.Id, exercise.Id);
+        await _routineService.DeleteExerciseAsync(SelectedRoutine.Id, SelectedWorkout.Id, row.Exercise.Id);
         await ReloadAsync(SelectedRoutine.Id, SelectedWorkout.Id);
     }
+}
 
-    private static IEnumerable<WorkoutExerciseSet> ParseStrengthSets(string input, int restSeconds)
+public partial class WorkoutExerciseCardRow : ObservableObject
+{
+    public WorkoutExercise Exercise { get; }
+
+    [ObservableProperty]
+    public partial bool IsExpanded { get; set; }
+
+    public WorkoutExerciseCardRow(WorkoutExercise exercise)
     {
-        var items = input.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-        var order = 1;
+        Exercise = exercise;
+        GroupedSets = BuildGroupedSets(exercise);
+    }
 
-        foreach (var item in items)
+    public string Name => Exercise.Name;
+
+    public string PrimaryMusclesText
+    {
+        get
         {
-            var parts = item.Split('x', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            if (parts.Length == 2 &&
-                int.TryParse(parts[0], out var reps) &&
-                double.TryParse(parts[1], out var weight))
-            {
-                yield return new WorkoutExerciseSet
-                {
-                    Order = order++,
-                    Reps = reps,
-                    WeightKg = weight,
-                    RestSeconds = restSeconds
-                };
-            }
+            var muscles = Exercise.PrimaryMuscleCategories
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            return muscles.Count == 0 ? "No primary muscle groups" : string.Join(", ", muscles);
         }
     }
 
-    private static IEnumerable<WorkoutExerciseSet> ParseDurationSets(string input, int restSeconds)
-    {
-        var items = input.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-        var order = 1;
+    public string RestText =>
+        Exercise.DefaultRestSeconds.HasValue ? $"Rest {Exercise.DefaultRestSeconds.Value}s" : "No rest set";
 
-        foreach (var item in items)
-        {
-            var cleaned = item.Trim().TrimEnd('s', 'S');
-            if (int.TryParse(cleaned, out var seconds))
+    public bool HasImage => !string.IsNullOrWhiteSpace(Exercise.ImagePath);
+
+    public ImageSource? PreviewImageSource =>
+        HasImage ? ImageSource.FromFile(Exercise.ImagePath!) : null;
+
+    public string PlaceholderText =>
+        string.IsNullOrWhiteSpace(Name) ? "?" : Name.Substring(0, 1).ToUpperInvariant();
+
+    public string ExpandButtonText => IsExpanded ? "Hide Info" : "Expand Info";
+
+    public IReadOnlyList<WorkoutExerciseGroupedSetRow> GroupedSets { get; }
+
+    partial void OnIsExpandedChanged(bool value)
+    {
+        OnPropertyChanged(nameof(ExpandButtonText));
+    }
+
+    private static IReadOnlyList<WorkoutExerciseGroupedSetRow> BuildGroupedSets(WorkoutExercise exercise)
+    {
+        return exercise.Sets
+            .OrderBy(x => x.Order)
+            .GroupBy(x => new
             {
-                yield return new WorkoutExerciseSet
-                {
-                    Order = order++,
-                    DurationSeconds = seconds,
-                    WeightKg = 0,
-                    RestSeconds = restSeconds
-                };
+                Reps = x.Reps,
+                WeightKg = x.WeightKg,
+                DurationSeconds = x.DurationSeconds
+            })
+            .Select(group => new WorkoutExerciseGroupedSetRow
+            {
+                Count = group.Count(),
+                Reps = group.Key.Reps,
+                WeightKg = group.Key.WeightKg,
+                DurationSeconds = group.Key.DurationSeconds
+            })
+            .ToList();
+    }
+}
+
+public sealed class WorkoutExerciseGroupedSetRow
+{
+    public int Count { get; set; }
+    public int? Reps { get; set; }
+    public double? WeightKg { get; set; }
+    public int? DurationSeconds { get; set; }
+
+    public string SummaryText
+    {
+        get
+        {
+            var setWord = Count == 1 ? "set" : "sets";
+
+            if (DurationSeconds.HasValue && DurationSeconds.Value > 0)
+            {
+                if (Reps.HasValue && Reps.Value > 0)
+                    return $"{Count} {setWord} × {Reps.Value} reps × {DurationSeconds.Value}s";
+
+                return $"{Count} {setWord} × {DurationSeconds.Value}s";
             }
+
+            if (Reps.HasValue && WeightKg.HasValue)
+                return $"{Count} {setWord} × {Reps.Value} reps × {WeightKg.Value:F1} kg";
+
+            if (Reps.HasValue)
+                return $"{Count} {setWord} × {Reps.Value} reps";
+
+            if (WeightKg.HasValue)
+                return $"{Count} {setWord} × {WeightKg.Value:F1} kg";
+
+            return $"{Count} {setWord}";
         }
     }
 }

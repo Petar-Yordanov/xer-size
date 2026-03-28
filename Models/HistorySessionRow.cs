@@ -1,6 +1,8 @@
-﻿namespace XerSize.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public sealed class HistorySessionRow
+namespace XerSize.Models;
+
+public partial class HistorySessionRow : ObservableObject
 {
     public Guid SessionId { get; set; }
 
@@ -23,4 +25,28 @@ public sealed class HistorySessionRow
     public bool IsVolumeDown { get; set; }
     public bool IsRepsUp { get; set; }
     public bool IsRepsDown { get; set; }
+
+    public List<HistorySessionExerciseInfoRow> ExerciseInfos { get; set; } = new();
+
+    [ObservableProperty]
+    public partial bool IsInfoExpanded { get; set; }
+
+    public string ToggleInfoText => IsInfoExpanded ? "Hide info" : "Show info";
+
+    partial void OnIsInfoExpandedChanged(bool value)
+    {
+        OnPropertyChanged(nameof(ToggleInfoText));
+    }
+}
+
+public sealed class HistorySessionExerciseInfoRow
+{
+    public string Name { get; set; } = string.Empty;
+    public string SummaryText { get; set; } = string.Empty;
+    public List<HistorySessionSetInfoRow> Sets { get; set; } = new();
+}
+
+public sealed class HistorySessionSetInfoRow
+{
+    public string Text { get; set; } = string.Empty;
 }

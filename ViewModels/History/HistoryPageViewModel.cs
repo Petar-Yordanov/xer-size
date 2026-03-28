@@ -24,6 +24,15 @@ public partial class HistoryPageViewModel : ObservableObject
     [ObservableProperty]
     public partial Workout? SelectedWorkout { get; set; }
 
+    [ObservableProperty]
+    public partial bool IsRoutineSheetOpen { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsWorkoutSheetOpen { get; set; }
+
+    public string SelectedRoutineName => SelectedRoutine?.Name ?? "Select routine";
+    public string SelectedWorkoutName => SelectedWorkout?.Name ?? "Select workout";
+
     public HistoryPageViewModel(IRoutineService routineService, IWorkoutHistoryService historyService)
     {
         _routineService = routineService;
@@ -42,7 +51,7 @@ public partial class HistoryPageViewModel : ObservableObject
             .ToList();
 
         Routines.Clear();
-        foreach (var routine in routines.OrderBy(x => x.Name))
+        foreach (var routine in routines)
             Routines.Add(routine);
 
         SelectedRoutine ??= Routines.FirstOrDefault();
@@ -53,12 +62,60 @@ public partial class HistoryPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private Task OpenSessionAsync(HistorySessionRow? row)
+    private void ToggleSessionInfo(HistorySessionRow? row)
     {
         if (row is null)
-            return Task.CompletedTask;
+            return;
 
-        return Shell.Current.GoToAsync($"{nameof(Views.Pages.HistorySessionDetailsPage)}?sessionId={row.SessionId}");
+        row.IsInfoExpanded = !row.IsInfoExpanded;
+    }
+
+    [RelayCommand]
+    private void ToggleRoutineSheet()
+    {
+        IsRoutineSheetOpen = !IsRoutineSheetOpen;
+        if (IsRoutineSheetOpen)
+            IsWorkoutSheetOpen = false;
+    }
+
+    [RelayCommand]
+    private void ToggleWorkoutSheet()
+    {
+        IsWorkoutSheetOpen = !IsWorkoutSheetOpen;
+        if (IsWorkoutSheetOpen)
+            IsRoutineSheetOpen = false;
+    }
+
+    [RelayCommand]
+    private void CloseRoutineSheet()
+    {
+        IsRoutineSheetOpen = false;
+    }
+
+    [RelayCommand]
+    private void CloseWorkoutSheet()
+    {
+        IsWorkoutSheetOpen = false;
+    }
+
+    [RelayCommand]
+    private void SelectRoutine(Routine? routine)
+    {
+        if (routine is null)
+            return;
+
+        SelectedRoutine = routine;
+        IsRoutineSheetOpen = false;
+    }
+
+    [RelayCommand]
+    private void SelectWorkout(Workout? workout)
+    {
+        if (workout is null)
+            return;
+
+        SelectedWorkout = workout;
+        IsWorkoutSheetOpen = false;
     }
 
     partial void OnSelectedRoutineChanged(Routine? value)
@@ -71,14 +128,18 @@ public partial class HistoryPageViewModel : ObservableObject
         }
         else if (SelectedWorkout is null || value.Workouts.All(x => x.Id != SelectedWorkout.Id))
         {
-            SelectedWorkout = value.Workouts.OrderBy(x => x.Name).FirstOrDefault();
+            SelectedWorkout = value.Workouts.FirstOrDefault();
         }
+
+        OnPropertyChanged(nameof(SelectedRoutineName));
+        OnPropertyChanged(nameof(SelectedWorkoutName));
 
         _ = BuildRowsAsync();
     }
 
     partial void OnSelectedWorkoutChanged(Workout? value)
     {
+        OnPropertyChanged(nameof(SelectedWorkoutName));
         _ = BuildRowsAsync();
     }
 
@@ -89,7 +150,7 @@ public partial class HistoryPageViewModel : ObservableObject
         if (SelectedRoutine is null)
             return;
 
-        foreach (var workout in SelectedRoutine.Workouts.OrderBy(x => x.Name))
+        foreach (var workout in SelectedRoutine.Workouts)
             Workouts.Add(workout);
     }
 
@@ -128,7 +189,7 @@ public partial class HistoryPageViewModel : ObservableObject
                     {
                         SessionId = session.Id,
                         Title = $"{session.RoutineName} • {session.WorkoutName}",
-                        Subtitle = "Tap for exercise details",
+                        Subtitle = $"{session.Exercises.Count} exercises",
 
                         DateText = session.PerformedAt.ToString("ddd, dd MMM yyyy • HH:mm"),
                         DurationText = $"{session.DurationMinutes} min",
@@ -139,13 +200,30 @@ public partial class HistoryPageViewModel : ObservableObject
                         SetsText = $"{session.TotalSets} sets",
                         RepsText = $"{currentReps} reps",
 
-                        VolumeDeltaText = BuildDeltaText(volumeDelta, "kg", "volume"),
-                        RepsDeltaText = BuildDeltaText(repsDelta, "reps", "reps"),
+                        VolumeDeltaText = BuildDeltaText(volumeDelta, "kg"),
+                        RepsDeltaText = BuildDeltaText(repsDelta, "reps"),
 
                         IsVolumeUp = volumeDelta.HasValue && volumeDelta.Value > 0,
                         IsVolumeDown = volumeDelta.HasValue && volumeDelta.Value < 0,
                         IsRepsUp = repsDelta.HasValue && repsDelta.Value > 0,
-                        IsRepsDown = repsDelta.HasValue && repsDelta.Value < 0
+                        IsRepsDown = repsDelta.HasValue && repsDelta.Value < 0,
+
+                        IsInfoExpanded = false,
+                        ExerciseInfos = session.Exercises
+                            .OrderBy(x => x.Name)
+                            .Select(exercise => new HistorySessionExerciseInfoRow
+                            {
+                                Name = exercise.Name,
+                                SummaryText = BuildExerciseSummary(exercise),
+                                Sets = exercise.Sets
+                                    .OrderBy(s => s.Order)
+                                    .Select(s => new HistorySessionSetInfoRow
+                                    {
+                                        Text = BuildSetText(s)
+                                    })
+                                    .ToList()
+                            })
+                            .ToList()
                     };
                 }).ToList();
             });
@@ -175,31 +253,72 @@ public partial class HistoryPageViewModel : ObservableObject
     private static int GetTotalReps(LoggedWorkoutSession session)
         => session.Exercises.Sum(x => x.Sets.Sum(s => s.Reps ?? 0));
 
-    private static string BuildDeltaText(double? delta, string unit, string label)
+    private static string BuildDeltaText(double? delta, string unit)
     {
         if (!delta.HasValue)
-            return $"First logged {label}";
+            return "First entry";
 
         if (delta.Value > 0)
-            return $"▲ +{delta.Value:F0} {unit} vs last";
+            return $"+{delta.Value:F0} {unit}";
 
         if (delta.Value < 0)
-            return $"▼ {delta.Value:F0} {unit} vs last";
+            return $"{delta.Value:F0} {unit}";
 
-        return $"= Same {label} as last";
+        return $"Same {unit}";
     }
 
-    private static string BuildDeltaText(int? delta, string unit, string label)
+    private static string BuildDeltaText(int? delta, string unit)
     {
         if (!delta.HasValue)
-            return $"First logged {label}";
+            return "First entry";
 
         if (delta.Value > 0)
-            return $"▲ +{delta.Value} {unit} vs last";
+            return $"+{delta.Value} {unit}";
 
         if (delta.Value < 0)
-            return $"▼ {delta.Value} {unit} vs last";
+            return $"{delta.Value} {unit}";
 
-        return $"= Same {label} as last";
+        return $"Same {unit}";
+    }
+
+    private static string BuildExerciseSummary(LoggedWorkoutExercise exercise)
+    {
+        var totalReps = exercise.Sets.Sum(x => x.Reps ?? 0);
+        var totalDurationSeconds = exercise.Sets.Sum(x => x.DurationSeconds ?? 0);
+
+        var parts = new List<string>
+        {
+            $"{exercise.Sets.Count} sets"
+        };
+
+        if (totalReps > 0)
+            parts.Add($"{totalReps} reps");
+
+        if (exercise.TotalVolume > 0)
+            parts.Add($"{exercise.TotalVolume:F0} volume");
+
+        if (totalDurationSeconds > 0)
+            parts.Add($"{totalDurationSeconds}s");
+
+        return string.Join(" • ", parts);
+    }
+
+    private static string BuildSetText(LoggedSet set)
+    {
+        var parts = new List<string> { $"Set {set.Order}" };
+
+        if (set.Reps.HasValue && set.Reps.Value > 0)
+            parts.Add($"{set.Reps.Value} reps");
+
+        if (set.WeightKg.HasValue && set.WeightKg.Value > 0)
+            parts.Add($"{set.WeightKg.Value:F1} kg");
+
+        if (set.DurationSeconds.HasValue && set.DurationSeconds.Value > 0)
+            parts.Add($"{set.DurationSeconds.Value}s");
+
+        if (set.RestSeconds.HasValue && set.RestSeconds.Value > 0)
+            parts.Add($"Rest {set.RestSeconds.Value}s");
+
+        return string.Join(" • ", parts);
     }
 }

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.RoutineManagerPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Routines"
+    xmlns:models="clr-namespace:XerSize.Models"
+    x:DataType="viewModels:RoutineManagerPageViewModel"
+    x:Name="PageRoot"
+    Title="Manage Routines">
+
+    <Grid Style="{StaticResource PageRootGridStyle}" RowDefinitions="Auto,*">
+        <Button
+            Grid.Row="0"
+            Text="+ Add Routine"
+            Style="{StaticResource PrimaryButtonStyle}"
+            Command="{Binding AddRoutineCommand}" />
+
+        <CollectionView
+            Grid.Row="1"
+            Margin="0,12,0,0"
+            ItemsSource="{Binding Items}"
+            SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Routine">
+                    <Border
+                        x:DataType="{x:Null}"
+                        Margin="0,0,0,12"
+                        Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="{Binding Name}"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="8">
+                                <Button
+                                    x:DataType="{x:Null}"
+                                    Text="↑"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.MoveUpCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <Button
+                                    x:DataType="{x:Null}"
+                                    Grid.Column="1"
+                                    Text="↓"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.MoveDownCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <Button
+                                    x:DataType="{x:Null}"
+                                    Grid.Column="2"
+                                    Text="Rename"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.RenameRoutineCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <Button
+                                    x:DataType="{x:Null}"
+                                    Grid.Column="3"
+                                    Text="Workouts"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.OpenWorkoutsCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <Button
+                                    x:DataType="{x:Null}"
+                                    Grid.Column="4"
+                                    Text="Delete"
+                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.DeleteRoutineCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

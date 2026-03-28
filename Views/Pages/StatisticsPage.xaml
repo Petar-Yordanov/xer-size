@@ -6,145 +6,879 @@
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
     xmlns:viewModels="clr-namespace:XerSize.ViewModels.Statistics"
     xmlns:models="clr-namespace:XerSize.Models"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
     x:DataType="viewModels:StatisticsPageViewModel"
+    x:Name="PageRoot"
     Title="Statistics">
 
-    <ScrollView>
-        <Grid Style="{StaticResource PageRootGridStyle}" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-            <Label Grid.Row="0" Text="Statistics" Style="{StaticResource PageTitleLabelStyle}" />
+    <Grid>
+        <ScrollView>
+            <Grid
+                Style="{StaticResource PageRootGridStyle}"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 
-            <Border Grid.Row="1" Style="{StaticResource CardBorderStyle}">
-                <VerticalStackLayout Spacing="10">
-                    <Picker Title="Period" ItemsSource="{Binding AvailableRanges}" SelectedItem="{Binding SelectedRange}" />
-                    <Picker Title="Scope" ItemsSource="{Binding AvailableScopes}" SelectedItem="{Binding SelectedScope}" />
-                    <Picker Title="Routine" ItemsSource="{Binding Routines}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedRoutine}" />
-                    <Picker Title="Workout" ItemsSource="{Binding Workouts}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedWorkout}" />
+                <VerticalStackLayout Grid.Row="0" Spacing="4">
+                    <Label
+                        Text="Statistics"
+                        Style="{StaticResource PageTitleLabelStyle}" />
+                    <Label
+                        Text="Preferences shows your current routine or workout setup. Timeline shows historical logged data."
+                        Style="{StaticResource MutedLabelStyle}" />
                 </VerticalStackLayout>
-            </Border>
 
-            <Grid Grid.Row="2" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
-                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource CardBorderStyle}">
-                    <VerticalStackLayout>
-                        <Label Text="Workouts" Style="{StaticResource MutedLabelStyle}" />
-                        <Label Text="{Binding Snapshot.WorkoutCount}" Style="{StaticResource PageTitleLabelStyle}" />
+                <Border
+                    Grid.Row="1"
+                    Margin="0,12,0,0"
+                    Style="{StaticResource CardBorderStyle}">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                            <components:SingleSelectDropdown
+                                Grid.Column="0"
+                                SelectedText="{Binding SelectedRoutineText}"
+                                TapCommand="{Binding ToggleRoutineSheetCommand}"
+                                TrailingIconText="v" />
+
+                            <Button
+                                Grid.Column="1"
+                                Text="Clear"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding ClearRoutineSelectionCommand}"
+                                IsVisible="{Binding HasRoutineSelection}" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                            <components:SingleSelectDropdown
+                                Grid.Column="0"
+                                SelectedText="{Binding SelectedWorkoutText}"
+                                TapCommand="{Binding ToggleWorkoutSheetCommand}"
+                                TrailingIconText="v" />
+
+                            <Button
+                                Grid.Column="1"
+                                Text="Clear"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding ClearWorkoutSelectionCommand}"
+                                IsVisible="{Binding HasWorkoutSelection}" />
+                        </Grid>
+
+                        <Label
+                            Text="{Binding Snapshot.SelectionSummary}"
+                            Style="{StaticResource MutedLabelStyle}" />
                     </VerticalStackLayout>
                 </Border>
-                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource CardBorderStyle}">
-                    <VerticalStackLayout>
-                        <Label Text="Total Volume" Style="{StaticResource MutedLabelStyle}" />
-                        <Label Text="{Binding Snapshot.TotalVolume, StringFormat='{}{0:F0} kg'}" Style="{StaticResource PageTitleLabelStyle}" />
+
+                <Border
+                    Grid.Row="2"
+                    Margin="0,12,0,0"
+                    Padding="4"
+                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                    StrokeThickness="0"
+                    IsVisible="{Binding HasAnySelection}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="18" />
+                    </Border.StrokeShape>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                        <Button
+                            Text="Preferences"
+                            Padding="14,10"
+                            Command="{Binding ShowPreferencesTabCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{DynamicResource PrimaryTextColor}">
+                            <Button.Triggers>
+                                <DataTrigger
+                                    TargetType="Button"
+                                    Binding="{Binding IsPreferencesTabSelected}"
+                                    Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                    <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+
+                        <Button
+                            Grid.Column="1"
+                            Text="Timeline"
+                            Padding="14,10"
+                            Command="{Binding ShowTimelineTabCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{DynamicResource PrimaryTextColor}">
+                            <Button.Triggers>
+                                <DataTrigger
+                                    TargetType="Button"
+                                    Binding="{Binding IsTimelineTabSelected}"
+                                    Value="True">
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                    <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <Border
+                    Grid.Row="3"
+                    Margin="0,12,0,0"
+                    Padding="16,18"
+                    Style="{StaticResource CardBorderStyle}"
+                    IsVisible="{Binding HasAnySelection, Converter={StaticResource InverseBoolConverter}}">
+                    <VerticalStackLayout Spacing="6">
+                        <Label
+                            Text="No statistics selected yet"
+                            Style="{StaticResource BodyLabelStyle}" />
+                        <Label
+                            Text="Choose a routine to view current setup preferences and logged timeline history."
+                            Style="{StaticResource MutedLabelStyle}" />
                     </VerticalStackLayout>
                 </Border>
-                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource CardBorderStyle}">
-                    <VerticalStackLayout>
-                        <Label Text="Total Sets" Style="{StaticResource MutedLabelStyle}" />
-                        <Label Text="{Binding Snapshot.TotalSets}" Style="{StaticResource PageTitleLabelStyle}" />
-                    </VerticalStackLayout>
-                </Border>
-                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource CardBorderStyle}">
-                    <VerticalStackLayout>
-                        <Label Text="Muscle Groups Hit" Style="{StaticResource MutedLabelStyle}" />
-                        <Label Text="{Binding Snapshot.MuscleGroupsHitCount}" Style="{StaticResource PageTitleLabelStyle}" />
-                    </VerticalStackLayout>
-                </Border>
+
+                <!-- Preferences -->
+                <VerticalStackLayout
+                    Grid.Row="4"
+                    Margin="0,12,0,0"
+                    Spacing="12"
+                    IsVisible="{Binding IsPreferencesTabSelected}">
+
+                    <VerticalStackLayout.Triggers>
+                        <DataTrigger
+                            TargetType="VerticalStackLayout"
+                            Binding="{Binding HasAnySelection}"
+                            Value="False">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </VerticalStackLayout.Triggers>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                Text="Current setup summary"
+                                Style="{StaticResource BodyLabelStyle}" />
+                            <Label
+                                Text="This section uses your current routine or workout structure, not workout history."
+                                Style="{StaticResource MutedLabelStyle}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        RowDefinitions="Auto,Auto"
+                        ColumnSpacing="10"
+                        RowSpacing="10">
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource CardBorderStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="Current workouts"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                                <Label
+                                    Text="{Binding Snapshot.CurrentWorkoutCount}"
+                                    Style="{StaticResource PageTitleLabelStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource CardBorderStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="Current exercises"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                                <Label
+                                    Text="{Binding Snapshot.CurrentExerciseCount}"
+                                    Style="{StaticResource PageTitleLabelStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Style="{StaticResource CardBorderStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="Current total sets"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                                <Label
+                                    Text="{Binding Snapshot.CurrentTotalSets, StringFormat='{}{0} sets'}"
+                                    Style="{StaticResource PageTitleLabelStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource CardBorderStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="Planned volume"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                                <Label
+                                    Text="{Binding Snapshot.CurrentPlannedVolume, StringFormat='{}{0:F0} kg'}"
+                                    Style="{StaticResource PageTitleLabelStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="12">
+                            <Label
+                                Text="Muscle group distribution"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Set distribution across muscle groups in the current setup. Values below are shown in sets."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <lvc:PieChart
+                                HeightRequest="220"
+                                Series="{Binding MuscleGroupPreferenceSeries}" />
+
+                            <CollectionView
+                                ItemsSource="{Binding Snapshot.MuscleGroupPreference}"
+                                SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:BreakdownItem">
+                                        <Grid ColumnDefinitions="*,Auto" Padding="0,2">
+                                            <Label
+                                                Text="{Binding Label}"
+                                                Style="{StaticResource MutedLabelStyle}" />
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding Value, StringFormat='{}{0:F1} sets'}"
+                                                Style="{StaticResource MutedLabelStyle}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="12">
+                            <Label
+                                Text="Equipment distribution"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Set distribution by equipment type in the current setup. Values below are shown in sets."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <lvc:PieChart
+                                HeightRequest="220"
+                                Series="{Binding EquipmentPreferenceSeries}" />
+
+                            <CollectionView
+                                ItemsSource="{Binding Snapshot.EquipmentPreference}"
+                                SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:BreakdownItem">
+                                        <Grid ColumnDefinitions="*,Auto" Padding="0,2">
+                                            <Label
+                                                Text="{Binding Label}"
+                                                Style="{StaticResource MutedLabelStyle}" />
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding Value, StringFormat='{}{0:F0} sets'}"
+                                                Style="{StaticResource MutedLabelStyle}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="Exercise mechanics"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Current set count by mechanic type. Y axis shows sets."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <lvc:CartesianChart
+                                HeightRequest="220"
+                                Series="{Binding MechanicComparisonSeries}"
+                                XAxes="{Binding MechanicComparisonXAxes}"
+                                YAxes="{Binding MechanicComparisonYAxes}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="Volume by exercise"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Current planned lifted load per exercise. Volume = weight × reps. Y axis shows kg."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <lvc:CartesianChart
+                                HeightRequest="260"
+                                Series="{Binding ExerciseVolumePreferenceSeries}"
+                                XAxes="{Binding ExerciseVolumePreferenceXAxes}"
+                                YAxes="{Binding ExerciseVolumePreferenceYAxes}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Timeline -->
+                <VerticalStackLayout
+                    Grid.Row="4"
+                    Margin="0,12,0,0"
+                    Spacing="12"
+                    IsVisible="{Binding IsTimelineTabSelected}">
+
+                    <VerticalStackLayout.Triggers>
+                        <DataTrigger
+                            TargetType="VerticalStackLayout"
+                            Binding="{Binding HasAnySelection}"
+                            Value="False">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </VerticalStackLayout.Triggers>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="12">
+                            <Label
+                                Text="Timeline filters"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Days and weeks use the selected quarter. Months shows the full selected year from January to December."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <components:SingleSelectDropdown
+                                SelectedText="{Binding SelectedYearText}"
+                                TapCommand="{Binding ToggleYearSheetCommand}"
+                                TrailingIconText="v" />
+
+                            <Border
+                                Padding="4"
+                                BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="18" />
+                                </Border.StrokeShape>
+
+                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
+                                    <Button
+                                        Text="Days"
+                                        Padding="14,10"
+                                        Command="{Binding SelectDaysBucketCommand}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{DynamicResource PrimaryTextColor}">
+                                        <Button.Triggers>
+                                            <DataTrigger
+                                                TargetType="Button"
+                                                Binding="{Binding IsDaysSelected}"
+                                                Value="True">
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Text="Weeks"
+                                        Padding="14,10"
+                                        Command="{Binding SelectWeeksBucketCommand}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{DynamicResource PrimaryTextColor}">
+                                        <Button.Triggers>
+                                            <DataTrigger
+                                                TargetType="Button"
+                                                Binding="{Binding IsWeeksSelected}"
+                                                Value="True">
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                                        Grid.Column="2"
+                                        Text="Months"
+                                        Padding="14,10"
+                                        Command="{Binding SelectMonthsBucketCommand}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{DynamicResource PrimaryTextColor}">
+                                        <Button.Triggers>
+                                            <DataTrigger
+                                                TargetType="Button"
+                                                Binding="{Binding IsMonthsSelected}"
+                                                Value="True">
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Grid>
+                            </Border>
+
+                            <Border
+                                Padding="4"
+                                BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="18" />
+                                </Border.StrokeShape>
+
+                                <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="6">
+                                    <Button
+                                        Text="Q1"
+                                        Padding="14,10"
+                                        Command="{Binding SelectQ1Command}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{DynamicResource PrimaryTextColor}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsQ1Selected}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Text="Q2"
+                                        Padding="14,10"
+                                        Command="{Binding SelectQ2Command}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{DynamicResource PrimaryTextColor}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsQ2Selected}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                                        Grid.Column="2"
+                                        Text="Q3"
+                                        Padding="14,10"
+                                        Command="{Binding SelectQ3Command}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{DynamicResource PrimaryTextColor}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsQ3Selected}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                                        Grid.Column="3"
+                                        Text="Q4"
+                                        Padding="14,10"
+                                        Command="{Binding SelectQ4Command}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="{DynamicResource PrimaryTextColor}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsQ4Selected}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="6">
+                            <Label
+                                Text="Timeline summary"
+                                Style="{StaticResource BodyLabelStyle}" />
+                            <Label
+                                Text="This section uses logged workout history only."
+                                Style="{StaticResource MutedLabelStyle}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        RowDefinitions="Auto,Auto"
+                        ColumnSpacing="10"
+                        RowSpacing="10">
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource CardBorderStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="Logged workouts"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                                <Label
+                                    Text="{Binding Snapshot.TimelineWorkoutCount}"
+                                    Style="{StaticResource PageTitleLabelStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource CardBorderStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="Logged volume"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                                <Label
+                                    Text="{Binding Snapshot.TimelineTotalVolume, StringFormat='{}{0:F0} kg'}"
+                                    Style="{StaticResource PageTitleLabelStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Style="{StaticResource CardBorderStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="Logged sets"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                                <Label
+                                    Text="{Binding Snapshot.TimelineTotalSets, StringFormat='{}{0} sets'}"
+                                    Style="{StaticResource PageTitleLabelStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource CardBorderStyle}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label
+                                    Text="Estimated calories"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                                <Label
+                                    Text="{Binding Snapshot.TimelineEstimatedCaloriesBurned, StringFormat='{}{0:F0} kcal'}"
+                                    Style="{StaticResource PageTitleLabelStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="Overall volume over time"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Total lifted load for each shown period. Volume = sum of weight × reps. Y axis shows kg."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <lvc:CartesianChart
+                                HeightRequest="240"
+                                Series="{Binding VolumeSeries}"
+                                XAxes="{Binding VolumeXAxes}"
+                                YAxes="{Binding VolumeYAxes}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="Average set weight over time"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Average logged set weight for each shown period. Y axis shows kg."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <lvc:CartesianChart
+                                HeightRequest="240"
+                                Series="{Binding LiftedWeightSeries}"
+                                XAxes="{Binding LiftedWeightXAxes}"
+                                YAxes="{Binding LiftedWeightYAxes}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="{Binding Snapshot.GymVisitFrequencyTitle}"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Number of logged workout sessions in each shown period. Y axis shows session count."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <lvc:CartesianChart
+                                HeightRequest="240"
+                                Series="{Binding GymVisitFrequencySeries}"
+                                XAxes="{Binding GymVisitFrequencyXAxes}"
+                                YAxes="{Binding GymVisitFrequencyYAxes}" />
+
+                            <Label
+                                Text="{Binding Snapshot.Plateau.Summary}"
+                                Style="{StaticResource MutedLabelStyle}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource CardBorderStyle}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="Volume by exercise over time"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Label
+                                Text="Historical lifted load per exercise across the selected period. Y axis shows volume in kg."
+                                Style="{StaticResource MutedLabelStyle}" />
+
+                            <lvc:CartesianChart
+                                HeightRequest="280"
+                                Series="{Binding ExerciseVolumeTimelineSeries}"
+                                XAxes="{Binding ExerciseVolumeTimelineXAxes}"
+                                YAxes="{Binding ExerciseVolumeTimelineYAxes}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
             </Grid>
+        </ScrollView>
 
-            <Border Grid.Row="3" Style="{StaticResource CardBorderStyle}">
+        <!-- Routine sheet -->
+        <Grid
+            x:DataType="{x:Null}"
+            IsVisible="{Binding IsRoutineSheetOpen}"
+            InputTransparent="False"
+            ZIndex="20">
+
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseRoutineSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border
+                VerticalOptions="End"
+                Margin="12,0,12,12"
+                Padding="0,12,0,18"
+                BackgroundColor="{DynamicResource SurfaceColor}"
+                Stroke="{DynamicResource BorderColor}"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Overall Volume Trend" Style="{StaticResource BodyLabelStyle}" />
-                    <lvc:CartesianChart
-                        HeightRequest="220"
-                        Series="{Binding VolumeSeries}"
-                        XAxes="{Binding VolumeXAxes}"
-                        YAxes="{Binding VolumeYAxes}" />
-                </VerticalStackLayout>
-            </Border>
+                    <BoxView
+                        HeightRequest="5"
+                        WidthRequest="48"
+                        HorizontalOptions="Center"
+                        Color="{DynamicResource BorderColor}" />
 
-            <Border Grid.Row="4" Style="{StaticResource CardBorderStyle}">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="Weight Tracking Over Time" Style="{StaticResource BodyLabelStyle}" />
-                    <lvc:CartesianChart
-                        HeightRequest="220"
-                        Series="{Binding WeightSeries}"
-                        XAxes="{Binding WeightXAxes}"
-                        YAxes="{Binding WeightYAxes}" />
-                </VerticalStackLayout>
-            </Border>
+                    <Label
+                        Margin="18,0,18,0"
+                        Text="Select Routine"
+                        Style="{StaticResource BodyLabelStyle}" />
 
-            <Border Grid.Row="5" Style="{StaticResource CardBorderStyle}">
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Training Preference" Style="{StaticResource BodyLabelStyle}" />
-                    <CollectionView ItemsSource="{Binding Snapshot.EquipmentPreference}">
+                    <CollectionView
+                        ItemsSource="{Binding Routines}"
+                        SelectionMode="None"
+                        MaximumHeightRequest="320">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:BreakdownItem">
-                                <Grid ColumnDefinitions="*,Auto" Padding="0,2">
-                                    <Label Text="{Binding Label}" Style="{StaticResource MutedLabelStyle}" />
-                                    <Label Grid.Column="1" Text="{Binding Value, StringFormat='{}{0:F0}'}" Style="{StaticResource MutedLabelStyle}" />
-                                </Grid>
+                            <DataTemplate x:DataType="models:Routine">
+                                <Border
+                                    x:DataType="{x:Null}"
+                                    Margin="12,0,12,8"
+                                    Padding="14,12"
+                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                    StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="16" />
+                                    </Border.StrokeShape>
+
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectRoutineCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label
+                                            Text="{Binding Name}"
+                                            VerticalOptions="Center"
+                                            Style="{StaticResource BodyLabelStyle}" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            Text=">"
+                                            VerticalOptions="Center"
+                                            Style="{StaticResource MutedLabelStyle}" />
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-
-                    <CollectionView ItemsSource="{Binding Snapshot.MechanicPreference}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:BreakdownItem">
-                                <Grid ColumnDefinitions="*,Auto" Padding="0,2">
-                                    <Label Text="{Binding Label}" Style="{StaticResource MutedLabelStyle}" />
-                                    <Label Grid.Column="1" Text="{Binding Value, StringFormat='{}{0:F0}'}" Style="{StaticResource MutedLabelStyle}" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <CollectionView ItemsSource="{Binding Snapshot.LateralityPreference}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:BreakdownItem">
-                                <Grid ColumnDefinitions="*,Auto" Padding="0,2">
-                                    <Label Text="{Binding Label}" Style="{StaticResource MutedLabelStyle}" />
-                                    <Label Grid.Column="1" Text="{Binding Value, StringFormat='{}{0:F0}'}" Style="{StaticResource MutedLabelStyle}" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </VerticalStackLayout>
-            </Border>
-
-            <Border Grid.Row="6" Style="{StaticResource CardBorderStyle}">
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Sets Per Muscle Group" Style="{StaticResource BodyLabelStyle}" />
-                    <CollectionView ItemsSource="{Binding Snapshot.SetsPerMuscleGroup}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:BreakdownItem">
-                                <Grid ColumnDefinitions="*,Auto" Padding="0,2">
-                                    <Label Text="{Binding Label}" Style="{StaticResource MutedLabelStyle}" />
-                                    <Label Grid.Column="1" Text="{Binding Value, StringFormat='{}{0:F1}'}" Style="{StaticResource MutedLabelStyle}" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-                    <Label Text="Neglected Muscles" Style="{StaticResource BodyLabelStyle}" />
-                    <CollectionView ItemsSource="{Binding Snapshot.NeglectedMuscles}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:BreakdownItem">
-                                <Grid ColumnDefinitions="*,Auto" Padding="0,2">
-                                    <Label Text="{Binding Label}" Style="{StaticResource MutedLabelStyle}" />
-                                    <Label Grid.Column="1" Text="{Binding Value, StringFormat='{}{0:F1}'}" Style="{StaticResource MutedLabelStyle}" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </VerticalStackLayout>
-            </Border>
-
-            <Border Grid.Row="7" Style="{StaticResource CardBorderStyle}">
-                <VerticalStackLayout Spacing="8">
-                    <Label Text="Plateau Detection" Style="{StaticResource BodyLabelStyle}" />
-                    <Label Text="{Binding Snapshot.Plateau.Summary}" Style="{StaticResource MutedLabelStyle}" />
-                    <Label Text="{Binding Snapshot.EstimatedCaloriesBurned, StringFormat='Estimated calories: {0:F0} kcal'}" Style="{StaticResource MutedLabelStyle}" />
-                    <Label Text="{Binding Snapshot.RestDays, StringFormat='Rest days in range: {0}'}" Style="{StaticResource MutedLabelStyle}" />
                 </VerticalStackLayout>
             </Border>
         </Grid>
-    </ScrollView>
+
+        <!-- Workout sheet -->
+        <Grid
+            x:DataType="{x:Null}"
+            IsVisible="{Binding IsWorkoutSheetOpen}"
+            InputTransparent="False"
+            ZIndex="21">
+
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseWorkoutSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border
+                VerticalOptions="End"
+                Margin="12,0,12,12"
+                Padding="0,12,0,18"
+                BackgroundColor="{DynamicResource SurfaceColor}"
+                Stroke="{DynamicResource BorderColor}"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView
+                        HeightRequest="5"
+                        WidthRequest="48"
+                        HorizontalOptions="Center"
+                        Color="{DynamicResource BorderColor}" />
+
+                    <Label
+                        Margin="18,0,18,0"
+                        Text="Select Workout"
+                        Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView
+                        ItemsSource="{Binding Workouts}"
+                        SelectionMode="None"
+                        MaximumHeightRequest="320">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Workout">
+                                <Border
+                                    x:DataType="{x:Null}"
+                                    Margin="12,0,12,8"
+                                    Padding="14,12"
+                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                    StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="16" />
+                                    </Border.StrokeShape>
+
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectWorkoutCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label
+                                            Text="{Binding Name}"
+                                            VerticalOptions="Center"
+                                            Style="{StaticResource BodyLabelStyle}" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            Text=">"
+                                            VerticalOptions="Center"
+                                            Style="{StaticResource MutedLabelStyle}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Year sheet -->
+        <Grid
+            x:DataType="{x:Null}"
+            IsVisible="{Binding IsYearSheetOpen}"
+            InputTransparent="False"
+            ZIndex="22">
+
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseYearSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border
+                VerticalOptions="End"
+                Margin="12,0,12,12"
+                Padding="0,12,0,18"
+                BackgroundColor="{DynamicResource SurfaceColor}"
+                Stroke="{DynamicResource BorderColor}"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView
+                        HeightRequest="5"
+                        WidthRequest="48"
+                        HorizontalOptions="Center"
+                        Color="{DynamicResource BorderColor}" />
+
+                    <Label
+                        Margin="18,0,18,0"
+                        Text="Select Year"
+                        Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView
+                        ItemsSource="{Binding AvailableYears}"
+                        SelectionMode="None"
+                        MaximumHeightRequest="320">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="x:Int32">
+                                <Border
+                                    x:DataType="{x:Null}"
+                                    Margin="12,0,12,8"
+                                    Padding="14,12"
+                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                    StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="16" />
+                                    </Border.StrokeShape>
+
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectYearCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label
+                                            Text="{Binding .}"
+                                            VerticalOptions="Center"
+                                            Style="{StaticResource BodyLabelStyle}" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            Text=">"
+                                            VerticalOptions="Center"
+                                            Style="{StaticResource MutedLabelStyle}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
 </ContentPage>

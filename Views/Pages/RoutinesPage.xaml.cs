@@ -23,7 +23,6 @@ public partial class RoutinesPage : ContentPage
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine(ex);
-            throw;
         }
     }
 }

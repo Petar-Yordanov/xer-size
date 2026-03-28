@@ -31,33 +31,34 @@ public static class MauiProgram
                 fonts.AddFont("SegoeUI-Semibold.ttf", "SegoeUISemibold");
             });
 
+        builder.Services.AddTransient<AppShell>();
+
         builder.Services.AddSingleton<IExerciseCatalogService, InMemoryExerciseCatalogService>();
         builder.Services.AddSingleton<IRoutineService, InMemoryRoutineService>();
         builder.Services.AddSingleton<IWorkoutHistoryService, InMemoryWorkoutHistoryService>();
         builder.Services.AddSingleton<IStatisticsService, InMemoryStatisticsService>();
         builder.Services.AddSingleton<IThemeService, ThemeService>();
-        builder.Services.AddTransient<HistorySessionDetailsPageViewModel>();
-        builder.Services.AddTransient<HistorySessionDetailsPage>();
-        builder.Services.AddSingleton<AppShell>();
 
-        builder.Services.AddSingleton<RoutinesPageViewModel>();
-        builder.Services.AddSingleton<ExercisesPageViewModel>();
-        builder.Services.AddSingleton<HistoryPageViewModel>();
-        builder.Services.AddTransient<HistorySessionDetailsPageViewModel>();
-        builder.Services.AddSingleton<StatisticsPageViewModel>();
-        builder.Services.AddSingleton<SettingsPageViewModel>();
+        builder.Services.AddTransient<RoutinesPageViewModel>();
+        builder.Services.AddTransient<ExercisesPageViewModel>();
+        builder.Services.AddTransient<HistoryPageViewModel>();
+        builder.Services.AddTransient<StatisticsPageViewModel>();
+        builder.Services.AddTransient<SettingsPageViewModel>();
         builder.Services.AddTransient<AddExercisePageViewModel>();
         builder.Services.AddTransient<CatalogExercisePickerPageViewModel>();
         builder.Services.AddTransient<RoutineEditorViewModel>();
+        builder.Services.AddTransient<RoutineManagerPageViewModel>();
+        builder.Services.AddTransient<WorkoutManagerPageViewModel>();
 
-        builder.Services.AddSingleton<RoutinesPage>();
-        builder.Services.AddSingleton<ExercisesPage>();
-        builder.Services.AddSingleton<HistoryPage>();
-        builder.Services.AddTransient<HistorySessionDetailsPage>();
-        builder.Services.AddSingleton<StatisticsPage>();
+        builder.Services.AddTransient<RoutinesPage>();
+        builder.Services.AddTransient<ExercisesPage>();
+        builder.Services.AddTransient<HistoryPage>();
+        builder.Services.AddTransient<StatisticsPage>();
         builder.Services.AddTransient<AddExercisePage>();
         builder.Services.AddTransient<CatalogExercisePickerPage>();
         builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<RoutineManagerPage>();
+        builder.Services.AddTransient<WorkoutManagerPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

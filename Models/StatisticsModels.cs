@@ -1,26 +1,37 @@
 ﻿namespace XerSize.Models;
 
-public enum StatisticsRange
+public enum StatisticsTab
 {
-    LastWeek,
-    Last2Weeks,
-    LastMonth,
-    Last3Months,
-    Last6Months,
-    LastYear
+    Preferences,
+    TimelineData
 }
 
-public enum StatisticsScopeKind
+public enum StatisticsTimelineBucket
 {
-    Routine,
-    Workout
+    Days,
+    Weeks,
+    Months
+}
+
+public enum StatisticsQuarter
+{
+    Q1 = 1,
+    Q2 = 2,
+    Q3 = 3,
+    Q4 = 4
 }
 
 public sealed class TrendPoint
 {
     public DateTime Date { get; set; }
     public double Value { get; set; }
-    public string Label => Date.ToString("dd MMM");
+    public string Label { get; set; } = string.Empty;
+}
+
+public sealed class TrendSeries
+{
+    public string Label { get; set; } = string.Empty;
+    public List<TrendPoint> Points { get; set; } = new();
 }
 
 public sealed class BreakdownItem
@@ -28,13 +39,6 @@ public sealed class BreakdownItem
     public string Label { get; set; } = string.Empty;
     public double Value { get; set; }
     public double Percent { get; set; }
-}
-
-public sealed class CalendarDayItem
-{
-    public DateTime Date { get; set; }
-    public bool WorkedOut { get; set; }
-    public double Volume { get; set; }
 }
 
 public sealed class PlateauInsight
@@ -46,23 +50,33 @@ public sealed class PlateauInsight
 public sealed class StatisticsSnapshot
 {
     public string Title { get; set; } = string.Empty;
+    public bool HasSelection { get; set; }
+    public bool HasWorkoutSelection { get; set; }
 
-    public int WorkoutCount { get; set; }
-    public int RestDays { get; set; }
-    public int MuscleGroupsHitCount { get; set; }
-    public int TotalSets { get; set; }
-    public double TotalVolume { get; set; }
-    public double EstimatedCaloriesBurned { get; set; }
+    public string SelectionSummary { get; set; } = "Select routine, then select the workout.";
 
-    public List<TrendPoint> VolumeTrend { get; set; } = new();
-    public List<TrendPoint> WeightTrend { get; set; } = new();
+    // Preferences
+    public int CurrentWorkoutCount { get; set; }
+    public int CurrentExerciseCount { get; set; }
+    public int CurrentTotalSets { get; set; }
+    public double CurrentPlannedVolume { get; set; }
 
-    public List<BreakdownItem> SetsPerMuscleGroup { get; set; } = new();
+    public List<BreakdownItem> MuscleGroupPreference { get; set; } = new();
     public List<BreakdownItem> EquipmentPreference { get; set; } = new();
     public List<BreakdownItem> MechanicPreference { get; set; } = new();
-    public List<BreakdownItem> LateralityPreference { get; set; } = new();
-    public List<BreakdownItem> NeglectedMuscles { get; set; } = new();
+    public List<BreakdownItem> ExerciseVolumePreference { get; set; } = new();
 
+    // Timeline
+    public int TimelineWorkoutCount { get; set; }
+    public int TimelineTotalSets { get; set; }
+    public double TimelineTotalVolume { get; set; }
+    public double TimelineEstimatedCaloriesBurned { get; set; }
+
+    public List<TrendPoint> VolumeTrend { get; set; } = new();
+    public List<TrendPoint> LiftedWeightTrend { get; set; } = new();
+    public List<TrendPoint> GymVisitFrequencyTrend { get; set; } = new();
+    public List<TrendSeries> ExerciseVolumeTrendSeries { get; set; } = new();
+
+    public string GymVisitFrequencyTitle { get; set; } = "Gym Visits";
     public PlateauInsight Plateau { get; set; } = new();
-    public List<CalendarDayItem> Calendar { get; set; } = new();
 }

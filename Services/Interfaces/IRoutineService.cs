@@ -10,11 +10,15 @@ public interface IRoutineService
     Task RenameRoutineAsync(Guid routineId, string newName);
     Task<Routine> DuplicateRoutineAsync(Guid routineId);
     Task DeleteRoutineAsync(Guid routineId);
+    Task MoveRoutineUpAsync(Guid routineId);
+    Task MoveRoutineDownAsync(Guid routineId);
 
     Task<Workout> AddWorkoutAsync(Guid routineId, string workoutName);
     Task RenameWorkoutAsync(Guid routineId, Guid workoutId, string newName);
     Task<Workout> DuplicateWorkoutAsync(Guid routineId, Guid workoutId);
     Task DeleteWorkoutAsync(Guid routineId, Guid workoutId);
+    Task MoveWorkoutUpAsync(Guid routineId, Guid workoutId);
+    Task MoveWorkoutDownAsync(Guid routineId, Guid workoutId);
 
     Task<WorkoutExercise?> GetExerciseAsync(Guid routineId, Guid workoutId, Guid workoutExerciseId);
 

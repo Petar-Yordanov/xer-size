@@ -5,7 +5,6 @@ namespace XerSize.Views.Pages;
 public partial class StatisticsPage : ContentPage
 {
     private readonly StatisticsPageViewModel _viewModel;
-    private bool _hasLoaded;
 
     public StatisticsPage(StatisticsPageViewModel viewModel)
     {
@@ -17,10 +16,13 @@ public partial class StatisticsPage : ContentPage
     {
         base.OnAppearing();
 
-        if (_hasLoaded)
-            return;
-
-        _hasLoaded = true;
-        await _viewModel.LoadCommand.ExecuteAsync(null);
+        try
+        {
+            await _viewModel.OnPageAppearingAsync();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+        }
     }
 }

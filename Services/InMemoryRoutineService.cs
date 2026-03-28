@@ -125,6 +125,18 @@ public sealed class InMemoryRoutineService : IRoutineService
         var workout = GetWorkout(routineId, workoutId);
         var existing = workout.Exercises.First(x => x.Id == exercise.Id);
 
+        existing.CatalogExerciseId = exercise.CatalogExerciseId;
+        existing.Name = exercise.Name;
+        existing.Force = exercise.Force;
+        existing.BodyCategory = exercise.BodyCategory;
+        existing.Mechanic = exercise.Mechanic;
+        existing.Equipment = exercise.Equipment;
+        existing.PrimaryMuscles = exercise.PrimaryMuscles.ToList();
+        existing.SecondaryMuscles = exercise.SecondaryMuscles.ToList();
+        existing.PrimaryMuscleCategories = exercise.PrimaryMuscleCategories.ToList();
+        existing.SecondaryMuscleCategories = exercise.SecondaryMuscleCategories.ToList();
+        existing.LimbInvolvement = exercise.LimbInvolvement;
+        existing.MovementPattern = exercise.MovementPattern;
         existing.DefaultRestSeconds = exercise.DefaultRestSeconds;
         existing.Notes = exercise.Notes;
         existing.ImagePath = exercise.ImagePath;
@@ -163,6 +175,8 @@ public sealed class InMemoryRoutineService : IRoutineService
                         Name = "Push",
                         Exercises = new List<WorkoutExercise>
                         {
+                            CreateWorkoutExercise("Bench_Press", 0, new[] { 10, 8, 6 }, new[] { 60.0, 70.0, 80.0 }, 120),
+                            CreateWorkoutExercise("Bench_Press", 0, new[] { 10, 8, 6 }, new[] { 60.0, 70.0, 80.0 }, 120),
                             CreateWorkoutExercise("Bench_Press", 0, new[] { 10, 8, 6 }, new[] { 60.0, 70.0, 80.0 }, 120),
                             CreateWorkoutExercise("Incline_Dumbbell_Press", 1, new[] { 10, 10, 8 }, new[] { 24.0, 24.0, 28.0 }, 90),
                             CreateWorkoutExercise("Arnold_Press", 2, new[] { 12, 10, 10 }, new[] { 14.0, 16.0, 16.0 }, 75),
@@ -328,6 +342,7 @@ public sealed class InMemoryRoutineService : IRoutineService
     {
         return new WorkoutExercise
         {
+            Id = source.Id,
             CatalogExerciseId = source.CatalogExerciseId,
             SortOrder = source.SortOrder,
             Name = source.Name,
@@ -369,6 +384,7 @@ public sealed class InMemoryRoutineService : IRoutineService
     {
         return new WorkoutExerciseSet
         {
+            Id = source.Id,
             Order = source.Order,
             Reps = source.Reps,
             WeightKg = source.WeightKg,
@@ -376,5 +392,43 @@ public sealed class InMemoryRoutineService : IRoutineService
             RestSeconds = source.RestSeconds,
             Notes = source.Notes
         };
+    }
+
+    public Task MoveRoutineUpAsync(Guid routineId)
+    {
+        var index = _routines.FindIndex(x => x.Id == routineId);
+        if (index > 0)
+            (_routines[index - 1], _routines[index]) = (_routines[index], _routines[index - 1]);
+
+        return Task.CompletedTask;
+    }
+
+    public Task MoveRoutineDownAsync(Guid routineId)
+    {
+        var index = _routines.FindIndex(x => x.Id == routineId);
+        if (index >= 0 && index < _routines.Count - 1)
+            (_routines[index + 1], _routines[index]) = (_routines[index], _routines[index + 1]);
+
+        return Task.CompletedTask;
+    }
+
+    public Task MoveWorkoutUpAsync(Guid routineId, Guid workoutId)
+    {
+        var workouts = GetRoutine(routineId).Workouts;
+        var index = workouts.FindIndex(x => x.Id == workoutId);
+        if (index > 0)
+            (workouts[index - 1], workouts[index]) = (workouts[index], workouts[index - 1]);
+
+        return Task.CompletedTask;
+    }
+
+    public Task MoveWorkoutDownAsync(Guid routineId, Guid workoutId)
+    {
+        var workouts = GetRoutine(routineId).Workouts;
+        var index = workouts.FindIndex(x => x.Id == workoutId);
+        if (index >= 0 && index < workouts.Count - 1)
+            (workouts[index + 1], workouts[index]) = (workouts[index], workouts[index + 1]);
+
+        return Task.CompletedTask;
     }
 }

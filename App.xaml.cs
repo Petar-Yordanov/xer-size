@@ -4,12 +4,9 @@ namespace XerSize;
 
 public partial class App : Application
 {
-    private readonly AppShell _shell;
-
-    public App(AppShell shell, IThemeService themeService)
+    public App(IThemeService themeService)
     {
         InitializeComponent();
-        _shell = shell;
 
         try
         {
@@ -18,12 +15,11 @@ public partial class App : Application
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine(ex);
-            throw;
         }
     }
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        return new Window(_shell);
+        return new Window(new AppShell());
     }
 }

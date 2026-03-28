@@ -4,9 +4,12 @@ namespace XerSize.Services.Interfaces;
 
 public interface IStatisticsService
 {
+    Task<IReadOnlyList<int>> GetAvailableTimelineYearsAsync(Guid routineId, Guid? workoutId);
+
     Task<StatisticsSnapshot> GetSnapshotAsync(
-        StatisticsRange range,
-        StatisticsScopeKind scopeKind,
         Guid routineId,
-        Guid? workoutId);
+        Guid? workoutId,
+        StatisticsTimelineBucket bucket,
+        int year,
+        StatisticsQuarter quarter);
 }
