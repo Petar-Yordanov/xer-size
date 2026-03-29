@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:components="clr-namespace:XerSize.Views.Components"
     xmlns:viewModels="clr-namespace:XerSize.ViewModels.Routines"
-    xmlns:models="clr-namespace:XerSize.Models"
     x:DataType="viewModels:RoutinesPageViewModel"
     x:Name="PageRoot"
     Title="Routines">
@@ -42,144 +41,124 @@
 
             <Grid Grid.Row="3" Margin="0,2,0,0">
 
-                <Border
-                    Padding="12,12,12,48"
-                    Style="{StaticResource CardBorderStyle}">
-                    <CollectionView
-                        ItemsSource="{Binding VisibleExercises}"
-                        SelectionMode="None"
-                        VerticalOptions="FillAndExpand"
-                        EmptyView="No exercises in this workout yet.">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:WorkoutExerciseCardRow">
-                                <Border
-                                    x:DataType="{x:Null}"
-                                    Margin="0,0,0,12"
-                                    Padding="12"
-                                    BackgroundColor="{DynamicResource SurfaceColor}"
-                                    Stroke="{DynamicResource BorderColor}"
-                                    StrokeThickness="1">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="16" />
-                                    </Border.StrokeShape>
+                <components:Card>
+                    <Grid Padding="0">
+                        <CollectionView
+                            Margin="0,0,0,48"
+                            ItemsSource="{Binding VisibleExercises}"
+                            SelectionMode="None"
+                            VerticalOptions="Fill"
+                            ItemSizingStrategy="MeasureFirstItem"
+                            EmptyView="No exercises in this workout yet.">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="{x:Null}">
+                                    <Border
+                                        Margin="0,0,0,12"
+                                        Padding="12"
+                                        BackgroundColor="{DynamicResource SurfaceColor}"
+                                        Stroke="{DynamicResource BorderColor}"
+                                        StrokeThickness="1">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="16" />
+                                        </Border.StrokeShape>
 
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.EditExerciseCommand}"
-                                            CommandParameter="{Binding .}" />
-                                    </Border.GestureRecognizers>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.EditExerciseCommand}"
+                                                CommandParameter="{Binding .}" />
+                                        </Border.GestureRecognizers>
 
-                                    <VerticalStackLayout Spacing="10">
-                                        <Grid
-                                            ColumnDefinitions="64,*,Auto"
-                                            RowDefinitions="Auto,Auto"
-                                            ColumnSpacing="10"
-                                            RowSpacing="6">
+                                        <VerticalStackLayout Spacing="10">
+                                            <Grid
+                                                ColumnDefinitions="64,*,Auto"
+                                                RowDefinitions="Auto,Auto"
+                                                ColumnSpacing="10"
+                                                RowSpacing="6">
+
+                                                <components:ImageTile
+                                                    Grid.RowSpan="2"
+                                                    Grid.Column="0"
+                                                    ImageSource="{Binding PreviewImageSource}"
+                                                    PlaceholderTitle="{Binding PlaceholderText}"
+                                                    PlaceholderSubtitle=""
+                                                    ActionText=""
+                                                    TileHeight="64"
+                                                    TileWidth="64" />
+
+                                                <VerticalStackLayout
+                                                    Grid.Column="1"
+                                                    Grid.Row="0"
+                                                    Grid.RowSpan="2"
+                                                    Spacing="2">
+                                                    <Label
+                                                        Text="{Binding Name}"
+                                                        LineBreakMode="TailTruncation"
+                                                        Style="{StaticResource BodyLabelStyle}" />
+
+                                                    <Label
+                                                        Text="{Binding PrimaryMusclesText}"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="1"
+                                                        Style="{StaticResource MutedLabelStyle}" />
+
+                                                    <Label
+                                                        Text="{Binding RestText}"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="1"
+                                                        Style="{StaticResource MutedLabelStyle}" />
+                                                </VerticalStackLayout>
+
+                                                <components:Button
+                                                    Grid.Column="2"
+                                                    Grid.Row="0"
+                                                    Text="Delete"
+                                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.DeleteExerciseCommand}"
+                                                    CommandParameter="{Binding .}" />
+
+                                                <components:Button
+                                                    Grid.Column="2"
+                                                    Grid.Row="1"
+                                                    Text="{Binding ExpandButtonText}"
+                                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.ToggleExerciseExpandedCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Grid>
 
                                             <Border
-                                                Grid.RowSpan="2"
-                                                Grid.Column="0"
-                                                HeightRequest="64"
-                                                WidthRequest="64"
-                                                Padding="0"
+                                                IsVisible="{Binding IsExpanded}"
+                                                Padding="12"
                                                 BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                                Stroke="{DynamicResource BorderColor}"
-                                                StrokeThickness="1">
+                                                StrokeThickness="0">
                                                 <Border.StrokeShape>
                                                     <RoundRectangle CornerRadius="14" />
                                                 </Border.StrokeShape>
 
-                                                <Grid>
-                                                    <Image
-                                                        IsVisible="{Binding HasImage}"
-                                                        Source="{Binding PreviewImageSource}"
-                                                        Aspect="AspectFill" />
-
+                                                <VerticalStackLayout Spacing="8">
                                                     <Label
-                                                        Text="{Binding PlaceholderText}"
-                                                        IsVisible="{Binding HasImage, Converter={StaticResource InverseBoolConverter}, FallbackValue=True}"
-                                                        HorizontalOptions="Center"
-                                                        VerticalOptions="Center"
+                                                        Text="Sets"
                                                         Style="{StaticResource BodyLabelStyle}" />
-                                                </Grid>
+
+                                                    <CollectionView
+                                                        ItemsSource="{Binding GroupedSets}"
+                                                        SelectionMode="None"
+                                                        ItemSizingStrategy="MeasureFirstItem">
+                                                        <CollectionView.ItemTemplate>
+                                                            <DataTemplate x:DataType="{x:Null}">
+                                                                <components:Badge
+                                                                    Text="{Binding SummaryText}" />
+                                                            </DataTemplate>
+                                                        </CollectionView.ItemTemplate>
+                                                    </CollectionView>
+                                                </VerticalStackLayout>
                                             </Border>
-
-                                            <VerticalStackLayout
-                                                Grid.Column="1"
-                                                Grid.Row="0"
-                                                Grid.RowSpan="2"
-                                                Spacing="2">
-                                                <Label
-                                                    Text="{Binding Name}"
-                                                    LineBreakMode="TailTruncation"
-                                                    Style="{StaticResource BodyLabelStyle}" />
-
-                                                <Label
-                                                    Text="{Binding PrimaryMusclesText}"
-                                                    LineBreakMode="TailTruncation"
-                                                    MaxLines="1"
-                                                    Style="{StaticResource MutedLabelStyle}" />
-
-                                                <Label
-                                                    Text="{Binding RestText}"
-                                                    LineBreakMode="TailTruncation"
-                                                    MaxLines="1"
-                                                    Style="{StaticResource MutedLabelStyle}" />
-                                            </VerticalStackLayout>
-
-                                            <Button
-                                                Grid.Column="2"
-                                                Grid.Row="0"
-                                                Padding="10,6"
-                                                Text="Delete"
-                                                Style="{StaticResource SecondaryButtonStyle}"
-                                                Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.DeleteExerciseCommand}"
-                                                CommandParameter="{Binding .}" />
-
-                                            <Button
-                                                Grid.Column="2"
-                                                Grid.Row="1"
-                                                Padding="10,6"
-                                                Text="{Binding ExpandButtonText}"
-                                                Style="{StaticResource SecondaryButtonStyle}"
-                                                Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.ToggleExerciseExpandedCommand}"
-                                                CommandParameter="{Binding .}" />
-                                        </Grid>
-
-                                        <Border
-                                            IsVisible="{Binding IsExpanded}"
-                                            Padding="12"
-                                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                            StrokeThickness="0">
-                                            <Border.StrokeShape>
-                                                <RoundRectangle CornerRadius="14" />
-                                            </Border.StrokeShape>
-
-                                            <VerticalStackLayout Spacing="8">
-                                                <Label
-                                                    Text="Sets"
-                                                    Style="{StaticResource BodyLabelStyle}" />
-
-                                                <CollectionView
-                                                    ItemsSource="{Binding GroupedSets}"
-                                                    SelectionMode="None">
-                                                    <CollectionView.ItemTemplate>
-                                                        <DataTemplate x:DataType="viewModels:WorkoutExerciseGroupedSetRow">
-                                                            <Label
-                                                                Margin="0,0,0,2"
-                                                                Text="{Binding SummaryText}"
-                                                                Style="{StaticResource MutedLabelStyle}" />
-                                                        </DataTemplate>
-                                                    </CollectionView.ItemTemplate>
-                                                </CollectionView>
-                                            </VerticalStackLayout>
-                                        </Border>
-                                    </VerticalStackLayout>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </Border>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </components:Card>
 
                 <Border
                     Margin="12,0,12,12"
@@ -226,11 +205,9 @@
         </Grid>
 
         <Grid
-            x:DataType="{x:Null}"
             IsVisible="{Binding IsRoutineSheetOpen}"
             InputTransparent="False"
             ZIndex="40">
-
             <BoxView BackgroundColor="#66000000">
                 <BoxView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CloseRoutineSheetCommand}" />
@@ -263,11 +240,11 @@
                     <CollectionView
                         ItemsSource="{Binding Routines}"
                         SelectionMode="None"
+                        ItemSizingStrategy="MeasureFirstItem"
                         MaximumHeightRequest="320">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Routine">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <Border
-                                    x:DataType="{x:Null}"
                                     Margin="12,0,12,8"
                                     Padding="14,12"
                                     BackgroundColor="{DynamicResource SurfaceMutedColor}"
@@ -303,7 +280,6 @@
         </Grid>
 
         <Grid
-            x:DataType="{x:Null}"
             IsVisible="{Binding IsQuickActionsOpen}"
             InputTransparent="False"
             ZIndex="50">
@@ -315,7 +291,6 @@
         </Grid>
 
         <Grid
-            x:DataType="{x:Null}"
             IsVisible="{Binding IsQuickActionsOpen}"
             InputTransparent="False"
             ZIndex="60"

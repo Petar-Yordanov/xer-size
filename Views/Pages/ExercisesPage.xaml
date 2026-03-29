@@ -11,11 +11,11 @@
 
     <Grid>
         <Grid Style="{StaticResource PageRootGridStyle}" RowDefinitions="Auto,*">
-            <Border Grid.Row="0" Style="{StaticResource CardBorderStyle}">
+            <components:Card Grid.Row="0">
                 <VerticalStackLayout Spacing="10">
-                    <SearchBar
-                        Placeholder="Search by name"
-                        Text="{Binding SearchText}" />
+                    <components:SearchField
+                        Text="{Binding SearchText}"
+                        Placeholder="Search by name" />
 
                     <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
                         <components:SingleSelectDropdown
@@ -36,20 +36,18 @@
                         TapCommand="{Binding ToggleBodyCategorySheetCommand}"
                         TrailingIconText="v" />
                 </VerticalStackLayout>
-            </Border>
+            </components:Card>
 
             <CollectionView
                 Grid.Row="1"
                 Margin="0,12,0,0"
                 ItemsSource="{Binding Items}"
                 SelectionMode="None"
+                ItemSizingStrategy="MeasureFirstItem"
                 EmptyView="No exercises match your filters.">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="viewModels:ExercisesCatalogCardRow">
-                        <Border
-                            x:DataType="{x:Null}"
-                            Margin="0,0,0,10"
-                            Style="{StaticResource CardBorderStyle}">
+                    <DataTemplate x:DataType="{x:Null}">
+                        <components:Card Margin="0,0,0,10">
                             <VerticalStackLayout Spacing="10">
                                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                     <Label
@@ -57,11 +55,10 @@
                                         Text="{Binding Name}"
                                         Style="{StaticResource BodyLabelStyle}" />
 
-                                    <Button
+                                    <components:Button
                                         Grid.Column="1"
-                                        Padding="12,8"
                                         Text="Edit"
-                                        Style="{StaticResource SecondaryButtonStyle}"
+                                        ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                         Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.EditCommand}"
                                         CommandParameter="{Binding .}" />
                                 </Grid>
@@ -87,48 +84,20 @@
                                 </Grid>
 
                                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                                    <Border
+                                    <components:MetricTile
                                         Grid.Column="0"
-                                        Padding="10,8"
-                                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                        StrokeThickness="0">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="12" />
-                                        </Border.StrokeShape>
+                                        Title="Equipment"
+                                        Value="{Binding Equipment}" />
 
-                                        <VerticalStackLayout Spacing="2">
-                                            <Label
-                                                Text="Equipment"
-                                                Style="{StaticResource MutedLabelStyle}" />
-                                            <Label
-                                                Text="{Binding Equipment}"
-                                                Style="{StaticResource BodyLabelStyle}" />
-                                        </VerticalStackLayout>
-                                    </Border>
-
-                                    <Border
+                                    <components:MetricTile
                                         Grid.Column="1"
-                                        Padding="10,8"
-                                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                        StrokeThickness="0">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="12" />
-                                        </Border.StrokeShape>
-
-                                        <VerticalStackLayout Spacing="2">
-                                            <Label
-                                                Text="Mechanic"
-                                                Style="{StaticResource MutedLabelStyle}" />
-                                            <Label
-                                                Text="{Binding Mechanic}"
-                                                Style="{StaticResource BodyLabelStyle}" />
-                                        </VerticalStackLayout>
-                                    </Border>
+                                        Title="Mechanic"
+                                        Value="{Binding Mechanic}" />
                                 </Grid>
 
-                                <Button
+                                <components:Button
                                     Text="{Binding ExpandButtonText}"
-                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.ToggleExpandedCommand}"
                                     CommandParameter="{Binding .}" />
 
@@ -188,18 +157,16 @@
                                     </VerticalStackLayout>
                                 </Border>
                             </VerticalStackLayout>
-                        </Border>
+                        </components:Card>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
 
         <Grid
-            x:DataType="{x:Null}"
             IsVisible="{Binding IsForceSheetOpen}"
             InputTransparent="False"
             ZIndex="20">
-
             <BoxView BackgroundColor="#66000000">
                 <BoxView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CloseForceSheetCommand}" />
@@ -232,39 +199,15 @@
                     <CollectionView
                         ItemsSource="{Binding ForceOptions}"
                         SelectionMode="None"
+                        ItemSizingStrategy="MeasureFirstItem"
                         MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:ExercisesCatalogOptionRow">
-                                <Border
-                                    x:DataType="{x:Null}"
-                                    Margin="12,0,12,8"
-                                    Padding="14,12"
-                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                    StrokeThickness="0">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="16" />
-                                    </Border.StrokeShape>
-
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectForceCommand}"
-                                            CommandParameter="{Binding .}" />
-                                    </Border.GestureRecognizers>
-
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <Label
-                                            Text="{Binding Text}"
-                                            VerticalOptions="Center"
-                                            Style="{StaticResource BodyLabelStyle}" />
-
-                                        <Label
-                                            Grid.Column="1"
-                                            Text="✓"
-                                            VerticalOptions="Center"
-                                            IsVisible="{Binding IsSelected}"
-                                            Style="{StaticResource BodyLabelStyle}" />
-                                    </Grid>
-                                </Border>
+                            <DataTemplate x:DataType="{x:Null}">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectForceCommand}"
+                                    TapCommandParameter="{Binding .}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -273,11 +216,9 @@
         </Grid>
 
         <Grid
-            x:DataType="{x:Null}"
             IsVisible="{Binding IsEquipmentSheetOpen}"
             InputTransparent="False"
             ZIndex="21">
-
             <BoxView BackgroundColor="#66000000">
                 <BoxView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CloseEquipmentSheetCommand}" />
@@ -310,39 +251,15 @@
                     <CollectionView
                         ItemsSource="{Binding EquipmentOptions}"
                         SelectionMode="None"
+                        ItemSizingStrategy="MeasureFirstItem"
                         MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:ExercisesCatalogOptionRow">
-                                <Border
-                                    x:DataType="{x:Null}"
-                                    Margin="12,0,12,8"
-                                    Padding="14,12"
-                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                    StrokeThickness="0">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="16" />
-                                    </Border.StrokeShape>
-
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectEquipmentCommand}"
-                                            CommandParameter="{Binding .}" />
-                                    </Border.GestureRecognizers>
-
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <Label
-                                            Text="{Binding Text}"
-                                            VerticalOptions="Center"
-                                            Style="{StaticResource BodyLabelStyle}" />
-
-                                        <Label
-                                            Grid.Column="1"
-                                            Text="✓"
-                                            VerticalOptions="Center"
-                                            IsVisible="{Binding IsSelected}"
-                                            Style="{StaticResource BodyLabelStyle}" />
-                                    </Grid>
-                                </Border>
+                            <DataTemplate x:DataType="{x:Null}">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectEquipmentCommand}"
+                                    TapCommandParameter="{Binding .}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -351,11 +268,9 @@
         </Grid>
 
         <Grid
-            x:DataType="{x:Null}"
             IsVisible="{Binding IsBodyCategorySheetOpen}"
             InputTransparent="False"
             ZIndex="22">
-
             <BoxView BackgroundColor="#66000000">
                 <BoxView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CloseBodyCategorySheetCommand}" />
@@ -388,39 +303,15 @@
                     <CollectionView
                         ItemsSource="{Binding BodyCategoryOptions}"
                         SelectionMode="None"
+                        ItemSizingStrategy="MeasureFirstItem"
                         MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:ExercisesCatalogOptionRow">
-                                <Border
-                                    x:DataType="{x:Null}"
-                                    Margin="12,0,12,8"
-                                    Padding="14,12"
-                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                    StrokeThickness="0">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="16" />
-                                    </Border.StrokeShape>
-
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectBodyCategoryCommand}"
-                                            CommandParameter="{Binding .}" />
-                                    </Border.GestureRecognizers>
-
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <Label
-                                            Text="{Binding Text}"
-                                            VerticalOptions="Center"
-                                            Style="{StaticResource BodyLabelStyle}" />
-
-                                        <Label
-                                            Grid.Column="1"
-                                            Text="✓"
-                                            VerticalOptions="Center"
-                                            IsVisible="{Binding IsSelected}"
-                                            Style="{StaticResource BodyLabelStyle}" />
-                                    </Grid>
-                                </Border>
+                            <DataTemplate x:DataType="{x:Null}">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectBodyCategoryCommand}"
+                                    TapCommandParameter="{Binding .}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

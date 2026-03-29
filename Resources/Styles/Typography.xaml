@@ -6,7 +6,14 @@
     <Style x:Key="PageTitleLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="FontFamily" Value="SegoeUISemibold" />
-        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+    </Style>
+
+    <Style x:Key="SectionTitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontFamily" Value="SegoeUISemibold" />
+        <Setter Property="FontSize" Value="17" />
     </Style>
 
     <Style x:Key="BodyLabelStyle" TargetType="Label">
@@ -15,9 +22,23 @@
         <Setter Property="FontSize" Value="14" />
     </Style>
 
-    <Style x:Key="MutedLabelStyle" TargetType="Label">
+    <Style x:Key="CaptionLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
         <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <Style x:Key="MutedLabelStyle" TargetType="Label" BasedOn="{StaticResource CaptionLabelStyle}" />
+
+    <Style x:Key="FieldLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+        <Setter Property="FontFamily" Value="OpenSansSemibold" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <Style x:Key="MetricValueLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontFamily" Value="SegoeUISemibold" />
+        <Setter Property="FontSize" Value="22" />
     </Style>
 </ResourceDictionary>

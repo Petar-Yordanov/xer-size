@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:XerSize.ViewModels.Settings"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
     x:DataType="viewModels:SettingsPageViewModel"
     Shell.NavBarIsVisible="False"
     Title="Settings">
@@ -11,31 +12,19 @@
     <ScrollView>
         <Grid
             Style="{StaticResource PageRootGridStyle}"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
             RowSpacing="14">
 
-            <VerticalStackLayout
-                Grid.Row="0"
-                Spacing="4">
-                <Label
-                    Text="Settings"
-                    Style="{StaticResource PageTitleLabelStyle}" />
-                <Label
-                    Text="Appearance, profile, units, and sync preferences."
-                    Style="{StaticResource MutedLabelStyle}" />
+            <VerticalStackLayout Grid.Row="0" Spacing="4">
+                <Label Text="Settings" Style="{StaticResource PageTitleLabelStyle}" />
+                <Label Text="Appearance, profile, units, and sync preferences." Style="{StaticResource MutedLabelStyle}" />
             </VerticalStackLayout>
 
-            <Border
-                Grid.Row="1"
-                Style="{StaticResource CardBorderStyle}">
+            <components:Card Grid.Row="1">
                 <VerticalStackLayout Spacing="14">
                     <VerticalStackLayout Spacing="2">
-                        <Label
-                            Text="Theme"
-                            Style="{StaticResource BodyLabelStyle}" />
-                        <Label
-                            Text="{Binding ThemeSummary}"
-                            Style="{StaticResource MutedLabelStyle}" />
+                        <Label Text="Theme" Style="{StaticResource BodyLabelStyle}" />
+                        <Label Text="{Binding ThemeSummary}" Style="{StaticResource MutedLabelStyle}" />
                     </VerticalStackLayout>
 
                     <Border
@@ -47,56 +36,27 @@
                         </Border.StrokeShape>
 
                         <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
-                            <Button
+                            <components:SelectionPill
+                                Grid.Column="0"
                                 Text="Light"
-                                Padding="14,10"
                                 Command="{Binding ApplyLightThemeCommand}"
-                                BackgroundColor="Transparent"
-                                TextColor="{DynamicResource PrimaryTextColor}">
-                                <Button.Triggers>
-                                    <DataTrigger
-                                        TargetType="Button"
-                                        Binding="{Binding IsLightTheme}"
-                                        Value="True">
-                                        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                                        <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
-                                    </DataTrigger>
-                                </Button.Triggers>
-                            </Button>
+                                IsSelected="{Binding IsLightTheme}" />
 
-                            <Button
+                            <components:SelectionPill
                                 Grid.Column="1"
                                 Text="Dark"
-                                Padding="14,10"
                                 Command="{Binding ApplyDarkThemeCommand}"
-                                BackgroundColor="Transparent"
-                                TextColor="{DynamicResource PrimaryTextColor}">
-                                <Button.Triggers>
-                                    <DataTrigger
-                                        TargetType="Button"
-                                        Binding="{Binding IsDarkTheme}"
-                                        Value="True">
-                                        <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                                        <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
-                                    </DataTrigger>
-                                </Button.Triggers>
-                            </Button>
+                                IsSelected="{Binding IsDarkTheme}" />
                         </Grid>
                     </Border>
                 </VerticalStackLayout>
-            </Border>
+            </components:Card>
 
-            <Border
-                Grid.Row="2"
-                Style="{StaticResource CardBorderStyle}">
+            <components:Card Grid.Row="2">
                 <VerticalStackLayout Spacing="14">
                     <VerticalStackLayout Spacing="2">
-                        <Label
-                            Text="User Profile"
-                            Style="{StaticResource BodyLabelStyle}" />
-                        <Label
-                            Text="{Binding UserProfileSummary}"
-                            Style="{StaticResource MutedLabelStyle}" />
+                        <Label Text="User Profile" Style="{StaticResource BodyLabelStyle}" />
+                        <Label Text="{Binding UserProfileSummary}" Style="{StaticResource MutedLabelStyle}" />
                     </VerticalStackLayout>
 
                     <Grid
@@ -105,40 +65,33 @@
                         RowDefinitions="Auto,Auto,Auto"
                         RowSpacing="12">
 
-                        <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="6">
-                            <Label
-                                Text="Weight"
-                                Style="{StaticResource MutedLabelStyle}" />
-                            <Entry
-                                Text="{Binding BodyWeightText}"
-                                Keyboard="Numeric"
-                                Placeholder="e.g. 80" />
-                        </VerticalStackLayout>
+                        <components:TextField
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Label="Weight"
+                            Text="{Binding BodyWeightText}"
+                            Keyboard="Numeric"
+                            Placeholder="e.g. 80" />
 
-                        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="6">
-                            <Label
-                                Text="Height"
-                                Style="{StaticResource MutedLabelStyle}" />
-                            <Entry
-                                Text="{Binding HeightText}"
-                                Keyboard="Numeric"
-                                Placeholder="e.g. 180" />
-                        </VerticalStackLayout>
+                        <components:TextField
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Label="Height"
+                            Text="{Binding HeightText}"
+                            Keyboard="Numeric"
+                            Placeholder="e.g. 180" />
 
-                        <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="6">
-                            <Label
-                                Text="Age"
-                                Style="{StaticResource MutedLabelStyle}" />
-                            <Entry
-                                Text="{Binding AgeText}"
-                                Keyboard="Numeric"
-                                Placeholder="e.g. 25" />
-                        </VerticalStackLayout>
+                        <components:TextField
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Label="Age"
+                            Text="{Binding AgeText}"
+                            Keyboard="Numeric"
+                            Placeholder="e.g. 25" />
 
                         <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="6">
-                            <Label
-                                Text="Sex"
-                                Style="{StaticResource MutedLabelStyle}" />
+                            <Label Text="Sex" Style="{StaticResource MutedLabelStyle}" />
+
                             <Border
                                 Padding="4"
                                 BackgroundColor="{DynamicResource SurfaceMutedColor}"
@@ -148,40 +101,17 @@
                                 </Border.StrokeShape>
 
                                 <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
-                                    <Button
+                                    <components:SelectionPill
+                                        Grid.Column="0"
                                         Text="Male"
-                                        Padding="14,10"
                                         Command="{Binding SelectMaleCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{DynamicResource PrimaryTextColor}">
-                                        <Button.Triggers>
-                                            <DataTrigger
-                                                TargetType="Button"
-                                                Binding="{Binding IsMaleSelected}"
-                                                Value="True">
-                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
-                                            </DataTrigger>
-                                        </Button.Triggers>
-                                    </Button>
+                                        IsSelected="{Binding IsMaleSelected}" />
 
-                                    <Button
+                                    <components:SelectionPill
                                         Grid.Column="1"
                                         Text="Female"
-                                        Padding="14,10"
                                         Command="{Binding SelectFemaleCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{DynamicResource PrimaryTextColor}">
-                                        <Button.Triggers>
-                                            <DataTrigger
-                                                TargetType="Button"
-                                                Binding="{Binding IsFemaleSelected}"
-                                                Value="True">
-                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
-                                            </DataTrigger>
-                                        </Button.Triggers>
-                                    </Button>
+                                        IsSelected="{Binding IsFemaleSelected}" />
                                 </Grid>
                             </Border>
                         </VerticalStackLayout>
@@ -202,19 +132,13 @@
                         </Border>
                     </Grid>
                 </VerticalStackLayout>
-            </Border>
+            </components:Card>
 
-            <Border
-                Grid.Row="3"
-                Style="{StaticResource CardBorderStyle}">
+            <components:Card Grid.Row="3">
                 <VerticalStackLayout Spacing="14">
                     <VerticalStackLayout Spacing="2">
-                        <Label
-                            Text="Units &amp; Measurements"
-                            Style="{StaticResource BodyLabelStyle}" />
-                        <Label
-                            Text="{Binding UnitsSummary}"
-                            Style="{StaticResource MutedLabelStyle}" />
+                        <Label Text="Units &amp; Measurements" Style="{StaticResource BodyLabelStyle}" />
+                        <Label Text="{Binding UnitsSummary}" Style="{StaticResource MutedLabelStyle}" />
                     </VerticalStackLayout>
 
                     <Grid
@@ -224,9 +148,8 @@
                         RowSpacing="12">
 
                         <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="6">
-                            <Label
-                                Text="Weight Unit"
-                                Style="{StaticResource MutedLabelStyle}" />
+                            <Label Text="Weight Unit" Style="{StaticResource MutedLabelStyle}" />
+
                             <Border
                                 Padding="4"
                                 BackgroundColor="{DynamicResource SurfaceMutedColor}"
@@ -236,48 +159,24 @@
                                 </Border.StrokeShape>
 
                                 <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
-                                    <Button
+                                    <components:SelectionPill
+                                        Grid.Column="0"
                                         Text="kg"
-                                        Padding="14,10"
                                         Command="{Binding SelectKgCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{DynamicResource PrimaryTextColor}">
-                                        <Button.Triggers>
-                                            <DataTrigger
-                                                TargetType="Button"
-                                                Binding="{Binding IsKgSelected}"
-                                                Value="True">
-                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
-                                            </DataTrigger>
-                                        </Button.Triggers>
-                                    </Button>
+                                        IsSelected="{Binding IsKgSelected}" />
 
-                                    <Button
+                                    <components:SelectionPill
                                         Grid.Column="1"
                                         Text="lbs"
-                                        Padding="14,10"
                                         Command="{Binding SelectLbsCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{DynamicResource PrimaryTextColor}">
-                                        <Button.Triggers>
-                                            <DataTrigger
-                                                TargetType="Button"
-                                                Binding="{Binding IsLbsSelected}"
-                                                Value="True">
-                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
-                                            </DataTrigger>
-                                        </Button.Triggers>
-                                    </Button>
+                                        IsSelected="{Binding IsLbsSelected}" />
                                 </Grid>
                             </Border>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="6">
-                            <Label
-                                Text="System"
-                                Style="{StaticResource MutedLabelStyle}" />
+                            <Label Text="System" Style="{StaticResource MutedLabelStyle}" />
+
                             <Border
                                 Padding="4"
                                 BackgroundColor="{DynamicResource SurfaceMutedColor}"
@@ -287,40 +186,17 @@
                                 </Border.StrokeShape>
 
                                 <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
-                                    <Button
+                                    <components:SelectionPill
+                                        Grid.Column="0"
                                         Text="Metric"
-                                        Padding="14,10"
                                         Command="{Binding SelectMetricCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{DynamicResource PrimaryTextColor}">
-                                        <Button.Triggers>
-                                            <DataTrigger
-                                                TargetType="Button"
-                                                Binding="{Binding IsMetricSelected}"
-                                                Value="True">
-                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
-                                            </DataTrigger>
-                                        </Button.Triggers>
-                                    </Button>
+                                        IsSelected="{Binding IsMetricSelected}" />
 
-                                    <Button
+                                    <components:SelectionPill
                                         Grid.Column="1"
                                         Text="Imperial"
-                                        Padding="14,10"
                                         Command="{Binding SelectImperialCommand}"
-                                        BackgroundColor="Transparent"
-                                        TextColor="{DynamicResource PrimaryTextColor}">
-                                        <Button.Triggers>
-                                            <DataTrigger
-                                                TargetType="Button"
-                                                Binding="{Binding IsImperialSelected}"
-                                                Value="True">
-                                                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                                                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
-                                            </DataTrigger>
-                                        </Button.Triggers>
-                                    </Button>
+                                        IsSelected="{Binding IsImperialSelected}" />
                                 </Grid>
                             </Border>
                         </VerticalStackLayout>
@@ -341,42 +217,19 @@
                         </Border>
                     </Grid>
                 </VerticalStackLayout>
-            </Border>
+            </components:Card>
 
-            <Border
+            <components:ToggleRow
                 Grid.Row="4"
-                Style="{StaticResource CardBorderStyle}">
-                <VerticalStackLayout Spacing="12">
-                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                        <VerticalStackLayout Spacing="2">
-                            <Label
-                                Text="Cloud Sync"
-                                Style="{StaticResource BodyLabelStyle}" />
-                            <Label
-                                Text="{Binding CloudSyncSummary}"
-                                Style="{StaticResource MutedLabelStyle}" />
-                        </VerticalStackLayout>
+                Title="Cloud Sync"
+                Subtitle="{Binding CloudSyncSummary}"
+                IsToggled="{Binding IsCloudSyncEnabled}" />
 
-                        <Switch
-                            Grid.Column="1"
-                            IsToggled="{Binding IsCloudSyncEnabled}"
-                            VerticalOptions="Center" />
-                    </Grid>
-
-                    <Border
-                        Padding="12"
-                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                        StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="14" />
-                        </Border.StrokeShape>
-
-                        <Label
-                            Text="This currently saves the preference locally only. Actual account sync / backup flow still needs backend implementation."
-                            Style="{StaticResource MutedLabelStyle}" />
-                    </Border>
-                </VerticalStackLayout>
-            </Border>
+            <components:Card Grid.Row="5">
+                <Label
+                    Text="This currently saves the preference locally only. Actual account sync / backup flow still needs backend implementation."
+                    Style="{StaticResource MutedLabelStyle}" />
+            </components:Card>
         </Grid>
     </ScrollView>
 </ContentPage>

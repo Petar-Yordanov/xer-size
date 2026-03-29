@@ -381,25 +381,35 @@ public partial class StatisticsPageViewModel : ObservableObject
 
             if (SelectedRoutine is null || SelectedYear <= 0)
             {
-                Snapshot = new StatisticsSnapshot
+                var empty = new StatisticsSnapshot
                 {
                     HasSelection = false,
                     SelectionSummary = "Select a routine to view current setup preferences and logged timeline history."
                 };
 
-                BuildCharts(Snapshot);
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    Snapshot = empty;
+                    BuildCharts(empty);
+                });
+
                 return;
             }
 
-            var snapshot = await _statisticsService.GetSnapshotAsync(
-                SelectedRoutine.Id,
-                SelectedWorkout?.Id,
-                SelectedTimelineBucket,
-                SelectedYear,
-                SelectedQuarter);
+            var routineId = SelectedRoutine.Id;
+            var workoutId = SelectedWorkout?.Id;
+            var bucket = SelectedTimelineBucket;
+            var year = SelectedYear;
+            var quarter = SelectedQuarter;
 
-            Snapshot = snapshot;
-            await MainThread.InvokeOnMainThreadAsync(() => BuildCharts(snapshot));
+            var snapshot = await Task.Run(async () =>
+                await _statisticsService.GetSnapshotAsync(routineId, workoutId, bucket, year, quarter));
+
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                Snapshot = snapshot;
+                BuildCharts(snapshot);
+            });
         }
         finally
         {

@@ -13,21 +13,13 @@
     <Grid>
         <Grid Style="{StaticResource PageRootGridStyle}" RowDefinitions="Auto,Auto,*">
             <VerticalStackLayout Grid.Row="0" Spacing="2">
-                <Label
-                    Text="History"
-                    Style="{StaticResource PageTitleLabelStyle}" />
-                <Label
-                    Text="Review past sessions and compare performance."
-                    Style="{StaticResource MutedLabelStyle}" />
+                <Label Text="History" Style="{StaticResource PageTitleLabelStyle}" />
+                <Label Text="Review past sessions and compare performance." Style="{StaticResource MutedLabelStyle}" />
             </VerticalStackLayout>
 
-            <Border
-                Grid.Row="1"
-                Style="{StaticResource CardBorderStyle}">
+            <components:Card Grid.Row="1">
                 <VerticalStackLayout Spacing="10">
-                    <Label
-                        Text="Filters"
-                        Style="{StaticResource BodyLabelStyle}" />
+                    <Label Text="Filters" Style="{StaticResource BodyLabelStyle}" />
 
                     <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
                         <components:SingleSelectDropdown
@@ -43,22 +35,18 @@
                             TrailingIconText="v" />
                     </Grid>
                 </VerticalStackLayout>
-            </Border>
+            </components:Card>
 
             <CollectionView
                 Grid.Row="2"
                 Margin="0,12,0,0"
                 ItemsSource="{Binding Sessions}"
                 SelectionMode="None"
+                ItemSizingStrategy="MeasureFirstItem"
                 EmptyView="No workout history yet.">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:HistorySessionRow">
-                        <Border
-                            x:DataType="{x:Null}"
-                            Margin="0,0,0,12"
-                            Padding="14"
-                            Style="{StaticResource CardBorderStyle}">
-
+                    <DataTemplate x:DataType="{x:Null}">
+                        <components:Card Margin="0,0,0,12">
                             <VerticalStackLayout Spacing="12">
                                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                     <VerticalStackLayout Spacing="3">
@@ -72,56 +60,26 @@
                                             Style="{StaticResource MutedLabelStyle}" />
                                     </VerticalStackLayout>
 
-                                    <Border
+                                    <components:Badge
                                         Grid.Column="1"
-                                        Style="{StaticResource ChipBorderStyle}">
-                                        <HorizontalStackLayout Spacing="8">
-                                            <Label
-                                                Text="{Binding DateText}"
-                                                Style="{StaticResource MutedLabelStyle}" />
-                                        </HorizontalStackLayout>
-                                    </Border>
+                                        Text="{Binding DateText}" />
                                 </Grid>
 
                                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
-                                    <Border
+                                    <components:MetricTile
                                         Grid.Column="0"
-                                        Style="{StaticResource MetricTileBorderStyle}">
-                                        <VerticalStackLayout Spacing="2">
-                                            <Label
-                                                Text="Volume"
-                                                Style="{StaticResource MutedLabelStyle}" />
-                                            <Label
-                                                Text="{Binding VolumeText}"
-                                                Style="{StaticResource BodyLabelStyle}" />
-                                        </VerticalStackLayout>
-                                    </Border>
+                                        Title="Volume"
+                                        Value="{Binding VolumeText}" />
 
-                                    <Border
+                                    <components:MetricTile
                                         Grid.Column="1"
-                                        Style="{StaticResource MetricTileBorderStyle}">
-                                        <VerticalStackLayout Spacing="2">
-                                            <Label
-                                                Text="Sets"
-                                                Style="{StaticResource MutedLabelStyle}" />
-                                            <Label
-                                                Text="{Binding SetsText}"
-                                                Style="{StaticResource BodyLabelStyle}" />
-                                        </VerticalStackLayout>
-                                    </Border>
+                                        Title="Sets"
+                                        Value="{Binding SetsText}" />
 
-                                    <Border
+                                    <components:MetricTile
                                         Grid.Column="2"
-                                        Style="{StaticResource MetricTileBorderStyle}">
-                                        <VerticalStackLayout Spacing="2">
-                                            <Label
-                                                Text="Reps"
-                                                Style="{StaticResource MutedLabelStyle}" />
-                                            <Label
-                                                Text="{Binding RepsText}"
-                                                Style="{StaticResource BodyLabelStyle}" />
-                                        </VerticalStackLayout>
-                                    </Border>
+                                        Title="Reps"
+                                        Value="{Binding RepsText}" />
                                 </Grid>
 
                                 <FlexLayout
@@ -129,75 +87,32 @@
                                     Direction="Row"
                                     JustifyContent="Start"
                                     AlignItems="Start">
-                                    <Border
+                                    <components:Badge
                                         Margin="0,0,8,8"
-                                        Style="{StaticResource ChipBorderStyle}">
-                                        <Label
-                                            Text="{Binding DurationText}"
-                                            Style="{StaticResource MutedLabelStyle}" />
-                                    </Border>
+                                        Text="{Binding DurationText}" />
 
-                                    <Border
+                                    <components:Badge
                                         Margin="0,0,8,8"
-                                        Style="{StaticResource ChipBorderStyle}">
-                                        <Label
-                                            Text="{Binding CaloriesText}"
-                                            Style="{StaticResource MutedLabelStyle}" />
-                                    </Border>
+                                        Text="{Binding CaloriesText}" />
                                 </FlexLayout>
 
                                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                                    <Border
+                                    <components:DeltaBadge
                                         Grid.Column="0"
-                                        Style="{StaticResource ChipBorderStyle}">
-                                        <Label
-                                            Text="{Binding VolumeDeltaText}"
-                                            Style="{StaticResource MutedLabelStyle}">
-                                            <Label.Triggers>
-                                                <DataTrigger
-                                                    TargetType="Label"
-                                                    Binding="{Binding IsVolumeUp}"
-                                                    Value="True">
-                                                    <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
-                                                </DataTrigger>
-                                                <DataTrigger
-                                                    TargetType="Label"
-                                                    Binding="{Binding IsVolumeDown}"
-                                                    Value="True">
-                                                    <Setter Property="TextColor" Value="{DynamicResource DangerColor}" />
-                                                </DataTrigger>
-                                            </Label.Triggers>
-                                        </Label>
-                                    </Border>
+                                        Text="{Binding VolumeDeltaText}"
+                                        IsPositive="{Binding IsVolumeUp}"
+                                        IsNegative="{Binding IsVolumeDown}" />
 
-                                    <Border
+                                    <components:DeltaBadge
                                         Grid.Column="1"
-                                        Style="{StaticResource ChipBorderStyle}">
-                                        <Label
-                                            Text="{Binding RepsDeltaText}"
-                                            HorizontalTextAlignment="End"
-                                            Style="{StaticResource MutedLabelStyle}">
-                                            <Label.Triggers>
-                                                <DataTrigger
-                                                    TargetType="Label"
-                                                    Binding="{Binding IsRepsUp}"
-                                                    Value="True">
-                                                    <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
-                                                </DataTrigger>
-                                                <DataTrigger
-                                                    TargetType="Label"
-                                                    Binding="{Binding IsRepsDown}"
-                                                    Value="True">
-                                                    <Setter Property="TextColor" Value="{DynamicResource DangerColor}" />
-                                                </DataTrigger>
-                                            </Label.Triggers>
-                                        </Label>
-                                    </Border>
+                                        Text="{Binding RepsDeltaText}"
+                                        IsPositive="{Binding IsRepsUp}"
+                                        IsNegative="{Binding IsRepsDown}" />
                                 </Grid>
 
-                                <Button
+                                <components:Button
                                     Text="{Binding ToggleInfoText}"
-                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.ToggleSessionInfoCommand}"
                                     CommandParameter="{Binding .}" />
 
@@ -217,12 +132,8 @@
 
                                                 <VerticalStackLayout Spacing="8">
                                                     <VerticalStackLayout Spacing="2">
-                                                        <Label
-                                                            Text="{Binding Name}"
-                                                            Style="{StaticResource BodyLabelStyle}" />
-                                                        <Label
-                                                            Text="{Binding SummaryText}"
-                                                            Style="{StaticResource MutedLabelStyle}" />
+                                                        <Label Text="{Binding Name}" Style="{StaticResource BodyLabelStyle}" />
+                                                        <Label Text="{Binding SummaryText}" Style="{StaticResource MutedLabelStyle}" />
                                                     </VerticalStackLayout>
 
                                                     <VerticalStackLayout
@@ -230,11 +141,7 @@
                                                         BindableLayout.ItemsSource="{Binding Sets}">
                                                         <BindableLayout.ItemTemplate>
                                                             <DataTemplate x:DataType="models:HistorySessionSetInfoRow">
-                                                                <Border Style="{StaticResource ChipBorderStyle}">
-                                                                    <Label
-                                                                        Text="{Binding Text}"
-                                                                        Style="{StaticResource MutedLabelStyle}" />
-                                                                </Border>
+                                                                <components:Badge Text="{Binding Text}" />
                                                             </DataTemplate>
                                                         </BindableLayout.ItemTemplate>
                                                     </VerticalStackLayout>
@@ -244,18 +151,16 @@
                                     </BindableLayout.ItemTemplate>
                                 </VerticalStackLayout>
                             </VerticalStackLayout>
-                        </Border>
+                        </components:Card>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
 
         <Grid
-            x:DataType="{x:Null}"
             IsVisible="{Binding IsRoutineSheetOpen}"
             InputTransparent="False"
             ZIndex="20">
-
             <BoxView BackgroundColor="#66000000">
                 <BoxView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CloseRoutineSheetCommand}" />
@@ -274,25 +179,17 @@
                 </Border.StrokeShape>
 
                 <VerticalStackLayout Spacing="10">
-                    <BoxView
-                        HeightRequest="5"
-                        WidthRequest="48"
-                        HorizontalOptions="Center"
-                        Color="{DynamicResource BorderColor}" />
-
-                    <Label
-                        Margin="18,0,18,0"
-                        Text="Select Routine"
-                        Style="{StaticResource BodyLabelStyle}" />
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Select Routine" Style="{StaticResource BodyLabelStyle}" />
 
                     <CollectionView
                         ItemsSource="{Binding Routines}"
                         SelectionMode="None"
+                        ItemSizingStrategy="MeasureFirstItem"
                         MaximumHeightRequest="320">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Routine">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <Border
-                                    x:DataType="{x:Null}"
                                     Margin="12,0,12,8"
                                     Padding="14,12"
                                     BackgroundColor="{DynamicResource SurfaceMutedColor}"
@@ -328,11 +225,9 @@
         </Grid>
 
         <Grid
-            x:DataType="{x:Null}"
             IsVisible="{Binding IsWorkoutSheetOpen}"
             InputTransparent="False"
             ZIndex="21">
-
             <BoxView BackgroundColor="#66000000">
                 <BoxView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CloseWorkoutSheetCommand}" />
@@ -351,25 +246,17 @@
                 </Border.StrokeShape>
 
                 <VerticalStackLayout Spacing="10">
-                    <BoxView
-                        HeightRequest="5"
-                        WidthRequest="48"
-                        HorizontalOptions="Center"
-                        Color="{DynamicResource BorderColor}" />
-
-                    <Label
-                        Margin="18,0,18,0"
-                        Text="Select Workout"
-                        Style="{StaticResource BodyLabelStyle}" />
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Select Workout" Style="{StaticResource BodyLabelStyle}" />
 
                     <CollectionView
                         ItemsSource="{Binding Workouts}"
                         SelectionMode="None"
+                        ItemSizingStrategy="MeasureFirstItem"
                         MaximumHeightRequest="320">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Workout">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <Border
-                                    x:DataType="{x:Null}"
                                     Margin="12,0,12,8"
                                     Padding="14,12"
                                     BackgroundColor="{DynamicResource SurfaceMutedColor}"

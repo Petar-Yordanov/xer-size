@@ -4,7 +4,9 @@ namespace XerSize.Views.Pages;
 
 public partial class ExercisesPage : ContentPage
 {
-    ExercisesPageViewModel _viewModel;
+    private readonly ExercisesPageViewModel _viewModel;
+    private bool _isLoaded;
+    private bool _isLoading;
 
     public ExercisesPage(ExercisesPageViewModel viewModel)
     {
@@ -16,13 +18,23 @@ public partial class ExercisesPage : ContentPage
     {
         base.OnAppearing();
 
+        if (_isLoaded || _isLoading)
+            return;
+
+        _isLoading = true;
+
         try
         {
             await _viewModel.LoadCommand.ExecuteAsync(null);
+            _isLoaded = true;
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine(ex);
+        }
+        finally
+        {
+            _isLoading = false;
         }
     }
 }

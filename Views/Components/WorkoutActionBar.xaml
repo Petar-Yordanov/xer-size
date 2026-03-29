@@ -3,26 +3,27 @@
     x:Class="XerSize.Views.Components.WorkoutActionBar"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="This">
+    xmlns:components="clr-namespace:XerSize.Views.Components"
+    xmlns:local="clr-namespace:XerSize.Views.Components"
+    x:Name="This"
+    x:DataType="local:WorkoutActionBar">
 
     <Border Style="{StaticResource CardBorderStyle}">
         <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
-            <Button
+            <components:Button
                 Text="+ Exercise"
-                Style="{StaticResource SecondaryButtonStyle}"
+                ButtonStyle="{StaticResource SecondaryButtonStyle}"
                 Command="{Binding Source={x:Reference This}, Path=AddExerciseCommand}" />
 
-            <Button
+            <components:Button
                 Grid.Column="1"
                 Text="Start Workout"
-                Style="{StaticResource PrimaryButtonStyle}"
+                ButtonStyle="{StaticResource PrimaryButtonStyle}"
                 Command="{Binding Source={x:Reference This}, Path=StartWorkoutCommand}" />
 
-            <Button
+            <components:Button
                 Grid.Column="2"
                 Text="⋯"
-                WidthRequest="48"
-                Style="{StaticResource SecondaryButtonStyle}"
                 Command="{Binding Source={x:Reference This}, Path=MoreCommand}" />
         </Grid>
     </Border>

@@ -3,7 +3,9 @@
     x:Class="XerSize.Views.Components.MultiSelectDropdown"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="This">
+    xmlns:local="clr-namespace:XerSize.Views.Components"
+    x:Name="This"
+    x:DataType="local:MultiSelectDropdown">
 
     <Border
         BackgroundColor="{DynamicResource SurfaceColor}"

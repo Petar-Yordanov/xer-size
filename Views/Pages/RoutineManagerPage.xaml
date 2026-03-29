@@ -4,76 +4,69 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:XerSize.ViewModels.Routines"
-    xmlns:models="clr-namespace:XerSize.Models"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
     x:DataType="viewModels:RoutineManagerPageViewModel"
     x:Name="PageRoot"
     Title="Manage Routines">
 
     <Grid Style="{StaticResource PageRootGridStyle}" RowDefinitions="Auto,*">
-        <Button
+        <components:Button
             Grid.Row="0"
             Text="+ Add Routine"
-            Style="{StaticResource PrimaryButtonStyle}"
             Command="{Binding AddRoutineCommand}" />
 
         <CollectionView
             Grid.Row="1"
             Margin="0,12,0,0"
             ItemsSource="{Binding Items}"
-            SelectionMode="None">
+            SelectionMode="None"
+            ItemSizingStrategy="MeasureFirstItem">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Routine">
-                    <Border
-                        x:DataType="{x:Null}"
-                        Margin="0,0,0,12"
-                        Style="{StaticResource CardBorderStyle}">
+                <DataTemplate x:DataType="{x:Null}">
+                    <components:Card Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="10">
                             <Label
                                 Text="{Binding Name}"
                                 Style="{StaticResource BodyLabelStyle}" />
 
                             <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="8">
-                                <Button
-                                    x:DataType="{x:Null}"
+                                <components:Button
+                                    Grid.Column="0"
                                     Text="↑"
-                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.MoveUpCommand}"
                                     CommandParameter="{Binding .}" />
 
-                                <Button
-                                    x:DataType="{x:Null}"
+                                <components:Button
                                     Grid.Column="1"
                                     Text="↓"
-                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.MoveDownCommand}"
                                     CommandParameter="{Binding .}" />
 
-                                <Button
-                                    x:DataType="{x:Null}"
+                                <components:Button
                                     Grid.Column="2"
                                     Text="Rename"
-                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.RenameRoutineCommand}"
                                     CommandParameter="{Binding .}" />
 
-                                <Button
-                                    x:DataType="{x:Null}"
+                                <components:Button
                                     Grid.Column="3"
                                     Text="Workouts"
-                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.OpenWorkoutsCommand}"
                                     CommandParameter="{Binding .}" />
 
-                                <Button
-                                    x:DataType="{x:Null}"
+                                <components:Button
                                     Grid.Column="4"
                                     Text="Delete"
-                                    Style="{StaticResource SecondaryButtonStyle}"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.DeleteRoutineCommand}"
                                     CommandParameter="{Binding .}" />
                             </Grid>
                         </VerticalStackLayout>
-                    </Border>
+                    </components:Card>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
