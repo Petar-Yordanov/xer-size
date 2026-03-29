@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="XerSize.Views.Components.SelectionPill"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:XerSize.Views.Components"
+    x:Name="This"
+    x:DataType="local:SelectionPill">
+
+    <Button
+        Text="{Binding Source={x:Reference This}, Path=Text}"
+        Command="{Binding Source={x:Reference This}, Path=Command}"
+        CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}"
+        Padding="{Binding Source={x:Reference This}, Path=ContentPadding}"
+        BackgroundColor="Transparent"
+        BorderColor="Transparent"
+        BorderWidth="0"
+        TextColor="{DynamicResource PrimaryTextColor}"
+        FontFamily="OpenSansSemibold"
+        FontSize="13"
+        CornerRadius="12"
+        MinimumHeightRequest="38">
+
+        <Button.Triggers>
+            <DataTrigger
+                TargetType="Button"
+                Binding="{Binding Source={x:Reference This}, Path=IsSelected}"
+                Value="True">
+                <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceColor}" />
+                <Setter Property="BorderColor" Value="{DynamicResource BorderColor}" />
+                <Setter Property="BorderWidth" Value="1" />
+            </DataTrigger>
+        </Button.Triggers>
+    </Button>
+</ContentView>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="XerSize.Views.Components.ImageTile"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:XerSize.Views.Components"
+    x:Name="This"
+    x:DataType="local:ImageTile">
+
+    <Border
+        Padding="0"
+        BackgroundColor="{DynamicResource SurfaceMutedColor}"
+        Stroke="{DynamicResource BorderColor}"
+        StrokeThickness="1"
+        MinimumHeightRequest="{Binding Source={x:Reference This}, Path=TileHeight}"
+        MinimumWidthRequest="{Binding Source={x:Reference This}, Path=TileWidth}">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="14" />
+        </Border.StrokeShape>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding Source={x:Reference This}, Path=TapCommand}"
+                CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
+        </Border.GestureRecognizers>
+
+        <Grid>
+            <Image
+                IsVisible="{Binding Source={x:Reference This}, Path=HasImage}"
+                Source="{Binding Source={x:Reference This}, Path=ImageSource}"
+                Aspect="AspectFill" />
+
+            <Grid
+                IsVisible="{Binding Source={x:Reference This}, Path=ShowPlaceholder}"
+                Padding="10">
+                <VerticalStackLayout
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Spacing="6">
+                    <Label
+                        Text="🖼"
+                        HorizontalTextAlignment="Center"
+                        FontSize="18"
+                        TextColor="{DynamicResource SecondaryTextColor}" />
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=PlaceholderTitle}"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BodyLabelStyle}" />
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=PlaceholderSubtitle}"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource MutedLabelStyle}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border
+                IsVisible="{Binding Source={x:Reference This}, Path=HasImage}"
+                Margin="6"
+                Padding="8,4"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                BackgroundColor="#AA000000"
+                StrokeThickness="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding Source={x:Reference This}, Path=TapCommand}"
+                        CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
+                </Border.GestureRecognizers>
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=ActionText}"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="12"
+                    TextColor="White" />
+            </Border>
+        </Grid>
+    </Border>
+</ContentView>

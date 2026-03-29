@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="XerSize.Views.Components.WorkoutActionBar"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
+    xmlns:local="clr-namespace:XerSize.Views.Components"
+    x:Name="This"
+    x:DataType="local:WorkoutActionBar">
+
+    <Border Style="{StaticResource CardBorderStyle}">
+        <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
+            <components:Button
+                Text="+ Exercise"
+                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                Command="{Binding Source={x:Reference This}, Path=AddExerciseCommand}" />
+
+            <components:Button
+                Grid.Column="1"
+                Text="Start Workout"
+                ButtonStyle="{StaticResource PrimaryButtonStyle}"
+                Command="{Binding Source={x:Reference This}, Path=StartWorkoutCommand}" />
+
+            <components:Button
+                Grid.Column="2"
+                Text="⋯"
+                Command="{Binding Source={x:Reference This}, Path=MoreCommand}" />
+        </Grid>
+    </Border>
+</ContentView>

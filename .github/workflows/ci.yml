@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches:
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Install MAUI + Android workloads
+        run: dotnet workload install maui android --ignore-failed-sources
+
+      - name: Generate temporary Android keystore
+        shell: pwsh
+        run: |
+          keytool -genkeypair `
+            -v `
+            -keystore "$env:GITHUB_WORKSPACE\android-signing.keystore" `
+            -storepass "temp-store-pass-123" `
+            -alias "xersize" `
+            -keyalg RSA `
+            -keysize 2048 `
+            -validity 10000 `
+            -dname "CN=XerSize, OU=CI, O=XerSize, L=NA, ST=NA, C=US"
+
+      - name: Publish signed Release APK
+        shell: pwsh
+        run: >
+          dotnet publish XerSize.csproj
+          -f net10.0-android
+          -c Release
+          -p:AndroidPackageFormats=apk
+          -p:AndroidKeyStore=true
+          -p:AndroidSigningKeyStore="$env:GITHUB_WORKSPACE\android-signing.keystore"
+          -p:AndroidSigningStorePass="temp-store-pass-123"
+          -p:AndroidSigningKeyAlias="xersize"
+          -p:AndroidSigningKeyPass="temp-store-pass-123"
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: XerSize-android-release-apk
+          path: |
+            **/bin/Release/net10.0-android/**/*.apk

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.RoutinesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Routines"
+    x:DataType="viewModels:RoutinesPageViewModel"
+    x:Name="PageRoot"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    Title="Routines">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <Grid Grid.Row="0">
+            <Grid
+                Style="{StaticResource PageRootGridStyle}"
+                RowDefinitions="Auto,Auto,Auto,*"
+                RowSpacing="8">
+
+                <components:RoutineDropdown
+                    Grid.Row="1"
+                    SelectedText="{Binding SelectedRoutineName}"
+                    TapCommand="{Binding ToggleRoutineSheetCommand}"
+                    AddCommand="{Binding AddRoutineCommand}"
+                    LongPressCommand="{Binding HandleRoutineLongPressCommand}"
+                    IsLongPressEnabled="True"
+                    ShowAddButton="True"
+                    AddButtonText="+"
+                    TrailingIconText="v" />
+
+                <components:WorkoutTabsBar
+                    Grid.Row="2"
+                    ItemsSource="{Binding VisibleWorkouts}"
+                    SelectedItem="{Binding SelectedWorkout}"
+                    AddCommand="{Binding AddWorkoutCommand}"
+                    LongPressCommand="{Binding HandleWorkoutLongPressCommand}" />
+
+                <Grid Grid.Row="3" Margin="0,2,0,0">
+                    <components:Card>
+                        <Grid Padding="0">
+                            <CollectionView
+                                Margin="0,0,0,72"
+                                ItemsSource="{Binding VisibleExercises}"
+                                SelectionMode="None"
+                                VerticalOptions="Fill"
+                                ItemSizingStrategy="MeasureFirstItem"
+                                EmptyView="No exercises in this workout yet.">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="{x:Null}">
+                                        <Border
+                                            Margin="0,0,0,12"
+                                            Padding="12"
+                                            BackgroundColor="{DynamicResource SurfaceColor}"
+                                            Stroke="{DynamicResource BorderColor}"
+                                            StrokeThickness="1">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="16" />
+                                            </Border.StrokeShape>
+
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.EditExerciseCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+
+                                            <VerticalStackLayout Spacing="10">
+                                                <Grid
+                                                    ColumnDefinitions="64,*,Auto"
+                                                    RowDefinitions="Auto,Auto"
+                                                    ColumnSpacing="10"
+                                                    RowSpacing="6">
+
+                                                    <components:ImageTile
+                                                        Grid.RowSpan="2"
+                                                        Grid.Column="0"
+                                                        ImageSource="{Binding PreviewImageSource}"
+                                                        PlaceholderTitle="{Binding PlaceholderText}"
+                                                        PlaceholderSubtitle=""
+                                                        ActionText=""
+                                                        TileHeight="64"
+                                                        TileWidth="64" />
+
+                                                    <VerticalStackLayout
+                                                        Grid.Column="1"
+                                                        Grid.Row="0"
+                                                        Grid.RowSpan="2"
+                                                        Spacing="2">
+                                                        <Label
+                                                            Text="{Binding Name}"
+                                                            LineBreakMode="TailTruncation"
+                                                            Style="{StaticResource BodyLabelStyle}" />
+
+                                                        <Label
+                                                            Text="{Binding PrimaryMusclesText}"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="1"
+                                                            Style="{StaticResource MutedLabelStyle}" />
+
+                                                        <Label
+                                                            Text="{Binding RestText}"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="1"
+                                                            Style="{StaticResource MutedLabelStyle}" />
+                                                    </VerticalStackLayout>
+
+                                                    <components:Button
+                                                        Grid.Column="2"
+                                                        Grid.Row="0"
+                                                        Text="Delete"
+                                                        ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                                        Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.DeleteExerciseCommand}"
+                                                        CommandParameter="{Binding .}" />
+
+                                                    <components:Button
+                                                        Grid.Column="2"
+                                                        Grid.Row="1"
+                                                        Text="{Binding ExpandButtonText}"
+                                                        ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                                        Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.ToggleExerciseExpandedCommand}"
+                                                        CommandParameter="{Binding .}" />
+                                                </Grid>
+
+                                                <Border
+                                                    IsVisible="{Binding IsExpanded}"
+                                                    Padding="12"
+                                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                                    StrokeThickness="0">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="14" />
+                                                    </Border.StrokeShape>
+
+                                                    <VerticalStackLayout Spacing="8">
+                                                        <Label
+                                                            Text="Sets"
+                                                            Style="{StaticResource BodyLabelStyle}" />
+
+                                                        <CollectionView
+                                                            ItemsSource="{Binding GroupedSets}"
+                                                            SelectionMode="None"
+                                                            ItemSizingStrategy="MeasureFirstItem">
+                                                            <CollectionView.ItemTemplate>
+                                                                <DataTemplate x:DataType="{x:Null}">
+                                                                    <components:Badge
+                                                                        Text="{Binding SummaryText}" />
+                                                                </DataTemplate>
+                                                            </CollectionView.ItemTemplate>
+                                                        </CollectionView>
+                                                    </VerticalStackLayout>
+                                                </Border>
+                                            </VerticalStackLayout>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </components:Card>
+
+                    <components:QuickActionLauncherButton
+                        Margin="12,0,12,12"
+                        VerticalOptions="End"
+                        HorizontalOptions="Fill"
+                        ZIndex="20"
+                        Text="Workout actions"
+                        LeadingIconText="⚡"
+                        Command="{Binding ToggleQuickActionsCommand}" />
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <components:BottomNavBar Grid.Row="1">
+            <HorizontalStackLayout Spacing="4">
+                <components:BottomNavBarItem
+                    Text="Routines"
+                    Icon="routines.png"
+                    Route="routines"
+                    IsSelected="True" />
+
+                <components:BottomNavBarItem
+                    Text="Exercises"
+                    Icon="exercises.png"
+                    Route="exercises" />
+
+                <components:BottomNavBarItem
+                    Text="History"
+                    Icon="history.png"
+                    Route="history" />
+
+                <components:BottomNavBarItem
+                    Text="Stats"
+                    Icon="statistics.png"
+                    Route="statistics" />
+
+                <components:BottomNavBarItem
+                    Text="Settings"
+                    Icon="settings.png"
+                    Route="settingsTab" />
+            </HorizontalStackLayout>
+        </components:BottomNavBar>
+    </Grid>
+</ContentPage>

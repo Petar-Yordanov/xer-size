@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.RoutineManagerPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Routines"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
+    x:DataType="viewModels:RoutineManagerPageViewModel"
+    x:Name="PageRoot"
+    Title="Manage Routines">
+
+    <Grid Style="{StaticResource PageRootGridStyle}" RowDefinitions="Auto,*">
+        <components:Button
+            Grid.Row="0"
+            Text="+ Add Routine"
+            Command="{Binding AddRoutineCommand}" />
+
+        <CollectionView
+            Grid.Row="1"
+            Margin="0,12,0,0"
+            ItemsSource="{Binding Items}"
+            SelectionMode="None"
+            ItemSizingStrategy="MeasureFirstItem">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Null}">
+                    <components:Card Margin="0,0,0,12">
+                        <VerticalStackLayout Spacing="10">
+                            <Label
+                                Text="{Binding Name}"
+                                Style="{StaticResource BodyLabelStyle}" />
+
+                            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="8">
+                                <components:Button
+                                    Grid.Column="0"
+                                    Text="↑"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.MoveUpCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <components:Button
+                                    Grid.Column="1"
+                                    Text="↓"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.MoveDownCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <components:Button
+                                    Grid.Column="2"
+                                    Text="Rename"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.RenameRoutineCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <components:Button
+                                    Grid.Column="3"
+                                    Text="Workouts"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.OpenWorkoutsCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <components:Button
+                                    Grid.Column="4"
+                                    Text="Delete"
+                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.DeleteRoutineCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </components:Card>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

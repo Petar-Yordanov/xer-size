@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.AddExercisePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Routines"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
+    x:DataType="viewModels:AddExercisePageViewModel"
+    x:Name="PageRoot"
+    Title="{Binding PageTitle}">
+
+    <Grid>
+        <ScrollView>
+            <Grid
+                Style="{StaticResource PageRootGridStyle}"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="12">
+
+                <Label
+                    Grid.Row="0"
+                    Text="{Binding PageTitle}"
+                    Style="{StaticResource PageTitleLabelStyle}" />
+
+                <components:Card Grid.Row="1">
+                    <VerticalStackLayout Spacing="14">
+
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Exercise" Style="{StaticResource BodyLabelStyle}" />
+                                <Label Text="{Binding SourceSummary}" Style="{StaticResource MutedLabelStyle}" />
+                            </VerticalStackLayout>
+
+                            <components:Button
+                                Grid.Column="1"
+                                Text="Choose From"
+                                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding OpenCatalogCommand}" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="110,*" ColumnSpacing="12">
+                            <components:ImageTile
+                                Grid.Column="0"
+                                ImageSource="{Binding SelectedImageSource}"
+                                TapCommand="{Binding PickImageCommand}"
+                                PlaceholderTitle="Upload"
+                                PlaceholderSubtitle="Tap anywhere"
+                                ActionText="Change"
+                                TileHeight="110"
+                                TileWidth="110" />
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="10">
+                                <components:TextField
+                                    Text="{Binding Name}"
+                                    Placeholder="Exercise name" />
+
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                    <components:MultiSelectDropdown
+                                        Grid.Column="0"
+                                        SelectedText="{Binding PrimaryMuscleCategoriesSummary}"
+                                        TapCommand="{Binding TogglePrimaryCategoriesSheetCommand}"
+                                        TrailingIconText="v" />
+
+                                    <components:MultiSelectDropdown
+                                        Grid.Column="1"
+                                        SelectedText="{Binding SecondaryMuscleCategoriesSummary}"
+                                        TapCommand="{Binding ToggleSecondaryCategoriesSheetCommand}"
+                                        TrailingIconText="v" />
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <components:TextArea
+                            Text="{Binding Notes}"
+                            Placeholder="Notes" />
+                    </VerticalStackLayout>
+                </components:Card>
+
+                <components:Card Grid.Row="2">
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="Sets" Style="{StaticResource BodyLabelStyle}" />
+                        <Label Text="Choose set type and manage sets in one place." Style="{StaticResource MutedLabelStyle}" />
+
+                        <Border
+                            Padding="4"
+                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="16" />
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                                <components:SelectionPill
+                                    Grid.Column="0"
+                                    Text="Strength"
+                                    Command="{Binding SelectStrengthModeCommand}"
+                                    IsSelected="{Binding IsStrengthMode}" />
+
+                                <components:SelectionPill
+                                    Grid.Column="1"
+                                    Text="Duration"
+                                    Command="{Binding SelectDurationModeCommand}"
+                                    IsSelected="{Binding IsDurationMode}" />
+                            </Grid>
+                        </Border>
+
+                        <VerticalStackLayout
+                            Spacing="10"
+                            IsVisible="{Binding IsStrengthMode}">
+                            <CollectionView ItemsSource="{Binding StrengthSets}" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="viewModels:EditableExerciseSetRow">
+                                        <Grid
+                                            ColumnDefinitions="Auto,*,*,*,Auto"
+                                            ColumnSpacing="8"
+                                            Padding="0,4">
+
+                                            <Label
+                                                Grid.Column="0"
+                                                VerticalOptions="Center"
+                                                Text="{Binding SetLabel}"
+                                                Style="{StaticResource BodyLabelStyle}" />
+
+                                            <Entry
+                                                Grid.Column="1"
+                                                Placeholder="Reps"
+                                                Keyboard="Numeric"
+                                                Text="{Binding RepsText}" />
+
+                                            <Entry
+                                                Grid.Column="2"
+                                                Placeholder="Kg"
+                                                Keyboard="Numeric"
+                                                Text="{Binding WeightKgText}" />
+
+                                            <Entry
+                                                Grid.Column="3"
+                                                Placeholder="Rest sec"
+                                                Keyboard="Numeric"
+                                                Text="{Binding RestSecondsText}" />
+
+                                            <components:Button
+                                                Grid.Column="4"
+                                                Text="X"
+                                                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                                Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.RemoveStrengthSetCommand}"
+                                                CommandParameter="{Binding .}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <components:Button
+                                Text="+ Add Set"
+                                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding AddStrengthSetCommand}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout
+                            Spacing="10"
+                            IsVisible="{Binding IsDurationMode}">
+                            <CollectionView ItemsSource="{Binding DurationSets}" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="viewModels:EditableExerciseSetRow">
+                                        <Grid
+                                            ColumnDefinitions="Auto,*,*,*,Auto"
+                                            ColumnSpacing="8"
+                                            Padding="0,4">
+
+                                            <Label
+                                                Grid.Column="0"
+                                                VerticalOptions="Center"
+                                                Text="{Binding SetLabel}"
+                                                Style="{StaticResource BodyLabelStyle}" />
+
+                                            <Entry
+                                                Grid.Column="1"
+                                                Placeholder="Reps"
+                                                Keyboard="Numeric"
+                                                Text="{Binding RepsText}" />
+
+                                            <Entry
+                                                Grid.Column="2"
+                                                Placeholder="Time sec"
+                                                Keyboard="Numeric"
+                                                Text="{Binding DurationSecondsText}" />
+
+                                            <Entry
+                                                Grid.Column="3"
+                                                Placeholder="Rest sec"
+                                                Keyboard="Numeric"
+                                                Text="{Binding RestSecondsText}" />
+
+                                            <components:Button
+                                                Grid.Column="4"
+                                                Text="X"
+                                                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                                Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.RemoveDurationSetCommand}"
+                                                CommandParameter="{Binding .}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <components:Button
+                                Text="+ Add Set"
+                                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding AddDurationSetCommand}" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </components:Card>
+
+                <components:Card Grid.Row="3">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Advanced" Style="{StaticResource BodyLabelStyle}" />
+                                <Label Text="Collapsed by default so it does not take space." Style="{StaticResource MutedLabelStyle}" />
+                            </VerticalStackLayout>
+
+                            <components:Button
+                                Grid.Column="1"
+                                Text="{Binding AdvancedButtonText}"
+                                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding ToggleAdvancedCommand}" />
+                        </Grid>
+
+                        <VerticalStackLayout
+                            IsVisible="{Binding IsAdvancedExpanded}"
+                            Spacing="12">
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <components:MultiSelectDropdown
+                                    Grid.Column="0"
+                                    SelectedText="{Binding PrimaryMusclesSummary}"
+                                    TapCommand="{Binding TogglePrimaryMusclesSheetCommand}"
+                                    TrailingIconText="v" />
+
+                                <components:MultiSelectDropdown
+                                    Grid.Column="1"
+                                    SelectedText="{Binding SecondaryMusclesSummary}"
+                                    TapCommand="{Binding ToggleSecondaryMusclesSheetCommand}"
+                                    TrailingIconText="v" />
+                            </Grid>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <components:SingleSelectDropdown
+                                    Grid.Column="0"
+                                    SelectedText="{Binding ForceSummary}"
+                                    TapCommand="{Binding ToggleForceSheetCommand}"
+                                    TrailingIconText="v" />
+
+                                <components:SingleSelectDropdown
+                                    Grid.Column="1"
+                                    SelectedText="{Binding BodyCategorySummary}"
+                                    TapCommand="{Binding ToggleBodyCategorySheetCommand}"
+                                    TrailingIconText="v" />
+                            </Grid>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <components:SingleSelectDropdown
+                                    Grid.Column="0"
+                                    SelectedText="{Binding MechanicSummary}"
+                                    TapCommand="{Binding ToggleMechanicSheetCommand}"
+                                    TrailingIconText="v" />
+
+                                <components:SingleSelectDropdown
+                                    Grid.Column="1"
+                                    SelectedText="{Binding EquipmentSummary}"
+                                    TapCommand="{Binding ToggleEquipmentSheetCommand}"
+                                    TrailingIconText="v" />
+                            </Grid>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                <components:SingleSelectDropdown
+                                    Grid.Column="0"
+                                    SelectedText="{Binding LimbInvolvementSummary}"
+                                    TapCommand="{Binding ToggleLimbInvolvementSheetCommand}"
+                                    TrailingIconText="v" />
+
+                                <components:SingleSelectDropdown
+                                    Grid.Column="1"
+                                    SelectedText="{Binding MovementPatternSummary}"
+                                    TapCommand="{Binding ToggleMovementPatternSheetCommand}"
+                                    TrailingIconText="v" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </components:Card>
+
+                <components:Button
+                    Grid.Row="4"
+                    Text="{Binding SaveButtonText}"
+                    Command="{Binding SaveCommand}" />
+            </Grid>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsPrimaryMusclesSheetOpen}" InputTransparent="False" ZIndex="20">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClosePrimaryMusclesSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Primary Muscles" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding PrimaryMuscleOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SelectableOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.TogglePrimaryMuscleOptionCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsSecondaryMusclesSheetOpen}" InputTransparent="False" ZIndex="21">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseSecondaryMusclesSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Secondary Muscles" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding SecondaryMuscleOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SelectableOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.ToggleSecondaryMuscleOptionCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsPrimaryCategoriesSheetOpen}" InputTransparent="False" ZIndex="22">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClosePrimaryCategoriesSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Primary Muscle Categories" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding PrimaryMuscleCategoryOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SelectableOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.TogglePrimaryCategoryOptionCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsSecondaryCategoriesSheetOpen}" InputTransparent="False" ZIndex="23">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseSecondaryCategoriesSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Secondary Muscle Categories" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding SecondaryMuscleCategoryOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SelectableOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.ToggleSecondaryCategoryOptionCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsForceSheetOpen}" InputTransparent="False" ZIndex="24">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseForceSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Force" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding ForceOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectForceCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsBodyCategorySheetOpen}" InputTransparent="False" ZIndex="25">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseBodyCategorySheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Body Category" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding BodyCategoryOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectBodyCategoryCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsMechanicSheetOpen}" InputTransparent="False" ZIndex="26">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseMechanicSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Mechanic" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding MechanicOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectMechanicCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsEquipmentSheetOpen}" InputTransparent="False" ZIndex="27">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseEquipmentSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Equipment" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding EquipmentOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectEquipmentCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsLimbInvolvementSheetOpen}" InputTransparent="False" ZIndex="28">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseLimbInvolvementSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Limb Involvement" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding LimbInvolvementOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectLimbInvolvementCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Grid IsVisible="{Binding IsMovementPatternSheetOpen}" InputTransparent="False" ZIndex="29">
+            <BoxView BackgroundColor="#66000000">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseMovementPatternSheetCommand}" />
+                </BoxView.GestureRecognizers>
+            </BoxView>
+
+            <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18"
+                    BackgroundColor="{DynamicResource SurfaceColor}"
+                    Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="24" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="10">
+                    <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
+                    <Label Margin="18,0,18,0" Text="Movement Pattern" Style="{StaticResource BodyLabelStyle}" />
+
+                    <CollectionView ItemsSource="{Binding MovementPatternOptions}" SelectionMode="None" MaximumHeightRequest="340">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                                <components:SheetOptionRow
+                                    Text="{Binding Text}"
+                                    IsSelected="{Binding IsSelected}"
+                                    TapCommand="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectMovementPatternCommand}"
+                                    TapCommandParameter="{Binding .}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </Grid>
+</ContentPage>

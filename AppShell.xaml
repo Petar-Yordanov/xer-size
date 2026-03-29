@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="XerSize.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:XerSize.Views.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarIsVisible="False"
+    Shell.NavBarIsVisible="False">
+
+    <ShellContent
+        Title="Routines"
+        Route="routines"
+        ContentTemplate="{DataTemplate pages:RoutinesPage}" />
+
+    <ShellContent
+        Title="Exercises"
+        Route="exercises"
+        ContentTemplate="{DataTemplate pages:ExercisesPage}" />
+
+    <ShellContent
+        Title="History"
+        Route="history"
+        ContentTemplate="{DataTemplate pages:HistoryPage}" />
+
+    <ShellContent
+        Title="Statistics"
+        Route="statistics"
+        ContentTemplate="{DataTemplate pages:StatisticsPage}" />
+
+    <ShellContent
+        Title="Settings"
+        Route="settingsTab"
+        ContentTemplate="{DataTemplate pages:SettingsPage}" />
+</Shell>

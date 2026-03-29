@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="XerSize.Resources.Themes.DarkTheme"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="PageBackgroundColor">#14181E</Color>
+    <Color x:Key="SurfaceColor">#1B2129</Color>
+    <Color x:Key="SurfaceMutedColor">#232B36</Color>
+    <Color x:Key="SurfaceRaisedColor">#262F3B</Color>
+    <Color x:Key="SurfacePressedColor">#313C49</Color>
+
+    <Color x:Key="BorderColor">#394452</Color>
+    <Color x:Key="BorderStrongColor">#4B5868</Color>
+    <Color x:Key="DividerColor">#313B47</Color>
+
+    <Color x:Key="PrimaryTextColor">#F2F5F8</Color>
+    <Color x:Key="SecondaryTextColor">#B3BDC8</Color>
+    <Color x:Key="TertiaryTextColor">#8E99A6</Color>
+
+    <Color x:Key="PrimaryColor">#4DA3FF</Color>
+    <Color x:Key="PrimaryColorPressed">#2F89EA</Color>
+    <Color x:Key="OnPrimaryColor">#08131E</Color>
+
+    <Color x:Key="AccentSoftColor">#17324D</Color>
+    <Color x:Key="SuccessColor">#58D68D</Color>
+    <Color x:Key="WarningColor">#F4B350</Color>
+    <Color x:Key="DangerColor">#F06A6A</Color>
+
+    <Color x:Key="InputBackgroundColor">#202730</Color>
+    <Color x:Key="InputBorderColor">#435061</Color>
+    <Color x:Key="InputBorderFocusedColor">#4DA3FF</Color>
+    <Color x:Key="InputPlaceholderColor">#8E99A6</Color>
+
+    <Color x:Key="OverlayScrimColor">#7A000000</Color>
+    <Color x:Key="DisabledBackgroundColor">#2A313A</Color>
+    <Color x:Key="DisabledTextColor">#778392</Color>
+</ResourceDictionary>
