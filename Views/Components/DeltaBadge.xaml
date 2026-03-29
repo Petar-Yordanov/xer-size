@@ -8,9 +8,16 @@
     x:DataType="local:DeltaBadge">
 
     <Border
-        Style="{StaticResource ChipBorderStyle}"
-        BackgroundColor="{DynamicResource SurfaceColor}"
-        Stroke="{DynamicResource BorderColor}">
+        Padding="10,6"
+        BackgroundColor="{DynamicResource SurfaceMutedColor}"
+        Stroke="{DynamicResource BorderColor}"
+        StrokeThickness="1"
+        MinimumHeightRequest="30"
+        HorizontalOptions="Start">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="12" />
+        </Border.StrokeShape>
 
         <Border.Triggers>
             <DataTrigger
@@ -30,24 +37,28 @@
             </DataTrigger>
         </Border.Triggers>
 
-        <Label
-            Text="{Binding Source={x:Reference This}, Path=Text}"
-            Style="{StaticResource MutedLabelStyle}">
-            <Label.Triggers>
-                <DataTrigger
-                    TargetType="Label"
-                    Binding="{Binding Source={x:Reference This}, Path=IsPositive}"
-                    Value="True">
-                    <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
-                </DataTrigger>
+        <HorizontalStackLayout Spacing="6">
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=Text}"
+                LineBreakMode="TailTruncation"
+                MaxLines="1"
+                Style="{StaticResource MutedLabelStyle}">
+                <Label.Triggers>
+                    <DataTrigger
+                        TargetType="Label"
+                        Binding="{Binding Source={x:Reference This}, Path=IsPositive}"
+                        Value="True">
+                        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+                    </DataTrigger>
 
-                <DataTrigger
-                    TargetType="Label"
-                    Binding="{Binding Source={x:Reference This}, Path=IsNegative}"
-                    Value="True">
-                    <Setter Property="TextColor" Value="{DynamicResource DangerColor}" />
-                </DataTrigger>
-            </Label.Triggers>
-        </Label>
+                    <DataTrigger
+                        TargetType="Label"
+                        Binding="{Binding Source={x:Reference This}, Path=IsNegative}"
+                        Value="True">
+                        <Setter Property="TextColor" Value="{DynamicResource DangerColor}" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+        </HorizontalStackLayout>
     </Border>
 </ContentView>

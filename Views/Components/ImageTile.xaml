@@ -15,7 +15,7 @@
         MinimumHeightRequest="{Binding Source={x:Reference This}, Path=TileHeight}"
         MinimumWidthRequest="{Binding Source={x:Reference This}, Path=TileWidth}">
         <Border.StrokeShape>
-            <RoundRectangle CornerRadius="16" />
+            <RoundRectangle CornerRadius="14" />
         </Border.StrokeShape>
 
         <Border.GestureRecognizers>
@@ -30,32 +30,53 @@
                 Source="{Binding Source={x:Reference This}, Path=ImageSource}"
                 Aspect="AspectFill" />
 
-            <VerticalStackLayout
+            <Grid
                 IsVisible="{Binding Source={x:Reference This}, Path=ShowPlaceholder}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Spacing="8"
                 Padding="10">
-                <Label
-                    Text="{Binding Source={x:Reference This}, Path=PlaceholderTitle}"
-                    HorizontalTextAlignment="Center"
-                    Style="{StaticResource BodyLabelStyle}" />
-                <Label
-                    Text="{Binding Source={x:Reference This}, Path=PlaceholderSubtitle}"
-                    HorizontalTextAlignment="Center"
-                    Style="{StaticResource MutedLabelStyle}" />
-            </VerticalStackLayout>
+                <VerticalStackLayout
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Spacing="6">
+                    <Label
+                        Text="🖼"
+                        HorizontalTextAlignment="Center"
+                        FontSize="18"
+                        TextColor="{DynamicResource SecondaryTextColor}" />
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=PlaceholderTitle}"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BodyLabelStyle}" />
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=PlaceholderSubtitle}"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource MutedLabelStyle}" />
+                </VerticalStackLayout>
+            </Grid>
 
-            <Button
+            <Border
                 IsVisible="{Binding Source={x:Reference This}, Path=HasImage}"
-                Text="{Binding Source={x:Reference This}, Path=ActionText}"
                 Margin="6"
-                Padding="10,6"
+                Padding="8,4"
                 HorizontalOptions="End"
                 VerticalOptions="Start"
-                Style="{StaticResource SecondaryButtonStyle}"
-                Command="{Binding Source={x:Reference This}, Path=TapCommand}"
-                CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
+                BackgroundColor="#AA000000"
+                StrokeThickness="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding Source={x:Reference This}, Path=TapCommand}"
+                        CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
+                </Border.GestureRecognizers>
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=ActionText}"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="12"
+                    TextColor="White" />
+            </Border>
         </Grid>
     </Border>
 </ContentView>

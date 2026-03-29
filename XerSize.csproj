@@ -54,6 +54,12 @@
 	  <MauiXaml Update="Views\Components\Badge.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\BottomNavBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\BottomNavBarItem.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 		<MauiXaml Update="Views\Components\DeltaBadge.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -72,6 +78,9 @@
 	  <MauiXaml Update="Views\Components\MetricTile.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\QuickActionLauncherButton.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\SearchField.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -79,6 +88,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\SheetOptionRow.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\TabChip.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\TextArea.xaml">

@@ -4,35 +4,35 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="PageBackgroundColor">#0B1220</Color>
-    <Color x:Key="SurfaceColor">#111827</Color>
-    <Color x:Key="SurfaceMutedColor">#1A2435</Color>
-    <Color x:Key="SurfaceRaisedColor">#162033</Color>
-    <Color x:Key="SurfacePressedColor">#223047</Color>
+    <Color x:Key="PageBackgroundColor">#14181E</Color>
+    <Color x:Key="SurfaceColor">#1B2129</Color>
+    <Color x:Key="SurfaceMutedColor">#232B36</Color>
+    <Color x:Key="SurfaceRaisedColor">#262F3B</Color>
+    <Color x:Key="SurfacePressedColor">#313C49</Color>
 
-    <Color x:Key="BorderColor">#334155</Color>
-    <Color x:Key="BorderStrongColor">#475569</Color>
-    <Color x:Key="DividerColor">#243142</Color>
+    <Color x:Key="BorderColor">#394452</Color>
+    <Color x:Key="BorderStrongColor">#4B5868</Color>
+    <Color x:Key="DividerColor">#313B47</Color>
 
-    <Color x:Key="PrimaryTextColor">#F8FAFC</Color>
-    <Color x:Key="SecondaryTextColor">#A8B3C5</Color>
-    <Color x:Key="TertiaryTextColor">#7C8CA5</Color>
+    <Color x:Key="PrimaryTextColor">#F2F5F8</Color>
+    <Color x:Key="SecondaryTextColor">#B3BDC8</Color>
+    <Color x:Key="TertiaryTextColor">#8E99A6</Color>
 
-    <Color x:Key="PrimaryColor">#60A5FA</Color>
-    <Color x:Key="PrimaryColorPressed">#3B82F6</Color>
-    <Color x:Key="OnPrimaryColor">#08111F</Color>
+    <Color x:Key="PrimaryColor">#4DA3FF</Color>
+    <Color x:Key="PrimaryColorPressed">#2F89EA</Color>
+    <Color x:Key="OnPrimaryColor">#08131E</Color>
 
-    <Color x:Key="AccentSoftColor">#172554</Color>
-    <Color x:Key="SuccessColor">#4ADE80</Color>
-    <Color x:Key="WarningColor">#F59E0B</Color>
-    <Color x:Key="DangerColor">#F87171</Color>
+    <Color x:Key="AccentSoftColor">#17324D</Color>
+    <Color x:Key="SuccessColor">#58D68D</Color>
+    <Color x:Key="WarningColor">#F4B350</Color>
+    <Color x:Key="DangerColor">#F06A6A</Color>
 
-    <Color x:Key="InputBackgroundColor">#0F172A</Color>
-    <Color x:Key="InputBorderColor">#334155</Color>
-    <Color x:Key="InputBorderFocusedColor">#60A5FA</Color>
-    <Color x:Key="InputPlaceholderColor">#7C8CA5</Color>
+    <Color x:Key="InputBackgroundColor">#202730</Color>
+    <Color x:Key="InputBorderColor">#435061</Color>
+    <Color x:Key="InputBorderFocusedColor">#4DA3FF</Color>
+    <Color x:Key="InputPlaceholderColor">#8E99A6</Color>
 
     <Color x:Key="OverlayScrimColor">#7A000000</Color>
-    <Color x:Key="DisabledBackgroundColor">#1E293B</Color>
-    <Color x:Key="DisabledTextColor">#64748B</Color>
+    <Color x:Key="DisabledBackgroundColor">#2A313A</Color>
+    <Color x:Key="DisabledTextColor">#778392</Color>
 </ResourceDictionary>

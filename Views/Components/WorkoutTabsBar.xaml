@@ -9,7 +9,7 @@
     x:Name="This"
     x:DataType="local:WorkoutTabsBar">
 
-    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
         <Border
             Grid.Column="0"
             Padding="6"
@@ -17,14 +17,14 @@
             Stroke="{DynamicResource BorderColor}"
             StrokeThickness="1">
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="18" />
+                <RoundRectangle CornerRadius="16" />
             </Border.StrokeShape>
 
             <CollectionView
                 ItemsSource="{Binding Source={x:Reference This}, Path=ItemsSource}"
                 SelectedItem="{Binding Source={x:Reference This}, Path=SelectedItem, Mode=TwoWay}"
                 SelectionMode="Single"
-                HeightRequest="48"
+                HeightRequest="46"
                 ItemSizingStrategy="MeasureFirstItem">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="6" />
@@ -33,14 +33,14 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Workout">
                         <Border
-                            Padding="14,10"
-                            BackgroundColor="{DynamicResource SurfaceColor}"
+                            Padding="14,9"
+                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
                             Stroke="{DynamicResource BorderColor}"
                             StrokeThickness="1"
-                            MinimumWidthRequest="96"
-                            MinimumHeightRequest="40">
+                            MinimumWidthRequest="92"
+                            MinimumHeightRequest="34">
                             <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="14" />
+                                <RoundRectangle CornerRadius="12" />
                             </Border.StrokeShape>
 
                             <Border.Behaviors>
@@ -55,6 +55,7 @@
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
                                 LineBreakMode="TailTruncation"
+                                MaxLines="1"
                                 Style="{StaticResource BodyLabelStyle}" />
                         </Border>
                     </DataTemplate>
@@ -65,7 +66,13 @@
         <Button
             Grid.Column="1"
             Text="+"
-            Style="{StaticResource IconButtonStyle}"
+            WidthRequest="46"
+            HeightRequest="46"
+            CornerRadius="14"
+            BackgroundColor="{DynamicResource SurfaceMutedColor}"
+            TextColor="{DynamicResource PrimaryTextColor}"
+            BorderColor="{DynamicResource BorderColor}"
+            BorderWidth="1"
             Command="{Binding Source={x:Reference This}, Path=AddCommand}" />
     </Grid>
 </ContentView>

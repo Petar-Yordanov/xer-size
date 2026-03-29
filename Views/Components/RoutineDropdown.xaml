@@ -8,58 +8,64 @@
     x:Name="This"
     x:DataType="local:RoutineDropdown">
 
-    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-        <Border
-            Grid.Column="0"
-            BackgroundColor="{DynamicResource SurfaceColor}"
-            Stroke="{DynamicResource BorderColor}"
-            StrokeThickness="1"
-            Padding="16,14"
-            MinimumHeightRequest="58">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="18" />
-            </Border.StrokeShape>
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+        <Grid Grid.Column="0">
+            <Border
+                BackgroundColor="{DynamicResource InputBackgroundColor}"
+                Stroke="{DynamicResource InputBorderColor}"
+                StrokeThickness="1"
+                Padding="14,12"
+                MinimumHeightRequest="46">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
 
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer
-                    Command="{Binding Source={x:Reference This}, Path=TapCommand}"
-                    CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
-            </Border.GestureRecognizers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding Source={x:Reference This}, Path=TapCommand}"
+                        CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
+                </Border.GestureRecognizers>
 
-            <Border.Behaviors>
-                <toolkit:TouchBehavior
-                    IsEnabled="{Binding Source={x:Reference This}, Path=IsLongPressEnabled}"
-                    LongPressDuration="650"
-                    LongPressCommand="{Binding Source={x:Reference This}, Path=LongPressCommand}"
-                    LongPressCommandParameter="{Binding Source={x:Reference This}, Path=LongPressCommandParameter}" />
-            </Border.Behaviors>
+                <Border.Behaviors>
+                    <toolkit:TouchBehavior
+                        IsEnabled="{Binding Source={x:Reference This}, Path=IsLongPressEnabled}"
+                        LongPressDuration="650"
+                        LongPressCommand="{Binding Source={x:Reference This}, Path=LongPressCommand}"
+                        LongPressCommandParameter="{Binding Source={x:Reference This}, Path=LongPressCommandParameter}" />
+                </Border.Behaviors>
 
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                <Label
-                    Text="{Binding Source={x:Reference This}, Path=SelectedText}"
-                    VerticalOptions="Center"
-                    LineBreakMode="TailTruncation"
-                    Style="{StaticResource BodyLabelStyle}" />
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=SelectedText}"
+                        VerticalOptions="Center"
+                        LineBreakMode="TailTruncation"
+                        MaxLines="1"
+                        Style="{StaticResource BodyLabelStyle}" />
 
-                <Label
-                    Grid.Column="1"
-                    Text="{Binding Source={x:Reference This}, Path=TrailingIconText}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource BodyLabelStyle}" />
-            </Grid>
-        </Border>
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding Source={x:Reference This}, Path=TrailingIconText}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        TextColor="{DynamicResource SecondaryTextColor}"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="13" />
+                </Grid>
+            </Border>
+        </Grid>
 
         <Button
             Grid.Column="1"
             IsVisible="{Binding Source={x:Reference This}, Path=ShowAddButton}"
-            WidthRequest="58"
-            HeightRequest="58"
-            CornerRadius="18"
-            FontSize="22"
+            WidthRequest="46"
+            HeightRequest="46"
+            CornerRadius="14"
+            FontSize="18"
             Text="{Binding Source={x:Reference This}, Path=AddButtonText}"
-            BackgroundColor="{DynamicResource PrimaryColor}"
-            TextColor="{DynamicResource OnPrimaryColor}"
+            BackgroundColor="{DynamicResource SurfaceMutedColor}"
+            TextColor="{DynamicResource PrimaryTextColor}"
+            BorderColor="{DynamicResource BorderColor}"
+            BorderWidth="1"
             Command="{Binding Source={x:Reference This}, Path=AddCommand}"
             CommandParameter="{Binding Source={x:Reference This}, Path=AddCommandParameter}" />
     </Grid>

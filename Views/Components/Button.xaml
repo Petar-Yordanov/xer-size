@@ -7,10 +7,13 @@
     x:Name="This"
     x:DataType="local:Button">
 
-	<Button
+    <Button
         Text="{Binding Source={x:Reference This}, Path=Text}"
         Command="{Binding Source={x:Reference This}, Path=Command}"
         CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}"
         IsEnabled="{Binding Source={x:Reference This}, Path=IsEnabled}"
-        Style="{Binding Source={x:Reference This}, Path=ButtonStyle}" />
+        Style="{Binding Source={x:Reference This}, Path=ButtonStyle}"
+        MinimumHeightRequest="42"
+        Padding="14,10"
+        LineBreakMode="NoWrap" />
 </ContentView>

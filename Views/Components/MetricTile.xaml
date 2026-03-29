@@ -7,19 +7,33 @@
     x:Name="This"
     x:DataType="local:MetricTile">
 
-    <Border Style="{StaticResource MetricTileBorderStyle}">
-        <VerticalStackLayout Spacing="3">
+    <Border
+        Style="{StaticResource MetricTileBorderStyle}"
+        Padding="12"
+        BackgroundColor="{DynamicResource SurfaceMutedColor}"
+        Stroke="{DynamicResource BorderColor}"
+        StrokeThickness="1">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="14" />
+        </Border.StrokeShape>
+
+        <VerticalStackLayout Spacing="4">
             <Label
                 Text="{Binding Source={x:Reference This}, Path=Title}"
+                LineBreakMode="TailTruncation"
                 Style="{StaticResource MutedLabelStyle}" />
 
             <Label
                 Text="{Binding Source={x:Reference This}, Path=Value}"
-                Style="{StaticResource BodyLabelStyle}" />
+                FontFamily="OpenSansSemibold"
+                FontSize="20"
+                LineBreakMode="TailTruncation"
+                TextColor="{DynamicResource PrimaryTextColor}" />
 
             <Label
                 IsVisible="{Binding Source={x:Reference This}, Path=HasSubtitle}"
                 Text="{Binding Source={x:Reference This}, Path=Subtitle}"
+                LineBreakMode="TailTruncation"
                 Style="{StaticResource MutedLabelStyle}" />
         </VerticalStackLayout>
     </Border>

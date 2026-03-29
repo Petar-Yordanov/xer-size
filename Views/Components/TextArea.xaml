@@ -17,14 +17,19 @@
             BackgroundColor="{DynamicResource InputBackgroundColor}"
             Stroke="{DynamicResource InputBorderColor}"
             StrokeThickness="1"
-            Padding="12,10">
+            Padding="12,10"
+            MinimumHeightRequest="108">
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="16" />
+                <RoundRectangle CornerRadius="14" />
             </Border.StrokeShape>
 
             <Editor
                 Text="{Binding Source={x:Reference This}, Path=Text, Mode=TwoWay}"
                 Placeholder="{Binding Source={x:Reference This}, Path=Placeholder}"
+                AutoSize="TextChanges"
+                BackgroundColor="Transparent"
+                TextColor="{DynamicResource PrimaryTextColor}"
+                PlaceholderColor="{DynamicResource SecondaryTextColor}"
                 Style="{StaticResource TextEditorStyle}" />
         </Border>
     </VerticalStackLayout>

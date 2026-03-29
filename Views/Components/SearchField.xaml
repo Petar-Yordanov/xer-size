@@ -7,18 +7,32 @@
     x:Name="This"
     x:DataType="local:SearchField">
 
-	<Border
+    <Border
         BackgroundColor="{DynamicResource InputBackgroundColor}"
         Stroke="{DynamicResource InputBorderColor}"
         StrokeThickness="1"
-        Padding="8,2">
-		<Border.StrokeShape>
-			<RoundRectangle CornerRadius="18" />
-		</Border.StrokeShape>
+        Padding="12,0"
+        MinimumHeightRequest="46">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="14" />
+        </Border.StrokeShape>
 
-		<SearchBar
-            Text="{Binding Source={x:Reference This}, Path=Text, Mode=TwoWay}"
-            Placeholder="{Binding Source={x:Reference This}, Path=Placeholder}"
-            Style="{StaticResource SearchBarStyle}" />
-	</Border>
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+            <Label
+                Text="⌕"
+                VerticalOptions="Center"
+                TextColor="{DynamicResource SecondaryTextColor}"
+                FontSize="15" />
+
+            <Entry
+                Grid.Column="1"
+                Text="{Binding Source={x:Reference This}, Path=Text, Mode=TwoWay}"
+                Placeholder="{Binding Source={x:Reference This}, Path=Placeholder}"
+                ClearButtonVisibility="WhileEditing"
+                BackgroundColor="Transparent"
+                TextColor="{DynamicResource PrimaryTextColor}"
+                PlaceholderColor="{DynamicResource SecondaryTextColor}"
+                VerticalOptions="Center" />
+        </Grid>
+    </Border>
 </ContentView>

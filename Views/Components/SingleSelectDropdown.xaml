@@ -12,10 +12,10 @@
             BackgroundColor="{DynamicResource InputBackgroundColor}"
             Stroke="{DynamicResource InputBorderColor}"
             StrokeThickness="1"
-            Padding="16,14"
-            MinimumHeightRequest="52">
+            Padding="14,12"
+            MinimumHeightRequest="46">
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="16" />
+                <RoundRectangle CornerRadius="14" />
             </Border.StrokeShape>
 
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
@@ -23,6 +23,7 @@
                     Text="{Binding Source={x:Reference This}, Path=SelectedText}"
                     VerticalOptions="Center"
                     LineBreakMode="TailTruncation"
+                    MaxLines="1"
                     Style="{StaticResource BodyLabelStyle}" />
 
                 <Label
@@ -39,7 +40,7 @@
         <Button
             BackgroundColor="Transparent"
             BorderWidth="0"
-            CornerRadius="16"
+            CornerRadius="14"
             Command="{Binding Source={x:Reference This}, Path=TapCommand}"
             CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
     </Grid>

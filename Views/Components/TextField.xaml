@@ -7,26 +7,31 @@
     x:Name="This"
     x:DataType="local:TextField">
 
-	<VerticalStackLayout Spacing="6">
-		<Label
+    <VerticalStackLayout Spacing="6">
+        <Label
             IsVisible="{Binding Source={x:Reference This}, Path=HasLabel}"
             Text="{Binding Source={x:Reference This}, Path=Label}"
             Style="{StaticResource FieldLabelStyle}" />
 
-		<Border
+        <Border
             BackgroundColor="{DynamicResource InputBackgroundColor}"
             Stroke="{DynamicResource InputBorderColor}"
             StrokeThickness="1"
-            Padding="14,2">
-			<Border.StrokeShape>
-				<RoundRectangle CornerRadius="16" />
-			</Border.StrokeShape>
+            Padding="12,0"
+            MinimumHeightRequest="46">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="14" />
+            </Border.StrokeShape>
 
-			<Entry
+            <Entry
                 Text="{Binding Source={x:Reference This}, Path=Text, Mode=TwoWay}"
                 Placeholder="{Binding Source={x:Reference This}, Path=Placeholder}"
                 Keyboard="{Binding Source={x:Reference This}, Path=Keyboard}"
-                Style="{StaticResource TextEntryStyle}" />
-		</Border>
-	</VerticalStackLayout>
+                ClearButtonVisibility="WhileEditing"
+                BackgroundColor="Transparent"
+                TextColor="{DynamicResource PrimaryTextColor}"
+                PlaceholderColor="{DynamicResource SecondaryTextColor}"
+                VerticalOptions="Center" />
+        </Border>
+    </VerticalStackLayout>
 </ContentView>

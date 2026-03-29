@@ -7,9 +7,21 @@
     x:Name="This"
     x:DataType="local:Badge">
 
-    <Border Style="{StaticResource ChipBorderStyle}">
+    <Border
+        Padding="10,6"
+        BackgroundColor="{DynamicResource SurfaceMutedColor}"
+        Stroke="{DynamicResource BorderColor}"
+        StrokeThickness="1"
+        MinimumHeightRequest="30"
+        HorizontalOptions="Start">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="12" />
+        </Border.StrokeShape>
+
         <Label
             Text="{Binding Source={x:Reference This}, Path=Text}"
+            LineBreakMode="TailTruncation"
+            MaxLines="1"
             Style="{StaticResource MutedLabelStyle}" />
     </Border>
 </ContentView>

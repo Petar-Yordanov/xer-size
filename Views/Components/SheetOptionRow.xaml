@@ -7,34 +7,47 @@
     x:Name="This"
     x:DataType="local:SheetOptionRow">
 
-	<Border
-        Margin="12,0,12,8"
-        Padding="14,12"
-        BackgroundColor="{DynamicResource SurfaceMutedColor}"
-        Stroke="{DynamicResource DividerColor}"
-        StrokeThickness="1">
-		<Border.StrokeShape>
-			<RoundRectangle CornerRadius="16" />
-		</Border.StrokeShape>
+    <Grid>
+        <Border
+            Margin="12,0,12,6"
+            Padding="12,10"
+            BackgroundColor="{DynamicResource SurfaceColor}"
+            Stroke="{DynamicResource BorderColor}"
+            StrokeThickness="1"
+            MinimumHeightRequest="44">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="12" />
+            </Border.StrokeShape>
 
-		<Border.GestureRecognizers>
-			<TapGestureRecognizer
-                Command="{Binding Source={x:Reference This}, Path=TapCommand}"
-                CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
-		</Border.GestureRecognizers>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={x:Reference This}, Path=TapCommand}"
+                    CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
+            </Border.GestureRecognizers>
 
-		<Grid ColumnDefinitions="*,Auto">
-			<Label
-                Text="{Binding Source={x:Reference This}, Path=Text}"
-                VerticalOptions="Center"
-                Style="{StaticResource BodyLabelStyle}" />
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <Label
+                    Text="•"
+                    VerticalOptions="Center"
+                    TextColor="{DynamicResource SecondaryTextColor}"
+                    FontSize="12" />
 
-			<Label
-                Grid.Column="1"
-                Text="✓"
-                IsVisible="{Binding Source={x:Reference This}, Path=IsSelected}"
-                VerticalOptions="Center"
-                Style="{StaticResource BodyLabelStyle}" />
-		</Grid>
-	</Border>
+                <Label
+                    Grid.Column="1"
+                    Text="{Binding Source={x:Reference This}, Path=Text}"
+                    VerticalOptions="Center"
+                    LineBreakMode="TailTruncation"
+                    Style="{StaticResource BodyLabelStyle}" />
+
+                <Label
+                    Grid.Column="2"
+                    Text="✓"
+                    IsVisible="{Binding Source={x:Reference This}, Path=IsSelected}"
+                    VerticalOptions="Center"
+                    TextColor="{DynamicResource PrimaryColor}"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="13" />
+            </Grid>
+        </Border>
+    </Grid>
 </ContentView>

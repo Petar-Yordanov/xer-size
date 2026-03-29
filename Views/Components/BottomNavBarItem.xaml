@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="XerSize.Views.Components.BottomNavBarItem"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="This">
+
+    <Grid WidthRequest="70" HeightRequest="58">
+        <Border
+            x:Name="SelectionSurface"
+            BackgroundColor="Transparent"
+            StrokeThickness="0"
+            Padding="10,6">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="18" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout
+                Spacing="2"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Image
+                    Source="{Binding Source={x:Reference This}, Path=Icon}"
+                    WidthRequest="20"
+                    HeightRequest="20"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Opacity="{Binding Source={x:Reference This}, Path=IconOpacity}" />
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=Text}"
+                    HorizontalTextAlignment="Center"
+                    HorizontalOptions="Center"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="11"
+                    LineBreakMode="TailTruncation"
+                    MaxLines="1"
+                    TextColor="{Binding Source={x:Reference This}, Path=TextColorValue}" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Button
+            BackgroundColor="Transparent"
+            BorderWidth="0"
+            CornerRadius="18"
+            Clicked="OnClicked" />
+    </Grid>
+</ContentView>

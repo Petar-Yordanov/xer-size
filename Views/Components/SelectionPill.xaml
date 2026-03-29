@@ -13,18 +13,22 @@
         CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}"
         Padding="{Binding Source={x:Reference This}, Path=ContentPadding}"
         BackgroundColor="Transparent"
+        BorderColor="Transparent"
+        BorderWidth="0"
         TextColor="{DynamicResource PrimaryTextColor}"
         FontFamily="OpenSansSemibold"
         FontSize="13"
-        CornerRadius="14">
+        CornerRadius="12"
+        MinimumHeightRequest="38">
 
         <Button.Triggers>
             <DataTrigger
                 TargetType="Button"
                 Binding="{Binding Source={x:Reference This}, Path=IsSelected}"
                 Value="True">
-                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="TextColor" Value="{DynamicResource OnPrimaryColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceColor}" />
+                <Setter Property="BorderColor" Value="{DynamicResource BorderColor}" />
+                <Setter Property="BorderWidth" Value="1" />
             </DataTrigger>
         </Button.Triggers>
     </Button>

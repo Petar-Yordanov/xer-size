@@ -7,9 +7,13 @@
     x:Name="This"
     x:DataType="local:IconButton">
 
-	<Button
+    <Button
         Text="{Binding Source={x:Reference This}, Path=Text}"
         Command="{Binding Source={x:Reference This}, Path=Command}"
         CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}"
-        Style="{StaticResource IconButtonStyle}" />
+        Style="{StaticResource IconButtonStyle}"
+        WidthRequest="42"
+        HeightRequest="42"
+        Padding="0"
+        CornerRadius="12" />
 </ContentView>

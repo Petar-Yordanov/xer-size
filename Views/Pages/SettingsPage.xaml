@@ -6,230 +6,268 @@
     xmlns:viewModels="clr-namespace:XerSize.ViewModels.Settings"
     xmlns:components="clr-namespace:XerSize.Views.Components"
     x:DataType="viewModels:SettingsPageViewModel"
+    x:Name="PageRoot"
     Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     Title="Settings">
 
-    <ScrollView>
-        <Grid
-            Style="{StaticResource PageRootGridStyle}"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
-            RowSpacing="14">
+    <Grid RowDefinitions="*,Auto">
 
-            <VerticalStackLayout Grid.Row="0" Spacing="4">
-                <Label Text="Settings" Style="{StaticResource PageTitleLabelStyle}" />
-                <Label Text="Appearance, profile, units, and sync preferences." Style="{StaticResource MutedLabelStyle}" />
-            </VerticalStackLayout>
+        <ScrollView Grid.Row="0">
+            <Grid
+                Style="{StaticResource PageRootGridStyle}"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="14">
 
-            <components:Card Grid.Row="1">
-                <VerticalStackLayout Spacing="14">
-                    <VerticalStackLayout Spacing="2">
-                        <Label Text="Theme" Style="{StaticResource BodyLabelStyle}" />
-                        <Label Text="{Binding ThemeSummary}" Style="{StaticResource MutedLabelStyle}" />
+                <VerticalStackLayout Grid.Row="0" Spacing="4">
+                    <Label Text="Settings" Style="{StaticResource PageTitleLabelStyle}" />
+                    <Label Text="Appearance, profile, units, and sync preferences." Style="{StaticResource MutedLabelStyle}" />
+                </VerticalStackLayout>
+
+                <components:Card Grid.Row="1">
+                    <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Theme" Style="{StaticResource BodyLabelStyle}" />
+                            <Label Text="{Binding ThemeSummary}" Style="{StaticResource MutedLabelStyle}" />
+                        </VerticalStackLayout>
+
+                        <Border
+                            Padding="4"
+                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="18" />
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                                <components:SelectionPill
+                                    Grid.Column="0"
+                                    Text="Light"
+                                    Command="{Binding ApplyLightThemeCommand}"
+                                    IsSelected="{Binding IsLightTheme}" />
+
+                                <components:SelectionPill
+                                    Grid.Column="1"
+                                    Text="Dark"
+                                    Command="{Binding ApplyDarkThemeCommand}"
+                                    IsSelected="{Binding IsDarkTheme}" />
+                            </Grid>
+                        </Border>
                     </VerticalStackLayout>
+                </components:Card>
 
-                    <Border
-                        Padding="4"
-                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                        StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="18" />
-                        </Border.StrokeShape>
+                <components:Card Grid.Row="2">
+                    <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="User Profile" Style="{StaticResource BodyLabelStyle}" />
+                            <Label Text="{Binding UserProfileSummary}" Style="{StaticResource MutedLabelStyle}" />
+                        </VerticalStackLayout>
 
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
-                            <components:SelectionPill
+                        <Grid
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="12"
+                            RowDefinitions="Auto,Auto,Auto"
+                            RowSpacing="12">
+
+                            <components:TextField
+                                Grid.Row="0"
                                 Grid.Column="0"
-                                Text="Light"
-                                Command="{Binding ApplyLightThemeCommand}"
-                                IsSelected="{Binding IsLightTheme}" />
+                                Label="Weight"
+                                Text="{Binding BodyWeightText}"
+                                Keyboard="Numeric"
+                                Placeholder="e.g. 80" />
 
-                            <components:SelectionPill
+                            <components:TextField
+                                Grid.Row="0"
                                 Grid.Column="1"
-                                Text="Dark"
-                                Command="{Binding ApplyDarkThemeCommand}"
-                                IsSelected="{Binding IsDarkTheme}" />
+                                Label="Height"
+                                Text="{Binding HeightText}"
+                                Keyboard="Numeric"
+                                Placeholder="e.g. 180" />
+
+                            <components:TextField
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Label="Age"
+                                Text="{Binding AgeText}"
+                                Keyboard="Numeric"
+                                Placeholder="e.g. 25" />
+
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="6">
+                                <Label Text="Sex" Style="{StaticResource MutedLabelStyle}" />
+
+                                <Border
+                                    Padding="4"
+                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                    StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="18" />
+                                    </Border.StrokeShape>
+
+                                    <Grid ColumnDefinitions="*,*"
+                                          ColumnSpacing="6">
+                                        <components:SelectionPill
+                                            Grid.Column="0"
+                                            Text="Male"
+                                            Command="{Binding SelectMaleCommand}"
+                                            IsSelected="{Binding IsMaleSelected}" />
+
+                                        <components:SelectionPill
+                                            Grid.Column="1"
+                                            Text="Female"
+                                            Command="{Binding SelectFemaleCommand}"
+                                            IsSelected="{Binding IsFemaleSelected}" />
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <Border
+                                Grid.Row="2"
+                                Grid.ColumnSpan="2"
+                                Padding="12"
+                                BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="14" />
+                                </Border.StrokeShape>
+
+                                <Label
+                                    Text="{Binding UserProfileHint}"
+                                    Style="{StaticResource MutedLabelStyle}" />
+                            </Border>
                         </Grid>
-                    </Border>
-                </VerticalStackLayout>
-            </components:Card>
-
-            <components:Card Grid.Row="2">
-                <VerticalStackLayout Spacing="14">
-                    <VerticalStackLayout Spacing="2">
-                        <Label Text="User Profile" Style="{StaticResource BodyLabelStyle}" />
-                        <Label Text="{Binding UserProfileSummary}" Style="{StaticResource MutedLabelStyle}" />
                     </VerticalStackLayout>
+                </components:Card>
 
-                    <Grid
-                        ColumnDefinitions="*,*"
-                        ColumnSpacing="12"
-                        RowDefinitions="Auto,Auto,Auto"
-                        RowSpacing="12">
+                <components:Card Grid.Row="3">
+                    <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="Units &amp; Measurements" Style="{StaticResource BodyLabelStyle}" />
+                            <Label Text="{Binding UnitsSummary}" Style="{StaticResource MutedLabelStyle}" />
+                        </VerticalStackLayout>
 
-                        <components:TextField
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Label="Weight"
-                            Text="{Binding BodyWeightText}"
-                            Keyboard="Numeric"
-                            Placeholder="e.g. 80" />
+                        <Grid
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="12"
+                            RowDefinitions="Auto,Auto"
+                            RowSpacing="12">
 
-                        <components:TextField
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Label="Height"
-                            Text="{Binding HeightText}"
-                            Keyboard="Numeric"
-                            Placeholder="e.g. 180" />
+                            <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="6">
+                                <Label Text="Weight Unit" Style="{StaticResource MutedLabelStyle}" />
 
-                        <components:TextField
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Label="Age"
-                            Text="{Binding AgeText}"
-                            Keyboard="Numeric"
-                            Placeholder="e.g. 25" />
+                                <Border
+                                    Padding="4"
+                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                    StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="18" />
+                                    </Border.StrokeShape>
 
-                        <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="6">
-                            <Label Text="Sex" Style="{StaticResource MutedLabelStyle}" />
+                                    <Grid ColumnDefinitions="*,*"
+                                          ColumnSpacing="6">
+                                        <components:SelectionPill
+                                            Grid.Column="0"
+                                            Text="kg"
+                                            Command="{Binding SelectKgCommand}"
+                                            IsSelected="{Binding IsKgSelected}" />
+
+                                        <components:SelectionPill
+                                            Grid.Column="1"
+                                            Text="lbs"
+                                            Command="{Binding SelectLbsCommand}"
+                                            IsSelected="{Binding IsLbsSelected}" />
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="6">
+                                <Label Text="System" Style="{StaticResource MutedLabelStyle}" />
+
+                                <Border
+                                    Padding="4"
+                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                    StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="18" />
+                                    </Border.StrokeShape>
+
+                                    <Grid ColumnDefinitions="*,*"
+                                          ColumnSpacing="6">
+                                        <components:SelectionPill
+                                            Grid.Column="0"
+                                            Text="Metric"
+                                            Command="{Binding SelectMetricCommand}"
+                                            IsSelected="{Binding IsMetricSelected}" />
+
+                                        <components:SelectionPill
+                                            Grid.Column="1"
+                                            Text="Imperial"
+                                            Command="{Binding SelectImperialCommand}"
+                                            IsSelected="{Binding IsImperialSelected}" />
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
 
                             <Border
-                                Padding="4"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Padding="12"
                                 BackgroundColor="{DynamicResource SurfaceMutedColor}"
                                 StrokeThickness="0">
                                 <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="18" />
+                                    <RoundRectangle CornerRadius="14" />
                                 </Border.StrokeShape>
 
-                                <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
-                                    <components:SelectionPill
-                                        Grid.Column="0"
-                                        Text="Male"
-                                        Command="{Binding SelectMaleCommand}"
-                                        IsSelected="{Binding IsMaleSelected}" />
-
-                                    <components:SelectionPill
-                                        Grid.Column="1"
-                                        Text="Female"
-                                        Command="{Binding SelectFemaleCommand}"
-                                        IsSelected="{Binding IsFemaleSelected}" />
-                                </Grid>
+                                <Label
+                                    Text="These settings control how values are displayed across the app."
+                                    Style="{StaticResource MutedLabelStyle}" />
                             </Border>
-                        </VerticalStackLayout>
-
-                        <Border
-                            Grid.Row="2"
-                            Grid.ColumnSpan="2"
-                            Padding="12"
-                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                            StrokeThickness="0">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="14" />
-                            </Border.StrokeShape>
-
-                            <Label
-                                Text="{Binding UserProfileHint}"
-                                Style="{StaticResource MutedLabelStyle}" />
-                        </Border>
-                    </Grid>
-                </VerticalStackLayout>
-            </components:Card>
-
-            <components:Card Grid.Row="3">
-                <VerticalStackLayout Spacing="14">
-                    <VerticalStackLayout Spacing="2">
-                        <Label Text="Units &amp; Measurements" Style="{StaticResource BodyLabelStyle}" />
-                        <Label Text="{Binding UnitsSummary}" Style="{StaticResource MutedLabelStyle}" />
+                        </Grid>
                     </VerticalStackLayout>
+                </components:Card>
 
-                    <Grid
-                        ColumnDefinitions="*,*"
-                        ColumnSpacing="12"
-                        RowDefinitions="Auto,Auto"
-                        RowSpacing="12">
+                <components:ToggleRow
+                    Grid.Row="4"
+                    Title="Cloud Sync"
+                    Subtitle="{Binding CloudSyncSummary}"
+                    IsToggled="{Binding IsCloudSyncEnabled}" />
 
-                        <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="6">
-                            <Label Text="Weight Unit" Style="{StaticResource MutedLabelStyle}" />
+                <components:Card Grid.Row="5">
+                    <Label
+                        Text="This currently saves the preference locally only. Actual account sync / backup flow still needs backend implementation."
+                        Style="{StaticResource MutedLabelStyle}" />
+                </components:Card>
+            </Grid>
+        </ScrollView>
 
-                            <Border
-                                Padding="4"
-                                BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                StrokeThickness="0">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="18" />
-                                </Border.StrokeShape>
+        <components:BottomNavBar Grid.Row="1">
+            <HorizontalStackLayout Spacing="4">
+                <components:BottomNavBarItem
+                    Text="Routines"
+                    Icon="routines.png"
+                    Route="routines" />
 
-                                <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
-                                    <components:SelectionPill
-                                        Grid.Column="0"
-                                        Text="kg"
-                                        Command="{Binding SelectKgCommand}"
-                                        IsSelected="{Binding IsKgSelected}" />
+                <components:BottomNavBarItem
+                    Text="Exercises"
+                    Icon="exercises.png"
+                    Route="exercises" />
 
-                                    <components:SelectionPill
-                                        Grid.Column="1"
-                                        Text="lbs"
-                                        Command="{Binding SelectLbsCommand}"
-                                        IsSelected="{Binding IsLbsSelected}" />
-                                </Grid>
-                            </Border>
-                        </VerticalStackLayout>
+                <components:BottomNavBarItem
+                    Text="History"
+                    Icon="history.png"
+                    Route="history" />
 
-                        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="6">
-                            <Label Text="System" Style="{StaticResource MutedLabelStyle}" />
+                <components:BottomNavBarItem
+                    Text="Stats"
+                    Icon="statistics.png"
+                    Route="statistics" />
 
-                            <Border
-                                Padding="4"
-                                BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                StrokeThickness="0">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="18" />
-                                </Border.StrokeShape>
-
-                                <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
-                                    <components:SelectionPill
-                                        Grid.Column="0"
-                                        Text="Metric"
-                                        Command="{Binding SelectMetricCommand}"
-                                        IsSelected="{Binding IsMetricSelected}" />
-
-                                    <components:SelectionPill
-                                        Grid.Column="1"
-                                        Text="Imperial"
-                                        Command="{Binding SelectImperialCommand}"
-                                        IsSelected="{Binding IsImperialSelected}" />
-                                </Grid>
-                            </Border>
-                        </VerticalStackLayout>
-
-                        <Border
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2"
-                            Padding="12"
-                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                            StrokeThickness="0">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="14" />
-                            </Border.StrokeShape>
-
-                            <Label
-                                Text="These settings control how values are displayed across the app."
-                                Style="{StaticResource MutedLabelStyle}" />
-                        </Border>
-                    </Grid>
-                </VerticalStackLayout>
-            </components:Card>
-
-            <components:ToggleRow
-                Grid.Row="4"
-                Title="Cloud Sync"
-                Subtitle="{Binding CloudSyncSummary}"
-                IsToggled="{Binding IsCloudSyncEnabled}" />
-
-            <components:Card Grid.Row="5">
-                <Label
-                    Text="This currently saves the preference locally only. Actual account sync / backup flow still needs backend implementation."
-                    Style="{StaticResource MutedLabelStyle}" />
-            </components:Card>
-        </Grid>
-    </ScrollView>
+                <components:BottomNavBarItem
+                    Text="Settings"
+                    Icon="settings.png"
+                    Route="settingsTab"
+                    IsSelected="True" />
+            </HorizontalStackLayout>
+        </components:BottomNavBar>
+    </Grid>
 </ContentPage>
