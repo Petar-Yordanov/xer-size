@@ -24,6 +24,7 @@
                     VerticalOptions="Center"
                     LineBreakMode="TailTruncation"
                     MaxLines="1"
+                    InputTransparent="True"
                     Style="{StaticResource BodyLabelStyle}" />
 
                 <Label
@@ -31,6 +32,7 @@
                     Text="{Binding Source={x:Reference This}, Path=TrailingIconText}"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
+                    InputTransparent="True"
                     TextColor="{DynamicResource SecondaryTextColor}"
                     FontFamily="OpenSansSemibold"
                     FontSize="13" />
@@ -38,7 +40,7 @@
         </Border>
 
         <Button
-            BackgroundColor="Transparent"
+            BackgroundColor="#01000000"
             BorderWidth="0"
             CornerRadius="14"
             Command="{Binding Source={x:Reference This}, Path=TapCommand}"

@@ -1,4 +1,5 @@
-﻿using XerSize.ViewModels.History;
+﻿using XerSize.Models;
+using XerSize.ViewModels.History;
 
 namespace XerSize.Views.Pages;
 

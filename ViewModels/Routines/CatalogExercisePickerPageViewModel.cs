@@ -264,8 +264,8 @@ public partial class CatalogExerciseCardRow : ObservableObject
     public string LimbInvolvement => Item.LimbInvolvement;
     public string MovementPattern => string.IsNullOrWhiteSpace(Item.MovementPattern) ? "Not specified" : Item.MovementPattern!;
 
-    public string PrimaryMusclesText => BuildList(Item.PrimaryMuscles);
-    public string SecondaryMusclesText => BuildList(Item.SecondaryMuscles);
+    public string PrimaryMusclesText => BuildList(Item.PrimaryMuscleCategories);
+    public string SecondaryMusclesText => BuildList(Item.SecondaryMuscleCategories);
     public string ExpandButtonText => IsExpanded ? "Hide Info" : "Expand Info";
 
     partial void OnIsExpandedChanged(bool value)

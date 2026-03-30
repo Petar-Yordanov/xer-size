@@ -19,25 +19,21 @@
                 <RoundRectangle CornerRadius="12" />
             </Border.StrokeShape>
 
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer
-                    Command="{Binding Source={x:Reference This}, Path=TapCommand}"
-                    CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
-            </Border.GestureRecognizers>
-
             <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
                 <Label
                     Text="•"
                     VerticalOptions="Center"
                     TextColor="{DynamicResource SecondaryTextColor}"
-                    FontSize="12" />
+                    FontSize="12"
+                    InputTransparent="True" />
 
                 <Label
                     Grid.Column="1"
                     Text="{Binding Source={x:Reference This}, Path=Text}"
                     VerticalOptions="Center"
                     LineBreakMode="TailTruncation"
-                    Style="{StaticResource BodyLabelStyle}" />
+                    Style="{StaticResource BodyLabelStyle}"
+                    InputTransparent="True" />
 
                 <Label
                     Grid.Column="2"
@@ -46,8 +42,17 @@
                     VerticalOptions="Center"
                     TextColor="{DynamicResource PrimaryColor}"
                     FontFamily="OpenSansSemibold"
-                    FontSize="13" />
+                    FontSize="13"
+                    InputTransparent="True" />
             </Grid>
         </Border>
+
+        <Button
+            Margin="12,0,12,6"
+            BackgroundColor="#01000000"
+            BorderWidth="0"
+            CornerRadius="12"
+            Command="{Binding Source={x:Reference This}, Path=TapCommand}"
+            CommandParameter="{Binding Source={x:Reference This}, Path=TapCommandParameter}" />
     </Grid>
 </ContentView>

@@ -1,4 +1,6 @@
-﻿using XerSize.ViewModels.Statistics;
+﻿using System.Reflection;
+using System.Windows.Input;
+using XerSize.ViewModels.Statistics;
 
 namespace XerSize.Views.Pages;
 

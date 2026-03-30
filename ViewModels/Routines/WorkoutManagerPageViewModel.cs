@@ -87,7 +87,7 @@ public partial class WorkoutManagerPageViewModel : ObservableObject
         if (page is null)
             return;
 
-        var confirm = await page.DisplayAlert("Delete Workout", $"Delete '{workout.Name}'?", "Delete", "Cancel");
+        var confirm = await page.DisplayAlertAsync("Delete Workout", $"Delete '{workout.Name}'?", "Delete", "Cancel");
         if (!confirm)
             return;
 

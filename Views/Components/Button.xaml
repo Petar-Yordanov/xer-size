@@ -3,17 +3,37 @@
     x:Class="XerSize.Views.Components.Button"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:XerSize.Views.Components"
-    x:Name="This"
-    x:DataType="local:Button">
+    x:Name="This">
 
-    <Button
-        Text="{Binding Source={x:Reference This}, Path=Text}"
-        Command="{Binding Source={x:Reference This}, Path=Command}"
-        CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}"
-        IsEnabled="{Binding Source={x:Reference This}, Path=IsEnabled}"
-        Style="{Binding Source={x:Reference This}, Path=ButtonStyle}"
-        MinimumHeightRequest="42"
+    <Border
+        x:Name="ButtonSurface"
+        StrokeThickness="1"
         Padding="14,10"
-        LineBreakMode="NoWrap" />
+        MinimumHeightRequest="42"
+        BackgroundColor="{DynamicResource PrimaryColor}"
+        Stroke="{DynamicResource PrimaryColor}"
+        HorizontalOptions="Fill"
+        VerticalOptions="Center">
+        <Border.StrokeShape>
+            <RoundRectangle x:Name="ButtonShape" CornerRadius="14" />
+        </Border.StrokeShape>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnTapped" />
+        </Border.GestureRecognizers>
+
+        <Grid>
+            <Label
+                x:Name="ButtonLabel"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                LineBreakMode="TailTruncation"
+                MaxLines="1"
+                FontFamily="OpenSansSemibold"
+                FontSize="13"
+                TextColor="{DynamicResource OnPrimaryColor}" />
+        </Grid>
+    </Border>
 </ContentView>

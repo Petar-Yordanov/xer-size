@@ -3,11 +3,7 @@
     x:Class="XerSize.Views.Components.WorkoutTabsBar"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:local="clr-namespace:XerSize.Views.Components"
-    xmlns:models="clr-namespace:XerSize.Models"
-    x:Name="This"
-    x:DataType="local:WorkoutTabsBar">
+    x:Name="This">
 
     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
         <Border
@@ -20,59 +16,41 @@
                 <RoundRectangle CornerRadius="16" />
             </Border.StrokeShape>
 
-            <CollectionView
-                ItemsSource="{Binding Source={x:Reference This}, Path=ItemsSource}"
-                SelectedItem="{Binding Source={x:Reference This}, Path=SelectedItem, Mode=TwoWay}"
-                SelectionMode="Single"
-                HeightRequest="46"
-                ItemSizingStrategy="MeasureFirstItem">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="6" />
-                </CollectionView.ItemsLayout>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Workout">
-                        <Border
-                            Padding="14,9"
-                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                            Stroke="{DynamicResource BorderColor}"
-                            StrokeThickness="1"
-                            MinimumWidthRequest="92"
-                            MinimumHeightRequest="34">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="12" />
-                            </Border.StrokeShape>
-
-                            <Border.Behaviors>
-                                <toolkit:TouchBehavior
-                                    LongPressDuration="650"
-                                    LongPressCommand="{Binding Source={x:Reference This}, Path=LongPressCommand}"
-                                    LongPressCommandParameter="{Binding .}" />
-                            </Border.Behaviors>
-
-                            <Label
-                                Text="{Binding Name}"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                LineBreakMode="TailTruncation"
-                                MaxLines="1"
-                                Style="{StaticResource BodyLabelStyle}" />
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <ScrollView
+                Orientation="Horizontal"
+                HorizontalScrollBarVisibility="Never">
+                <HorizontalStackLayout
+                    x:Name="TabsHost"
+                    Spacing="6" />
+            </ScrollView>
         </Border>
 
-        <Button
+        <Border
             Grid.Column="1"
-            Text="+"
+            x:Name="AddSurface"
             WidthRequest="46"
             HeightRequest="46"
-            CornerRadius="14"
+            Padding="0"
             BackgroundColor="{DynamicResource SurfaceMutedColor}"
-            TextColor="{DynamicResource PrimaryTextColor}"
-            BorderColor="{DynamicResource BorderColor}"
-            BorderWidth="1"
-            Command="{Binding Source={x:Reference This}, Path=AddCommand}" />
+            Stroke="{DynamicResource BorderColor}"
+            StrokeThickness="1">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="14" />
+            </Border.StrokeShape>
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnAddTapped" />
+            </Border.GestureRecognizers>
+
+            <Label
+                Text="+"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                FontFamily="OpenSansSemibold"
+                FontSize="18"
+                TextColor="{DynamicResource PrimaryTextColor}" />
+        </Border>
     </Grid>
 </ContentView>

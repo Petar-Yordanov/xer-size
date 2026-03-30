@@ -141,15 +141,6 @@ public partial class RoutinesPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void ToggleExerciseExpanded(WorkoutExerciseCardRow? row)
-    {
-        if (row is null)
-            return;
-
-        row.IsExpanded = !row.IsExpanded;
-    }
-
-    [RelayCommand]
     private async Task EditExerciseAsync(WorkoutExerciseCardRow? row)
     {
         if (row is null || SelectedRoutine is null || SelectedWorkout is null)
@@ -157,6 +148,15 @@ public partial class RoutinesPageViewModel : ObservableObject
 
         await Shell.Current.GoToAsync(
             $"{nameof(AddExercisePage)}?routineId={SelectedRoutine.Id}&workoutId={SelectedWorkout.Id}&exerciseId={row.Exercise.Id}");
+    }
+
+    [RelayCommand]
+    private void ToggleExerciseExpanded(WorkoutExerciseCardRow? row)
+    {
+        if (row is null)
+            return;
+
+        row.IsExpanded = !row.IsExpanded;
     }
 
     [RelayCommand]
@@ -246,7 +246,12 @@ public partial class RoutinesPageViewModel : ObservableObject
             return;
 
         foreach (var exercise in SelectedWorkout.Exercises.OrderBy(x => x.SortOrder))
-            VisibleExercises.Add(new WorkoutExerciseCardRow(exercise));
+        {
+            VisibleExercises.Add(new WorkoutExerciseCardRow(
+                exercise,
+                onEdit: EditExerciseAsync,
+                onDelete: DeleteExerciseAsync));
+        }
     }
 
     [RelayCommand]
@@ -285,14 +290,22 @@ public partial class RoutinesPageViewModel : ObservableObject
 
 public partial class WorkoutExerciseCardRow : ObservableObject
 {
+    private readonly Func<WorkoutExerciseCardRow, Task>? _onEdit;
+    private readonly Func<WorkoutExerciseCardRow, Task>? _onDelete;
+
     public WorkoutExercise Exercise { get; }
 
     [ObservableProperty]
     public partial bool IsExpanded { get; set; }
 
-    public WorkoutExerciseCardRow(WorkoutExercise exercise)
+    public WorkoutExerciseCardRow(
+        WorkoutExercise exercise,
+        Func<WorkoutExerciseCardRow, Task>? onEdit = null,
+        Func<WorkoutExerciseCardRow, Task>? onDelete = null)
     {
         Exercise = exercise;
+        _onEdit = onEdit;
+        _onDelete = onDelete;
         GroupedSets = BuildGroupedSets(exercise);
     }
 
@@ -329,6 +342,26 @@ public partial class WorkoutExerciseCardRow : ObservableObject
     partial void OnIsExpandedChanged(bool value)
     {
         OnPropertyChanged(nameof(ExpandButtonText));
+    }
+
+    [RelayCommand]
+    private void ToggleExpanded()
+    {
+        IsExpanded = !IsExpanded;
+    }
+
+    [RelayCommand]
+    private async Task EditAsync()
+    {
+        if (_onEdit is not null)
+            await _onEdit(this);
+    }
+
+    [RelayCommand]
+    private async Task DeleteAsync()
+    {
+        if (_onDelete is not null)
+            await _onDelete(this);
     }
 
     private static IReadOnlyList<WorkoutExerciseGroupedSetRow> BuildGroupedSets(WorkoutExercise exercise)

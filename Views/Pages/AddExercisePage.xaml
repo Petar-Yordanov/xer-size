@@ -108,7 +108,7 @@
                             IsVisible="{Binding IsStrengthMode}">
                             <CollectionView ItemsSource="{Binding StrengthSets}" SelectionMode="None">
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="viewModels:EditableExerciseSetRow">
+                                    <DataTemplate x:DataType="{x:Null}">
                                         <Grid
                                             ColumnDefinitions="Auto,*,*,*,Auto"
                                             ColumnSpacing="8"
@@ -160,7 +160,7 @@
                             IsVisible="{Binding IsDurationMode}">
                             <CollectionView ItemsSource="{Binding DurationSets}" SelectionMode="None">
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="viewModels:EditableExerciseSetRow">
+                                    <DataTemplate x:DataType="{x:Null}">
                                         <Grid
                                             ColumnDefinitions="Auto,*,*,*,Auto"
                                             ColumnSpacing="8"
@@ -314,7 +314,7 @@
 
                     <CollectionView ItemsSource="{Binding PrimaryMuscleOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SelectableOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -347,7 +347,7 @@
 
                     <CollectionView ItemsSource="{Binding SecondaryMuscleOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SelectableOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -380,7 +380,7 @@
 
                     <CollectionView ItemsSource="{Binding PrimaryMuscleCategoryOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SelectableOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -413,7 +413,7 @@
 
                     <CollectionView ItemsSource="{Binding SecondaryMuscleCategoryOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SelectableOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -446,7 +446,7 @@
 
                     <CollectionView ItemsSource="{Binding ForceOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -479,7 +479,7 @@
 
                     <CollectionView ItemsSource="{Binding BodyCategoryOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -512,7 +512,7 @@
 
                     <CollectionView ItemsSource="{Binding MechanicOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -545,7 +545,7 @@
 
                     <CollectionView ItemsSource="{Binding EquipmentOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -578,7 +578,7 @@
 
                     <CollectionView ItemsSource="{Binding LimbInvolvementOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"
@@ -611,7 +611,7 @@
 
                     <CollectionView ItemsSource="{Binding MovementPatternOptions}" SelectionMode="None" MaximumHeightRequest="340">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:SingleSelectOptionRow">
+                            <DataTemplate x:DataType="{x:Null}">
                                 <components:SheetOptionRow
                                     Text="{Binding Text}"
                                     IsSelected="{Binding IsSelected}"

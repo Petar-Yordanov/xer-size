@@ -118,34 +118,11 @@
                             </VerticalStackLayout>
                         </components:Card>
 
-                        <Grid
-                            ColumnDefinitions="*,*"
-                            RowDefinitions="Auto,Auto"
-                            ColumnSpacing="10"
-                            RowSpacing="10">
-                            <components:MetricTile
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Title="Current workouts"
-                                Value="{Binding Snapshot.CurrentWorkoutCount}" />
-
-                            <components:MetricTile
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Title="Current exercises"
-                                Value="{Binding Snapshot.CurrentExerciseCount}" />
-
-                            <components:MetricTile
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Title="Current total sets"
-                                Value="{Binding Snapshot.CurrentTotalSets, StringFormat='{}{0} sets'}" />
-
-                            <components:MetricTile
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Title="Planned volume"
-                                Value="{Binding Snapshot.CurrentPlannedVolume, StringFormat='{}{0:F0} kg'}" />
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            <components:MetricTile Grid.Row="0" Grid.Column="0" Title="Current workouts" Value="{Binding Snapshot.CurrentWorkoutCount}" />
+                            <components:MetricTile Grid.Row="0" Grid.Column="1" Title="Current exercises" Value="{Binding Snapshot.CurrentExerciseCount}" />
+                            <components:MetricTile Grid.Row="1" Grid.Column="0" Title="Current total sets" Value="{Binding Snapshot.CurrentTotalSets, StringFormat='{}{0} sets'}" />
+                            <components:MetricTile Grid.Row="1" Grid.Column="1" Title="Planned volume" Value="{Binding Snapshot.CurrentPlannedVolume, StringFormat='{}{0:F0} kg'}" />
                         </Grid>
 
                         <components:Card>
@@ -153,14 +130,9 @@
                                 <Label Text="Muscle group distribution" Style="{StaticResource BodyLabelStyle}" />
                                 <Label Text="Set distribution across muscle groups in the current setup. Values below are shown in sets." Style="{StaticResource MutedLabelStyle}" />
 
-                                <lvc:PieChart
-                                    HeightRequest="220"
-                                    Series="{Binding MuscleGroupPreferenceSeries}" />
+                                <lvc:PieChart HeightRequest="220" Series="{Binding MuscleGroupPreferenceSeries}" />
 
-                                <CollectionView
-                                    ItemsSource="{Binding Snapshot.MuscleGroupPreference}"
-                                    SelectionMode="None"
-                                    ItemSizingStrategy="MeasureFirstItem">
+                                <CollectionView ItemsSource="{Binding Snapshot.MuscleGroupPreference}" SelectionMode="None" ItemSizingStrategy="MeasureFirstItem">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="models:BreakdownItem">
                                             <Grid ColumnDefinitions="*,Auto" Padding="0,2">
@@ -178,14 +150,9 @@
                                 <Label Text="Equipment distribution" Style="{StaticResource BodyLabelStyle}" />
                                 <Label Text="Set distribution by equipment type in the current setup. Values below are shown in sets." Style="{StaticResource MutedLabelStyle}" />
 
-                                <lvc:PieChart
-                                    HeightRequest="220"
-                                    Series="{Binding EquipmentPreferenceSeries}" />
+                                <lvc:PieChart HeightRequest="220" Series="{Binding EquipmentPreferenceSeries}" />
 
-                                <CollectionView
-                                    ItemsSource="{Binding Snapshot.EquipmentPreference}"
-                                    SelectionMode="None"
-                                    ItemSizingStrategy="MeasureFirstItem">
+                                <CollectionView ItemsSource="{Binding Snapshot.EquipmentPreference}" SelectionMode="None" ItemSizingStrategy="MeasureFirstItem">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="models:BreakdownItem">
                                             <Grid ColumnDefinitions="*,Auto" Padding="0,2">
@@ -246,39 +213,19 @@
                                     TapCommand="{Binding ToggleYearSheetCommand}"
                                     TrailingIconText="v" />
 
-                                <Border
-                                    Padding="4"
-                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                    StrokeThickness="0">
+                                <Border Padding="4" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="18" />
                                     </Border.StrokeShape>
 
                                     <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
-                                        <components:SelectionPill
-                                            Grid.Column="0"
-                                            Text="Days"
-                                            Command="{Binding SelectDaysBucketCommand}"
-                                            IsSelected="{Binding IsDaysSelected}" />
-
-                                        <components:SelectionPill
-                                            Grid.Column="1"
-                                            Text="Weeks"
-                                            Command="{Binding SelectWeeksBucketCommand}"
-                                            IsSelected="{Binding IsWeeksSelected}" />
-
-                                        <components:SelectionPill
-                                            Grid.Column="2"
-                                            Text="Months"
-                                            Command="{Binding SelectMonthsBucketCommand}"
-                                            IsSelected="{Binding IsMonthsSelected}" />
+                                        <components:SelectionPill Grid.Column="0" Text="Days" Command="{Binding SelectDaysBucketCommand}" IsSelected="{Binding IsDaysSelected}" />
+                                        <components:SelectionPill Grid.Column="1" Text="Weeks" Command="{Binding SelectWeeksBucketCommand}" IsSelected="{Binding IsWeeksSelected}" />
+                                        <components:SelectionPill Grid.Column="2" Text="Months" Command="{Binding SelectMonthsBucketCommand}" IsSelected="{Binding IsMonthsSelected}" />
                                     </Grid>
                                 </Border>
 
-                                <Border
-                                    Padding="4"
-                                    BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                    StrokeThickness="0">
+                                <Border Padding="4" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="18" />
                                     </Border.StrokeShape>
@@ -300,34 +247,11 @@
                             </VerticalStackLayout>
                         </components:Card>
 
-                        <Grid
-                            ColumnDefinitions="*,*"
-                            RowDefinitions="Auto,Auto"
-                            ColumnSpacing="10"
-                            RowSpacing="10">
-                            <components:MetricTile
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Title="Logged workouts"
-                                Value="{Binding Snapshot.TimelineWorkoutCount}" />
-
-                            <components:MetricTile
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Title="Logged volume"
-                                Value="{Binding Snapshot.TimelineTotalVolume, StringFormat='{}{0:F0} kg'}" />
-
-                            <components:MetricTile
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Title="Logged sets"
-                                Value="{Binding Snapshot.TimelineTotalSets, StringFormat='{}{0} sets'}" />
-
-                            <components:MetricTile
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Title="Estimated calories"
-                                Value="{Binding Snapshot.TimelineEstimatedCaloriesBurned, StringFormat='{}{0:F0} kcal'}" />
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            <components:MetricTile Grid.Row="0" Grid.Column="0" Title="Logged workouts" Value="{Binding Snapshot.TimelineWorkoutCount}" />
+                            <components:MetricTile Grid.Row="0" Grid.Column="1" Title="Logged volume" Value="{Binding Snapshot.TimelineTotalVolume, StringFormat='{}{0:F0} kg'}" />
+                            <components:MetricTile Grid.Row="1" Grid.Column="0" Title="Logged sets" Value="{Binding Snapshot.TimelineTotalSets, StringFormat='{}{0} sets'}" />
+                            <components:MetricTile Grid.Row="1" Grid.Column="1" Title="Estimated calories" Value="{Binding Snapshot.TimelineEstimatedCaloriesBurned, StringFormat='{}{0:F0} kcal'}" />
                         </Grid>
 
                         <components:Card>
@@ -335,11 +259,7 @@
                                 <Label Text="Overall volume over time" Style="{StaticResource BodyLabelStyle}" />
                                 <Label Text="Total lifted load for each shown period. Volume = sum of weight × reps. Y axis shows kg." Style="{StaticResource MutedLabelStyle}" />
 
-                                <lvc:CartesianChart
-                                    HeightRequest="240"
-                                    Series="{Binding VolumeSeries}"
-                                    XAxes="{Binding VolumeXAxes}"
-                                    YAxes="{Binding VolumeYAxes}" />
+                                 
                             </VerticalStackLayout>
                         </components:Card>
 
@@ -348,11 +268,7 @@
                                 <Label Text="Average set weight over time" Style="{StaticResource BodyLabelStyle}" />
                                 <Label Text="Average logged set weight for each shown period. Y axis shows kg." Style="{StaticResource MutedLabelStyle}" />
 
-                                <lvc:CartesianChart
-                                    HeightRequest="240"
-                                    Series="{Binding LiftedWeightSeries}"
-                                    XAxes="{Binding LiftedWeightXAxes}"
-                                    YAxes="{Binding LiftedWeightYAxes}" />
+                                <lvc:CartesianChart HeightRequest="240" Series="{Binding LiftedWeightSeries}" XAxes="{Binding LiftedWeightXAxes}" YAxes="{Binding LiftedWeightYAxes}" />
                             </VerticalStackLayout>
                         </components:Card>
 
@@ -361,11 +277,7 @@
                                 <Label Text="{Binding Snapshot.GymVisitFrequencyTitle}" Style="{StaticResource BodyLabelStyle}" />
                                 <Label Text="Number of logged workout sessions in each shown period. Y axis shows session count." Style="{StaticResource MutedLabelStyle}" />
 
-                                <lvc:CartesianChart
-                                    HeightRequest="240"
-                                    Series="{Binding GymVisitFrequencySeries}"
-                                    XAxes="{Binding GymVisitFrequencyXAxes}"
-                                    YAxes="{Binding GymVisitFrequencyYAxes}" />
+                                <lvc:CartesianChart HeightRequest="240" Series="{Binding GymVisitFrequencySeries}" XAxes="{Binding GymVisitFrequencyXAxes}" YAxes="{Binding GymVisitFrequencyYAxes}" />
 
                                 <Label Text="{Binding Snapshot.Plateau.Summary}" Style="{StaticResource MutedLabelStyle}" />
                             </VerticalStackLayout>
@@ -376,34 +288,21 @@
                                 <Label Text="Volume by exercise over time" Style="{StaticResource BodyLabelStyle}" />
                                 <Label Text="Historical lifted load per exercise across the selected period. Y axis shows volume in kg." Style="{StaticResource MutedLabelStyle}" />
 
-                                <lvc:CartesianChart
-                                    HeightRequest="280"
-                                    Series="{Binding ExerciseVolumeTimelineSeries}"
-                                    XAxes="{Binding ExerciseVolumeTimelineXAxes}"
-                                    YAxes="{Binding ExerciseVolumeTimelineYAxes}" />
+                                <lvc:CartesianChart HeightRequest="280" Series="{Binding ExerciseVolumeTimelineSeries}" XAxes="{Binding ExerciseVolumeTimelineXAxes}" YAxes="{Binding ExerciseVolumeTimelineYAxes}" />
                             </VerticalStackLayout>
                         </components:Card>
                     </VerticalStackLayout>
                 </Grid>
             </ScrollView>
 
-            <Grid
-                IsVisible="{Binding IsRoutineSheetOpen}"
-                InputTransparent="False"
-                ZIndex="20">
+            <Grid IsVisible="{Binding IsRoutineSheetOpen}" InputTransparent="False" ZIndex="20">
                 <BoxView BackgroundColor="#66000000">
                     <BoxView.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CloseRoutineSheetCommand}" />
                     </BoxView.GestureRecognizers>
                 </BoxView>
 
-                <Border
-                    VerticalOptions="End"
-                    Margin="12,0,12,12"
-                    Padding="0,12,0,18"
-                    BackgroundColor="{DynamicResource SurfaceColor}"
-                    Stroke="{DynamicResource BorderColor}"
-                    StrokeThickness="1">
+                <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18" BackgroundColor="{DynamicResource SurfaceColor}" Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="24" />
                     </Border.StrokeShape>
@@ -412,39 +311,21 @@
                         <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
                         <Label Margin="18,0,18,0" Text="Select Routine" Style="{StaticResource BodyLabelStyle}" />
 
-                        <CollectionView
-                            ItemsSource="{Binding Routines}"
-                            SelectionMode="None"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            MaximumHeightRequest="320">
+                        <CollectionView ItemsSource="{Binding Routines}" SelectionMode="None" ItemSizingStrategy="MeasureFirstItem" MaximumHeightRequest="320">
                             <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Routine">
-                                    <Border
-                                        Margin="12,0,12,8"
-                                        Padding="14,12"
-                                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                        StrokeThickness="0">
+                                <DataTemplate x:DataType="{x:Null}">
+                                    <Border Margin="12,0,12,8" Padding="14,12" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="16" />
                                         </Border.StrokeShape>
 
                                         <Border.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectRoutineCommand}"
-                                                CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectRoutineCommand}" CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
                                         <Grid ColumnDefinitions="*,Auto">
-                                            <Label
-                                                Text="{Binding Name}"
-                                                VerticalOptions="Center"
-                                                Style="{StaticResource BodyLabelStyle}" />
-
-                                            <Label
-                                                Grid.Column="1"
-                                                Text=">"
-                                                VerticalOptions="Center"
-                                                Style="{StaticResource MutedLabelStyle}" />
+                                            <Label Text="{Binding Name}" VerticalOptions="Center" Style="{StaticResource BodyLabelStyle}" />
+                                            <Label Grid.Column="1" Text=">" VerticalOptions="Center" Style="{StaticResource MutedLabelStyle}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -454,23 +335,14 @@
                 </Border>
             </Grid>
 
-            <Grid
-                IsVisible="{Binding IsWorkoutSheetOpen}"
-                InputTransparent="False"
-                ZIndex="21">
+            <Grid IsVisible="{Binding IsWorkoutSheetOpen}" InputTransparent="False" ZIndex="21">
                 <BoxView BackgroundColor="#66000000">
                     <BoxView.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CloseWorkoutSheetCommand}" />
                     </BoxView.GestureRecognizers>
                 </BoxView>
 
-                <Border
-                    VerticalOptions="End"
-                    Margin="12,0,12,12"
-                    Padding="0,12,0,18"
-                    BackgroundColor="{DynamicResource SurfaceColor}"
-                    Stroke="{DynamicResource BorderColor}"
-                    StrokeThickness="1">
+                <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18" BackgroundColor="{DynamicResource SurfaceColor}" Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="24" />
                     </Border.StrokeShape>
@@ -479,39 +351,21 @@
                         <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
                         <Label Margin="18,0,18,0" Text="Select Workout" Style="{StaticResource BodyLabelStyle}" />
 
-                        <CollectionView
-                            ItemsSource="{Binding Workouts}"
-                            SelectionMode="None"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            MaximumHeightRequest="320">
+                        <CollectionView ItemsSource="{Binding Workouts}" SelectionMode="None" ItemSizingStrategy="MeasureFirstItem" MaximumHeightRequest="320">
                             <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Workout">
-                                    <Border
-                                        Margin="12,0,12,8"
-                                        Padding="14,12"
-                                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                        StrokeThickness="0">
+                                <DataTemplate x:DataType="{x:Null}">
+                                    <Border Margin="12,0,12,8" Padding="14,12" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="16" />
                                         </Border.StrokeShape>
 
                                         <Border.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectWorkoutCommand}"
-                                                CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectWorkoutCommand}" CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
                                         <Grid ColumnDefinitions="*,Auto">
-                                            <Label
-                                                Text="{Binding Name}"
-                                                VerticalOptions="Center"
-                                                Style="{StaticResource BodyLabelStyle}" />
-
-                                            <Label
-                                                Grid.Column="1"
-                                                Text=">"
-                                                VerticalOptions="Center"
-                                                Style="{StaticResource MutedLabelStyle}" />
+                                            <Label Text="{Binding Name}" VerticalOptions="Center" Style="{StaticResource BodyLabelStyle}" />
+                                            <Label Grid.Column="1" Text=">" VerticalOptions="Center" Style="{StaticResource MutedLabelStyle}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -521,23 +375,14 @@
                 </Border>
             </Grid>
 
-            <Grid
-                IsVisible="{Binding IsYearSheetOpen}"
-                InputTransparent="False"
-                ZIndex="22">
+            <Grid IsVisible="{Binding IsYearSheetOpen}" InputTransparent="False" ZIndex="22">
                 <BoxView BackgroundColor="#66000000">
                     <BoxView.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CloseYearSheetCommand}" />
                     </BoxView.GestureRecognizers>
                 </BoxView>
 
-                <Border
-                    VerticalOptions="End"
-                    Margin="12,0,12,12"
-                    Padding="0,12,0,18"
-                    BackgroundColor="{DynamicResource SurfaceColor}"
-                    Stroke="{DynamicResource BorderColor}"
-                    StrokeThickness="1">
+                <Border VerticalOptions="End" Margin="12,0,12,12" Padding="0,12,0,18" BackgroundColor="{DynamicResource SurfaceColor}" Stroke="{DynamicResource BorderColor}" StrokeThickness="1">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="24" />
                     </Border.StrokeShape>
@@ -546,39 +391,21 @@
                         <BoxView HeightRequest="5" WidthRequest="48" HorizontalOptions="Center" Color="{DynamicResource BorderColor}" />
                         <Label Margin="18,0,18,0" Text="Select Year" Style="{StaticResource BodyLabelStyle}" />
 
-                        <CollectionView
-                            ItemsSource="{Binding AvailableYears}"
-                            SelectionMode="None"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            MaximumHeightRequest="320">
+                        <CollectionView ItemsSource="{Binding AvailableYears}" SelectionMode="None" ItemSizingStrategy="MeasureFirstItem" MaximumHeightRequest="320">
                             <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="x:Int32">
-                                    <Border
-                                        Margin="12,0,12,8"
-                                        Padding="14,12"
-                                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
-                                        StrokeThickness="0">
+                                <DataTemplate x:DataType="{x:Null}">
+                                    <Border Margin="12,0,12,8" Padding="14,12" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="16" />
                                         </Border.StrokeShape>
 
                                         <Border.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectYearCommand}"
-                                                CommandParameter="{Binding .}" />
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectYearCommand}" CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
                                         <Grid ColumnDefinitions="*,Auto">
-                                            <Label
-                                                Text="{Binding .}"
-                                                VerticalOptions="Center"
-                                                Style="{StaticResource BodyLabelStyle}" />
-
-                                            <Label
-                                                Grid.Column="1"
-                                                Text=">"
-                                                VerticalOptions="Center"
-                                                Style="{StaticResource MutedLabelStyle}" />
+                                            <Label Text="{Binding .}" VerticalOptions="Center" Style="{StaticResource BodyLabelStyle}" />
+                                            <Label Grid.Column="1" Text=">" VerticalOptions="Center" Style="{StaticResource MutedLabelStyle}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -591,31 +418,11 @@
 
         <components:BottomNavBar Grid.Row="1">
             <HorizontalStackLayout Spacing="4">
-                <components:BottomNavBarItem
-                    Text="Routines"
-                    Icon="routines.png"
-                    Route="routines" />
-
-                <components:BottomNavBarItem
-                    Text="Exercises"
-                    Icon="exercises.png"
-                    Route="exercises" />
-
-                <components:BottomNavBarItem
-                    Text="History"
-                    Icon="history.png"
-                    Route="history" />
-
-                <components:BottomNavBarItem
-                    Text="Stats"
-                    Icon="statistics.png"
-                    Route="statistics"
-                    IsSelected="True" />
-
-                <components:BottomNavBarItem
-                    Text="Settings"
-                    Icon="settings.png"
-                    Route="settingsTab" />
+                <components:BottomNavBarItem Text="Routines" Icon="routines.png" Route="routines" />
+                <components:BottomNavBarItem Text="Exercises" Icon="exercises.png" Route="exercises" />
+                <components:BottomNavBarItem Text="History" Icon="history.png" Route="history" />
+                <components:BottomNavBarItem Text="Stats" Icon="statistics.png" Route="statistics" IsSelected="True" />
+                <components:BottomNavBarItem Text="Settings" Icon="settings.png" Route="settingsTab" />
             </HorizontalStackLayout>
         </components:BottomNavBar>
     </Grid>

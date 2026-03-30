@@ -71,7 +71,7 @@ public partial class RoutineManagerPageViewModel : ObservableObject
         if (page is null)
             return;
 
-        var confirm = await page.DisplayAlert("Delete Routine", $"Delete '{routine.Name}'?", "Delete", "Cancel");
+        var confirm = await page.DisplayAlertAsync("Delete Routine", $"Delete '{routine.Name}'?", "Delete", "Cancel");
         if (!confirm)
             return;
 

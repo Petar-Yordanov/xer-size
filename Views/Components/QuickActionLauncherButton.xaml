@@ -7,41 +7,40 @@
     x:Name="This"
     x:DataType="local:QuickActionLauncherButton">
 
-    <Grid>
-        <Border
-            HeightRequest="44"
-            Padding="14,0"
-            BackgroundColor="{DynamicResource PrimaryColor}"
-            StrokeThickness="0">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="16" />
-            </Border.StrokeShape>
+    <Border
+        HeightRequest="44"
+        Padding="14,0"
+        BackgroundColor="{DynamicResource PrimaryColor}"
+        StrokeThickness="0">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="16" />
+        </Border.StrokeShape>
 
-            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                <Label
-                    Text="{Binding Source={x:Reference This}, Path=LeadingIconText}"
-                    VerticalOptions="Center"
-                    TextColor="{DynamicResource OnPrimaryColor}"
-                    FontSize="15" />
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding Source={x:Reference This}, Path=Command}"
+                CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+        </Border.GestureRecognizers>
 
-                <Label
-                    Grid.Column="1"
-                    Text="{Binding Source={x:Reference This}, Path=Text}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    TextColor="{DynamicResource OnPrimaryColor}"
-                    FontFamily="OpenSansSemibold"
-                    FontSize="13"
-                    LineBreakMode="TailTruncation"
-                    MaxLines="1" />
-            </Grid>
-        </Border>
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=LeadingIconText}"
+                VerticalOptions="Center"
+                InputTransparent="True"
+                TextColor="{DynamicResource OnPrimaryColor}"
+                FontSize="15" />
 
-        <Button
-            BackgroundColor="Transparent"
-            BorderWidth="0"
-            CornerRadius="16"
-            Command="{Binding Source={x:Reference This}, Path=Command}"
-            CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
-    </Grid>
+            <Label
+                Grid.Column="1"
+                Text="{Binding Source={x:Reference This}, Path=Text}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                TextColor="{DynamicResource OnPrimaryColor}"
+                FontFamily="OpenSansSemibold"
+                FontSize="13"
+                LineBreakMode="TailTruncation"
+                MaxLines="1" />
+        </Grid>
+    </Border>
 </ContentView>
