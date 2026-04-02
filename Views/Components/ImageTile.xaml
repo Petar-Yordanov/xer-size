@@ -37,11 +37,12 @@
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     Spacing="6">
-                    <Label
-                        Text="🖼"
-                        HorizontalTextAlignment="Center"
-                        FontSize="18"
-                        TextColor="{DynamicResource SecondaryTextColor}" />
+                    <Image
+                        Source="add_photo.png"
+                        WidthRequest="20"
+                        HeightRequest="20"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center" />
                     <Label
                         Text="{Binding Source={x:Reference This}, Path=PlaceholderTitle}"
                         HorizontalTextAlignment="Center"

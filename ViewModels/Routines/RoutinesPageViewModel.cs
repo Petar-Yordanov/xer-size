@@ -137,7 +137,7 @@ public partial class RoutinesPageViewModel : ObservableObject
         if (page is null || SelectedWorkout is null)
             return;
 
-        await page.DisplayAlert("Start Workout", $"Starting '{SelectedWorkout.Name}' is not implemented yet.", "OK");
+        await page.DisplayAlertAsync("Start Workout", $"Starting '{SelectedWorkout.Name}' is not implemented yet.", "OK");
     }
 
     [RelayCommand]
@@ -279,7 +279,7 @@ public partial class RoutinesPageViewModel : ObservableObject
         if (page is null)
             return;
 
-        var confirm = await page.DisplayAlert("Delete Exercise", $"Delete '{row.Name}'?", "Delete", "Cancel");
+        var confirm = await page.DisplayAlertAsync("Delete Exercise", $"Delete '{row.Name}'?", "Delete", "Cancel");
         if (!confirm)
             return;
 

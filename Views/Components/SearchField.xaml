@@ -18,11 +18,12 @@
         </Border.StrokeShape>
 
         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-            <Label
-                Text="⌕"
-                VerticalOptions="Center"
-                TextColor="{DynamicResource SecondaryTextColor}"
-                FontSize="15" />
+            <Image
+                Source="search.png"
+                WidthRequest="16"
+                HeightRequest="16"
+                Aspect="AspectFit"
+                VerticalOptions="Center" />
 
             <Entry
                 Grid.Column="1"

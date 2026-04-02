@@ -140,7 +140,7 @@
 
                                             <components:Button
                                                 Grid.Column="4"
-                                                Text="X"
+                                                ImageSource="delete.png"
                                                 ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                                 Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.RemoveStrengthSetCommand}"
                                                 CommandParameter="{Binding .}" />
@@ -192,7 +192,7 @@
 
                                             <components:Button
                                                 Grid.Column="4"
-                                                Text="X"
+                                                ImageSource="delete.png"
                                                 ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                                 Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.RemoveDurationSetCommand}"
                                                 CommandParameter="{Binding .}" />
@@ -221,7 +221,22 @@
                                 Grid.Column="1"
                                 Text="{Binding AdvancedButtonText}"
                                 ButtonStyle="{StaticResource SecondaryButtonStyle}"
-                                Command="{Binding ToggleAdvancedCommand}" />
+                                Command="{Binding ToggleAdvancedCommand}">
+                                <components:Button.Triggers>
+                                    <DataTrigger
+                                        TargetType="components:Button"
+                                        Binding="{Binding IsAdvancedExpanded}"
+                                        Value="True">
+                                        <Setter Property="ImageSource" Value="expand_less.png" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        TargetType="components:Button"
+                                        Binding="{Binding IsAdvancedExpanded}"
+                                        Value="False">
+                                        <Setter Property="ImageSource" Value="expand_more.png" />
+                                    </DataTrigger>
+                                </components:Button.Triggers>
+                            </components:Button>
                         </Grid>
 
                         <VerticalStackLayout
@@ -290,6 +305,7 @@
                 <components:Button
                     Grid.Row="4"
                     Text="{Binding SaveButtonText}"
+                    ImageSource="save.png"
                     Command="{Binding SaveCommand}" />
             </Grid>
         </ScrollView>

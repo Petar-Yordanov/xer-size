@@ -30,14 +30,12 @@
                             <components:SingleSelectDropdown
                                 Grid.Column="0"
                                 SelectedText="{Binding SelectedRoutineName}"
-                                TapCommand="{Binding ToggleRoutineSheetCommand}"
-                                TrailingIconText="v" />
+                                TapCommand="{Binding ToggleRoutineSheetCommand}" />
 
                             <components:SingleSelectDropdown
                                 Grid.Column="1"
                                 SelectedText="{Binding SelectedWorkoutName}"
-                                TapCommand="{Binding ToggleWorkoutSheetCommand}"
-                                TrailingIconText="v" />
+                                TapCommand="{Binding ToggleWorkoutSheetCommand}" />
                         </Grid>
                     </VerticalStackLayout>
                 </components:Card>
@@ -82,12 +80,11 @@
                                                 Style="{StaticResource MutedLabelStyle}" />
                                         </Grid>
 
-
                                         <Label
-                                          Margin="0,0,8,6"
-                                          Text="{Binding Subtitle}"
-                                          VerticalTextAlignment="Center"
-                                          Style="{StaticResource MutedLabelStyle}" />
+                                            Margin="0,0,8,6"
+                                            Text="{Binding Subtitle}"
+                                            VerticalTextAlignment="Center"
+                                            Style="{StaticResource MutedLabelStyle}" />
 
                                         <FlexLayout
                                             Wrap="Wrap"
@@ -141,10 +138,27 @@
                                                     <RoundRectangle CornerRadius="14" />
                                                 </Border.StrokeShape>
 
-                                                <Label
-                                                    Text="{Binding ToggleInfoText}"
-                                                    HorizontalOptions="Center"
-                                                    Style="{StaticResource BodyLabelStyle}" />
+                                                <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                                                    <Label
+                                                        Text="{Binding ToggleInfoText}"
+                                                        VerticalOptions="Center"
+                                                        Style="{StaticResource BodyLabelStyle}" />
+
+                                                    <Image
+                                                        WidthRequest="16"
+                                                        HeightRequest="16"
+                                                        Aspect="AspectFit"
+                                                        VerticalOptions="Center">
+                                                        <Image.Triggers>
+                                                            <DataTrigger TargetType="Image" Binding="{Binding IsInfoExpanded}" Value="True">
+                                                                <Setter Property="Source" Value="expand_less.png" />
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Image" Binding="{Binding IsInfoExpanded}" Value="False">
+                                                                <Setter Property="Source" Value="expand_more.png" />
+                                                            </DataTrigger>
+                                                        </Image.Triggers>
+                                                    </Image>
+                                                </HorizontalStackLayout>
                                             </Border>
                                         </toolkit:Expander.Header>
 
@@ -242,17 +256,20 @@
                                                 CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
-                                        <Grid ColumnDefinitions="*,Auto">
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                             <Label
                                                 Text="{Binding Name}"
                                                 VerticalOptions="Center"
                                                 Style="{StaticResource BodyLabelStyle}" />
 
-                                            <Label
+                                            <Image
                                                 Grid.Column="1"
-                                                Text=">"
+                                                Source="right.png"
+                                                WidthRequest="16"
+                                                HeightRequest="16"
+                                                Aspect="AspectFit"
                                                 VerticalOptions="Center"
-                                                Style="{StaticResource MutedLabelStyle}" />
+                                                HorizontalOptions="Center" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -309,17 +326,20 @@
                                                 CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
-                                        <Grid ColumnDefinitions="*,Auto">
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                             <Label
                                                 Text="{Binding Name}"
                                                 VerticalOptions="Center"
                                                 Style="{StaticResource BodyLabelStyle}" />
 
-                                            <Label
+                                            <Image
                                                 Grid.Column="1"
-                                                Text=">"
+                                                Source="right.png"
+                                                WidthRequest="16"
+                                                HeightRequest="16"
+                                                Aspect="AspectFit"
                                                 VerticalOptions="Center"
-                                                Style="{StaticResource MutedLabelStyle}" />
+                                                HorizontalOptions="Center" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

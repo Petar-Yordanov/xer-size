@@ -10,36 +10,62 @@ public partial class Button : ContentView
             typeof(string),
             typeof(Button),
             string.Empty,
-            propertyChanged: OnVisualPropertyChanged);
+            propertyChanged: OnAppearancePropertyChanged);
+
+    public static readonly BindableProperty ImageSourceProperty =
+        BindableProperty.Create(
+            nameof(ImageSource),
+            typeof(string),
+            typeof(Button),
+            default(string),
+            propertyChanged: OnAppearancePropertyChanged);
 
     public static readonly BindableProperty CommandProperty =
         BindableProperty.Create(
             nameof(Command),
             typeof(ICommand),
-            typeof(Button),
-            null,
-            propertyChanged: OnVisualPropertyChanged);
+            typeof(Button));
 
     public static readonly BindableProperty CommandParameterProperty =
         BindableProperty.Create(
             nameof(CommandParameter),
             typeof(object),
-            typeof(Button),
-            null,
-            propertyChanged: OnVisualPropertyChanged);
+            typeof(Button));
 
     public static readonly BindableProperty ButtonStyleProperty =
         BindableProperty.Create(
             nameof(ButtonStyle),
             typeof(Style),
             typeof(Button),
-            null,
-            propertyChanged: OnVisualPropertyChanged);
+            default(Style),
+            propertyChanged: OnButtonStyleChanged);
+
+    public static readonly BindableProperty CornerRadiusProperty =
+        BindableProperty.Create(
+            nameof(CornerRadius),
+            typeof(float),
+            typeof(Button),
+            14f,
+            propertyChanged: OnAppearancePropertyChanged);
+
+    public static readonly BindableProperty IsEnabledProperty =
+        BindableProperty.Create(
+            nameof(IsEnabled),
+            typeof(bool),
+            typeof(Button),
+            true,
+            propertyChanged: OnAppearancePropertyChanged);
 
     public string Text
     {
         get => (string)GetValue(TextProperty);
         set => SetValue(TextProperty, value);
+    }
+
+    public string? ImageSource
+    {
+        get => (string?)GetValue(ImageSourceProperty);
+        set => SetValue(ImageSourceProperty, value);
     }
 
     public ICommand? Command
@@ -60,148 +86,108 @@ public partial class Button : ContentView
         set => SetValue(ButtonStyleProperty, value);
     }
 
+    public float CornerRadius
+    {
+        get => (float)GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
+    }
+
+    public new bool IsEnabled
+    {
+        get => (bool)GetValue(IsEnabledProperty);
+        set => SetValue(IsEnabledProperty, value);
+    }
+
     public Button()
     {
         InitializeComponent();
-        ApplyVisualState();
+        ApplyButtonStyle();
+        UpdateAppearance();
     }
 
-    protected override void OnParentSet()
-    {
-        base.OnParentSet();
-        ApplyVisualState();
-    }
-
-    protected override void OnBindingContextChanged()
-    {
-        base.OnBindingContextChanged();
-        ApplyVisualState();
-    }
-
-    protected override void OnPropertyChanged(string? propertyName = null)
-    {
-        base.OnPropertyChanged(propertyName);
-
-        if (propertyName == nameof(IsEnabled))
-            ApplyVisualState();
-    }
-
-    private static void OnVisualPropertyChanged(BindableObject bindable, object? oldValue, object? newValue)
+    private static void OnAppearancePropertyChanged(BindableObject bindable, object? oldValue, object? newValue)
     {
         if (bindable is Button button)
-            button.ApplyVisualState();
+            button.UpdateAppearance();
     }
 
-    private async void OnTapped(object? sender, TappedEventArgs e)
+    private static void OnButtonStyleChanged(BindableObject bindable, object? oldValue, object? newValue)
+    {
+        if (bindable is Button button)
+        {
+            button.ApplyButtonStyle();
+            button.UpdateAppearance();
+        }
+    }
+
+    private void OnTapped(object? sender, TappedEventArgs e)
     {
         if (!IsEnabled)
             return;
 
-        if (Command?.CanExecute(CommandParameter) != true)
-            return;
-
-        try
-        {
-            await ButtonSurface.ScaleTo(0.985, 45);
-            await ButtonSurface.ScaleTo(1.0, 45);
-        }
-        catch
-        {
-            // Ignore animation interruptions.
-        }
-
-        Command.Execute(CommandParameter);
+        if (Command?.CanExecute(CommandParameter) == true)
+            Command.Execute(CommandParameter);
     }
 
-    private void ApplyVisualState()
+    private void ApplyButtonStyle()
     {
-        if (ButtonSurface is null || ButtonLabel is null || Application.Current?.Resources is not ResourceDictionary resources)
+        if (ButtonStyle is null)
+            return;
+
+        ButtonSurface.Style = ButtonStyle;
+    }
+
+    private void UpdateAppearance()
+    {
+        if (ButtonLabel is null || ButtonIcon is null || ButtonSurface is null || ButtonShape is null || ButtonContentGrid is null)
             return;
 
         ButtonLabel.Text = Text ?? string.Empty;
 
-        var primaryStyle = resources["PrimaryButtonStyle"] as Style;
-        var secondaryStyle = resources["SecondaryButtonStyle"] as Style;
-        var dangerStyle = resources["DangerButtonStyle"] as Style;
-        var iconStyle = resources["IconButtonStyle"] as Style;
+        var hasImage = !string.IsNullOrWhiteSpace(ImageSource);
+        var hasText = !string.IsNullOrWhiteSpace(Text);
 
-        var isSecondary = ReferenceEquals(ButtonStyle, secondaryStyle);
-        var isDanger = ReferenceEquals(ButtonStyle, dangerStyle);
-        var isIcon = ReferenceEquals(ButtonStyle, iconStyle);
+        ButtonIcon.IsVisible = hasImage;
+        ButtonIcon.Source = hasImage ? ImageSource : null;
 
-        var primaryColor = GetColor(resources, "PrimaryColor", Colors.Blue);
-        var onPrimaryColor = GetColor(resources, "OnPrimaryColor", Colors.White);
-        var surfaceMutedColor = GetColor(resources, "SurfaceMutedColor", Colors.LightGray);
-        var primaryTextColor = GetColor(resources, "PrimaryTextColor", Colors.Black);
-        var borderColor = GetColor(resources, "BorderColor", Colors.Gray);
-        var dangerColor = GetColor(resources, "DangerColor", Colors.Red);
-        var disabledBackgroundColor = GetColor(resources, "DisabledBackgroundColor", Colors.LightGray);
-        var disabledTextColor = GetColor(resources, "DisabledTextColor", Colors.DarkGray);
-
-        if (!IsEnabled)
+        if (hasImage && hasText)
         {
-            ButtonSurface.BackgroundColor = disabledBackgroundColor;
-            ButtonSurface.Stroke = borderColor;
-            ButtonLabel.TextColor = disabledTextColor;
-            ButtonSurface.Opacity = 0.85;
-            return;
+            ButtonContentGrid.ColumnDefinitions.Clear();
+            ButtonContentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            ButtonContentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+
+            Grid.SetColumn(ButtonIcon, 0);
+            Grid.SetColumn(ButtonLabel, 1);
+
+            ButtonContentGrid.ColumnSpacing = 8;
+            ButtonLabel.HorizontalOptions = LayoutOptions.Center;
+            ButtonLabel.HorizontalTextAlignment = TextAlignment.Center;
+        }
+        else if (hasImage)
+        {
+            ButtonContentGrid.ColumnDefinitions.Clear();
+            ButtonContentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+
+            Grid.SetColumn(ButtonIcon, 0);
+            Grid.SetColumn(ButtonLabel, 0);
+
+            ButtonContentGrid.ColumnSpacing = 0;
+            ButtonLabel.Text = string.Empty;
+        }
+        else
+        {
+            ButtonContentGrid.ColumnDefinitions.Clear();
+            ButtonContentGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+
+            Grid.SetColumn(ButtonLabel, 0);
+            Grid.SetColumn(ButtonIcon, 0);
+
+            ButtonContentGrid.ColumnSpacing = 0;
+            ButtonLabel.HorizontalOptions = LayoutOptions.Center;
+            ButtonLabel.HorizontalTextAlignment = TextAlignment.Center;
         }
 
-        ButtonSurface.Opacity = 1.0;
-
-        if (isDanger)
-        {
-            ButtonSurface.BackgroundColor = surfaceMutedColor;
-            ButtonSurface.Stroke = dangerColor;
-            ButtonLabel.TextColor = dangerColor;
-            ButtonSurface.Padding = new Thickness(12, 9);
-            ButtonSurface.MinimumHeightRequest = 40;
-            ButtonSurface.WidthRequest = -1;
-            ButtonSurface.HeightRequest = -1;
-            ButtonShape.CornerRadius = 14;
-            return;
-        }
-
-        if (isSecondary)
-        {
-            ButtonSurface.BackgroundColor = surfaceMutedColor;
-            ButtonSurface.Stroke = borderColor;
-            ButtonLabel.TextColor = primaryTextColor;
-            ButtonSurface.Padding = new Thickness(12, 9);
-            ButtonSurface.MinimumHeightRequest = 40;
-            ButtonSurface.WidthRequest = -1;
-            ButtonSurface.HeightRequest = -1;
-            ButtonShape.CornerRadius = 14;
-            return;
-        }
-
-        if (isIcon)
-        {
-            ButtonSurface.BackgroundColor = surfaceMutedColor;
-            ButtonSurface.Stroke = borderColor;
-            ButtonLabel.TextColor = primaryTextColor;
-            ButtonSurface.Padding = new Thickness(0);
-            ButtonSurface.MinimumHeightRequest = 42;
-            ButtonSurface.WidthRequest = 42;
-            ButtonSurface.HeightRequest = 42;
-            ButtonShape.CornerRadius = 14;
-            return;
-        }
-
-        ButtonSurface.BackgroundColor = primaryColor;
-        ButtonSurface.Stroke = primaryColor;
-        ButtonLabel.TextColor = onPrimaryColor;
-        ButtonSurface.Padding = new Thickness(14, 10);
-        ButtonSurface.MinimumHeightRequest = 42;
-        ButtonSurface.WidthRequest = -1;
-        ButtonSurface.HeightRequest = -1;
-        ButtonShape.CornerRadius = 14;
-    }
-
-    private static Color GetColor(ResourceDictionary resources, string key, Color fallback)
-    {
-        return resources.TryGetValue(key, out var value) && value is Color color
-            ? color
-            : fallback;
+        ButtonSurface.Opacity = IsEnabled ? 1.0 : 0.6;
+        ButtonShape.CornerRadius = CornerRadius;
     }
 }

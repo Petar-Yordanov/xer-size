@@ -107,8 +107,8 @@ public partial class WorkoutTabsBar : ContentView
 
         try
         {
-            await AddSurface.ScaleTo(0.985, 45);
-            await AddSurface.ScaleTo(1.0, 45);
+            await AddSurface.ScaleToAsync(0.985, 45);
+            await AddSurface.ScaleToAsync(1.0, 45);
         }
         catch
         {
@@ -179,8 +179,8 @@ public partial class WorkoutTabsBar : ContentView
         {
             try
             {
-                await border.ScaleTo(0.985, 45);
-                await border.ScaleTo(1.0, 45);
+                await border.ScaleToAsync(0.985, 45);
+                await border.ScaleToAsync(1.0, 45);
             }
             catch
             {

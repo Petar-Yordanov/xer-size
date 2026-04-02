@@ -19,30 +19,24 @@
                 <RoundRectangle CornerRadius="12" />
             </Border.StrokeShape>
 
-            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                 <Label
-                    Text="•"
-                    VerticalOptions="Center"
-                    TextColor="{DynamicResource SecondaryTextColor}"
-                    FontSize="12"
-                    InputTransparent="True" />
-
-                <Label
-                    Grid.Column="1"
+                    Grid.Column="0"
                     Text="{Binding Source={x:Reference This}, Path=Text}"
                     VerticalOptions="Center"
                     LineBreakMode="TailTruncation"
                     Style="{StaticResource BodyLabelStyle}"
                     InputTransparent="True" />
 
-                <Label
-                    Grid.Column="2"
-                    Text="✓"
+                <Image
+                    Grid.Column="1"
+                    Source="check.png"
                     IsVisible="{Binding Source={x:Reference This}, Path=IsSelected}"
+                    WidthRequest="16"
+                    HeightRequest="16"
+                    Aspect="AspectFit"
                     VerticalOptions="Center"
-                    TextColor="{DynamicResource PrimaryColor}"
-                    FontFamily="OpenSansSemibold"
-                    FontSize="13"
+                    HorizontalOptions="Center"
                     InputTransparent="True" />
             </Grid>
         </Border>

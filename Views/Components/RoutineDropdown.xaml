@@ -42,14 +42,14 @@
                         MaxLines="1"
                         Style="{StaticResource BodyLabelStyle}" />
 
-                    <Label
+                    <Image
                         Grid.Column="1"
-                        Text="{Binding Source={x:Reference This}, Path=TrailingIconText}"
+                        Source="expand_more.png"
+                        WidthRequest="16"
+                        HeightRequest="16"
+                        Aspect="AspectFit"
                         VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        TextColor="{DynamicResource SecondaryTextColor}"
-                        FontFamily="OpenSansSemibold"
-                        FontSize="13" />
+                        HorizontalOptions="Center" />
                 </Grid>
             </Border>
         </Grid>
@@ -60,13 +60,12 @@
             WidthRequest="46"
             HeightRequest="46"
             CornerRadius="14"
-            FontSize="18"
-            Text="{Binding Source={x:Reference This}, Path=AddButtonText}"
             BackgroundColor="{DynamicResource SurfaceMutedColor}"
-            TextColor="{DynamicResource PrimaryTextColor}"
             BorderColor="{DynamicResource BorderColor}"
             BorderWidth="1"
             Command="{Binding Source={x:Reference This}, Path=AddCommand}"
-            CommandParameter="{Binding Source={x:Reference This}, Path=AddCommandParameter}" />
+            CommandParameter="{Binding Source={x:Reference This}, Path=AddCommandParameter}"
+            ImageSource="add.png"
+            Padding="12" />
     </Grid>
 </ContentView>

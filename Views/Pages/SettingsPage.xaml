@@ -39,7 +39,8 @@
                                 <RoundRectangle CornerRadius="18" />
                             </Border.StrokeShape>
 
-                            <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                            <Grid ColumnDefinitions="*,*"
+                                  ColumnSpacing="6">
                                 <components:SelectionPill
                                     Grid.Column="0"
                                     Text="Light"

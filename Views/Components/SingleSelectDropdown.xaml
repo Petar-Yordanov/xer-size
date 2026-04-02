@@ -27,15 +27,15 @@
                     InputTransparent="True"
                     Style="{StaticResource BodyLabelStyle}" />
 
-                <Label
+                <Image
                     Grid.Column="1"
-                    Text="{Binding Source={x:Reference This}, Path=TrailingIconText}"
+                    Source="expand_more.png"
+                    WidthRequest="16"
+                    HeightRequest="16"
+                    Aspect="AspectFit"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
-                    InputTransparent="True"
-                    TextColor="{DynamicResource SecondaryTextColor}"
-                    FontFamily="OpenSansSemibold"
-                    FontSize="13" />
+                    InputTransparent="True" />
             </Grid>
         </Border>
 

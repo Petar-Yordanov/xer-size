@@ -38,28 +38,28 @@
                             <Grid ColumnDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="8">
                                 <components:Button
                                     Grid.Column="0"
-                                    Text="↑"
+                                    ImageSource="arrow_up.png"
                                     ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.MoveUpCommand}"
                                     CommandParameter="{Binding .}" />
 
                                 <components:Button
                                     Grid.Column="1"
-                                    Text="↓"
+                                    ImageSource="arrow_down.png"
                                     ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.MoveDownCommand}"
                                     CommandParameter="{Binding .}" />
 
                                 <components:Button
                                     Grid.Column="2"
-                                    Text="Rename"
+                                    ImageSource="edit.png"
                                     ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.RenameWorkoutCommand}"
                                     CommandParameter="{Binding .}" />
 
                                 <components:Button
                                     Grid.Column="3"
-                                    Text="Delete"
+                                    ImageSource="delete.png"
                                     ButtonStyle="{StaticResource SecondaryButtonStyle}"
                                     Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.DeleteWorkoutCommand}"
                                     CommandParameter="{Binding .}" />

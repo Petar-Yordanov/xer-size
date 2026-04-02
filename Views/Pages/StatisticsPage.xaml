@@ -32,8 +32,7 @@
                                 <components:SingleSelectDropdown
                                     Grid.Column="0"
                                     SelectedText="{Binding SelectedRoutineText}"
-                                    TapCommand="{Binding ToggleRoutineSheetCommand}"
-                                    TrailingIconText="v" />
+                                    TapCommand="{Binding ToggleRoutineSheetCommand}" />
 
                                 <components:Button
                                     Grid.Column="1"
@@ -47,8 +46,7 @@
                                 <components:SingleSelectDropdown
                                     Grid.Column="0"
                                     SelectedText="{Binding SelectedWorkoutText}"
-                                    TapCommand="{Binding ToggleWorkoutSheetCommand}"
-                                    TrailingIconText="v" />
+                                    TapCommand="{Binding ToggleWorkoutSheetCommand}" />
 
                                 <components:Button
                                     Grid.Column="1"
@@ -210,8 +208,7 @@
 
                                 <components:SingleSelectDropdown
                                     SelectedText="{Binding SelectedYearText}"
-                                    TapCommand="{Binding ToggleYearSheetCommand}"
-                                    TrailingIconText="v" />
+                                    TapCommand="{Binding ToggleYearSheetCommand}" />
 
                                 <Border Padding="4" BackgroundColor="{DynamicResource SurfaceMutedColor}" StrokeThickness="0">
                                     <Border.StrokeShape>
@@ -258,8 +255,6 @@
                             <VerticalStackLayout Spacing="10">
                                 <Label Text="Overall volume over time" Style="{StaticResource BodyLabelStyle}" />
                                 <Label Text="Total lifted load for each shown period. Volume = sum of weight × reps. Y axis shows kg." Style="{StaticResource MutedLabelStyle}" />
-
-                                 
                             </VerticalStackLayout>
                         </components:Card>
 
@@ -323,9 +318,9 @@
                                             <TapGestureRecognizer Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectRoutineCommand}" CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
-                                        <Grid ColumnDefinitions="*,Auto">
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                             <Label Text="{Binding Name}" VerticalOptions="Center" Style="{StaticResource BodyLabelStyle}" />
-                                            <Label Grid.Column="1" Text=">" VerticalOptions="Center" Style="{StaticResource MutedLabelStyle}" />
+                                            <Image Grid.Column="1" Source="right.png" WidthRequest="16" HeightRequest="16" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -363,9 +358,9 @@
                                             <TapGestureRecognizer Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectWorkoutCommand}" CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
-                                        <Grid ColumnDefinitions="*,Auto">
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                             <Label Text="{Binding Name}" VerticalOptions="Center" Style="{StaticResource BodyLabelStyle}" />
-                                            <Label Grid.Column="1" Text=">" VerticalOptions="Center" Style="{StaticResource MutedLabelStyle}" />
+                                            <Image Grid.Column="1" Source="right.png" WidthRequest="16" HeightRequest="16" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -403,9 +398,9 @@
                                             <TapGestureRecognizer Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectYearCommand}" CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
-                                        <Grid ColumnDefinitions="*,Auto">
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                                             <Label Text="{Binding .}" VerticalOptions="Center" Style="{StaticResource BodyLabelStyle}" />
-                                            <Label Grid.Column="1" Text=">" VerticalOptions="Center" Style="{StaticResource MutedLabelStyle}" />
+                                            <Image Grid.Column="1" Source="right.png" WidthRequest="16" HeightRequest="16" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

@@ -42,15 +42,13 @@
                 <TapGestureRecognizer Tapped="OnAddTapped" />
             </Border.GestureRecognizers>
 
-            <Label
-                Text="+"
+            <Image
+                Source="add.png"
+                WidthRequest="18"
+                HeightRequest="18"
+                Aspect="AspectFit"
                 HorizontalOptions="Center"
-                VerticalOptions="Center"
-                HorizontalTextAlignment="Center"
-                VerticalTextAlignment="Center"
-                FontFamily="OpenSansSemibold"
-                FontSize="18"
-                TextColor="{DynamicResource PrimaryTextColor}" />
+                VerticalOptions="Center" />
         </Border>
     </Grid>
 </ContentView>

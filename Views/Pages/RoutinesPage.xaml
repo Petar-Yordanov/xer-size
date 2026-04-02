@@ -113,14 +113,12 @@
                                                             Style="{StaticResource MutedLabelStyle}" />
                                                     </VerticalStackLayout>
 
-                                                    <Button
+                                                    <components:Button
                                                         Grid.Column="2"
                                                         Grid.Row="0"
-                                                        Text="Delete"
-                                                        Command="{Binding DeleteCommand}"
-                                                        Style="{StaticResource SecondaryButtonStyle}"
-                                                        MinimumHeightRequest="42"
-                                                        Padding="14,10" />
+                                                        ImageSource="delete.png"
+                                                        ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                                        Command="{Binding DeleteCommand}" />
                                                 </Grid>
 
                                                 <toolkit:Expander
@@ -135,10 +133,27 @@
                                                                 <RoundRectangle CornerRadius="14" />
                                                             </Border.StrokeShape>
 
-                                                            <Label
-                                                                Text="{Binding ExpandButtonText}"
-                                                                HorizontalOptions="Center"
-                                                                Style="{StaticResource BodyLabelStyle}" />
+                                                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                                                                <Label
+                                                                    Text="{Binding ExpandButtonText}"
+                                                                    VerticalOptions="Center"
+                                                                    Style="{StaticResource BodyLabelStyle}" />
+
+                                                                <Image
+                                                                    WidthRequest="16"
+                                                                    HeightRequest="16"
+                                                                    Aspect="AspectFit"
+                                                                    VerticalOptions="Center">
+                                                                    <Image.Triggers>
+                                                                        <DataTrigger TargetType="Image" Binding="{Binding IsExpanded}" Value="True">
+                                                                            <Setter Property="Source" Value="expand_less.png" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Image" Binding="{Binding IsExpanded}" Value="False">
+                                                                            <Setter Property="Source" Value="expand_more.png" />
+                                                                        </DataTrigger>
+                                                                    </Image.Triggers>
+                                                                </Image>
+                                                            </HorizontalStackLayout>
                                                         </Border>
                                                     </toolkit:Expander.Header>
 
@@ -251,12 +266,6 @@
                                                 Text="{Binding Name}"
                                                 VerticalOptions="Center"
                                                 Style="{StaticResource BodyLabelStyle}" />
-
-                                            <Label
-                                                Grid.Column="1"
-                                                Text=">"
-                                                VerticalOptions="Center"
-                                                Style="{StaticResource MutedLabelStyle}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

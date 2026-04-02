@@ -22,9 +22,23 @@
             <TapGestureRecognizer Tapped="OnTapped" />
         </Border.GestureRecognizers>
 
-        <Grid>
+        <Grid
+            x:Name="ButtonContentGrid"
+            ColumnDefinitions="Auto,*"
+            ColumnSpacing="8">
+            <Image
+                x:Name="ButtonIcon"
+                Grid.Column="0"
+                IsVisible="False"
+                WidthRequest="18"
+                HeightRequest="18"
+                Aspect="AspectFit"
+                VerticalOptions="Center"
+                HorizontalOptions="Center" />
+
             <Label
                 x:Name="ButtonLabel"
+                Grid.Column="1"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 HorizontalTextAlignment="Center"

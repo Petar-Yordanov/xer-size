@@ -26,20 +26,17 @@
                             <components:SingleSelectDropdown
                                 Grid.Column="0"
                                 SelectedText="{Binding SelectedForceSummary}"
-                                TapCommand="{Binding ToggleForceSheetCommand}"
-                                TrailingIconText="v" />
+                                TapCommand="{Binding ToggleForceSheetCommand}" />
 
                             <components:SingleSelectDropdown
                                 Grid.Column="1"
                                 SelectedText="{Binding SelectedEquipmentSummary}"
-                                TapCommand="{Binding ToggleEquipmentSheetCommand}"
-                                TrailingIconText="v" />
+                                TapCommand="{Binding ToggleEquipmentSheetCommand}" />
                         </Grid>
 
                         <components:SingleSelectDropdown
                             SelectedText="{Binding SelectedBodyCategorySummary}"
-                            TapCommand="{Binding ToggleBodyCategorySheetCommand}"
-                            TrailingIconText="v" />
+                            TapCommand="{Binding ToggleBodyCategorySheetCommand}" />
                     </VerticalStackLayout>
                 </components:Card>
 
@@ -78,7 +75,6 @@
                                                         LineBreakMode="TailTruncation"
                                                         MaxLines="1"
                                                         Style="{StaticResource MutedLabelStyle}" />
-
                                                 </VerticalStackLayout>
 
                                                 <Button
@@ -108,7 +104,7 @@
                                                     Margin="0,0,8,6"
                                                     Text="{Binding Force}" />
                                             </FlexLayout>
-                                            
+
                                             <Grid
                                                 ColumnDefinitions="Auto,*"
                                                 RowDefinitions="Auto,Auto"
@@ -166,10 +162,27 @@
                                                             <RoundRectangle CornerRadius="14" />
                                                         </Border.StrokeShape>
 
-                                                        <Label
-                                                            Text="{Binding ExpandButtonText}"
-                                                            HorizontalOptions="Center"
-                                                            Style="{StaticResource BodyLabelStyle}" />
+                                                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                                                            <Label
+                                                                Text="{Binding ExpandButtonText}"
+                                                                VerticalOptions="Center"
+                                                                Style="{StaticResource BodyLabelStyle}" />
+
+                                                            <Image
+                                                                WidthRequest="16"
+                                                                HeightRequest="16"
+                                                                Aspect="AspectFit"
+                                                                VerticalOptions="Center">
+                                                                <Image.Triggers>
+                                                                    <DataTrigger TargetType="Image" Binding="{Binding IsExpanded}" Value="True">
+                                                                        <Setter Property="Source" Value="expand_less.png" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger TargetType="Image" Binding="{Binding IsExpanded}" Value="False">
+                                                                        <Setter Property="Source" Value="expand_more.png" />
+                                                                    </DataTrigger>
+                                                                </Image.Triggers>
+                                                            </Image>
+                                                        </HorizontalStackLayout>
                                                     </Border>
                                                 </toolkit:Expander.Header>
 
