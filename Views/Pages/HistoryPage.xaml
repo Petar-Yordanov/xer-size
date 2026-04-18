@@ -192,7 +192,42 @@
                                                                 BindableLayout.ItemsSource="{Binding Sets}">
                                                                 <BindableLayout.ItemTemplate>
                                                                     <DataTemplate x:DataType="models:HistorySessionSetInfoRow">
-                                                                        <components:Badge Text="{Binding Text}" />
+                                                                        <FlexLayout
+                                                                            Wrap="Wrap"
+                                                                            Direction="Row"
+                                                                            JustifyContent="Center"
+                                                                            AlignItems="Center"
+                                                                            BindableLayout.ItemsSource="{Binding Parts}">
+                                                                            <BindableLayout.ItemTemplate>
+                                                                                <DataTemplate x:DataType="models:SetPartItem">
+                                                                                    <HorizontalStackLayout
+                                                                                        Margin="0,0,3,3"
+                                                                                        Spacing="3"
+                                                                                        VerticalOptions="Center">
+                                                                                        <Label
+                                                                                            Text="×"
+                                                                                            VerticalOptions="Center"
+                                                                                            IsVisible="{Binding ShowSeparator}"
+                                                                                            Style="{StaticResource MutedLabelStyle}" />
+                                                                                        <Border
+                                                                                            Padding="7,2"
+                                                                                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                                                                            Stroke="{DynamicResource BorderColor}"
+                                                                                            StrokeThickness="1"
+                                                                                            VerticalOptions="Center">
+                                                                                            <Border.StrokeShape>
+                                                                                                <RoundRectangle CornerRadius="10" />
+                                                                                            </Border.StrokeShape>
+                                                                                            <Label
+                                                                                                Text="{Binding Text}"
+                                                                                                LineBreakMode="TailTruncation"
+                                                                                                MaxLines="1"
+                                                                                                Style="{StaticResource MutedLabelStyle}" />
+                                                                                        </Border>
+                                                                                    </HorizontalStackLayout>
+                                                                                </DataTemplate>
+                                                                            </BindableLayout.ItemTemplate>
+                                                                        </FlexLayout>
                                                                     </DataTemplate>
                                                                 </BindableLayout.ItemTemplate>
                                                             </VerticalStackLayout>

@@ -91,4 +91,7 @@ public partial class HistorySessionSetInfoRow : ObservableObject
 {
     [ObservableProperty]
     public partial string Text { get; set; } = string.Empty;
+
+    [ObservableProperty]
+    public partial IReadOnlyList<SetPartItem> Parts { get; set; } = Array.Empty<SetPartItem>();
 }

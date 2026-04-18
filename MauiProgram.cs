@@ -9,6 +9,7 @@ using XerSize.ViewModels.History;
 using XerSize.ViewModels.Routines;
 using XerSize.ViewModels.Settings;
 using XerSize.ViewModels.Statistics;
+using XerSize.ViewModels.Workouts;
 using XerSize.Views.Pages;
 
 namespace XerSize;
@@ -38,6 +39,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IWorkoutHistoryService, InMemoryWorkoutHistoryService>();
         builder.Services.AddSingleton<IStatisticsService, InMemoryStatisticsService>();
         builder.Services.AddSingleton<IThemeService, ThemeService>();
+        builder.Services.AddSingleton<IActiveWorkoutService, InMemoryActiveWorkoutService>();
 
         builder.Services.AddTransient<RoutinesPageViewModel>();
         builder.Services.AddTransient<ExercisesPageViewModel>();
@@ -49,6 +51,7 @@ public static class MauiProgram
         builder.Services.AddTransient<RoutineEditorViewModel>();
         builder.Services.AddTransient<RoutineManagerPageViewModel>();
         builder.Services.AddTransient<WorkoutManagerPageViewModel>();
+        builder.Services.AddTransient<ActiveWorkoutPageViewModel>();
 
         builder.Services.AddTransient<RoutinesPage>();
         builder.Services.AddTransient<ExercisesPage>();
@@ -59,6 +62,7 @@ public static class MauiProgram
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<RoutineManagerPage>();
         builder.Services.AddTransient<WorkoutManagerPage>();
+        builder.Services.AddTransient<ActiveWorkoutPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

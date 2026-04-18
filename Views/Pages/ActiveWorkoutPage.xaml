@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XerSize.Views.Pages.ActiveWorkoutPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:XerSize.ViewModels.Workouts"
+    xmlns:components="clr-namespace:XerSize.Views.Components"
+    x:DataType="viewModels:ActiveWorkoutPageViewModel"
+    x:Name="PageRoot"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    Title="Active Workout">
+
+    <Grid BackgroundColor="{DynamicResource PageBackgroundColor}">
+        <Grid.GestureRecognizers>
+            <SwipeGestureRecognizer Direction="Left" Command="{Binding GoNextCommand}" />
+            <SwipeGestureRecognizer Direction="Right" Command="{Binding GoPreviousCommand}" />
+        </Grid.GestureRecognizers>
+
+        <ScrollView>
+            <Grid
+                Style="{StaticResource PageRootGridStyle}"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="12">
+
+                <components:Card Grid.Row="0">
+                    <VerticalStackLayout Spacing="10">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{Binding WorkoutName}" Style="{StaticResource PageTitleLabelStyle}" />
+                            <Label Text="{Binding RoutineName}" Style="{StaticResource MutedLabelStyle}" />
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <components:MetricTile
+                                Grid.Column="0"
+                                Title="Elapsed"
+                                Value="{Binding ElapsedText}"
+                                Subtitle="{Binding StartedAtText}" />
+
+                            <components:MetricTile
+                                Grid.Column="1"
+                                Title="Rest"
+                                Value="{Binding RestCountdownText}">
+                                <components:MetricTile.Triggers>
+                                    <DataTrigger
+                                        TargetType="components:MetricTile"
+                                        Binding="{Binding IsRestActive}"
+                                        Value="False">
+                                        <Setter Property="Value" Value="No rest active" />
+                                    </DataTrigger>
+                                </components:MetricTile.Triggers>
+                            </components:MetricTile>
+                        </Grid>
+
+                        <components:Button
+                            Text="Skip Rest"
+                            ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                            Command="{Binding SkipRestCommand}"
+                            IsEnabled="{Binding IsRestActive}" />
+                    </VerticalStackLayout>
+                </components:Card>
+
+                <components:Card Grid.Row="1">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Exercise flow" Style="{StaticResource BodyLabelStyle}" />
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                            <HorizontalStackLayout
+                                Spacing="8"
+                                BindableLayout.ItemsSource="{Binding Breadcrumbs}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="viewModels:ActiveWorkoutBreadcrumbRow">
+                                        <Border
+                                            Padding="12,10"
+                                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                            Stroke="{DynamicResource BorderColor}"
+                                            StrokeThickness="1">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="14" />
+                                            </Border.StrokeShape>
+
+                                            <Border.Triggers>
+                                                <DataTrigger TargetType="Border" Binding="{Binding IsCurrent}" Value="True">
+                                                    <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceColor}" />
+                                                    <Setter Property="Stroke" Value="{DynamicResource PrimaryColor}" />
+                                                </DataTrigger>
+
+                                                <DataTrigger TargetType="Border" Binding="{Binding IsCompleted}" Value="True">
+                                                    <Setter Property="Stroke" Value="{DynamicResource SuccessColor}" />
+                                                </DataTrigger>
+
+                                                <DataTrigger TargetType="Border" Binding="{Binding IsSkipped}" Value="True">
+                                                    <Setter Property="Stroke" Value="{DynamicResource DangerColor}" />
+                                                </DataTrigger>
+                                            </Border.Triggers>
+
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SelectExerciseCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+
+                                            <VerticalStackLayout Spacing="2" WidthRequest="120">
+                                                <Label
+                                                    Text="{Binding Name}"
+                                                    LineBreakMode="TailTruncation"
+                                                    MaxLines="1"
+                                                    Style="{StaticResource BodyLabelStyle}" />
+
+                                                <Label
+                                                    Text="{Binding ProgressText}"
+                                                    Style="{StaticResource MutedLabelStyle}" />
+                                            </VerticalStackLayout>
+                                        </Border>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </HorizontalStackLayout>
+                        </ScrollView>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <components:Button
+                                Grid.Column="0"
+                                Text="Previous"
+                                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding GoPreviousCommand}"
+                                IsEnabled="{Binding CanGoPrevious}" />
+
+                            <components:Button
+                                Grid.Column="1"
+                                Text="Next"
+                                ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                Command="{Binding GoNextCommand}"
+                                IsEnabled="{Binding CanGoNext}" />
+                        </Grid>
+
+                        <Label
+                            Text="Swipe left and right anywhere on the page to move between exercises."
+                            Style="{StaticResource MutedLabelStyle}" />
+                    </VerticalStackLayout>
+                </components:Card>
+
+                <components:Card Grid.Row="2">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="{Binding CurrentExerciseName}" Style="{StaticResource BodyLabelStyle}" />
+                        <Label Text="{Binding CurrentExerciseMeta}" Style="{StaticResource MutedLabelStyle}" />
+                        <Label Text="{Binding CurrentExerciseProgressText}" Style="{StaticResource MutedLabelStyle}" />
+
+                        <Border
+                            Padding="12"
+                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                            StrokeThickness="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                Text="{Binding CurrentExerciseNotes}"
+                                Style="{StaticResource MutedLabelStyle}" />
+                        </Border>
+                    </VerticalStackLayout>
+                </components:Card>
+
+                <components:Card Grid.Row="3">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Sets" Style="{StaticResource BodyLabelStyle}" />
+
+                        <CollectionView
+                            ItemsSource="{Binding Sets}"
+                            SelectionMode="None"
+                            ItemSizingStrategy="MeasureAllItems">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:ActiveWorkoutSetRow">
+                                    <Border
+                                        Margin="0,0,0,12"
+                                        Padding="12"
+                                        BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                        Stroke="{DynamicResource BorderColor}"
+                                        StrokeThickness="1">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="16" />
+                                        </Border.StrokeShape>
+
+                                        <Border.Triggers>
+                                            <DataTrigger TargetType="Border" Binding="{Binding IsCurrent}" Value="True">
+                                                <Setter Property="Stroke" Value="{DynamicResource PrimaryColor}" />
+                                            </DataTrigger>
+
+                                            <DataTrigger TargetType="Border" Binding="{Binding IsCompleted}" Value="True">
+                                                <Setter Property="Stroke" Value="{DynamicResource SuccessColor}" />
+                                            </DataTrigger>
+
+                                            <DataTrigger TargetType="Border" Binding="{Binding IsSkipped}" Value="True">
+                                                <Setter Property="Stroke" Value="{DynamicResource DangerColor}" />
+                                            </DataTrigger>
+                                        </Border.Triggers>
+
+                                        <VerticalStackLayout Spacing="10">
+                                            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                                <Label
+                                                    Grid.Column="0"
+                                                    Text="{Binding SetLabel}"
+                                                    Style="{StaticResource BodyLabelStyle}" />
+
+                                                <components:Badge
+                                                    Grid.Column="1"
+                                                    Text="{Binding PlannedRestSecondsText, StringFormat='Rest {0}s'}" />
+
+                                                <components:Badge
+                                                    Grid.Column="2"
+                                                    Text="{Binding ActionText}" />
+                                            </Grid>
+
+                                            <Grid
+                                                ColumnDefinitions="*,*"
+                                                ColumnSpacing="10"
+                                                RowDefinitions="Auto,Auto"
+                                                RowSpacing="10">
+
+                                                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="4">
+                                                    <Label Text="Planned reps" Style="{StaticResource MutedLabelStyle}" />
+                                                    <Entry
+                                                        Text="{Binding PlannedRepsText}"
+                                                        IsReadOnly="True"
+                                                        BackgroundColor="Transparent" />
+                                                </VerticalStackLayout>
+
+                                                <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="4">
+                                                    <Label Text="Planned kg" Style="{StaticResource MutedLabelStyle}" />
+                                                    <Entry
+                                                        Text="{Binding PlannedWeightKgText}"
+                                                        IsReadOnly="True"
+                                                        BackgroundColor="Transparent" />
+                                                </VerticalStackLayout>
+
+                                                <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="4">
+                                                    <Label Text="Actual reps" Style="{StaticResource MutedLabelStyle}" />
+                                                    <Entry
+                                                        Text="{Binding ActualRepsText}"
+                                                        Keyboard="Numeric"
+                                                        Placeholder="reps" />
+                                                </VerticalStackLayout>
+
+                                                <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="4">
+                                                    <Label Text="Actual kg" Style="{StaticResource MutedLabelStyle}" />
+                                                    <Entry
+                                                        Text="{Binding ActualWeightKgText}"
+                                                        Keyboard="Numeric"
+                                                        Placeholder="kg" />
+                                                </VerticalStackLayout>
+                                            </Grid>
+
+                                            <VerticalStackLayout
+                                                Spacing="4"
+                                                IsVisible="{Binding IsDurationSet}">
+                                                <Label Text="Actual duration seconds" Style="{StaticResource MutedLabelStyle}" />
+                                                <Entry
+                                                    Text="{Binding ActualDurationSecondsText}"
+                                                    Keyboard="Numeric"
+                                                    Placeholder="seconds" />
+                                            </VerticalStackLayout>
+
+                                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                                                <components:Button
+                                                    Grid.Column="0"
+                                                    Text="{Binding ActionText}"
+                                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.ToggleSetStateCommand}"
+                                                    CommandParameter="{Binding .}" />
+
+                                                <components:Button
+                                                    Grid.Column="1"
+                                                    Text="Skip this set"
+                                                    ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                                                    Command="{Binding Source={x:Reference PageRoot}, Path=BindingContext.SkipSetCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Grid>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </components:Card>
+
+                <Grid Grid.Row="4" ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <components:Button
+                        Grid.Column="0"
+                        Text="Cancel Workout"
+                        ButtonStyle="{StaticResource SecondaryButtonStyle}"
+                        Command="{Binding CancelWorkoutCommand}" />
+
+                    <components:Button
+                        Grid.Column="1"
+                        Text="Finish Workout"
+                        Command="{Binding FinishWorkoutCommand}" />
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

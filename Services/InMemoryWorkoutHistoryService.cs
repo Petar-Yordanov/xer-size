@@ -16,6 +16,13 @@ public sealed class InMemoryWorkoutHistoryService : IWorkoutHistoryService
     public Task<IReadOnlyList<LoggedWorkoutSession>> GetAllAsync()
         => Task.FromResult((IReadOnlyList<LoggedWorkoutSession>)_sessions);
 
+    public Task AddSessionAsync(LoggedWorkoutSession session)
+    {
+        _sessions.Add(session);
+        _sessions.Sort((a, b) => a.PerformedAt.CompareTo(b.PerformedAt));
+        return Task.CompletedTask;
+    }
+
     private static List<LoggedWorkoutSession> GenerateSessions(IReadOnlyList<Routine> routines)
     {
         var sessions = new List<LoggedWorkoutSession>();

@@ -9,6 +9,7 @@ namespace XerSize.ViewModels.Routines;
 public partial class RoutinesPageViewModel : ObservableObject
 {
     private readonly IRoutineService _routineService;
+    private readonly IActiveWorkoutService _activeWorkoutService;
 
     public ObservableCollection<Routine> Routines { get; } = new();
     public ObservableCollection<Workout> VisibleWorkouts { get; } = new();
@@ -32,9 +33,12 @@ public partial class RoutinesPageViewModel : ObservableObject
     public string SelectedRoutineName => SelectedRoutine?.Name ?? "Select routine";
     public string SelectedWorkoutName => SelectedWorkout?.Name ?? "None";
 
-    public RoutinesPageViewModel(IRoutineService routineService)
+    public RoutinesPageViewModel(
+        IRoutineService routineService,
+        IActiveWorkoutService activeWorkoutService)
     {
         _routineService = routineService;
+        _activeWorkoutService = activeWorkoutService;
     }
 
     [RelayCommand]
@@ -133,11 +137,11 @@ public partial class RoutinesPageViewModel : ObservableObject
     {
         IsQuickActionsOpen = false;
 
-        var page = Shell.Current?.CurrentPage ?? Application.Current?.Windows.FirstOrDefault()?.Page;
-        if (page is null || SelectedWorkout is null)
+        if (SelectedRoutine is null || SelectedWorkout is null)
             return;
 
-        await page.DisplayAlertAsync("Start Workout", $"Starting '{SelectedWorkout.Name}' is not implemented yet.", "OK");
+        await _activeWorkoutService.StartAsync(SelectedRoutine.Id, SelectedWorkout.Id);
+        await Shell.Current.GoToAsync(nameof(ActiveWorkoutPage));
     }
 
     [RelayCommand]
@@ -372,14 +376,16 @@ public partial class WorkoutExerciseCardRow : ObservableObject
             {
                 Reps = x.Reps,
                 WeightKg = x.WeightKg,
-                DurationSeconds = x.DurationSeconds
+                DurationSeconds = x.DurationSeconds,
+                RestSeconds = x.RestSeconds
             })
             .Select(group => new WorkoutExerciseGroupedSetRow
             {
                 Count = group.Count(),
                 Reps = group.Key.Reps,
                 WeightKg = group.Key.WeightKg,
-                DurationSeconds = group.Key.DurationSeconds
+                DurationSeconds = group.Key.DurationSeconds,
+                RestSeconds = group.Key.RestSeconds
             })
             .ToList();
     }
@@ -391,31 +397,36 @@ public sealed class WorkoutExerciseGroupedSetRow
     public int? Reps { get; set; }
     public double? WeightKg { get; set; }
     public int? DurationSeconds { get; set; }
+    public int? RestSeconds { get; set; }
 
-    public string SummaryText
+    public IReadOnlyList<SetPartItem> Parts
     {
         get
         {
             var setWord = Count == 1 ? "set" : "sets";
+            var texts = new List<string> { $"{Count} {setWord}" };
+
+            if (Reps.HasValue && Reps.Value > 0)
+                texts.Add($"{Reps.Value} reps");
+
+            if (WeightKg.HasValue && WeightKg.Value > 0)
+                texts.Add($"{WeightKg.Value:F1} kg");
 
             if (DurationSeconds.HasValue && DurationSeconds.Value > 0)
-            {
-                if (Reps.HasValue && Reps.Value > 0)
-                    return $"{Count} {setWord} × {Reps.Value} reps × {DurationSeconds.Value}s";
+                texts.Add($"{DurationSeconds.Value}s");
 
-                return $"{Count} {setWord} × {DurationSeconds.Value}s";
-            }
+            if (RestSeconds.HasValue && RestSeconds.Value > 0)
+                texts.Add($"Rest {RestSeconds.Value}s");
 
-            if (Reps.HasValue && WeightKg.HasValue)
-                return $"{Count} {setWord} × {Reps.Value} reps × {WeightKg.Value:F1} kg";
-
-            if (Reps.HasValue)
-                return $"{Count} {setWord} × {Reps.Value} reps";
-
-            if (WeightKg.HasValue)
-                return $"{Count} {setWord} × {WeightKg.Value:F1} kg";
-
-            return $"{Count} {setWord}";
+            return texts
+                .Select((text, index) => new SetPartItem
+                {
+                    Text = text,
+                    ShowSeparator = index > 0
+                })
+                .ToList();
         }
     }
+
+    public string SummaryText => string.Join(" × ", Parts.Select(p => p.Text));
 }

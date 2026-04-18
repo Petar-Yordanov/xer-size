@@ -219,7 +219,8 @@ public partial class HistoryPageViewModel : ObservableObject
                                     .OrderBy(s => s.Order)
                                     .Select(s => new HistorySessionSetInfoRow
                                     {
-                                        Text = BuildSetText(s)
+                                        Text = BuildSetText(s),
+                                        Parts = BuildSetParts(s)
                                     })
                                     .ToList()
                             })
@@ -305,6 +306,22 @@ public partial class HistoryPageViewModel : ObservableObject
 
     private static string BuildSetText(LoggedSet set)
     {
+        return string.Join(" × ", BuildSetPartTexts(set));
+    }
+
+    private static IReadOnlyList<SetPartItem> BuildSetParts(LoggedSet set)
+    {
+        return BuildSetPartTexts(set)
+            .Select((text, index) => new SetPartItem
+            {
+                Text = text,
+                ShowSeparator = index > 0
+            })
+            .ToList();
+    }
+
+    private static IReadOnlyList<string> BuildSetPartTexts(LoggedSet set)
+    {
         var parts = new List<string> { $"Set {set.Order}" };
 
         if (set.Reps.HasValue && set.Reps.Value > 0)
@@ -319,6 +336,6 @@ public partial class HistoryPageViewModel : ObservableObject
         if (set.RestSeconds.HasValue && set.RestSeconds.Value > 0)
             parts.Add($"Rest {set.RestSeconds.Value}s");
 
-        return string.Join(" • ", parts);
+        return parts;
     }
 }

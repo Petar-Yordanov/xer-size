@@ -78,7 +78,7 @@
 
                                                         <components:ImageTile
                                                             ImageSource="{Binding PreviewImageSource}"
-                                                            PlaceholderTitle="{Binding PlaceholderText}"
+                                                            PlaceholderTitle=""
                                                             PlaceholderSubtitle=""
                                                             ActionText=""
                                                             TileHeight="64"
@@ -102,12 +102,6 @@
 
                                                         <Label
                                                             Text="{Binding PrimaryMusclesText}"
-                                                            LineBreakMode="TailTruncation"
-                                                            MaxLines="1"
-                                                            Style="{StaticResource MutedLabelStyle}" />
-
-                                                        <Label
-                                                            Text="{Binding RestText}"
                                                             LineBreakMode="TailTruncation"
                                                             MaxLines="1"
                                                             Style="{StaticResource MutedLabelStyle}" />
@@ -171,17 +165,50 @@
                                                                 Text="Sets"
                                                                 Style="{StaticResource BodyLabelStyle}" />
 
-                                                            <CollectionView
-                                                                ItemsSource="{Binding GroupedSets}"
-                                                                SelectionMode="None"
-                                                                ItemSizingStrategy="MeasureFirstItem">
-                                                                <CollectionView.ItemTemplate>
+                                                            <VerticalStackLayout
+                                                                Spacing="6"
+                                                                BindableLayout.ItemsSource="{Binding GroupedSets}">
+                                                                <BindableLayout.ItemTemplate>
                                                                     <DataTemplate x:DataType="viewModels:WorkoutExerciseGroupedSetRow">
-                                                                        <components:Badge
-                                                                            Text="{Binding SummaryText}" />
+                                                                        <FlexLayout
+                                                                            Wrap="Wrap"
+                                                                            Direction="Row"
+                                                                            JustifyContent="Center"
+                                                                            AlignItems="Center"
+                                                                            BindableLayout.ItemsSource="{Binding Parts}">
+                                                                            <BindableLayout.ItemTemplate>
+                                                                                <DataTemplate x:DataType="models:SetPartItem">
+                                                                                    <HorizontalStackLayout
+                                                                                        Margin="0,0,3,3"
+                                                                                        Spacing="3"
+                                                                                        VerticalOptions="Center">
+                                                                                        <Label
+                                                                                            Text="×"
+                                                                                            VerticalOptions="Center"
+                                                                                            IsVisible="{Binding ShowSeparator}"
+                                                                                            Style="{StaticResource MutedLabelStyle}" />
+                                                                                        <Border
+                                                                                            Padding="7,2"
+                                                                                            BackgroundColor="{DynamicResource SurfaceMutedColor}"
+                                                                                            Stroke="{DynamicResource BorderColor}"
+                                                                                            StrokeThickness="1"
+                                                                                            VerticalOptions="Center">
+                                                                                            <Border.StrokeShape>
+                                                                                                <RoundRectangle CornerRadius="10" />
+                                                                                            </Border.StrokeShape>
+                                                                                            <Label
+                                                                                                Text="{Binding Text}"
+                                                                                                LineBreakMode="TailTruncation"
+                                                                                                MaxLines="1"
+                                                                                                Style="{StaticResource MutedLabelStyle}" />
+                                                                                        </Border>
+                                                                                    </HorizontalStackLayout>
+                                                                                </DataTemplate>
+                                                                            </BindableLayout.ItemTemplate>
+                                                                        </FlexLayout>
                                                                     </DataTemplate>
-                                                                </CollectionView.ItemTemplate>
-                                                            </CollectionView>
+                                                                </BindableLayout.ItemTemplate>
+                                                            </VerticalStackLayout>
                                                         </VerticalStackLayout>
                                                     </Border>
                                                 </toolkit:Expander>

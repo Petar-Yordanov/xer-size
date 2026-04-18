@@ -5,7 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:XerSize.Views.Components"
     x:Name="This"
-    x:DataType="local:Badge">
+    x:DataType="local:Badge"
+    HorizontalOptions="Start"
+    VerticalOptions="Start">
 
     <Border
         Padding="10,6"

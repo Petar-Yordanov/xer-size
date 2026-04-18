@@ -46,11 +46,23 @@
                     <Label
                         Text="{Binding Source={x:Reference This}, Path=PlaceholderTitle}"
                         HorizontalTextAlignment="Center"
-                        Style="{StaticResource BodyLabelStyle}" />
+                        Style="{StaticResource BodyLabelStyle}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference This}, Path=PlaceholderTitle}" Value="">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                     <Label
                         Text="{Binding Source={x:Reference This}, Path=PlaceholderSubtitle}"
                         HorizontalTextAlignment="Center"
-                        Style="{StaticResource MutedLabelStyle}" />
+                        Style="{StaticResource MutedLabelStyle}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference This}, Path=PlaceholderSubtitle}" Value="">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                 </VerticalStackLayout>
             </Grid>
 
