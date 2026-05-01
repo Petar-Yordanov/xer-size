@@ -20,9 +20,14 @@ public sealed class DashboardStatisticsService
 
     public DashboardMetrics GetDashboardMetrics(DateTime from, DateTime to, string rangeId)
     {
-        var history = workoutHistoryService.GetHistory(from, to);
-        var completedWorkoutCount = history.Count;
-        var estimatedCaloriesByWorkout = CalculateEstimatedCaloriesByWorkout(history);
+        var rawHistory = workoutHistoryService.GetHistory(from, to);
+
+        var metricHistory = rawHistory
+            .Where(workout => !workout.ExcludeMetadataFromMetrics)
+            .ToList();
+
+        var completedWorkoutCount = metricHistory.Count;
+        var estimatedCaloriesByWorkout = CalculateEstimatedCaloriesByWorkout(metricHistory);
         var totalEstimatedCalories = estimatedCaloriesByWorkout.Sum();
 
         if (completedWorkoutCount == 0)
@@ -41,8 +46,7 @@ public sealed class DashboardStatisticsService
             };
         }
 
-        var historyExercises = history
-            .Where(workout => !workout.ExcludeMetadataFromMetrics)
+        var historyExercises = metricHistory
             .SelectMany(workout => workoutHistoryService.GetExercises(workout.Id))
             .ToList();
 
@@ -50,7 +54,7 @@ public sealed class DashboardStatisticsService
             ? 0
             : estimatedCaloriesByWorkout.Average();
 
-        var averageWorkoutMinutes = history.Average(workout => Math.Max(0, workout.DurationMinutes));
+        var averageWorkoutMinutes = metricHistory.Average(workout => Math.Max(0, workout.DurationMinutes));
         var averageSessionsPerWeek = CalculateSessionsPerWeek(completedWorkoutCount, from, to);
 
         return new DashboardMetrics
@@ -60,7 +64,7 @@ public sealed class DashboardStatisticsService
             AverageWorkoutMinutes = averageWorkoutMinutes,
             AverageSessionsPerWeek = averageSessionsPerWeek,
             TargetProgress = BuildTargetProgress(rangeId, completedWorkoutCount, totalEstimatedCalories),
-            ActivityTimeline = BuildActivityTimeline(history, from, to),
+            ActivityTimeline = BuildActivityTimeline(metricHistory, from, to),
             PreferredMuscleGroups = BuildPreferredMuscleGroups(historyExercises),
             PreferredEquipment = BuildPreferredEquipment(historyExercises),
             PreferredMechanics = BuildPreferredMechanics(historyExercises)
@@ -81,6 +85,7 @@ public sealed class DashboardStatisticsService
         var bmr = CalculateBmrMifflin(weightKg, heightCm, age, sex);
 
         return history
+            .Where(workout => !workout.ExcludeMetadataFromMetrics)
             .Where(workout => !workout.ExcludeCaloriesFromMetrics)
             .Select(workout => CalculateEstimatedWorkoutCalories(workout, bmr))
             .Where(calories => calories > 0)

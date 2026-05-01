@@ -224,6 +224,9 @@ public partial class ManageWorkoutsPageViewModel : ObservableObject
     [RelayCommand]
     private void ToggleSettingsExcludeVolume()
     {
+        if (isLoadingWorkoutSettings || settingsWorkout is null)
+            return;
+
         SettingsExcludeVolumeFromMetrics = !SettingsExcludeVolumeFromMetrics;
 
         SaveWorkoutSettingsImmediately();
@@ -232,6 +235,9 @@ public partial class ManageWorkoutsPageViewModel : ObservableObject
     [RelayCommand]
     private void ToggleSettingsExcludeCalories()
     {
+        if (isLoadingWorkoutSettings || settingsWorkout is null)
+            return;
+
         SettingsExcludeCaloriesFromMetrics = !SettingsExcludeCaloriesFromMetrics;
 
         SaveWorkoutSettingsImmediately();
@@ -240,6 +246,9 @@ public partial class ManageWorkoutsPageViewModel : ObservableObject
     [RelayCommand]
     private void ToggleSettingsExcludeMetadata()
     {
+        if (isLoadingWorkoutSettings || settingsWorkout is null)
+            return;
+
         SettingsExcludeMetadataFromMetrics = !SettingsExcludeMetadataFromMetrics;
 
         SaveWorkoutSettingsImmediately();
@@ -251,15 +260,6 @@ public partial class ManageWorkoutsPageViewModel : ObservableObject
         IsWorkoutSettingsDialogVisible = false;
         IsSettingsTrainingTypeDropdownExpanded = false;
         settingsWorkout = null;
-
-        isLoadingWorkoutSettings = true;
-
-        SettingsTrainingType = ExercisePresentationOptions.ToDisplayName(TrainingType.Strength);
-        SettingsExcludeVolumeFromMetrics = false;
-        SettingsExcludeCaloriesFromMetrics = false;
-        SettingsExcludeMetadataFromMetrics = false;
-
-        isLoadingWorkoutSettings = false;
 
         OnPropertyChanged(nameof(WorkoutSettingsDialogMessage));
     }
@@ -385,15 +385,6 @@ public partial class ManageWorkoutsPageViewModel : ObservableObject
 
         NewWorkoutName = string.Empty;
         EditWorkoutName = string.Empty;
-
-        isLoadingWorkoutSettings = true;
-
-        SettingsTrainingType = ExercisePresentationOptions.ToDisplayName(TrainingType.Strength);
-        SettingsExcludeVolumeFromMetrics = false;
-        SettingsExcludeCaloriesFromMetrics = false;
-        SettingsExcludeMetadataFromMetrics = false;
-
-        isLoadingWorkoutSettings = false;
 
         OnPropertyChanged(nameof(DeleteDialogMessage));
         OnPropertyChanged(nameof(WorkoutSettingsDialogMessage));
