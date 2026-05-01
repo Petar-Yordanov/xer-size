@@ -1,0 +1,22 @@
+{
+  "id": "Figure_Four_Stretch",
+  "name": "Figure Four Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Piriformis"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

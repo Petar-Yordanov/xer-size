@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.QuickActionChip"
+    x:DataType="components:QuickActionChip">
+
+    <Border
+        WidthRequest="{Binding Source={x:Reference This}, Path=Size}"
+        HeightRequest="{Binding Source={x:Reference This}, Path=Size}"
+        Style="{StaticResource ChipBorderStyle}"
+        Padding="0"
+        BackgroundColor="{Binding Source={x:Reference This}, Path=ChipBackgroundColor}">
+        <Border.Behaviors>
+            <toolkit:TouchBehavior PressedScale="0.92" PressedOpacity="0.90" />
+        </Border.Behaviors>
+
+        <Image
+            Source="{Binding Source={x:Reference This}, Path=IconSource}"
+            WidthRequest="{Binding Source={x:Reference This}, Path=IconSize}"
+            HeightRequest="{Binding Source={x:Reference This}, Path=IconSize}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding Source={x:Reference This}, Path=Command}"
+                CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+        </Border.GestureRecognizers>
+    </Border>
+</ContentView>

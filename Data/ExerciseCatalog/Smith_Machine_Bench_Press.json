@@ -1,0 +1,24 @@
+{
+  "id": "Smith_Machine_Bench_Press",
+  "name": "Smith Machine Bench Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Sternal Pectoralis Major"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Triceps Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

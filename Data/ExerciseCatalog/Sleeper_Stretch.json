@@ -1,0 +1,24 @@
+{
+  "id": "Sleeper_Stretch",
+  "name": "Sleeper Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Posterior Deltoid",
+    "Infraspinatus"
+  ],
+  "secondaryMuscles": [
+    "Teres Minor"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Rotator Cuff"
+  ],
+  "secondaryMuscleCategories": [
+    "Rotator Cuff"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

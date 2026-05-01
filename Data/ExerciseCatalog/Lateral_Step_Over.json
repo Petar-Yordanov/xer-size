@@ -1,0 +1,26 @@
+{
+  "id": "Lateral_Step_Over",
+  "name": "Lateral Step Over",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Gluteus Medius",
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Adductors",
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Calves"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

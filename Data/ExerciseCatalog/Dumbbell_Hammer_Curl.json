@@ -1,0 +1,23 @@
+{
+  "id": "Dumbbell_Hammer_Curl",
+  "name": "Dumbbell Hammer Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Brachialis",
+    "Brachioradialis"
+  ],
+  "secondaryMuscles": [
+    "Biceps Long Head"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Biceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

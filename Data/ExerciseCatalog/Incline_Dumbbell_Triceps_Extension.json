@@ -1,0 +1,26 @@
+{
+  "id": "Incline_Dumbbell_Triceps_Extension",
+  "name": "Incline Dumbbell Triceps Extension",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Triceps Long Head"
+  ],
+  "secondaryMuscles": [
+    "Triceps Medial Head",
+    "Anconeus"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Incline Dumbbell Skull Crusher"
+  ],
+  "movementPattern": "Isolation"
+}

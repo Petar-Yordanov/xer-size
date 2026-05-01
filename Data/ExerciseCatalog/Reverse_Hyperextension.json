@@ -1,0 +1,25 @@
+{
+  "id": "Reverse_Hyperextension",
+  "name": "Reverse Hyperextension",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Biceps Femoris"
+  ],
+  "secondaryMuscles": [
+    "Semitendinosus",
+    "Erector Spinae"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

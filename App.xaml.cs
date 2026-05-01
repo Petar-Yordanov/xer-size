@@ -1,25 +1,15 @@
-﻿using XerSize.Services.Interfaces;
-
-namespace XerSize;
-
-public partial class App : Application
+﻿namespace XerSize
 {
-    public App(IThemeService themeService)
+    public partial class App : Application
     {
-        InitializeComponent();
-
-        try
+        public App()
         {
-            themeService.Initialize();
+            InitializeComponent();
         }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine(ex);
-        }
-    }
 
-    protected override Window CreateWindow(IActivationState? activationState)
-    {
-        return new Window(new AppShell());
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            return new Window(new AppShell());
+        }
     }
 }

@@ -1,0 +1,26 @@
+{
+  "id": "Single_Leg_Back_Extension",
+  "name": "Single Leg Back Extension",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Erector Spinae"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Lower Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Hinge"
+}

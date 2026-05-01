@@ -1,0 +1,23 @@
+{
+  "id": "Standing_Machine_Calf_Raise",
+  "name": "Standing Machine Calf Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "secondaryMuscles": [
+    "Soleus",
+    "Plantaris"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

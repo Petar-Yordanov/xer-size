@@ -1,0 +1,24 @@
+{
+  "id": "Face_Pull",
+  "name": "Face Pull",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Middle Trapezius",
+    "Rhomboids"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Rotator Cuff"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

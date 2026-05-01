@@ -1,0 +1,22 @@
+{
+  "id": "Wrist_Extensor_Stretch",
+  "name": "Wrist Extensor Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Wrist Extensors"
+  ],
+  "secondaryMuscles": [
+    "Brachioradialis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

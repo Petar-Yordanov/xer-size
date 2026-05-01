@@ -1,0 +1,26 @@
+{
+  "id": "Lever_Preacher_Curl",
+  "name": "Lever Preacher Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Biceps Short Head"
+  ],
+  "secondaryMuscles": [
+    "Brachialis",
+    "Brachioradialis"
+  ],
+  "primaryMuscleCategories": [
+    "Biceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Preacher Curl"
+  ],
+  "movementPattern": "Isolation"
+}

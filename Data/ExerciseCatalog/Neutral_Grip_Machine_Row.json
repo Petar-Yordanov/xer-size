@@ -1,0 +1,25 @@
+{
+  "id": "Neutral_Grip_Machine_Row",
+  "name": "Neutral Grip Machine Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Rhomboids",
+    "Middle Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Latissimus Dorsi",
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Lats",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

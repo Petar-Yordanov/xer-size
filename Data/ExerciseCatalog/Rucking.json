@@ -1,0 +1,26 @@
+{
+  "id": "Rucking",
+  "name": "Rucking",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Erector Spinae",
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Lower Back",
+    "Calves"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Carry"
+}

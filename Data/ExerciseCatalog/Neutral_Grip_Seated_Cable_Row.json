@@ -1,0 +1,25 @@
+{
+  "id": "Neutral_Grip_Seated_Cable_Row",
+  "name": "Neutral Grip Seated Cable Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Rhomboids",
+    "Middle Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Latissimus Dorsi",
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Lats",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

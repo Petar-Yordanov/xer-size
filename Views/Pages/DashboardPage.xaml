@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    xmlns:vm="clr-namespace:XerSize.ViewModels"
+    xmlns:behaviors="clr-namespace:XerSize.Behaviors"
+    x:Class="XerSize.Views.Pages.DashboardPage"
+    x:DataType="vm:DashboardPageViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20,18,20,150" Spacing="18">
+                <VerticalStackLayout.Behaviors>
+                    <behaviors:AppearAnimationBehavior TranslationY="14" Duration="240" />
+                </VerticalStackLayout.Behaviors>
+
+                <VerticalStackLayout Spacing="4">
+                    <Label
+                        Text="Let’s start&#10;strong!"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="30"
+                        TextColor="{StaticResource TextPrimary}" />
+
+                    <Label
+                        Text="Your training dashboard"
+                        Style="{StaticResource SectionSubtitleStyle}" />
+                </VerticalStackLayout>
+
+                <CollectionView
+                    ItemsSource="{Binding RangeTabs}"
+                    ItemsLayout="HorizontalList"
+                    SelectionMode="None">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:DashboardRangeTabPresentationModel">
+                            <components:TabPill
+                                Margin="0,0,10,0"
+                                Text="{Binding Name}"
+                                IsSelected="{Binding IsSelected}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectRangeTabCommand}"
+                                CommandParameter="{Binding .}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <components:HeroCard
+                    Title="{Binding AdviceTitle}"
+                    Subtitle="{Binding AdviceSubtitle}"
+                    CardBackgroundColor="{StaticResource Accent}"
+                    TitleColor="{StaticResource White}"
+                    SubtitleColor="#FFF3EE"
+                    TopIconSource="settings.png"
+                    TopIconBackgroundColor="#22FFFFFF">
+
+                    <components:HeroCard.SecondaryActionContent>
+                        <components:AppActionButton
+                            Text="Settings"
+                            ButtonBackgroundColor="{StaticResource SurfaceSoft}"
+                            ButtonStrokeColor="{StaticResource StrokeSoft}"
+                            ButtonStrokeThickness="1"
+                            TextColor="{StaticResource TextPrimary}"
+                            ShadowOpacity="0"
+                            Command="{Binding GoToSettingsCommand}" />
+                    </components:HeroCard.SecondaryActionContent>
+
+                    <components:HeroCard.PrimaryActionContent>
+                        <components:AppActionButton
+                            Text="Set Routine"
+                            ButtonBackgroundColor="{StaticResource Surface}"
+                            ButtonStrokeColor="Transparent"
+                            ButtonStrokeThickness="0"
+                            TextColor="{StaticResource Accent}"
+                            ShadowOpacity="0.10"
+                            PressedScale="0.96"
+                            Command="{Binding GoToWorkoutsCommand}" />
+                    </components:HeroCard.PrimaryActionContent>
+                </components:HeroCard>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                    <components:MetricTile
+                        Grid.Column="0"
+                        Title="Average Estimated Calories"
+                        Value="{Binding AverageEstimatedCaloriesBurned}"
+                        Subtitle="Per workout"
+                        TileBackgroundColor="{StaticResource AccentSurface}"
+                        ValueColor="{StaticResource AccentText}" />
+
+                    <components:MetricTile
+                        Grid.Column="1"
+                        Title="Average Workout Time"
+                        Value="{Binding AverageWorkoutTime}"
+                        Subtitle="Per session"
+                        TileBackgroundColor="{StaticResource WarningSurface}"
+                        ValueColor="{StaticResource TextPrimary}" />
+
+                    <components:MetricTile
+                        Grid.Column="2"
+                        Title="Average Sessions a Week"
+                        Value="{Binding AverageSessionsPerWeek}"
+                        Subtitle="Rolling average"
+                        TileBackgroundColor="{StaticResource SuccessSurface}"
+                        ValueColor="{StaticResource TextPrimary}" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                    <components:TargetProgressCard
+                        Grid.Column="0"
+                        Title="Session Target"
+                        Value="{Binding SessionTargetValue}"
+                        Subtitle="{Binding SessionTargetSubtitle}"
+                        Progress="{Binding SessionTargetProgress}"
+                        ProgressText="{Binding SessionTargetProgressText}"
+                        CardBackgroundColor="{StaticResource InfoSurface}"
+                        ValueColor="{StaticResource TextPrimary}"
+                        TrackColor="{StaticResource Surface}"
+                        TrackStrokeColor="{StaticResource StrokeSoft}"
+                        FillColor="{StaticResource InfoColor}"
+                        ProgressTextColor="{StaticResource TextPrimary}" />
+
+                    <components:TargetProgressCard
+                        Grid.Column="1"
+                        Title="Calorie Target"
+                        Value="{Binding CalorieTargetValue}"
+                        Subtitle="{Binding CalorieTargetSubtitle}"
+                        Progress="{Binding CalorieTargetProgress}"
+                        ProgressText="{Binding CalorieTargetProgressText}"
+                        CardBackgroundColor="{StaticResource AccentSurface}"
+                        ValueColor="{StaticResource AccentText}"
+                        TrackColor="{StaticResource Surface}"
+                        TrackStrokeColor="{StaticResource StrokeSoft}"
+                        FillColor="{StaticResource Accent}"
+                        ProgressTextColor="{StaticResource TextPrimary}" />
+                </Grid>
+
+                <components:CartesianChartCard
+                    IsVisible="{Binding HasActivityTimelineData}"
+                    Title="Activity timeline"
+                    DotColor="{StaticResource InfoColor}"
+                    CardBackgroundColor="{StaticResource InfoSurface}"
+                    ChartBackgroundColor="Transparent"
+                    Series="{Binding ActivityTimelineSeries}"
+                    XAxes="{Binding ActivityTimelineXAxes}"
+                    YAxes="{Binding ActivityTimelineYAxes}"
+                    ChartHeight="240" />
+
+                <Border
+                    IsVisible="{Binding HasNoActivityTimelineData}"
+                    Style="{StaticResource CardBorderStyle}"
+                    BackgroundColor="{StaticResource InfoSurface}">
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            Text="Activity timeline"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="16"
+                            TextColor="{StaticResource TextPrimary}"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding ChartEmptyMessage}"
+                            Style="{StaticResource SectionSubtitleStyle}"
+                            HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <ScrollView Orientation="Horizontal">
+                    <HorizontalStackLayout Spacing="14">
+                        <components:PieChartCard
+                            IsVisible="{Binding HasPreferredMuscleGroupsData}"
+                            WidthRequest="320"
+                            Title="Preferred muscle groups (Sets)"
+                            DotColor="{StaticResource Accent}"
+                            CardBackgroundColor="{StaticResource AccentSurface}"
+                            ChartBackgroundColor="Transparent"
+                            Series="{Binding PreferredMuscleGroupsSeries}"
+                            ChartHeight="240" />
+
+                        <Border
+                            IsVisible="{Binding HasNoPreferredMuscleGroupsData}"
+                            WidthRequest="320"
+                            Style="{StaticResource CardBorderStyle}"
+                            BackgroundColor="{StaticResource AccentSurface}">
+
+                            <VerticalStackLayout Spacing="8">
+                                <Label
+                                    Text="Preferred muscle groups"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="16"
+                                    TextColor="{StaticResource TextPrimary}"
+                                    HorizontalTextAlignment="Center" />
+
+                                <Label
+                                    Text="{Binding ChartEmptyMessage}"
+                                    Style="{StaticResource SectionSubtitleStyle}"
+                                    HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <components:ColumnChartCard
+                            IsVisible="{Binding HasPreferredEquipmentData}"
+                            WidthRequest="320"
+                            Title="Preferred equipment (Sets)"
+                            DotColor="{StaticResource WarningColor}"
+                            CardBackgroundColor="{StaticResource WarningSurface}"
+                            ChartBackgroundColor="Transparent"
+                            Series="{Binding PreferredEquipmentSeries}"
+                            XAxes="{Binding PreferredEquipmentXAxes}"
+                            YAxes="{Binding PreferredEquipmentYAxes}"
+                            ChartHeight="220" />
+
+                        <Border
+                            IsVisible="{Binding HasNoPreferredEquipmentData}"
+                            WidthRequest="320"
+                            Style="{StaticResource CardBorderStyle}"
+                            BackgroundColor="{StaticResource WarningSurface}">
+
+                            <VerticalStackLayout Spacing="8">
+                                <Label
+                                    Text="Preferred equipment"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="16"
+                                    TextColor="{StaticResource TextPrimary}"
+                                    HorizontalTextAlignment="Center" />
+
+                                <Label
+                                    Text="{Binding ChartEmptyMessage}"
+                                    Style="{StaticResource SectionSubtitleStyle}"
+                                    HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <components:ColumnChartCard
+                            IsVisible="{Binding HasPreferredMechanicData}"
+                            WidthRequest="320"
+                            Title="Preferred mechanic (Sets)"
+                            DotColor="{StaticResource InfoColor}"
+                            CardBackgroundColor="{StaticResource InfoSurface}"
+                            ChartBackgroundColor="Transparent"
+                            Series="{Binding PreferredMechanicSeries}"
+                            XAxes="{Binding PreferredMechanicXAxes}"
+                            YAxes="{Binding PreferredMechanicYAxes}"
+                            ChartHeight="220" />
+
+                        <Border
+                            IsVisible="{Binding HasNoPreferredMechanicData}"
+                            WidthRequest="320"
+                            Style="{StaticResource CardBorderStyle}"
+                            BackgroundColor="{StaticResource InfoSurface}">
+
+                            <VerticalStackLayout Spacing="8">
+                                <Label
+                                    Text="Preferred mechanic"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="16"
+                                    TextColor="{StaticResource TextPrimary}"
+                                    HorizontalTextAlignment="Center" />
+
+                                <Label
+                                    Text="{Binding ChartEmptyMessage}"
+                                    Style="{StaticResource SectionSubtitleStyle}"
+                                    HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </HorizontalStackLayout>
+                </ScrollView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid
+            VerticalOptions="End"
+            HorizontalOptions="Fill"
+            Margin="20,0,20,18"
+            InputTransparent="False">
+
+            <components:BottomNavBarSimple
+                LeftPrimaryItem="{Binding DashboardNavItem}"
+                LeftSecondaryItem="{Binding WorkoutsNavItem}"
+                RightPrimaryItem="{Binding CalendarNavItem}"
+                RightSecondaryItem="{Binding SettingsNavItem}"
+                ItemCommand="{Binding SelectNavCommand}"
+                BarBackgroundColor="{StaticResource Surface}"
+                BarStrokeColor="{StaticResource StrokeSoft}"
+                BarShadowBrush="#18000000" />
+        </Grid>
+    </Grid>
+</ContentPage>

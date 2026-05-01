@@ -1,0 +1,25 @@
+{
+  "id": "Machine_Shoulder_Press",
+  "name": "Machine Shoulder Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Lateral Head",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Vertical Push"
+}

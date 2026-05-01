@@ -1,0 +1,24 @@
+{
+  "id": "Hanging_Leg_Raise",
+  "name": "Hanging Leg Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Lower Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Hip Flexors",
+    "Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

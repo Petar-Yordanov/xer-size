@@ -1,0 +1,26 @@
+{
+  "id": "Curtsy_Lunge",
+  "name": "Curtsy Lunge",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Gluteus Medius"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Lunge"
+}

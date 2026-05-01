@@ -1,0 +1,22 @@
+{
+  "id": "Machine_Crunch",
+  "name": "Machine Crunch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

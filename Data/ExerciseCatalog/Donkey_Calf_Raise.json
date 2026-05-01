@@ -1,0 +1,22 @@
+{
+  "id": "Donkey_Calf_Raise",
+  "name": "Donkey Calf Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "secondaryMuscles": [
+    "Soleus"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

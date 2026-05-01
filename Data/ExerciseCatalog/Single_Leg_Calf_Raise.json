@@ -1,0 +1,23 @@
+{
+  "id": "Single_Leg_Calf_Raise",
+  "name": "Single Leg Calf Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "secondaryMuscles": [
+    "Soleus",
+    "Plantaris"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

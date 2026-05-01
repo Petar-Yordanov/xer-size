@@ -1,0 +1,24 @@
+{
+  "id": "Snatch_Grip_High_Pull",
+  "name": "Snatch Grip High Pull",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

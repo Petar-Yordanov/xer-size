@@ -1,0 +1,23 @@
+{
+  "id": "Standing_IT_Band_Stretch",
+  "name": "Standing IT Band Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Tensor Fasciae Latae",
+    "Gluteus Medius"
+  ],
+  "secondaryMuscles": [
+    "External Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

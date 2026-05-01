@@ -1,0 +1,26 @@
+{
+  "id": "Dumbbell_Lying_External_Shoulder_Rotation",
+  "name": "Dumbbell Lying External Shoulder Rotation",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Infraspinatus",
+    "Teres Minor"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Rotator Cuff"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "aliases": [
+    "Dumbbell Lying External Rotation"
+  ],
+  "movementPattern": "Isolation"
+}

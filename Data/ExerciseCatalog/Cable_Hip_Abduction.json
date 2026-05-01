@@ -1,0 +1,23 @@
+{
+  "id": "Cable_Hip_Abduction",
+  "name": "Cable Hip Abduction",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Gluteus Medius",
+    "Gluteus Minimus"
+  ],
+  "secondaryMuscles": [
+    "Tensor Fasciae Latae"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

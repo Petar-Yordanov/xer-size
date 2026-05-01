@@ -1,0 +1,24 @@
+{
+  "id": "Recumbent_Bike",
+  "name": "Recumbent Bike",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

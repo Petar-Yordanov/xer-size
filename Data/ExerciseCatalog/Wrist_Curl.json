@@ -1,0 +1,23 @@
+{
+  "id": "Wrist_Curl",
+  "name": "Wrist Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Forearm Flexors"
+  ],
+  "secondaryMuscles": [
+    "Brachioradialis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Biceps",
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

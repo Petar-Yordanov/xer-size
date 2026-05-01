@@ -1,0 +1,26 @@
+{
+  "id": "Stair_Climber",
+  "name": "Stair Climber",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius",
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves",
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

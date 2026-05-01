@@ -1,0 +1,22 @@
+{
+  "id": "Close_Stance_Leg_Press",
+  "name": "Close Stance Leg Press",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Squat"
+}

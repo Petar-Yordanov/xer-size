@@ -1,0 +1,25 @@
+{
+  "id": "Wide_Grip_Barbell_Chest_Press",
+  "name": "Wide Grip Barbell Chest Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Sternal Head",
+    "Clavicular Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

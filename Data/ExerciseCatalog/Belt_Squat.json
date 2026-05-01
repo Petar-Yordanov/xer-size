@@ -1,0 +1,26 @@
+{
+  "id": "Belt_Squat",
+  "name": "Belt Squat",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Adductors",
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Squat"
+}

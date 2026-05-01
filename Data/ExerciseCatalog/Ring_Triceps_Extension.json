@@ -1,0 +1,23 @@
+{
+  "id": "Ring_Triceps_Extension",
+  "name": "Ring Triceps Extension",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Triceps Long Head"
+  ],
+  "secondaryMuscles": [
+    "Triceps Medial Head",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

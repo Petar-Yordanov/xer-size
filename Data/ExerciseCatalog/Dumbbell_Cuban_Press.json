@@ -1,0 +1,26 @@
+{
+  "id": "Dumbbell_Cuban_Press",
+  "name": "Dumbbell Cuban Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Lateral Deltoid",
+    "Supraspinatus"
+  ],
+  "secondaryMuscles": [
+    "Infraspinatus",
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Rotator Cuff"
+  ],
+  "secondaryMuscleCategories": [
+    "Rotator Cuff",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Vertical Push"
+}

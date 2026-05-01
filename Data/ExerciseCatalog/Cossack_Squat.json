@@ -1,0 +1,25 @@
+{
+  "id": "Cossack_Squat",
+  "name": "Cossack Squat",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Adductors",
+    "Gluteus Medius"
+  ],
+  "secondaryMuscles": [
+    "Quadriceps",
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads",
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Alternating"
+}

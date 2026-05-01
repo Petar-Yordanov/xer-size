@@ -1,0 +1,24 @@
+{
+  "id": "Captain_s_Chair_Leg_Raise",
+  "name": "Captain's Chair Leg Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Lower Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Hip Flexors",
+    "Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Quads"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

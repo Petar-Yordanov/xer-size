@@ -1,0 +1,23 @@
+{
+  "id": "Rear_Delt_Stretch",
+  "name": "Rear Delt Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Infraspinatus",
+    "Teres Minor"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Rotator Cuff"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "Bicycle_Crunch",
+  "name": "Bicycle Crunch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Quads"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Core"
+}

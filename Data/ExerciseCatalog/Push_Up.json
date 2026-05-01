@@ -1,0 +1,26 @@
+{
+  "id": "Push_Up",
+  "name": "Push Up",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Sternal Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Head",
+    "Rectus Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Triceps",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

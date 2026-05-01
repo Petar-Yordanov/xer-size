@@ -1,0 +1,22 @@
+{
+  "id": "Sphinx_Stretch",
+  "name": "Sphinx Stretch",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Iliopsoas"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

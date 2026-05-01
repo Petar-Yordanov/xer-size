@@ -1,0 +1,24 @@
+{
+  "id": "Cable_Glute_Kickback",
+  "name": "Cable Glute Kickback",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Medius",
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

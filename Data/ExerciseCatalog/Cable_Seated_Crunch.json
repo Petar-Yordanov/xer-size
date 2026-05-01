@@ -1,0 +1,23 @@
+{
+  "id": "Cable_Seated_Crunch",
+  "name": "Cable Seated Crunch",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "External Obliques",
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

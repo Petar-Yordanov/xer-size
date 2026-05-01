@@ -1,0 +1,23 @@
+{
+  "id": "Single_Leg_Barbell_Calf_Raise",
+  "name": "Single Leg Barbell Calf Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "secondaryMuscles": [
+    "Soleus",
+    "Plantaris"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

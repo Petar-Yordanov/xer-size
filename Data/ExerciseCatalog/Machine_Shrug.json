@@ -1,0 +1,23 @@
+{
+  "id": "Machine_Shrug",
+  "name": "Machine Shrug",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Levator Scapulae"
+  ],
+  "primaryMuscleCategories": [
+    "Upper Back",
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

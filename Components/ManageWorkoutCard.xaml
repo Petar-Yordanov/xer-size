@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:XerSize.Behaviors"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.ManageWorkoutCard"
+    x:DataType="components:ManageWorkoutCard">
+
+    <Border
+        Style="{StaticResource CardBorderStyle}"
+        BackgroundColor="{StaticResource Surface}"
+        Padding="14">
+
+        <Border.Behaviors>
+            <behaviors:DropReorderBehavior
+                Command="{Binding Source={x:Reference This}, Path=ReorderCommand}"
+                TargetItem="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+
+            <behaviors:DragItemBehavior
+                Item="{Binding Source={x:Reference This}, Path=CommandParameter}"
+                DragScale="1"
+                DragOpacity="1"
+                DragTranslationY="0" />
+        </Border.Behaviors>
+
+        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <Border
+                Grid.Column="0"
+                WidthRequest="44"
+                HeightRequest="44"
+                BackgroundColor="{StaticResource AccentSurface}"
+                Stroke="{StaticResource AccentSoft}"
+                StrokeThickness="1"
+                Padding="11"
+                VerticalOptions="Center"
+                InputTransparent="True">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="999" />
+                </Border.StrokeShape>
+
+                <Image
+                    Source="routines.png"
+                    WidthRequest="18"
+                    HeightRequest="18"
+                    Aspect="AspectFit"
+                    InputTransparent="True" />
+            </Border>
+
+            <VerticalStackLayout
+                Grid.Column="1"
+                Spacing="3"
+                VerticalOptions="Center"
+                InputTransparent="True">
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=Title}"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="16"
+                    TextColor="{StaticResource TextPrimary}"
+                    LineBreakMode="TailTruncation"
+                    InputTransparent="True" />
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=OrderText}"
+                    Style="{StaticResource FieldLabelStyle}"
+                    InputTransparent="True" />
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=SettingsText}"
+                    Style="{StaticResource SectionSubtitleStyle}"
+                    InputTransparent="True" />
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout
+                Grid.Column="2"
+                Spacing="8"
+                VerticalOptions="Center"
+                ZIndex="20">
+
+                <components:QuickActionChip
+                    Size="36"
+                    IconSize="15"
+                    IconSource="settings.png"
+                    ChipBackgroundColor="{StaticResource SurfaceSoft}"
+                    Command="{Binding Source={x:Reference This}, Path=SettingsCommand}"
+                    CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+
+                <components:QuickActionChip
+                    Size="36"
+                    IconSize="15"
+                    IconSource="edit.png"
+                    ChipBackgroundColor="{StaticResource AccentSurface}"
+                    Command="{Binding Source={x:Reference This}, Path=EditCommand}"
+                    CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+
+                <components:QuickActionChip
+                    Size="36"
+                    IconSize="15"
+                    IconSource="delete.png"
+                    ChipBackgroundColor="{StaticResource ErrorSurface}"
+                    Command="{Binding Source={x:Reference This}, Path=DeleteCommand}"
+                    CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+</ContentView>

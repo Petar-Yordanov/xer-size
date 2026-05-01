@@ -1,0 +1,23 @@
+{
+  "id": "Knee_Raise",
+  "name": "Knee Raise",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Lower Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Hip Flexors",
+    "External Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

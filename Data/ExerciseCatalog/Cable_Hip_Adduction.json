@@ -1,0 +1,22 @@
+{
+  "id": "Cable_Hip_Adduction",
+  "name": "Cable Hip Adduction",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Adductors"
+  ],
+  "secondaryMuscles": [
+    "Gracilis"
+  ],
+  "primaryMuscleCategories": [
+    "Adductors"
+  ],
+  "secondaryMuscleCategories": [
+    "Adductors"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

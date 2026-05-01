@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.TextAreaField"
+    x:DataType="components:TextAreaField">
+
+    <VerticalStackLayout Spacing="8">
+        <Label
+            Text="{Binding Source={x:Reference This}, Path=Label}"
+            Style="{StaticResource FieldLabelStyle}" />
+
+        <Border
+            Style="{StaticResource InputBorderStyle}"
+            BackgroundColor="{Binding Source={x:Reference This}, Path=FieldBackgroundColor}">
+            <Editor
+                Text="{Binding Source={x:Reference This}, Path=Text, Mode=TwoWay}"
+                Placeholder="{Binding Source={x:Reference This}, Path=Placeholder}"
+                MinimumHeightRequest="{Binding Source={x:Reference This}, Path=MinHeight}" />
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

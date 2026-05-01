@@ -1,0 +1,22 @@
+{
+  "id": "Reverse_Prayer_Stretch",
+  "name": "Reverse Prayer Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Wrist Extensors"
+  ],
+  "secondaryMuscles": [
+    "Brachioradialis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

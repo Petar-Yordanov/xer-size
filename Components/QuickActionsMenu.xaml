@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:components="clr-namespace:XerSize.Components"
+    xmlns:behaviors="clr-namespace:XerSize.Behaviors"
+    x:Class="XerSize.Components.QuickActionsMenu"
+    x:DataType="components:QuickActionsMenu">
+
+    <ContentView.Behaviors>
+        <behaviors:AnimatedVisibilityBehavior
+            IsVisibleState="{Binding Source={x:Reference This}, Path=IsOpen}"
+            TranslationY="26"
+            Duration="170" />
+    </ContentView.Behaviors>
+
+    <Grid InputTransparent="False">
+        <BoxView
+            Color="#33000000"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={x:Reference This}, Path=CloseCommand}" />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <VerticalStackLayout
+            WidthRequest="260"
+            Spacing="10"
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+            Margin="{Binding Source={x:Reference This}, Path=MenuMargin}">
+
+            <Border
+                BackgroundColor="{StaticResource Surface}"
+                Stroke="{StaticResource StrokeSoft}"
+                StrokeThickness="1"
+                Padding="10">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="28" />
+                </Border.StrokeShape>
+
+                <Border.Shadow>
+                    <Shadow
+                        Brush="#28000000"
+                        Offset="0,12"
+                        Radius="24"
+                        Opacity="0.22" />
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="8">
+
+                    <Border
+                        Padding="14,12"
+                        BackgroundColor="{StaticResource AccentSurface}"
+                        Stroke="{StaticResource AccentSoft}"
+                        StrokeThickness="1">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20" />
+                        </Border.StrokeShape>
+
+                        <Border.Behaviors>
+                            <toolkit:TouchBehavior PressedScale="0.97" PressedOpacity="0.92" />
+                        </Border.Behaviors>
+
+                        <Grid ColumnDefinitions="40,*" ColumnSpacing="10">
+                            <Border
+                                WidthRequest="34"
+                                HeightRequest="34"
+                                BackgroundColor="{StaticResource Surface}"
+                                StrokeThickness="0"
+                                Padding="9"
+                                VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="999" />
+                                </Border.StrokeShape>
+
+                                <Image
+                                    Source="{Binding Source={x:Reference This}, Path=PrimaryIconSource}"
+                                    WidthRequest="16"
+                                    HeightRequest="16"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label
+                                    Text="{Binding Source={x:Reference This}, Path=PrimaryTitle}"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="14"
+                                    TextColor="{StaticResource TextPrimary}" />
+
+                                <Label
+                                    Text="{Binding Source={x:Reference This}, Path=PrimarySubtitle}"
+                                    Style="{StaticResource SectionSubtitleStyle}" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={x:Reference This}, Path=PrimaryCommand}" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border
+                        Padding="14,12"
+                        BackgroundColor="{StaticResource SurfaceSoft}"
+                        Stroke="{StaticResource StrokeSoft}"
+                        StrokeThickness="1">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20" />
+                        </Border.StrokeShape>
+
+                        <Border.Behaviors>
+                            <toolkit:TouchBehavior PressedScale="0.97" PressedOpacity="0.92" />
+                        </Border.Behaviors>
+
+                        <Grid ColumnDefinitions="40,*" ColumnSpacing="10">
+                            <Border
+                                WidthRequest="34"
+                                HeightRequest="34"
+                                BackgroundColor="{StaticResource Surface}"
+                                StrokeThickness="0"
+                                Padding="9"
+                                VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="999" />
+                                </Border.StrokeShape>
+
+                                <Image
+                                    Source="{Binding Source={x:Reference This}, Path=SecondaryIconSource}"
+                                    WidthRequest="16"
+                                    HeightRequest="16"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label
+                                    Text="{Binding Source={x:Reference This}, Path=SecondaryTitle}"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="14"
+                                    TextColor="{StaticResource TextPrimary}" />
+
+                                <Label
+                                    Text="{Binding Source={x:Reference This}, Path=SecondarySubtitle}"
+                                    Style="{StaticResource SectionSubtitleStyle}" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={x:Reference This}, Path=SecondaryCommand}" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border
+                        Padding="14,12"
+                        BackgroundColor="{StaticResource WarningSurface}"
+                        Stroke="{StaticResource StrokeSoft}"
+                        StrokeThickness="1">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20" />
+                        </Border.StrokeShape>
+
+                        <Border.Behaviors>
+                            <toolkit:TouchBehavior PressedScale="0.97" PressedOpacity="0.92" />
+                        </Border.Behaviors>
+
+                        <Grid ColumnDefinitions="40,*" ColumnSpacing="10">
+                            <Border
+                                WidthRequest="34"
+                                HeightRequest="34"
+                                BackgroundColor="{StaticResource Surface}"
+                                StrokeThickness="0"
+                                Padding="9"
+                                VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="999" />
+                                </Border.StrokeShape>
+
+                                <Image
+                                    Source="{Binding Source={x:Reference This}, Path=TertiaryIconSource}"
+                                    WidthRequest="16"
+                                    HeightRequest="16"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center" />
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label
+                                    Text="{Binding Source={x:Reference This}, Path=TertiaryTitle}"
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="14"
+                                    TextColor="{StaticResource TextPrimary}" />
+
+                                <Label
+                                    Text="{Binding Source={x:Reference This}, Path=TertiarySubtitle}"
+                                    Style="{StaticResource SectionSubtitleStyle}" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={x:Reference This}, Path=TertiaryCommand}" />
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>

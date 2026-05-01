@@ -1,0 +1,25 @@
+{
+  "id": "Medicine_Ball_Slam",
+  "name": "Medicine Ball Slam",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Rectus Abdominis",
+    "Transverse Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Latissimus Dorsi",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Vertical Push"
+}

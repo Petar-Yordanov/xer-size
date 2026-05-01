@@ -1,0 +1,24 @@
+{
+  "id": "Scapular_Pull_Up",
+  "name": "Scapular Pull Up",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Lower Trapezius",
+    "Serratus Anterior"
+  ],
+  "secondaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "primaryMuscleCategories": [
+    "Upper Back",
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Lats"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Vertical Pull"
+}

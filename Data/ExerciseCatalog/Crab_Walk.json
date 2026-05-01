@@ -1,0 +1,26 @@
+{
+  "id": "Crab_Walk",
+  "name": "Crab Walk",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Triceps Lateral Head",
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Rectus Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps",
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Abs"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

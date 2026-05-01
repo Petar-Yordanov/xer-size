@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.MetricTile"
+    x:DataType="components:MetricTile">
+
+    <Border
+        Style="{StaticResource CardBorderStyle}"
+        Padding="14"
+        BackgroundColor="{Binding Source={x:Reference This}, Path=TileBackgroundColor}">
+        <VerticalStackLayout Spacing="8">
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=Title}"
+                Style="{StaticResource SectionSubtitleStyle}" />
+
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=Value}"
+                FontFamily="OpenSansSemibold"
+                FontSize="22"
+                TextColor="{Binding Source={x:Reference This}, Path=ValueColor}" />
+
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=Subtitle}"
+                Style="{StaticResource SectionSubtitleStyle}" />
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

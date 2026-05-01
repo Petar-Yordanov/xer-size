@@ -1,0 +1,22 @@
+{
+  "id": "Cable_Front_Raise",
+  "name": "Cable Front Raise",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Anterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Levator Scapulae"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

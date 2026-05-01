@@ -1,0 +1,22 @@
+{
+  "id": "Single_Leg_Tibialis_Raise",
+  "name": "Single Leg Tibialis Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Tibialis Anterior"
+  ],
+  "secondaryMuscles": [
+    "Extensor Digitorum Longus"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

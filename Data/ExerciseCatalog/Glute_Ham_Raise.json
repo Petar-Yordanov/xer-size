@@ -1,0 +1,25 @@
+{
+  "id": "Glute_Ham_Raise",
+  "name": "Glute Ham Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Biceps Femoris",
+    "Semitendinosus"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Erector Spinae"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

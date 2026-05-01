@@ -1,0 +1,22 @@
+{
+  "id": "Neck_Flexion_Stretch",
+  "name": "Neck Flexion Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Cervical Extensors"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

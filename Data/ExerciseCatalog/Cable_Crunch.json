@@ -1,0 +1,23 @@
+{
+  "id": "Cable_Crunch",
+  "name": "Cable Crunch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Transverse Abdominis",
+    "Internal Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "Plank",
+  "name": "Plank",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Transverse Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Internal Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

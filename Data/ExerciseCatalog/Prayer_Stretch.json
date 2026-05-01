@@ -1,0 +1,24 @@
+{
+  "id": "Prayer_Stretch",
+  "name": "Prayer Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Teres Major",
+    "Thoracic Erectors"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Mid Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "Jump_Rope_Boxer_Skip",
+  "name": "Jump Rope Boxer Skip",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "secondaryMuscles": [
+    "Quadriceps",
+    "Forearm Flexors"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads",
+    "Forearms"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "Single_Arm_Straight_Arm_Cable_Pulldown",
+  "name": "Single Arm Straight Arm Cable Pulldown",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Biceps Short Head",
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Biceps",
+    "Forearms"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Vertical Pull"
+}

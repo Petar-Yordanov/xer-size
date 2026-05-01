@@ -1,0 +1,26 @@
+{
+  "id": "Single_Arm_Landmine_Row",
+  "name": "Single Arm Landmine Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Rhomboids"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid",
+    "Biceps Short Head"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Biceps"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Horizontal Pull"
+}

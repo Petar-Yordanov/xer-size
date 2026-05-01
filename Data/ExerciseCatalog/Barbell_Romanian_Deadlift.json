@@ -1,0 +1,25 @@
+{
+  "id": "Barbell_Romanian_Deadlift",
+  "name": "Barbell Romanian Deadlift",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Biceps Femoris",
+    "Semitendinosus"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Erector Spinae"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

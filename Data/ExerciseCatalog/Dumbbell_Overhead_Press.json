@@ -1,0 +1,25 @@
+{
+  "id": "Dumbbell_Overhead_Press",
+  "name": "Dumbbell Overhead Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Lateral Head",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Vertical Push"
+}

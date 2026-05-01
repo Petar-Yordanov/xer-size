@@ -1,0 +1,26 @@
+{
+  "id": "Cable_Low_Row",
+  "name": "Cable Low Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Rhomboids"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid",
+    "Biceps Long Head"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Biceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

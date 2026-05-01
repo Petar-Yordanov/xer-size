@@ -1,0 +1,26 @@
+{
+  "id": "Trap_Bar_Deadlift",
+  "name": "Trap Bar Deadlift",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Forearm Flexors",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "Feet_Elevated_Diamond_Push_Up",
+  "name": "Feet Elevated Diamond Push Up",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Triceps Lateral Head",
+    "Sternal Pectoralis Major"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps",
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

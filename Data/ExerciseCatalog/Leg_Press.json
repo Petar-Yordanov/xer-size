@@ -1,0 +1,24 @@
+{
+  "id": "Leg_Press",
+  "name": "Leg Press",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Squat"
+}

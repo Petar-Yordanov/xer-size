@@ -1,0 +1,26 @@
+{
+  "id": "Battle_Rope_Slam",
+  "name": "Battle Rope Slam",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Triceps Long Head"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

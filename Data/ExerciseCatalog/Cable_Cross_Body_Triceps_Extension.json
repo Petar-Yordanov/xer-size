@@ -1,0 +1,22 @@
+{
+  "id": "Cable_Cross_Body_Triceps_Extension",
+  "name": "Cable Cross Body Triceps Extension",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Triceps Lateral Head"
+  ],
+  "secondaryMuscles": [
+    "Triceps Medial Head"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

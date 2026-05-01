@@ -1,0 +1,23 @@
+{
+  "id": "Dumbbell_Reverse_Curl",
+  "name": "Dumbbell Reverse Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Brachioradialis"
+  ],
+  "secondaryMuscles": [
+    "Wrist Extensors",
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms",
+    "Biceps"
+  ],
+  "limbInvolvement": "Bilateral"
+}

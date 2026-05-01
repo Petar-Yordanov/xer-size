@@ -1,0 +1,24 @@
+{
+  "id": "Poliquin_Step_Up",
+  "name": "Poliquin Step Up",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Vastus Medialis"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Medius",
+    "Quadriceps"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Lunge"
+}

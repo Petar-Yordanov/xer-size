@@ -1,0 +1,23 @@
+{
+  "id": "Incline_Dumbbell_Curl",
+  "name": "Incline Dumbbell Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Long Head"
+  ],
+  "secondaryMuscles": [
+    "Brachialis",
+    "Brachioradialis"
+  ],
+  "primaryMuscleCategories": [
+    "Biceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Isolation"
+}

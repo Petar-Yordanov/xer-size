@@ -1,0 +1,23 @@
+{
+  "id": "Dead_Bug",
+  "name": "Dead Bug",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Transverse Abdominis"
+  ],
+  "secondaryMuscles": [
+    "External Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Quads"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

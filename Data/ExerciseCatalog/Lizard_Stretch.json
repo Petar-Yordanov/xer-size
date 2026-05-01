@@ -1,0 +1,24 @@
+{
+  "id": "Lizard_Stretch",
+  "name": "Lizard Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Iliopsoas",
+    "Adductors"
+  ],
+  "secondaryMuscles": [
+    "Rectus Femoris"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

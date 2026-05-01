@@ -1,0 +1,22 @@
+{
+  "id": "Standing_Adductor_Stretch",
+  "name": "Standing Adductor Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Adductors"
+  ],
+  "secondaryMuscles": [
+    "Gracilis"
+  ],
+  "primaryMuscleCategories": [
+    "Adductors"
+  ],
+  "secondaryMuscleCategories": [
+    "Adductors"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "Scalenes_Stretch",
+  "name": "Scalenes Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Scalenes"
+  ],
+  "secondaryMuscles": [
+    "Sternocleidomastoid"
+  ],
+  "primaryMuscleCategories": [
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Neck"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

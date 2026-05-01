@@ -1,0 +1,22 @@
+{
+  "id": "Single_Arm_Cable_Lateral_Raise",
+  "name": "Single Arm Cable Lateral Raise",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Supraspinatus"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Rotator Cuff"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

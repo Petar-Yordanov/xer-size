@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Name="ManageWorkoutsPageRoot"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    xmlns:vm="clr-namespace:XerSize.ViewModels"
+    xmlns:workouts="clr-namespace:XerSize.Models.Presentation.Workouts"
+    xmlns:behaviors="clr-namespace:XerSize.Behaviors"
+    x:Class="XerSize.Views.Pages.ManageWorkoutsPage"
+    x:DataType="vm:ManageWorkoutsPageViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20,18,20,40" Spacing="18">
+                <VerticalStackLayout.Behaviors>
+                    <behaviors:AppearAnimationBehavior TranslationY="14" Duration="240" />
+                </VerticalStackLayout.Behaviors>
+
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <components:QuickActionChip
+                        Grid.Column="0"
+                        Size="44"
+                        IconSize="18"
+                        IconSource="left.png"
+                        ChipBackgroundColor="{StaticResource Surface}"
+                        Command="{Binding BackCommand}" />
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                        <Label
+                            Text="Manage workouts"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="26"
+                            TextColor="{StaticResource TextPrimary}" />
+
+                        <Label
+                            Text="Add, rename, delete, reorder, and configure workout days"
+                            Style="{StaticResource SectionSubtitleStyle}" />
+                    </VerticalStackLayout>
+
+                    <components:QuickActionChip
+                        Grid.Column="2"
+                        Size="44"
+                        IconSize="18"
+                        IconSource="add.png"
+                        ChipBackgroundColor="{StaticResource AccentSurface}"
+                        Command="{Binding AddWorkoutCommand}" />
+                </Grid>
+
+                <CollectionView ItemsSource="{Binding Workouts}" SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.EmptyView>
+                        <Border Style="{StaticResource CardBorderStyle}" BackgroundColor="{StaticResource Surface}">
+                            <VerticalStackLayout Spacing="8">
+                                <Label
+                                    Text="No workouts yet."
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="16"
+                                    HorizontalTextAlignment="Center" />
+
+                                <Label
+                                    Text="Tap the plus button to create your first workout."
+                                    Style="{StaticResource SectionSubtitleStyle}"
+                                    HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="workouts:WorkoutPresentationModel">
+                            <components:ManageWorkoutCard
+                                Title="{Binding Name}"
+                                OrderText="{Binding SortNumberText}"
+                                SettingsText="{Binding SettingsText}"
+                                CommandParameter="{Binding .}"
+                                SettingsCommand="{Binding Source={x:Reference ManageWorkoutsPageRoot}, Path=BindingContext.OpenWorkoutSettingsCommand}"
+                                EditCommand="{Binding Source={x:Reference ManageWorkoutsPageRoot}, Path=BindingContext.EditWorkoutCommand}"
+                                DeleteCommand="{Binding Source={x:Reference ManageWorkoutsPageRoot}, Path=BindingContext.DeleteWorkoutCommand}"
+                                ReorderCommand="{Binding Source={x:Reference ManageWorkoutsPageRoot}, Path=BindingContext.ReorderWorkoutCommand}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <components:AddWorkoutNameDialog
+            ZIndex="18"
+            IsOpen="{Binding IsAddWorkoutDialogVisible}"
+            WorkoutName="{Binding NewWorkoutName, Mode=TwoWay}"
+            Title="Add workout"
+            Message="Give this workout day a name."
+            IconSource="routines.png"
+            IconBackgroundColor="{StaticResource AccentSurface}"
+            PrimaryButtonText="Create"
+            SecondaryButtonText="Cancel"
+            PrimaryCommand="{Binding CreateWorkoutCommand}"
+            SecondaryCommand="{Binding CancelAddWorkoutCommand}"
+            DismissCommand="{Binding CancelAddWorkoutCommand}" />
+
+        <components:AddWorkoutNameDialog
+            ZIndex="19"
+            IsOpen="{Binding IsEditWorkoutDialogVisible}"
+            WorkoutName="{Binding EditWorkoutName, Mode=TwoWay}"
+            Title="Edit workout"
+            Message="Rename this workout day."
+            IconSource="edit.png"
+            IconBackgroundColor="{StaticResource AccentSurface}"
+            PrimaryButtonText="Save"
+            SecondaryButtonText="Cancel"
+            PrimaryCommand="{Binding SaveEditWorkoutCommand}"
+            SecondaryCommand="{Binding CancelEditWorkoutCommand}"
+            DismissCommand="{Binding CancelEditWorkoutCommand}" />
+
+        <components:AppDialog
+            ZIndex="20"
+            IsOpen="{Binding IsDeleteDialogVisible}"
+            Title="Delete workout?"
+            Message="{Binding DeleteDialogMessage}"
+            IconSource="delete.png"
+            IconBackgroundColor="{StaticResource ErrorSurface}"
+            PrimaryButtonText="Delete"
+            SecondaryButtonText="Cancel"
+            PrimaryButtonBackgroundColor="{StaticResource ErrorColor}"
+            PrimaryCommand="{Binding ConfirmDeleteWorkoutCommand}"
+            SecondaryCommand="{Binding CancelDeleteWorkoutCommand}"
+            DismissCommand="{Binding CancelDeleteWorkoutCommand}" />
+
+        <components:AppDialog
+            ZIndex="21"
+            IsOpen="{Binding IsWorkoutSettingsDialogVisible}"
+            Title="Workout settings"
+            Message="{Binding WorkoutSettingsDialogMessage}"
+            IconSource="settings.png"
+            IconBackgroundColor="{StaticResource AccentSurface}"
+            MaximumDialogWidth="460"
+            PrimaryButtonText="Done"
+            ShowSecondaryButton="False"
+            PrimaryCommand="{Binding CancelWorkoutSettingsCommand}"
+            DismissCommand="{Binding CancelWorkoutSettingsCommand}">
+            <components:AppDialog.DialogContent>
+                <VerticalStackLayout Spacing="16">
+                    <components:SingleSelectField
+                        Label="Training type"
+                        Placeholder="Select training type"
+                        SelectedText="{Binding SettingsTrainingType, Mode=TwoWay}"
+                        IsExpanded="{Binding IsSettingsTrainingTypeDropdownExpanded, Mode=TwoWay}"
+                        ItemsSource="{Binding TrainingTypeOptions}"
+                        SelectItemCommand="{Binding SelectSettingsTrainingTypeCommand}"
+                        DropdownBackgroundColor="{StaticResource AccentSurface}" />
+
+                    <VerticalStackLayout Spacing="10">
+                        <components:ToggleField
+                            Style="{StaticResource SettingsToggleFieldStyle}"
+                            Label="Volume"
+                            Title="Exclude volume from metrics"
+                            Subtitle="Do not include lifted volume from this workout in dashboard/statistics volume totals"
+                            IsToggled="{Binding SettingsExcludeVolumeFromMetrics, Mode=TwoWay}"
+                            ToggleCommand="{Binding ToggleSettingsExcludeVolumeCommand}" />
+
+                        <components:ToggleField
+                            Style="{StaticResource SettingsToggleFieldStyle}"
+                            Label="Calories"
+                            Title="Exclude calories from metrics"
+                            Subtitle="Do not include estimated calories from this workout in dashboard calorie averages or targets"
+                            IsToggled="{Binding SettingsExcludeCaloriesFromMetrics, Mode=TwoWay}"
+                            ToggleCommand="{Binding ToggleSettingsExcludeCaloriesCommand}" />
+
+                        <components:ToggleField
+                            Style="{StaticResource SettingsToggleFieldStyle}"
+                            Label="Metadata"
+                            Title="Exclude metadata from metrics"
+                            Subtitle="Do not include exercise metadata such as muscles, equipment, mechanic, or type"
+                            IsToggled="{Binding SettingsExcludeMetadataFromMetrics, Mode=TwoWay}"
+                            ToggleCommand="{Binding ToggleSettingsExcludeMetadataCommand}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </components:AppDialog.DialogContent>
+        </components:AppDialog>
+    </Grid>
+</ContentPage>

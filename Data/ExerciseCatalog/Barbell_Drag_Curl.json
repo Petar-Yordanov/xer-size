@@ -1,0 +1,23 @@
+{
+  "id": "Barbell_Drag_Curl",
+  "name": "Barbell Drag Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Biceps Long Head"
+  ],
+  "secondaryMuscles": [
+    "Brachialis",
+    "Brachioradialis"
+  ],
+  "primaryMuscleCategories": [
+    "Biceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

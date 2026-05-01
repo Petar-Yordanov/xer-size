@@ -1,0 +1,22 @@
+{
+  "id": "Thoracic_Extension_Stretch",
+  "name": "Thoracic Extension Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Thoracic Erectors"
+  ],
+  "secondaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "primaryMuscleCategories": [
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Lats"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

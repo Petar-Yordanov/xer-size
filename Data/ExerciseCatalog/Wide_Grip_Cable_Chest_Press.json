@@ -1,0 +1,24 @@
+{
+  "id": "Wide_Grip_Cable_Chest_Press",
+  "name": "Wide Grip Cable Chest Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Sternal Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

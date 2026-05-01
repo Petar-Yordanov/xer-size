@@ -1,0 +1,22 @@
+{
+  "id": "Toe_Flexor_Stretch",
+  "name": "Toe Flexor Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Flexor Digitorum Longus"
+  ],
+  "secondaryMuscles": [
+    "Plantar Fascia"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

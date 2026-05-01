@@ -1,0 +1,26 @@
+{
+  "id": "Single_Leg_Press",
+  "name": "Single Leg Press",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Erector Spinae"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Lower Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Squat"
+}

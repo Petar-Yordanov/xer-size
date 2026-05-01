@@ -1,0 +1,25 @@
+{
+  "id": "Running_on_Treadmill",
+  "name": "Running on Treadmill",
+  "force": "Cardio",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Calves"
+  ],
+  "limbInvolvement": "Alternating"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "Landmine_Rotation",
+  "name": "Landmine Rotation",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "External Obliques",
+    "Internal Obliques"
+  ],
+  "secondaryMuscles": [
+    "External Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Quads"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Rotation"
+}

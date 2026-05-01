@@ -1,0 +1,23 @@
+{
+  "id": "Seated_Machine_Calf_Raise",
+  "name": "Seated Machine Calf Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Soleus"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius",
+    "Plantaris"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

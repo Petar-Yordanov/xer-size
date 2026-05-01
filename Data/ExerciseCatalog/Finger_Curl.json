@@ -1,0 +1,24 @@
+{
+  "id": "Finger_Curl",
+  "name": "Finger Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Forearm Flexors",
+    "Brachioradialis"
+  ],
+  "secondaryMuscles": [
+    "Forearm Extensors",
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

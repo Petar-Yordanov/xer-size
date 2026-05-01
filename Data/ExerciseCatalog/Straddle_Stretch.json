@@ -1,0 +1,24 @@
+{
+  "id": "Straddle_Stretch",
+  "name": "Straddle Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Adductors",
+    "Hamstrings"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

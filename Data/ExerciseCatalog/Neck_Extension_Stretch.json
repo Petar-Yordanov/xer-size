@@ -1,0 +1,22 @@
+{
+  "id": "Neck_Extension_Stretch",
+  "name": "Neck Extension Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Sternocleidomastoid"
+  ],
+  "secondaryMuscles": [
+    "Scalenes"
+  ],
+  "primaryMuscleCategories": [
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Neck"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "Neck_Flexion",
+  "name": "Neck Flexion",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Sternocleidomastoid"
+  ],
+  "secondaryMuscles": [
+    "Deep Neck Flexors"
+  ],
+  "primaryMuscleCategories": [
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Neck"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

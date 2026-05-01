@@ -1,0 +1,25 @@
+{
+  "id": "Machine_Pec_Deck_Fly",
+  "name": "Machine Pec Deck Fly",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Sternal Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Pec Deck Fly"
+  ],
+  "movementPattern": "Horizontal Push"
+}

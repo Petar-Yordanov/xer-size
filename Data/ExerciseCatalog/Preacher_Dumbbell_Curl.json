@@ -1,0 +1,22 @@
+{
+  "id": "Preacher_Dumbbell_Curl",
+  "name": "Preacher Dumbbell Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Biceps Short Head"
+  ],
+  "secondaryMuscles": [
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Biceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

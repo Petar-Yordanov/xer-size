@@ -1,0 +1,25 @@
+{
+  "id": "Single_Arm_Dumbbell_Overhead_Press",
+  "name": "Single Arm Dumbbell Overhead Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius",
+    "Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Triceps"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Vertical Push"
+}

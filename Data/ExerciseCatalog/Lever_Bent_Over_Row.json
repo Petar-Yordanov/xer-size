@@ -1,0 +1,29 @@
+{
+  "id": "Lever_Bent_Over_Row",
+  "name": "Lever Bent Over Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Rhomboids"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid",
+    "Biceps Long Head"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Biceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Bent Over Row"
+  ],
+  "movementPattern": "Horizontal Pull"
+}

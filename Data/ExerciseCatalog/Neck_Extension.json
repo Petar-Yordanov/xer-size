@@ -1,0 +1,24 @@
+{
+  "id": "Neck_Extension",
+  "name": "Neck Extension",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Upper Trapezius",
+    "Splenius Capitis"
+  ],
+  "secondaryMuscles": [
+    "Levator Scapulae"
+  ],
+  "primaryMuscleCategories": [
+    "Neck",
+    "Upper Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Neck"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "Plate_Front_Raise",
+  "name": "Plate Front Raise",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius",
+    "Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "Decline_Sit_Up",
+  "name": "Decline Sit Up",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Quads"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

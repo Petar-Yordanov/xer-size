@@ -1,0 +1,23 @@
+{
+  "id": "Pallof_Press",
+  "name": "Pallof Press",
+  "force": "Push",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Transverse Abdominis",
+    "Internal Obliques"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Rotation"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "Barbell_Wrist_Roller",
+  "name": "Barbell Wrist Roller",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Forearm Flexors",
+    "Brachioradialis"
+  ],
+  "secondaryMuscles": [
+    "Forearm Extensors",
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

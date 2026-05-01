@@ -1,0 +1,26 @@
+{
+  "id": "Goblet_Dumbbell_Squat",
+  "name": "Goblet Dumbbell Squat",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Rectus Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Squat"
+}

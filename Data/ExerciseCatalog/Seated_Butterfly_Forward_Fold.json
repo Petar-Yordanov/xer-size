@@ -1,0 +1,22 @@
+{
+  "id": "Seated_Butterfly_Forward_Fold",
+  "name": "Seated Butterfly Forward Fold",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Adductors"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

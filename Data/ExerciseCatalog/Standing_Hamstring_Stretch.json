@@ -1,0 +1,22 @@
+{
+  "id": "Standing_Hamstring_Stretch",
+  "name": "Standing Hamstring Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Hamstrings"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "Speed_Bag",
+  "name": "Speed Bag",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Forearm Flexors"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius",
+    "Triceps Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

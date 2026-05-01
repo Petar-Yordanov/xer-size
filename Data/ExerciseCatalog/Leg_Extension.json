@@ -1,0 +1,22 @@
+{
+  "id": "Leg_Extension",
+  "name": "Leg Extension",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Rectus Femoris"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

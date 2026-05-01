@@ -1,0 +1,24 @@
+{
+  "id": "Chest_Supported_Rear_Delt_Raise",
+  "name": "Chest Supported Rear Delt Raise",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius",
+    "Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

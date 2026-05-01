@@ -1,0 +1,23 @@
+{
+  "id": "Machine_Rear_Delt_Fly",
+  "name": "Machine Rear Delt Fly",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Middle Trapezius",
+    "Rhomboids"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

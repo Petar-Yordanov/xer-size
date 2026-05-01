@@ -1,0 +1,26 @@
+{
+  "id": "Battle_Rope_Double_Wave",
+  "name": "Battle Rope Double Wave",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Triceps Lateral Head"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

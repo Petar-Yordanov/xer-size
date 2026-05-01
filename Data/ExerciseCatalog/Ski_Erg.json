@@ -1,0 +1,26 @@
+{
+  "id": "Ski_Erg",
+  "name": "Ski Erg",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Triceps Long Head",
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

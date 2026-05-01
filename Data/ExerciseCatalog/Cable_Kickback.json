@@ -1,0 +1,23 @@
+{
+  "id": "Cable_Kickback",
+  "name": "Cable Kickback",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Lateral Head",
+    "Medial Head"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

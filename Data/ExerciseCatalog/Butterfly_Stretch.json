@@ -1,0 +1,22 @@
+{
+  "id": "Butterfly_Stretch",
+  "name": "Butterfly Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Adductors"
+  ],
+  "secondaryMuscles": [
+    "Gracilis"
+  ],
+  "primaryMuscleCategories": [
+    "Adductors"
+  ],
+  "secondaryMuscleCategories": [
+    "Adductors"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

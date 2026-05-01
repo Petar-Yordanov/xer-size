@@ -1,0 +1,25 @@
+{
+  "id": "High_Knees",
+  "name": "High Knees",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Hip Flexors",
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Calves"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

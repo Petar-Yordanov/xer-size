@@ -1,0 +1,24 @@
+{
+  "id": "Jump_Rope",
+  "name": "Jump Rope",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "secondaryMuscles": [
+    "Soleus",
+    "Forearm Flexors"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves",
+    "Forearms"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

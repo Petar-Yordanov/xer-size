@@ -1,0 +1,26 @@
+{
+  "id": "Pseudo_Planche_Push_Up",
+  "name": "Pseudo Planche Push Up",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Sternal Pectoralis Major"
+  ],
+  "secondaryMuscles": [
+    "Triceps Long Head",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

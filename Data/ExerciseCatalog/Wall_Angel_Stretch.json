@@ -1,0 +1,26 @@
+{
+  "id": "Wall_Angel_Stretch",
+  "name": "Wall Angel Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Lower Trapezius",
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Thoracic Erectors",
+    "Pectoralis Minor"
+  ],
+  "primaryMuscleCategories": [
+    "Upper Back",
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back",
+    "Chest"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

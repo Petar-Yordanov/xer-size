@@ -1,0 +1,27 @@
+{
+  "id": "Childs_Pose_Side_Reach_Stretch",
+  "name": "Childs Pose Side Reach Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Serratus Anterior"
+  ],
+  "secondaryMuscles": [
+    "Thoracic Erectors"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back"
+  ],
+  "limbInvolvement": "Unilateral",
+  "aliases": [
+    "Child's Pose Side Reach Stretch"
+  ],
+  "movementPattern": "Stretching"
+}

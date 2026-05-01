@@ -1,0 +1,29 @@
+{
+  "id": "Barbell_Back_Squat",
+  "name": "Barbell Back Squat",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Erector Spinae"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Back Squat"
+  ],
+  "movementPattern": "Squat"
+}

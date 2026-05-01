@@ -1,0 +1,22 @@
+{
+  "id": "Dumbbell_Upright_Row",
+  "name": "Dumbbell Upright Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

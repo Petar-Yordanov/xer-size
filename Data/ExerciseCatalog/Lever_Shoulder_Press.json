@@ -1,0 +1,26 @@
+{
+  "id": "Lever_Shoulder_Press",
+  "name": "Lever Shoulder Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Triceps Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Shoulder Press"
+  ],
+  "movementPattern": "Vertical Push"
+}

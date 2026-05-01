@@ -1,0 +1,26 @@
+{
+  "id": "Walking_Lunge",
+  "name": "Walking Lunge",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Gluteus Medius"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Lunge"
+}

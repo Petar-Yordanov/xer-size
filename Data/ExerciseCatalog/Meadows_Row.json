@@ -1,0 +1,24 @@
+{
+  "id": "Meadows_Row",
+  "name": "Meadows Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Rhomboids",
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Horizontal Pull"
+}

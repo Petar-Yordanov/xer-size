@@ -1,0 +1,26 @@
+{
+  "id": "Y_Raise",
+  "name": "Y Raise",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Lower Trapezius",
+    "Serratus Anterior"
+  ],
+  "secondaryMuscles": [
+    "Supraspinatus",
+    "Infraspinatus"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Upper Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Rotator Cuff",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

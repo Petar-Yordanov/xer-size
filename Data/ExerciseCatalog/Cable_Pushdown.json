@@ -1,0 +1,27 @@
+{
+  "id": "Cable_Pushdown",
+  "name": "Cable Pushdown",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Triceps Lateral Head"
+  ],
+  "secondaryMuscles": [
+    "Triceps Medial Head",
+    "Anconeus"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Cable Triceps Pushdown",
+    "Cable Pushdowns"
+  ],
+  "movementPattern": "Isolation"
+}

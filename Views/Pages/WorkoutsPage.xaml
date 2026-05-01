@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Name="WorkoutsPageRoot"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    xmlns:vm="clr-namespace:XerSize.ViewModels"
+    xmlns:workouts="clr-namespace:XerSize.Models.Presentation.Workouts"
+    xmlns:history="clr-namespace:XerSize.Models.Presentation.History"
+    xmlns:behaviors="clr-namespace:XerSize.Behaviors"
+    x:Class="XerSize.Views.Pages.WorkoutsPage"
+    x:DataType="vm:WorkoutsPageViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="20,18,20,150" Spacing="18">
+                <VerticalStackLayout.Behaviors>
+                    <behaviors:AppearAnimationBehavior TranslationY="14" Duration="240" />
+                </VerticalStackLayout.Behaviors>
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <Label Grid.Column="0" Text="Workouts" FontFamily="OpenSansSemibold" FontSize="30" TextColor="{StaticResource TextPrimary}" VerticalOptions="Center" />
+
+                    <components:QuickActionChip
+                        Grid.Column="1"
+                        Size="44"
+                        IconSize="18"
+                        IconSource="settings.png"
+                        ChipBackgroundColor="{StaticResource Surface}"
+                        Command="{Binding ManageWorkoutsCommand}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End" />
+                </Grid>
+
+                <CollectionView ItemsSource="{Binding WorkoutTabs}" ItemsLayout="HorizontalList" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="workouts:WorkoutPresentationModel">
+                            <components:TabPill
+                                Margin="0,0,10,0"
+                                Text="{Binding Name}"
+                                IsSelected="{Binding IsSelected}"
+                                Command="{Binding Source={x:Reference WorkoutsPageRoot}, Path=BindingContext.SelectWorkoutTabCommand}"
+                                CommandParameter="{Binding .}"
+                                ReorderCommand="{Binding Source={x:Reference WorkoutsPageRoot}, Path=BindingContext.ReorderWorkoutTabCommand}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <CollectionView ItemsSource="{Binding WorkoutItems}" SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.EmptyView>
+                        <Border Style="{StaticResource CardBorderStyle}" BackgroundColor="{StaticResource Surface}">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="No exercises yet." FontFamily="OpenSansSemibold" FontSize="16" HorizontalTextAlignment="Center" />
+                                <Label Text="Use the center button to add exercises to this workout later." Style="{StaticResource SectionSubtitleStyle}" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="workouts:WorkoutExercisePresentationModel">
+                            <components:WorkoutExerciseCard
+                                ExerciseName="{Binding Name}"
+                                ImageSource="{Binding ImageSource}"
+                                SummaryText="{Binding SummaryText}"
+                                Sets="{Binding Sets}"
+                                IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
+                                CommandParameter="{Binding .}"
+                                EditCommand="{Binding Source={x:Reference WorkoutsPageRoot}, Path=BindingContext.EditExerciseCommand}"
+                                DeleteCommand="{Binding Source={x:Reference WorkoutsPageRoot}, Path=BindingContext.DeleteExerciseCommand}"
+                                ToggleExpandCommand="{Binding Source={x:Reference WorkoutsPageRoot}, Path=BindingContext.ToggleExpandCommand}"
+                                ProgressCommand="{Binding Source={x:Reference WorkoutsPageRoot}, Path=BindingContext.ShowExerciseProgressCommand}"
+                                ReorderCommand="{Binding Source={x:Reference WorkoutsPageRoot}, Path=BindingContext.ReorderExerciseCommand}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsBottomNavVisible}" VerticalOptions="End" HorizontalOptions="Fill" Margin="20,0,20,18" InputTransparent="False">
+            <components:BottomNavBar
+                LeftPrimaryItem="{Binding DashboardNavItem}"
+                LeftSecondaryItem="{Binding WorkoutsNavItem}"
+                RightPrimaryItem="{Binding CalendarNavItem}"
+                RightSecondaryItem="{Binding SettingsNavItem}"
+                ItemCommand="{Binding SelectNavCommand}"
+                CenterCommand="{Binding OpenQuickActionsCommand}"
+                CenterIconSource="expand_content.png"
+                BarBackgroundColor="{StaticResource Surface}"
+                BarStrokeColor="{StaticResource StrokeSoft}"
+                BarShadowBrush="#18000000"
+                CenterButtonBackgroundColor="{StaticResource Accent}"
+                CenterButtonSize="62"
+                CenterIconSize="20" />
+        </Grid>
+
+        <components:QuickActionsMenu
+            ZIndex="15"
+            IsOpen="{Binding IsQuickActionsMenuVisible}"
+            CloseCommand="{Binding CloseQuickActionsCommand}"
+            PrimaryTitle="Add workout"
+            PrimarySubtitle="Create a new workout day"
+            PrimaryIconSource="routines.png"
+            PrimaryCommand="{Binding AddWorkoutCommand}"
+            SecondaryTitle="Add exercise"
+            SecondarySubtitle="Add movement to this workout"
+            SecondaryIconSource="exercises.png"
+            SecondaryCommand="{Binding AddExerciseCommand}"
+            TertiaryTitle="{Binding StartWorkoutActionTitle}"
+            TertiarySubtitle="{Binding StartWorkoutActionSubtitle}"
+            TertiaryIconSource="expand_content.png"
+            TertiaryCommand="{Binding StartWorkoutCommand}" />
+
+        <components:AddWorkoutNameDialog
+            ZIndex="18"
+            IsOpen="{Binding IsAddWorkoutDialogVisible}"
+            WorkoutName="{Binding NewWorkoutName, Mode=TwoWay}"
+            Title="Add workout"
+            Message="Give this workout day a name."
+            IconSource="routines.png"
+            IconBackgroundColor="{StaticResource AccentSurface}"
+            PrimaryButtonText="Create"
+            SecondaryButtonText="Cancel"
+            PrimaryCommand="{Binding CreateWorkoutCommand}"
+            SecondaryCommand="{Binding CancelAddWorkoutCommand}"
+            DismissCommand="{Binding CancelAddWorkoutCommand}" />
+
+        <components:AppDialog
+            ZIndex="20"
+            IsOpen="{Binding IsDeleteDialogVisible}"
+            Title="Delete exercise?"
+            Message="{Binding DeleteDialogMessage}"
+            IconSource="delete.png"
+            IconBackgroundColor="{StaticResource ErrorSurface}"
+            PrimaryButtonText="Delete"
+            SecondaryButtonText="Cancel"
+            PrimaryButtonBackgroundColor="{StaticResource ErrorColor}"
+            PrimaryCommand="{Binding ConfirmDeleteCommand}"
+            SecondaryCommand="{Binding CancelDeleteCommand}"
+            DismissCommand="{Binding CancelDeleteCommand}" />
+
+        <components:AppDialog
+            ZIndex="22"
+            IsOpen="{Binding IsStartWorkoutBlockedDialogVisible}"
+            Title="No exercises yet"
+            Message="Add at least one exercise to this workout before starting."
+            IconSource="exercises.png"
+            IconBackgroundColor="{StaticResource AccentSurface}"
+            PrimaryButtonText="OK"
+            ShowSecondaryButton="False"
+            PrimaryCommand="{Binding CloseStartWorkoutBlockedDialogCommand}"
+            DismissCommand="{Binding CloseStartWorkoutBlockedDialogCommand}" />
+
+        <components:AppDialog
+            ZIndex="24"
+            IsOpen="{Binding IsExerciseHistoryDialogVisible}"
+            Title="{Binding ExerciseHistoryDialogTitle}"
+            Message="{Binding ExerciseHistoryDialogMessage}"
+            IconSource="statistics.png"
+            IconBackgroundColor="{StaticResource AccentSurface}"
+            MaximumDialogWidth="520"
+            DialogVerticalOptions="End"
+            PrimaryButtonText="Close"
+            ShowSecondaryButton="False"
+            PrimaryCommand="{Binding CloseExerciseHistoryCommand}"
+            DismissCommand="{Binding CloseExerciseHistoryCommand}">
+
+            <components:AppDialog.DialogContent>
+                <VerticalStackLayout Spacing="12">
+                    <Border
+                        IsVisible="{Binding HasNoSelectedExerciseHistory}"
+                        Style="{StaticResource SoftCardBorderStyle}"
+                        BackgroundColor="{StaticResource SurfaceSoft}">
+                        <Label
+                            Text="No previous completed history found for this exercise yet."
+                            Style="{StaticResource SectionSubtitleStyle}"
+                            HorizontalTextAlignment="Center" />
+                    </Border>
+
+                    <CollectionView
+                        HeightRequest="340"
+                        ItemsSource="{Binding SelectedExerciseHistoryItems}"
+                        SelectionMode="None"
+                        IsVisible="{Binding HasSelectedExerciseHistory}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="history:HistoryExercisePresentationModel">
+                                <Border
+                                    BackgroundColor="{StaticResource SurfaceSoft}"
+                                    Stroke="{StaticResource StrokeSoft}"
+                                    StrokeThickness="1"
+                                    Padding="12">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="18" />
+                                    </Border.StrokeShape>
+
+                                    <VerticalStackLayout Spacing="10">
+                                        <VerticalStackLayout Spacing="3">
+                                            <Label
+                                                Text="{Binding Name}"
+                                                FontFamily="OpenSansSemibold"
+                                                FontSize="14"
+                                                TextColor="{StaticResource TextPrimary}" />
+
+                                            <Label
+                                                Text="{Binding SummaryText}"
+                                                Style="{StaticResource SectionSubtitleStyle}" />
+                                        </VerticalStackLayout>
+
+                                        <FlexLayout
+                                            Direction="Row"
+                                            Wrap="Wrap"
+                                            BindableLayout.ItemsSource="{Binding CompletedSets}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="history:HistorySetPresentationModel">
+                                                    <components:SetPill
+                                                        Margin="0,0,6,6"
+                                                        Text="{Binding SetText}"
+                                                        BackgroundColorValue="{StaticResource Surface}"
+                                                        StrokeColorValue="{StaticResource StrokeSoft}"
+                                                        TextColorValue="{StaticResource TextPrimary}" />
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </FlexLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </components:AppDialog.DialogContent>
+        </components:AppDialog>
+    </Grid>
+</ContentPage>

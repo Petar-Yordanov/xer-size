@@ -1,0 +1,22 @@
+{
+  "id": "Barbell_Upright_Row",
+  "name": "Barbell Upright Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

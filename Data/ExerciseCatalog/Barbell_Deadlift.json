@@ -1,0 +1,31 @@
+{
+  "id": "Barbell_Deadlift",
+  "name": "Barbell Deadlift",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Biceps Femoris",
+    "Erector Spinae"
+  ],
+  "secondaryMuscles": [
+    "Forearm Flexors",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes",
+    "Lower Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Conventional Deadlift"
+  ],
+  "movementPattern": "Hinge"
+}

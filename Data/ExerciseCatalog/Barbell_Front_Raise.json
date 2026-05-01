@@ -1,0 +1,22 @@
+{
+  "id": "Barbell_Front_Raise",
+  "name": "Barbell Front Raise",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Anterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Levator Scapulae"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

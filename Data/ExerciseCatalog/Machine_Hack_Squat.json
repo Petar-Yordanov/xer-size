@@ -1,0 +1,24 @@
+{
+  "id": "Machine_Hack_Squat",
+  "name": "Machine Hack Squat",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Squat"
+}

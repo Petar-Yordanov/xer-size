@@ -1,0 +1,23 @@
+{
+  "id": "Dumbbell_Lateral_Raise",
+  "name": "Dumbbell Lateral Raise",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Supraspinatus"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Rotator Cuff"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

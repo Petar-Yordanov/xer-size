@@ -1,0 +1,26 @@
+{
+  "id": "Battle_Rope_Alternating_Wave",
+  "name": "Battle Rope Alternating Wave",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Forearm Flexors"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

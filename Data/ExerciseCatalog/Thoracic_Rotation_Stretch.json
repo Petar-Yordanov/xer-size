@@ -1,0 +1,24 @@
+{
+  "id": "Thoracic_Rotation_Stretch",
+  "name": "Thoracic Rotation Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Thoracic Erectors",
+    "External Obliques"
+  ],
+  "secondaryMuscles": [
+    "Rhomboids"
+  ],
+  "primaryMuscleCategories": [
+    "Mid Back",
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "Dumbbell_Pullover",
+  "name": "Dumbbell Pullover",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Forearm Flexors",
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms",
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

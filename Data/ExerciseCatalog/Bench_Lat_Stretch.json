@@ -1,0 +1,24 @@
+{
+  "id": "Bench_Lat_Stretch",
+  "name": "Bench Lat Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Teres Major",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.TargetProgressCard"
+    x:DataType="components:TargetProgressCard">
+
+    <Border
+        Style="{StaticResource CardBorderStyle}"
+        Padding="14"
+        BackgroundColor="{Binding Source={x:Reference This}, Path=CardBackgroundColor}">
+
+        <VerticalStackLayout Spacing="10">
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=Title}"
+                Style="{StaticResource SectionSubtitleStyle}"
+                LineBreakMode="TailTruncation" />
+
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=Value}"
+                FontFamily="OpenSansSemibold"
+                FontSize="22"
+                TextColor="{Binding Source={x:Reference This}, Path=ValueColor}"
+                LineBreakMode="TailTruncation" />
+
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=Subtitle}"
+                Style="{StaticResource SectionSubtitleStyle}" />
+
+            <Border
+                x:Name="ProgressTrack"
+                HeightRequest="28"
+                BackgroundColor="{Binding Source={x:Reference This}, Path=TrackColor}"
+                Stroke="{Binding Source={x:Reference This}, Path=TrackStrokeColor}"
+                StrokeThickness="1"
+                HorizontalOptions="Fill">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="999" />
+                </Border.StrokeShape>
+
+                <Grid>
+                    <Border
+                        x:Name="ProgressFill"
+                        WidthRequest="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Fill"
+                        BackgroundColor="{Binding Source={x:Reference This}, Path=FillColor}"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="999" />
+                        </Border.StrokeShape>
+                    </Border>
+
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=ProgressText}"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="12"
+                        TextColor="{Binding Source={x:Reference This}, Path=ProgressTextColor}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        LineBreakMode="TailTruncation"
+                        Padding="10,0" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

@@ -1,0 +1,24 @@
+{
+  "id": "Cable_Hammer_Curl",
+  "name": "Cable Hammer Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Brachialis",
+    "Brachioradialis"
+  ],
+  "secondaryMuscles": [
+    "Forearm Extensors",
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Biceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

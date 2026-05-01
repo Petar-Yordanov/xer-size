@@ -1,0 +1,25 @@
+{
+  "id": "Single_Arm_Landmine_Press",
+  "name": "Single Arm Landmine Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius",
+    "Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Triceps"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Vertical Push"
+}

@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Name="StartWorkoutPageRoot"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    xmlns:vm="clr-namespace:XerSize.ViewModels"
+    xmlns:active="clr-namespace:XerSize.Models.Presentation.ActiveWorkouts"
+    xmlns:history="clr-namespace:XerSize.Models.Presentation.History"
+    x:Class="XerSize.Views.Pages.StartWorkoutPage"
+    x:DataType="vm:StartWorkoutPageViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="20,18,20,130" Spacing="18">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <components:QuickActionChip Grid.Column="0" Size="44" IconSize="18" IconSource="left.png" ChipBackgroundColor="{StaticResource Surface}" Command="{Binding BackCommand}" />
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                        <Label Text="Active workout" FontFamily="OpenSansSemibold" FontSize="26" TextColor="{StaticResource TextPrimary}" />
+                        <Label Text="{Binding ElapsedText}" Style="{StaticResource SectionSubtitleStyle}" />
+                    </VerticalStackLayout>
+
+                    <components:QuickActionChip Grid.Column="2" Size="44" IconSize="18" IconSource="statistics.png" ChipBackgroundColor="{StaticResource AccentSurface}" Command="{Binding ShowProgressCommand}" IsVisible="{Binding HasExercises}" />
+                </Grid>
+
+                <Border IsVisible="{Binding IsWorkoutEmpty}" Style="{StaticResource CardBorderStyle}" BackgroundColor="{StaticResource Surface}">
+                    <VerticalStackLayout Spacing="14">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="No exercises in this workout" FontFamily="OpenSansSemibold" FontSize="20" TextColor="{StaticResource TextPrimary}" HorizontalTextAlignment="Center" />
+                            <Label Text="Add at least one exercise before starting a session." Style="{StaticResource SectionSubtitleStyle}" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <components:AppActionButton Grid.Column="0" Text="Back" ButtonBackgroundColor="{StaticResource SurfaceSoft}" ButtonStrokeColor="{StaticResource StrokeSoft}" ButtonStrokeThickness="1" TextColor="{StaticResource TextPrimary}" ShadowOpacity="0" PressedScale="0.97" Command="{Binding BackCommand}" />
+                            <components:AppActionButton Grid.Column="1" Text="Add exercise" ButtonBackgroundColor="{StaticResource Accent}" ButtonStrokeColor="Transparent" ButtonStrokeThickness="0" TextColor="{StaticResource White}" ShadowOpacity="0.10" PressedScale="0.96" Command="{Binding AddExerciseCommand}" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <CollectionView IsVisible="{Binding HasExercises}" ItemsSource="{Binding Exercises}" ItemsLayout="HorizontalList" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="active:ActiveWorkoutExercisePresentationModel">
+                            <components:TabPill
+                                Margin="0,0,10,0"
+                                Text="{Binding BreadcrumbText}"
+                                IsSelected="{Binding IsSelected}"
+                                Command="{Binding Source={x:Reference StartWorkoutPageRoot}, Path=BindingContext.SelectExerciseCommand}"
+                                CommandParameter="{Binding .}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Grid IsVisible="{Binding HasExercises}">
+                    <Grid.GestureRecognizers>
+                        <SwipeGestureRecognizer Direction="Left" Command="{Binding NextExerciseCommand}" />
+                        <SwipeGestureRecognizer Direction="Right" Command="{Binding PreviousExerciseCommand}" />
+                    </Grid.GestureRecognizers>
+
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="{Binding CurrentExercise.Name}" FontFamily="OpenSansSemibold" FontSize="24" TextColor="{StaticResource TextPrimary}" />
+
+                        <Border HeightRequest="230" BackgroundColor="{StaticResource SurfaceSoft}" Stroke="{StaticResource StrokeSoft}" StrokeThickness="1" Padding="10">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="28" />
+                            </Border.StrokeShape>
+                            <Image Source="{Binding CurrentExercise.ImageSource}" Aspect="AspectFill" />
+                        </Border>
+
+                        <Border IsVisible="{Binding CurrentExercise.HasNotes}" Style="{StaticResource SoftCardBorderStyle}" BackgroundColor="{StaticResource SurfaceSoft}">
+                            <VerticalStackLayout Spacing="6">
+                                <Label Text="Notes" Style="{StaticResource FieldLabelStyle}" />
+                                <Label Text="{Binding CurrentExercise.Notes}" Style="{StaticResource SectionSubtitleStyle}" />
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <Label Grid.Column="0" Text="Sets" FontFamily="OpenSansSemibold" FontSize="18" TextColor="{StaticResource TextPrimary}" VerticalOptions="Center" />
+                            <components:QuickActionChip Grid.Column="1" Size="38" IconSize="16" IconSource="statistics.png" ChipBackgroundColor="{StaticResource AccentSurface}" Command="{Binding ShowProgressCommand}" />
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding CurrentExercise.Sets}" SelectionMode="None">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="active:ActiveWorkoutSetPresentationModel">
+                                    <Border
+                                        BackgroundColor="{StaticResource Surface}"
+                                        Stroke="{StaticResource StrokeSoft}"
+                                        StrokeThickness="1"
+                                        Padding="12">
+
+                                        <Border.Triggers>
+                                            <DataTrigger TargetType="Border" Binding="{Binding IsCurrentSet}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource AccentSurface}" />
+                                                <Setter Property="Stroke" Value="{StaticResource AccentSoft}" />
+                                            </DataTrigger>
+
+                                            <DataTrigger TargetType="Border" Binding="{Binding IsWaitingForRest}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="{StaticResource WarningSurface}" />
+                                                <Setter Property="Stroke" Value="{StaticResource WarningColor}" />
+                                                <Setter Property="StrokeThickness" Value="1" />
+                                            </DataTrigger>
+                                        </Border.Triggers>
+
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="18" />
+                                        </Border.StrokeShape>
+
+                                        <Grid ColumnDefinitions="Auto,*,*,Auto" ColumnSpacing="10">
+                                            <Border Grid.Column="0" WidthRequest="36" HeightRequest="36" BackgroundColor="{StaticResource AccentSurface}" Stroke="{StaticResource AccentSoft}" StrokeThickness="1" VerticalOptions="Center">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="999" />
+                                                </Border.StrokeShape>
+                                                <Label Text="{Binding SortNumberText}" FontFamily="OpenSansSemibold" FontSize="11" TextColor="{StaticResource AccentText}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                            </Border>
+
+                                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                                <Label Text="Reps" Style="{StaticResource FieldLabelStyle}" />
+                                                <Border Style="{StaticResource InputBorderStyle}" Padding="10,8">
+                                                    <Entry Text="{Binding Reps, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                                                </Border>
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout Grid.Column="2" Spacing="4">
+                                                <Label Text="Kg" Style="{StaticResource FieldLabelStyle}" />
+                                                <Border Style="{StaticResource InputBorderStyle}" Padding="10,8">
+                                                    <Entry Text="{Binding WeightKg, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                                                </Border>
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout Grid.Column="3" Spacing="4" VerticalOptions="Center">
+                                                <Label
+                                                    Text="{Binding CurrentSetIndicatorText}"
+                                                    FontFamily="OpenSansSemibold"
+                                                    FontSize="10"
+                                                    TextColor="{StaticResource TextPrimary}"
+                                                    HorizontalTextAlignment="Center"
+                                                    IsVisible="{Binding ShowCurrentSetIndicator}" />
+
+                                                <components:StatusBadge
+                                                    Text="{Binding CurrentStatusText}"
+                                                    BadgeBackgroundColor="{StaticResource SurfaceSoft}"
+                                                    BadgeStrokeColor="{StaticResource StrokeSoft}"
+                                                    BadgeAccentColor="{StaticResource Accent}"
+                                                    BadgeTextColor="{StaticResource TextPrimary}" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border
+            Grid.Row="1"
+            IsVisible="{Binding HasExercises}"
+            Margin="20,0,20,18"
+            Padding="12"
+            BackgroundColor="{StaticResource Surface}"
+            Stroke="{StaticResource StrokeSoft}"
+            StrokeThickness="1">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="28" />
+            </Border.StrokeShape>
+
+            <Grid>
+                <Grid
+                    ColumnDefinitions="Auto,*,Auto"
+                    ColumnSpacing="12"
+                    IsVisible="{Binding CanCompleteWorkout, Converter={StaticResource InvertedBoolConverter}}">
+
+                    <components:QuickActionChip
+                        Grid.Column="0"
+                        Size="48"
+                        IconSize="18"
+                        IconSource="close.png"
+                        ChipBackgroundColor="{StaticResource ErrorSurface}"
+                        Command="{Binding SkipCurrentSetCommand}" />
+
+                    <Border
+                        Grid.Column="1"
+                        BackgroundColor="{StaticResource SurfaceSoft}"
+                        Stroke="{StaticResource StrokeSoft}"
+                        StrokeThickness="1"
+                        Padding="12,10"
+                        VerticalOptions="Center">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="18" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            Text="{Binding RestTimerText}"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="18"
+                            TextColor="{StaticResource TextPrimary}"
+                            HorizontalTextAlignment="Center" />
+                    </Border>
+
+                    <components:AppActionButton
+                        Grid.Column="2"
+                        Text="{Binding PrimaryButtonText}"
+                        ButtonBackgroundColor="{StaticResource Accent}"
+                        ButtonStrokeColor="Transparent"
+                        ButtonStrokeThickness="0"
+                        TextColor="{StaticResource White}"
+                        ShadowOpacity="0.10"
+                        PressedScale="0.96"
+                        Command="{Binding PrimaryActionCommand}" />
+                </Grid>
+
+                <components:AppActionButton
+                    IsVisible="{Binding CanCompleteWorkout}"
+                    Text="{Binding PrimaryButtonText}"
+                    ButtonBackgroundColor="{StaticResource Accent}"
+                    ButtonStrokeColor="Transparent"
+                    ButtonStrokeThickness="0"
+                    TextColor="{StaticResource White}"
+                    ShadowOpacity="0.10"
+                    PressedScale="0.96"
+                    Command="{Binding PrimaryActionCommand}" />
+            </Grid>
+        </Border>
+
+        <components:AppDialog
+            Grid.RowSpan="2"
+            ZIndex="20"
+            IsOpen="{Binding IsLeaveWorkoutDialogVisible}"
+            Title="Leave active workout?"
+            Message="Your active workout stays in memory for now, but timers will stop while you leave this screen."
+            IconSource="close.png"
+            IconBackgroundColor="{StaticResource WarningSurface}"
+            PrimaryButtonText="Leave"
+            SecondaryButtonText="Stay"
+            PrimaryCommand="{Binding ConfirmLeaveWorkoutCommand}"
+            SecondaryCommand="{Binding CancelLeaveWorkoutCommand}"
+            DismissCommand="{Binding CancelLeaveWorkoutCommand}" />
+
+        <components:AppDialog
+            Grid.RowSpan="2"
+            ZIndex="21"
+            IsOpen="{Binding IsCompletePartialWorkoutDialogVisible}"
+            Title="Complete partial workout?"
+            Message="Some sets are skipped or still pending. Save this workout as partial?"
+            IconSource="save.png"
+            IconBackgroundColor="{StaticResource AccentSurface}"
+            PrimaryButtonText="Save partial"
+            SecondaryButtonText="Cancel"
+            PrimaryCommand="{Binding ConfirmCompletePartialWorkoutCommand}"
+            SecondaryCommand="{Binding CancelCompletePartialWorkoutCommand}"
+            DismissCommand="{Binding CancelCompletePartialWorkoutCommand}" />
+
+        <components:AppDialog
+            Grid.RowSpan="2"
+            ZIndex="22"
+            IsOpen="{Binding IsInfoDialogVisible}"
+            Title="{Binding InfoDialogTitle}"
+            Message="{Binding InfoDialogMessage}"
+            IconSource="statistics.png"
+            IconBackgroundColor="{StaticResource InfoSurface}"
+            PrimaryButtonText="OK"
+            ShowSecondaryButton="False"
+            PrimaryCommand="{Binding CloseInfoDialogCommand}"
+            DismissCommand="{Binding CloseInfoDialogCommand}" />
+
+        <components:AppDialog
+            Grid.RowSpan="2"
+            ZIndex="23"
+            IsOpen="{Binding IsWorkoutCompleteDialogVisible}"
+            Title="Workout complete"
+            Message="Workout saved to history."
+            IconSource="check.png"
+            IconBackgroundColor="{StaticResource SuccessSurface}"
+            PrimaryButtonText="Back to workouts"
+            ShowSecondaryButton="False"
+            PrimaryCommand="{Binding CloseWorkoutCompleteCommand}"
+            DismissCommand="{Binding CloseWorkoutCompleteCommand}" />
+
+        <components:AppDialog
+            Grid.RowSpan="2"
+            ZIndex="24"
+            IsOpen="{Binding IsExerciseHistoryDialogVisible}"
+            Title="{Binding ExerciseHistoryDialogTitle}"
+            Message="{Binding ExerciseHistoryDialogMessage}"
+            IconSource="statistics.png"
+            IconBackgroundColor="{StaticResource AccentSurface}"
+            MaximumDialogWidth="520"
+            DialogVerticalOptions="End"
+            PrimaryButtonText="Close"
+            ShowSecondaryButton="False"
+            PrimaryCommand="{Binding CloseExerciseHistoryCommand}"
+            DismissCommand="{Binding CloseExerciseHistoryCommand}">
+
+            <components:AppDialog.DialogContent>
+                <VerticalStackLayout Spacing="12">
+                    <Border
+                        IsVisible="{Binding HasNoSelectedExerciseHistory}"
+                        Style="{StaticResource SoftCardBorderStyle}"
+                        BackgroundColor="{StaticResource SurfaceSoft}">
+                        <Label
+                            Text="No previous completed history found for this exercise yet."
+                            Style="{StaticResource SectionSubtitleStyle}"
+                            HorizontalTextAlignment="Center" />
+                    </Border>
+
+                    <CollectionView
+                        HeightRequest="340"
+                        ItemsSource="{Binding SelectedExerciseHistoryItems}"
+                        SelectionMode="None"
+                        IsVisible="{Binding HasSelectedExerciseHistory}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="history:HistoryExercisePresentationModel">
+                                <Border
+                                    BackgroundColor="{StaticResource SurfaceSoft}"
+                                    Stroke="{StaticResource StrokeSoft}"
+                                    StrokeThickness="1"
+                                    Padding="12">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="18" />
+                                    </Border.StrokeShape>
+
+                                    <VerticalStackLayout Spacing="10">
+                                        <VerticalStackLayout Spacing="3">
+                                            <Label
+                                                Text="{Binding Name}"
+                                                FontFamily="OpenSansSemibold"
+                                                FontSize="14"
+                                                TextColor="{StaticResource TextPrimary}" />
+
+                                            <Label
+                                                Text="{Binding SummaryText}"
+                                                Style="{StaticResource SectionSubtitleStyle}" />
+                                        </VerticalStackLayout>
+
+                                        <FlexLayout
+                                            Direction="Row"
+                                            Wrap="Wrap"
+                                            BindableLayout.ItemsSource="{Binding CompletedSets}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="history:HistorySetPresentationModel">
+                                                    <components:SetPill
+                                                        Margin="0,0,6,6"
+                                                        Text="{Binding SetText}"
+                                                        BackgroundColorValue="{StaticResource Surface}"
+                                                        StrokeColorValue="{StaticResource StrokeSoft}"
+                                                        TextColorValue="{StaticResource TextPrimary}" />
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </FlexLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </components:AppDialog.DialogContent>
+        </components:AppDialog>
+    </Grid>
+</ContentPage>

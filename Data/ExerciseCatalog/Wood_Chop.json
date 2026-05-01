@@ -1,0 +1,25 @@
+{
+  "id": "Wood_Chop",
+  "name": "Wood Chop",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "External Obliques",
+    "Internal Obliques"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Rotation"
+}

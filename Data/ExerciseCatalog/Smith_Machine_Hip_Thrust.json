@@ -1,0 +1,23 @@
+{
+  "id": "Smith_Machine_Hip_Thrust",
+  "name": "Smith Machine Hip Thrust",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Erector Spinae"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral"
+}

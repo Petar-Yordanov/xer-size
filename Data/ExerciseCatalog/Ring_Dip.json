@@ -1,0 +1,26 @@
+{
+  "id": "Ring_Dip",
+  "name": "Ring Dip",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Sternal Pectoralis Major",
+    "Triceps Long Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Chest",
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

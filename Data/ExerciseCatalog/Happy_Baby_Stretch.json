@@ -1,0 +1,23 @@
+{
+  "id": "Happy_Baby_Stretch",
+  "name": "Happy Baby Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Adductors",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

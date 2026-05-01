@@ -1,0 +1,24 @@
+{
+  "id": "Lever_Decline_Chest_Press",
+  "name": "Lever Decline Chest Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Lower Pectoralis Major"
+  ],
+  "secondaryMuscles": [
+    "Triceps Lateral Head",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

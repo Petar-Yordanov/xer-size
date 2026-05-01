@@ -1,0 +1,23 @@
+{
+  "id": "Barbell_Shrug",
+  "name": "Barbell Shrug",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Levator Scapulae"
+  ],
+  "primaryMuscleCategories": [
+    "Upper Back",
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

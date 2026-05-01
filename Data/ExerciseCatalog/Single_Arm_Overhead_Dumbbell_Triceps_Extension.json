@@ -1,0 +1,23 @@
+{
+  "id": "Single_Arm_Overhead_Dumbbell_Triceps_Extension",
+  "name": "Single Arm Overhead Dumbbell Triceps Extension",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Long Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Sternal Head"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

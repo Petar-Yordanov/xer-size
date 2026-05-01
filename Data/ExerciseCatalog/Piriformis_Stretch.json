@@ -1,0 +1,23 @@
+{
+  "id": "Piriformis_Stretch",
+  "name": "Piriformis Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Piriformis",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Medius"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

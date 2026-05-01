@@ -1,0 +1,23 @@
+{
+  "id": "Scapular_Push_Up",
+  "name": "Scapular Push Up",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Serratus Anterior"
+  ],
+  "secondaryMuscles": [
+    "Pectoralis Minor",
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Chest",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral"
+}

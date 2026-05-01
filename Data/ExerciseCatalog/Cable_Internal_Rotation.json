@@ -1,0 +1,22 @@
+{
+  "id": "Cable_Internal_Rotation",
+  "name": "Cable Internal Rotation",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Subscapularis"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Rotator Cuff"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

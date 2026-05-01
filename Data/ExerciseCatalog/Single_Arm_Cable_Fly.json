@@ -1,0 +1,24 @@
+{
+  "id": "Single_Arm_Cable_Fly",
+  "name": "Single Arm Cable Fly",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Lateral Head",
+    "Medial Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Sternal Head"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Chest",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "Cable_High_Row",
+  "name": "Cable High Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Upper Trapezius",
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Rhomboids",
+    "Latissimus Dorsi"
+  ],
+  "primaryMuscleCategories": [
+    "Upper Back",
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back",
+    "Lats"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

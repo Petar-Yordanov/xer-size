@@ -1,0 +1,24 @@
+{
+  "id": "Butt_Kick",
+  "name": "Butt Kick",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Hamstrings"
+  ],
+  "secondaryMuscles": [
+    "Quadriceps",
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads",
+    "Calves"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

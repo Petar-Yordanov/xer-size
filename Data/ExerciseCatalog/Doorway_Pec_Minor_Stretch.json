@@ -1,0 +1,22 @@
+{
+  "id": "Doorway_Pec_Minor_Stretch",
+  "name": "Doorway Pec Minor Stretch",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Pectoralis Minor"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

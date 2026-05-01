@@ -1,0 +1,30 @@
+
+{
+  "id": "Heavy_Bag_Punch",
+  "name": "Heavy Bag Punch",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Triceps Lateral Head"
+  ],
+  "secondaryMuscles": [
+    "External Obliques",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Abs"
+  ],
+  "limbInvolvement": "Alternating",
+  "aliases": [
+    "Heavy Bag Punches"
+  ],
+  "movementPattern": "Cardio"
+}

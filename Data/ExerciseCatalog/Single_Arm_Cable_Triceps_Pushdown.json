@@ -1,0 +1,23 @@
+{
+  "id": "Single_Arm_Cable_Triceps_Pushdown",
+  "name": "Single Arm Cable Triceps Pushdown",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Lateral Head",
+    "Medial Head"
+  ],
+  "secondaryMuscles": [
+    "Long Head"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

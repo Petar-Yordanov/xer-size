@@ -1,0 +1,24 @@
+{
+  "id": "Barbell_Hip_Thrust",
+  "name": "Barbell Hip Thrust",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Gluteus Medius"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

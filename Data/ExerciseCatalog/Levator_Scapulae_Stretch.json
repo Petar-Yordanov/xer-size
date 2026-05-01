@@ -1,0 +1,21 @@
+{
+  "id": "Levator_Scapulae_Stretch",
+  "name": "Levator Scapulae Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Levator Scapulae"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "limbInvolvement": "Unilateral"
+}

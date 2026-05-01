@@ -1,0 +1,23 @@
+{
+  "id": "Barbell_JM_Press",
+  "name": "Barbell JM Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Triceps Long Head"
+  ],
+  "secondaryMuscles": [
+    "Triceps Medial Head",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

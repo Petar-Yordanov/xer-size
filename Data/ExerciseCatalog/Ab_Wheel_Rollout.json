@@ -1,0 +1,25 @@
+{
+  "id": "Ab_Wheel_Rollout",
+  "name": "Ab Wheel Rollout",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Rectus Abdominis",
+    "Transverse Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Serratus Anterior",
+    "Lats"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Chest",
+    "Lats"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

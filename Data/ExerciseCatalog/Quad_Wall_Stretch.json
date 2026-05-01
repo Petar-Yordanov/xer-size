@@ -1,0 +1,23 @@
+{
+  "id": "Quad_Wall_Stretch",
+  "name": "Quad Wall Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Rectus Femoris",
+    "Vastus Lateralis"
+  ],
+  "secondaryMuscles": [
+    "Iliopsoas"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

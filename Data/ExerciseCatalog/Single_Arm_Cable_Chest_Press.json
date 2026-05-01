@@ -1,0 +1,23 @@
+{
+  "id": "Single_Arm_Cable_Chest_Press",
+  "name": "Single Arm Cable Chest Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Sternal Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Abs"
+  ],
+  "limbInvolvement": "Unilateral"
+}

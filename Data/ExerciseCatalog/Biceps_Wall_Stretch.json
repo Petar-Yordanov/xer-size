@@ -1,0 +1,23 @@
+{
+  "id": "Biceps_Wall_Stretch",
+  "name": "Biceps Wall Stretch",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Biceps Long Head",
+    "Biceps Short Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Biceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

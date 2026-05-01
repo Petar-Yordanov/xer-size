@@ -1,0 +1,23 @@
+{
+  "id": "Single_Arm_Overhead_Cable_Triceps_Extension",
+  "name": "Single Arm Overhead Cable Triceps Extension",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Long Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Sternal Head"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

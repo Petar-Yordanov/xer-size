@@ -1,0 +1,26 @@
+{
+  "id": "Seal_Jack",
+  "name": "Seal Jack",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Medius"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius",
+    "Sternal Pectoralis Major"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves",
+    "Chest"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

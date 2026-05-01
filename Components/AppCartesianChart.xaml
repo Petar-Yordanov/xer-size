@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    x:Class="XerSize.Components.AppCartesianChart"
+    x:DataType="local:AppCartesianChart"
+    xmlns:local="clr-namespace:XerSize.Components">
+
+    <Grid
+        HeightRequest="{Binding Source={x:Reference This}, Path=ChartHeight}"
+        MinimumHeightRequest="{Binding Source={x:Reference This}, Path=ChartHeight}"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
+
+        <lvc:CartesianChart
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            HeightRequest="{Binding Source={x:Reference This}, Path=ChartHeight}"
+            MinimumHeightRequest="{Binding Source={x:Reference This}, Path=ChartHeight}"
+            BackgroundColor="{Binding Source={x:Reference This}, Path=ChartBackgroundColor}"
+            Series="{Binding Source={x:Reference This}, Path=Series}"
+            XAxes="{Binding Source={x:Reference This}, Path=XAxes}"
+            YAxes="{Binding Source={x:Reference This}, Path=YAxes}" />
+    </Grid>
+</ContentView>

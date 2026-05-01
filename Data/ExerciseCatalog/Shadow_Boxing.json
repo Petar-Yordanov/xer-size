@@ -1,0 +1,26 @@
+{
+  "id": "Shadow_Boxing",
+  "name": "Shadow Boxing",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Triceps Lateral Head"
+  ],
+  "secondaryMuscles": [
+    "External Obliques",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Abs"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

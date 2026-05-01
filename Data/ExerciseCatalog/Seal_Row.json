@@ -1,0 +1,26 @@
+{
+  "id": "Seal_Row",
+  "name": "Seal Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Rhomboids"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid",
+    "Biceps Short Head"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Biceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

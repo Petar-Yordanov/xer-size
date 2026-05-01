@@ -1,0 +1,26 @@
+{
+  "id": "45_Degree_Back_Extension",
+  "name": "45 Degree Back Extension",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Erector Spinae"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Lower Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

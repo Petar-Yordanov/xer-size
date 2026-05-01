@@ -1,0 +1,22 @@
+{
+  "id": "Sissy_Squat",
+  "name": "Sissy Squat",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Rectus Femoris"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Squat"
+}

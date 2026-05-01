@@ -1,0 +1,22 @@
+{
+  "id": "Toe_Extensor_Stretch",
+  "name": "Toe Extensor Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Extensor Digitorum Longus"
+  ],
+  "secondaryMuscles": [
+    "Tibialis Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

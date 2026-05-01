@@ -1,0 +1,26 @@
+{
+  "id": "Battle_Rope_Outside_Circle",
+  "name": "Battle Rope Outside Circle",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Posterior Deltoid",
+    "Forearm Extensors"
+  ],
+  "secondaryMuscles": [
+    "Middle Trapezius",
+    "Rectus Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Abs"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

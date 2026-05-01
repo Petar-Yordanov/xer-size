@@ -1,0 +1,26 @@
+{
+  "id": "Suspension_Row",
+  "name": "Suspension Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Rhomboids"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid",
+    "Biceps Short Head"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Biceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

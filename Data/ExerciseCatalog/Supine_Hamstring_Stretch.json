@@ -1,0 +1,22 @@
+{
+  "id": "Supine_Hamstring_Stretch",
+  "name": "Supine Hamstring Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Hamstrings"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

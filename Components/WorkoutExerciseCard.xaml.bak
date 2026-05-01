@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:behaviors="clr-namespace:XerSize.Behaviors"
+    xmlns:components="clr-namespace:XerSize.Components"
+    xmlns:items="clr-namespace:XerSize.ViewModels.Items"
+    x:Class="XerSize.Components.WorkoutExerciseCard"
+    x:DataType="components:WorkoutExerciseCard">
+
+    <Border
+        Style="{StaticResource CardBorderStyle}"
+        BackgroundColor="{StaticResource Surface}"
+        Padding="14">
+
+        <Border.Behaviors>
+            <behaviors:DropReorderBehavior
+                Command="{Binding Source={x:Reference This}, Path=ReorderCommand}"
+                TargetItem="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+
+            <behaviors:DragItemBehavior
+                Item="{Binding Source={x:Reference This}, Path=CommandParameter}"
+                DragScale="1.03"
+                DragOpacity="0.86"
+                DragTranslationY="-8" />
+        </Border.Behaviors>
+
+        <VerticalStackLayout Spacing="12">
+
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+
+                <Border
+                    Grid.Column="0"
+                    WidthRequest="58"
+                    HeightRequest="58"
+                    BackgroundColor="{StaticResource SurfaceSoft}"
+                    Stroke="{StaticResource StrokeSoft}"
+                    StrokeThickness="1"
+                    Padding="7"
+                    VerticalOptions="Start">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+
+                    <Image
+                        Source="{Binding Source={x:Reference This}, Path=ImageSource}"
+                        Aspect="AspectFill"
+                        WidthRequest="44"
+                        HeightRequest="44"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Border>
+
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Spacing="4"
+                    VerticalOptions="Center">
+
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=ExerciseName}"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="17"
+                        TextColor="{StaticResource TextPrimary}"
+                        LineBreakMode="TailTruncation" />
+
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=SummaryText}"
+                        Style="{StaticResource SectionSubtitleStyle}" />
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout
+                    Grid.Column="2"
+                    Spacing="8"
+                    VerticalOptions="Center">
+
+                    <components:QuickActionChip
+                        Size="34"
+                        IconSize="14"
+                        IconSource="edit.png"
+                        ChipBackgroundColor="{StaticResource AccentSurface}"
+                        Command="{Binding Source={x:Reference This}, Path=EditCommand}"
+                        CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+
+                    <components:QuickActionChip
+                        Size="34"
+                        IconSize="14"
+                        IconSource="delete.png"
+                        ChipBackgroundColor="{StaticResource ErrorSurface}"
+                        Command="{Binding Source={x:Reference This}, Path=DeleteCommand}"
+                        CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+
+                    <components:QuickActionChip
+                        Size="34"
+                        IconSize="14"
+                        IconSource="{Binding Source={x:Reference This}, Path=ExpandIconSource}"
+                        ChipBackgroundColor="{StaticResource SurfaceSoft}"
+                        Command="{Binding Source={x:Reference This}, Path=ToggleExpandCommand}"
+                        CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <VerticalStackLayout
+                Spacing="8"
+                IsVisible="{Binding Source={x:Reference This}, Path=IsExpanded}">
+
+                <BoxView
+                    HeightRequest="1"
+                    Color="{StaticResource DividerColor}"
+                    Opacity="0.75" />
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Label
+                        Grid.Column="0"
+                        Text="Sets"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="14"
+                        TextColor="{StaticResource TextPrimary}"
+                        VerticalOptions="Center" />
+
+                    <components:QuickActionChip
+                        Grid.Column="1"
+                        Size="34"
+                        IconSize="14"
+                        IconSource="statistics.png"
+                        ChipBackgroundColor="{StaticResource AccentSurface}"
+                        Command="{Binding Source={x:Reference This}, Path=ProgressCommand}"
+                        CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+                </Grid>
+
+                <CollectionView
+                    ItemsSource="{Binding Source={x:Reference This}, Path=Sets}"
+                    SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="items:WorkoutSetItemViewModel">
+                            <Border
+                                BackgroundColor="{StaticResource SurfaceSoft}"
+                                Stroke="{StaticResource StrokeSoft}"
+                                StrokeThickness="1"
+                                Padding="12,10">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="16" />
+                                </Border.StrokeShape>
+
+                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                        <Label Text="Reps" Style="{StaticResource FieldLabelStyle}" />
+                                        <Label
+                                            Text="{Binding RepsText}"
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="13"
+                                            TextColor="{StaticResource TextPrimary}" />
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                        <Label Text="Weight" Style="{StaticResource FieldLabelStyle}" />
+                                        <Label
+                                            Text="{Binding WeightText}"
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="13"
+                                            TextColor="{StaticResource TextPrimary}" />
+                                    </VerticalStackLayout>
+
+                                    <VerticalStackLayout Grid.Column="2" Spacing="2">
+                                        <Label Text="Rest" Style="{StaticResource FieldLabelStyle}" />
+                                        <Label
+                                            Text="{Binding RestText}"
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="13"
+                                            TextColor="{StaticResource TextPrimary}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

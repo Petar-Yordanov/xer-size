@@ -1,0 +1,23 @@
+{
+  "id": "Cable_External_Rotation",
+  "name": "Cable External Rotation",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Infraspinatus",
+    "Teres Minor"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Rotator Cuff"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "Dumbbell_Wrist_Curl",
+  "name": "Dumbbell Wrist Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Wrist Flexors"
+  ],
+  "secondaryMuscles": [
+    "Palmaris Longus",
+    "Brachioradialis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

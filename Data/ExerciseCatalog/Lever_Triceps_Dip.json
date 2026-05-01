@@ -1,0 +1,28 @@
+{
+  "id": "Lever_Triceps_Dip",
+  "name": "Lever Triceps Dip",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Triceps Lateral Head",
+    "Triceps Medial Head"
+  ],
+  "secondaryMuscles": [
+    "Lower Pectoralis Major",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Chest",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Triceps Dip"
+  ],
+  "movementPattern": "Horizontal Push"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "Cable_Overhead_Triceps_Extension",
+  "name": "Cable Overhead Triceps Extension",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Triceps Long Head"
+  ],
+  "secondaryMuscles": [
+    "Triceps Medial Head"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

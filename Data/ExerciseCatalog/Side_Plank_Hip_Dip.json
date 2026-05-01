@@ -1,0 +1,25 @@
+{
+  "id": "Side_Plank_Hip_Dip",
+  "name": "Side Plank Hip Dip",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "External Obliques",
+    "Internal Obliques"
+  ],
+  "secondaryMuscles": [
+    "Quadratus Lumborum",
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Lower Back"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Core"
+}

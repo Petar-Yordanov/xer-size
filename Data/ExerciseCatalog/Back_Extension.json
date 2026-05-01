@@ -1,0 +1,24 @@
+{
+  "id": "Back_Extension",
+  "name": "Back Extension",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Erector Spinae"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Semitendinosus"
+  ],
+  "primaryMuscleCategories": [
+    "Lower Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

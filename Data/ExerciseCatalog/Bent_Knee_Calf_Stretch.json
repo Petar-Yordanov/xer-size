@@ -1,0 +1,22 @@
+{
+  "id": "Bent_Knee_Calf_Stretch",
+  "name": "Bent Knee Calf Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Soleus"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

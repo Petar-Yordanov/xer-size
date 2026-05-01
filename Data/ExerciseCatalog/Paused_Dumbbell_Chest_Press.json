@@ -1,0 +1,24 @@
+{
+  "id": "Paused_Dumbbell_Chest_Press",
+  "name": "Paused Dumbbell Chest Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Sternal Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "Cable_Reverse_Wood_Chop",
+  "name": "Cable Reverse Wood Chop",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "External Obliques",
+    "Internal Obliques"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Rotation"
+}

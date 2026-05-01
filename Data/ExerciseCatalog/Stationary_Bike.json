@@ -1,0 +1,24 @@
+{
+  "id": "Stationary_Bike",
+  "name": "Stationary Bike",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Calves"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

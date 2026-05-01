@@ -1,0 +1,25 @@
+{
+  "id": "Single_Arm_Seated_Cable_Row",
+  "name": "Single Arm Seated Cable Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Rhomboids",
+    "Middle Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Latissimus Dorsi",
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Lats",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Horizontal Pull"
+}

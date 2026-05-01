@@ -1,0 +1,22 @@
+{
+  "id": "Sternocleidomastoid_Stretch",
+  "name": "Sternocleidomastoid Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Sternocleidomastoid"
+  ],
+  "secondaryMuscles": [
+    "Scalenes"
+  ],
+  "primaryMuscleCategories": [
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Neck"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

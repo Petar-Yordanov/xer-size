@@ -1,0 +1,23 @@
+{
+  "id": "Dumbbell_Skull_Crusher",
+  "name": "Dumbbell Skull Crusher",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Lateral Head",
+    "Medial Head"
+  ],
+  "secondaryMuscles": [
+    "Long Head"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

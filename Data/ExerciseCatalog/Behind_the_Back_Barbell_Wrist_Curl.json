@@ -1,0 +1,22 @@
+{
+  "id": "Behind_the_Back_Barbell_Wrist_Curl",
+  "name": "Behind the Back Barbell Wrist Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Wrist Flexors"
+  ],
+  "secondaryMuscles": [
+    "Palmaris Longus"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

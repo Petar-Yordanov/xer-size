@@ -1,0 +1,26 @@
+{
+  "id": "Bear_Crawl",
+  "name": "Bear Crawl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Quadriceps",
+    "Serratus Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads",
+    "Abs"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "Leg_Raise",
+  "name": "Leg Raise",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Lower Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Hip Flexors",
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Straight Leg Raise"
+  ],
+  "movementPattern": "Core"
+}

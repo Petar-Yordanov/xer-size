@@ -1,41 +1,32 @@
-﻿using XerSize.Models;
-using XerSize.ViewModels.History;
+﻿using Microsoft.Extensions.DependencyInjection;
+using XerSize.ViewModels;
 
 namespace XerSize.Views.Pages;
 
 public partial class HistoryPage : ContentPage
 {
-    private readonly HistoryPageViewModel _viewModel;
-    private bool _isLoaded;
-    private bool _isLoading;
+    public HistoryPage()
+        : this(ResolveViewModel())
+    {
+    }
 
     public HistoryPage(HistoryPageViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = _viewModel = viewModel;
+        BindingContext = viewModel;
     }
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        if (_isLoaded || _isLoading)
-            return;
+        if (BindingContext is HistoryPageViewModel vm)
+            vm.SyncSelectedNav();
+    }
 
-        _isLoading = true;
-
-        try
-        {
-            await _viewModel.LoadCommand.ExecuteAsync(null);
-            _isLoaded = true;
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine(ex);
-        }
-        finally
-        {
-            _isLoading = false;
-        }
+    private static HistoryPageViewModel ResolveViewModel()
+    {
+        return IPlatformApplication.Current?.Services.GetRequiredService<HistoryPageViewModel>()
+            ?? throw new InvalidOperationException("HistoryPageViewModel is not registered in the service provider.");
     }
 }

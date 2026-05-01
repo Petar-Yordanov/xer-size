@@ -1,0 +1,24 @@
+{
+  "id": "Good_Morning",
+  "name": "Good Morning",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Biceps Femoris",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Erector Spinae"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

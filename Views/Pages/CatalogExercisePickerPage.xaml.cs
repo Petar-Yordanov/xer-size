@@ -1,40 +1,32 @@
-﻿using XerSize.ViewModels.Routines;
+﻿using Microsoft.Extensions.DependencyInjection;
+using XerSize.ViewModels;
 
 namespace XerSize.Views.Pages;
 
 public partial class CatalogExercisePickerPage : ContentPage
 {
-    private readonly CatalogExercisePickerPageViewModel _viewModel;
-    private bool _isLoaded;
-    private bool _isLoading;
+    public CatalogExercisePickerPage()
+        : this(ResolveViewModel())
+    {
+    }
 
     public CatalogExercisePickerPage(CatalogExercisePickerPageViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = _viewModel = viewModel;
+        BindingContext = viewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        if (_isLoaded || _isLoading)
-            return;
+        if (BindingContext is CatalogExercisePickerPageViewModel vm)
+            await vm.InitializeAsync();
+    }
 
-        _isLoading = true;
-
-        try
-        {
-            await _viewModel.LoadCommand.ExecuteAsync(null);
-            _isLoaded = true;
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine(ex);
-        }
-        finally
-        {
-            _isLoading = false;
-        }
+    private static CatalogExercisePickerPageViewModel ResolveViewModel()
+    {
+        return IPlatformApplication.Current?.Services.GetRequiredService<CatalogExercisePickerPageViewModel>()
+            ?? throw new InvalidOperationException("CatalogExercisePickerPageViewModel is not registered in the service provider.");
     }
 }

@@ -1,0 +1,23 @@
+{
+  "id": "Band_Neck_Lateral_Flexion",
+  "name": "Band Neck Lateral Flexion",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Sternocleidomastoid"
+  ],
+  "secondaryMuscles": [
+    "Deep Neck Flexors"
+  ],
+  "primaryMuscleCategories": [
+    "Neck"
+  ],
+  "secondaryMuscleCategories": [
+    "Neck",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

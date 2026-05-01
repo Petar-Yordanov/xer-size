@@ -1,0 +1,26 @@
+{
+  "id": "Deficit_Barbell_Deadlift",
+  "name": "Deficit Barbell Deadlift",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Erector Spinae"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Lower Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

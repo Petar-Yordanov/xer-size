@@ -1,0 +1,22 @@
+{
+  "id": "Nordic_Curl",
+  "name": "Nordic Curl",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Biceps Femoris",
+    "Semitendinosus"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral"
+}

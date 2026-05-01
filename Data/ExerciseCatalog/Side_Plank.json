@@ -1,0 +1,25 @@
+{
+  "id": "Side_Plank",
+  "name": "Side Plank",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "External Obliques",
+    "Internal Obliques"
+  ],
+  "secondaryMuscles": [
+    "Transverse Abdominis",
+    "Gluteus Medius"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Core"
+}

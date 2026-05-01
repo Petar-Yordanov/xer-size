@@ -1,0 +1,29 @@
+{
+  "id": "Air_Bike",
+  "name": "Air Bike",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Calves"
+  ],
+  "limbInvolvement": "Alternating",
+  "aliases": [
+    "Fan Bike"
+  ],
+  "movementPattern": "Cardio"
+}

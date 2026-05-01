@@ -1,0 +1,27 @@
+{
+  "id": "Lever_Pulldown",
+  "name": "Lever Pulldown",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Biceps Short Head",
+    "Teres Major"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Biceps",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Pulldown"
+  ],
+  "movementPattern": "Vertical Pull"
+}

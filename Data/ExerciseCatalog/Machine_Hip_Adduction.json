@@ -1,0 +1,22 @@
+{
+  "id": "Machine_Hip_Adduction",
+  "name": "Machine Hip Adduction",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Adductors"
+  ],
+  "secondaryMuscles": [
+    "Gracilis"
+  ],
+  "primaryMuscleCategories": [
+    "Adductors"
+  ],
+  "secondaryMuscleCategories": [
+    "Adductors"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

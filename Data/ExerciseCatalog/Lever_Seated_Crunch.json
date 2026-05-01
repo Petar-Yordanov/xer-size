@@ -1,0 +1,26 @@
+{
+  "id": "Lever_Seated_Crunch",
+  "name": "Lever Seated Crunch",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "External Obliques",
+    "Transverse Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Seated Crunch"
+  ],
+  "movementPattern": "Core"
+}

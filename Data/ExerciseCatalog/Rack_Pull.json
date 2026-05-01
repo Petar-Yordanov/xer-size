@@ -1,0 +1,26 @@
+{
+  "id": "Rack_Pull",
+  "name": "Rack Pull",
+  "force": "Pull",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Erector Spinae",
+    "Upper Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Forearm Flexors",
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Lower Back",
+    "Upper Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms",
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

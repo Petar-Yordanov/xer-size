@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.SearchField"
+    x:DataType="components:SearchField">
+
+    <Border Style="{StaticResource InputBorderStyle}">
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+            <Image
+                Source="{Binding Source={x:Reference This}, Path=IconSource}"
+                WidthRequest="16"
+                HeightRequest="16"
+                VerticalOptions="Center" />
+
+            <Entry
+                Grid.Column="1"
+                Text="{Binding Source={x:Reference This}, Path=Text, Mode=TwoWay}"
+                Placeholder="{Binding Source={x:Reference This}, Path=Placeholder}" />
+        </Grid>
+    </Border>
+</ContentView>

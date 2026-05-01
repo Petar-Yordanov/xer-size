@@ -1,0 +1,23 @@
+{
+  "id": "Machine_Hip_Abduction",
+  "name": "Machine Hip Abduction",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Gluteus Medius",
+    "Gluteus Minimus"
+  ],
+  "secondaryMuscles": [
+    "Tensor Fasciae Latae"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

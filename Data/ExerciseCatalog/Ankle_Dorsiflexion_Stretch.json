@@ -1,0 +1,23 @@
+{
+  "id": "Ankle_Dorsiflexion_Stretch",
+  "name": "Ankle Dorsiflexion Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Gastrocnemius",
+    "Soleus"
+  ],
+  "secondaryMuscles": [
+    "Tibialis Anterior"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

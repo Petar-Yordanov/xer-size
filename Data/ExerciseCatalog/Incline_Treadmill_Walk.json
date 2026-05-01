@@ -1,0 +1,26 @@
+{
+  "id": "Incline_Treadmill_Walk",
+  "name": "Incline Treadmill Walk",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Gastrocnemius"
+  ],
+  "secondaryMuscles": [
+    "Quadriceps",
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads",
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

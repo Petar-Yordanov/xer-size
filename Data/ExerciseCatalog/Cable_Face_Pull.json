@@ -1,0 +1,29 @@
+{
+  "id": "Cable_Face_Pull",
+  "name": "Cable Face Pull",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Posterior Deltoid",
+    "External Rotators"
+  ],
+  "secondaryMuscles": [
+    "Middle Trapezius",
+    "Rhomboids"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Rotator Cuff"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Mid Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Cable Face Pulls"
+  ],
+  "movementPattern": "Horizontal Pull"
+}

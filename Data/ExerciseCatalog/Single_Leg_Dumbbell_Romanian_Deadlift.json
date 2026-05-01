@@ -1,0 +1,26 @@
+{
+  "id": "Single_Leg_Dumbbell_Romanian_Deadlift",
+  "name": "Single Leg Dumbbell Romanian Deadlift",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Biceps Femoris",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Forearm Flexors",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Lower Back",
+    "Abs"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Hinge"
+}

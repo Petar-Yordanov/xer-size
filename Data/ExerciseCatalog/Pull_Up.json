@@ -1,0 +1,27 @@
+{
+  "id": "Pull_Up",
+  "name": "Pull Up",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Biceps Short Head",
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Biceps",
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Pull-Up"
+  ],
+  "movementPattern": "Vertical Pull"
+}

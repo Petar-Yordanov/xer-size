@@ -1,0 +1,25 @@
+{
+  "id": "Bench_Dip",
+  "name": "Bench Dip",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Lateral Head",
+    "Medial Head"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Sternal Head"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Chest"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

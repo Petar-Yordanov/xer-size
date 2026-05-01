@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.SectionExpanderHeader"
+    x:DataType="components:SectionExpanderHeader">
+
+    <Border
+        Style="{StaticResource CardBorderStyle}"
+        BackgroundColor="{Binding Source={x:Reference This}, Path=HeaderBackgroundColor}">
+        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+
+            <Border
+                WidthRequest="32"
+                HeightRequest="32"
+                BackgroundColor="{Binding Source={x:Reference This}, Path=IconBackgroundColor}"
+                Stroke="{StaticResource StrokeSoft}"
+                StrokeThickness="1"
+                Padding="8"
+                VerticalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="999" />
+                </Border.StrokeShape>
+
+                <Image
+                    Source="{Binding Source={x:Reference This}, Path=IconSource}"
+                    WidthRequest="14"
+                    HeightRequest="14"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Border>
+
+            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=Title}"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="16" />
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=Subtitle}"
+                    Style="{StaticResource SectionSubtitleStyle}" />
+            </VerticalStackLayout>
+
+            <Image
+                Grid.Column="2"
+                WidthRequest="18"
+                HeightRequest="18"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Source="expand_more.png">
+                <Image.Triggers>
+                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference This}, Path=IsExpanded}" Value="True">
+                        <Setter Property="Source" Value="expand_less.png" />
+                    </DataTrigger>
+                </Image.Triggers>
+            </Image>
+        </Grid>
+    </Border>
+</ContentView>

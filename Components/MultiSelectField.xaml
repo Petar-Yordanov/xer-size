@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.MultiSelectField"
+    x:DataType="components:MultiSelectField">
+
+    <VerticalStackLayout Spacing="8">
+        <Label
+            Text="{Binding Source={x:Reference This}, Path=Label}"
+            Style="{StaticResource FieldLabelStyle}" />
+
+        <toolkit:Expander IsExpanded="{Binding Source={x:Reference This}, Path=IsExpanded, Mode=TwoWay}">
+            <toolkit:Expander.Header>
+                <Border Style="{StaticResource InputBorderStyle}">
+                    <Border.Behaviors>
+                        <toolkit:TouchBehavior PressedScale="0.98" PressedOpacity="0.92" />
+                    </Border.Behaviors>
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <Label
+                            Text="{Binding Source={x:Reference This}, Path=SummaryText}"
+                            VerticalOptions="Center">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    TargetType="Label"
+                                    Binding="{Binding Source={x:Reference This}, Path=HasSelection}"
+                                    Value="False">
+                                    <Setter Property="TextColor" Value="{StaticResource TextMuted}" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    TargetType="Label"
+                                    Binding="{Binding Source={x:Reference This}, Path=HasSelection}"
+                                    Value="True">
+                                    <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+
+                        <Image
+                            Grid.Column="1"
+                            WidthRequest="16"
+                            HeightRequest="16"
+                            VerticalOptions="Center"
+                            Source="expand_more.png">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    TargetType="Image"
+                                    Binding="{Binding Source={x:Reference This}, Path=IsExpanded}"
+                                    Value="True">
+                                    <Setter Property="Source" Value="expand_less.png" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </Border>
+            </toolkit:Expander.Header>
+
+            <Border
+                Style="{StaticResource SoftCardBorderStyle}"
+                Margin="0,8,0,0"
+                Padding="8"
+                BackgroundColor="{Binding Source={x:Reference This}, Path=DropdownBackgroundColor}">
+                <VerticalStackLayout Spacing="8">
+
+                    <CollectionView
+                        ItemsSource="{Binding Source={x:Reference This}, Path=ItemsSource}"
+                        ItemTemplate="{Binding Source={x:Reference This}, Path=ItemTemplate}"
+                        SelectionMode="None" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <ContentPresenter
+                            Grid.Column="0"
+                            Content="{Binding Source={x:Reference This}, Path=SecondaryActionContent}" />
+                        <ContentPresenter
+                            Grid.Column="1"
+                            Content="{Binding Source={x:Reference This}, Path=PrimaryActionContent}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </toolkit:Expander>
+    </VerticalStackLayout>
+</ContentView>

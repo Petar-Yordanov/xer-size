@@ -1,0 +1,29 @@
+{
+  "id": "Barbell_Overhead_Press",
+  "name": "Barbell Overhead Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Lateral Head",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Overhead Press",
+    "Military Press"
+  ],
+  "movementPattern": "Vertical Push"
+}

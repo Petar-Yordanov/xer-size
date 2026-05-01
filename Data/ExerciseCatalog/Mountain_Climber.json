@@ -1,0 +1,24 @@
+{
+  "id": "Mountain_Climber",
+  "name": "Mountain Climber",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Rectus Abdominis",
+    "Transverse Abdominis"
+  ],
+  "secondaryMuscles": [
+    "External Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Quads"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

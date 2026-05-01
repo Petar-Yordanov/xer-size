@@ -1,0 +1,26 @@
+{
+  "id": "Plank_Jack",
+  "name": "Plank Jack",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Transverse Abdominis",
+    "Gluteus Medius"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Quadriceps"
+  ],
+  "primaryMuscleCategories": [
+    "Abs",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Quads"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

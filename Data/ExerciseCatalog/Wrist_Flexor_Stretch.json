@@ -1,0 +1,22 @@
+{
+  "id": "Wrist_Flexor_Stretch",
+  "name": "Wrist Flexor Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Wrist Flexors"
+  ],
+  "secondaryMuscles": [
+    "Palmaris Longus"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

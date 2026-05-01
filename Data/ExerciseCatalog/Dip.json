@@ -1,0 +1,24 @@
+{
+  "id": "Dip",
+  "name": "Dip",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Lower Chest"
+  ],
+  "secondaryMuscles": [
+    "Lateral Head",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Chest",
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Push"
+}

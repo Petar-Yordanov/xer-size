@@ -1,0 +1,22 @@
+{
+  "id": "Seated_Hamstring_Stretch",
+  "name": "Seated Hamstring Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Hamstrings"
+  ],
+  "secondaryMuscles": [
+    "Lower Back"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

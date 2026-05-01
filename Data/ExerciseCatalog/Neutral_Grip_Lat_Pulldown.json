@@ -1,0 +1,24 @@
+{
+  "id": "Neutral_Grip_Lat_Pulldown",
+  "name": "Neutral Grip Lat Pulldown",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Biceps Short Head",
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Biceps",
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Vertical Pull"
+}

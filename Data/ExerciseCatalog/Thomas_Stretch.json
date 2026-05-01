@@ -1,0 +1,23 @@
+{
+  "id": "Thomas_Stretch",
+  "name": "Thomas Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Iliopsoas",
+    "Rectus Femoris"
+  ],
+  "secondaryMuscles": [
+    "Tensor Fasciae Latae"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

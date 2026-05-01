@@ -1,0 +1,26 @@
+{
+  "id": "Cross_Jack",
+  "name": "Cross Jack",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Medius"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius",
+    "External Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves",
+    "Abs"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

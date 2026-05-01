@@ -1,0 +1,26 @@
+{
+  "id": "Skater_Hop",
+  "name": "Skater Hop",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Gluteus Medius",
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Calves"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

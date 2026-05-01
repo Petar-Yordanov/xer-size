@@ -1,0 +1,22 @@
+{
+  "id": "Triceps_Wall_Stretch",
+  "name": "Triceps Wall Stretch",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Triceps Long Head"
+  ],
+  "secondaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Lats"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

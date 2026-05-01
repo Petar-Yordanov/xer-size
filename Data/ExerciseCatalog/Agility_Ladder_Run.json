@@ -1,0 +1,26 @@
+{
+  "id": "Agility_Ladder_Run",
+  "name": "Agility Ladder Run",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gastrocnemius"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Medius",
+    "Hip Flexors"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

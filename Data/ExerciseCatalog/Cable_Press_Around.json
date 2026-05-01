@@ -1,0 +1,24 @@
+{
+  "id": "Cable_Press_Around",
+  "name": "Cable Press Around",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Sternal Pectoralis Major"
+  ],
+  "secondaryMuscles": [
+    "Serratus Anterior",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

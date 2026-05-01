@@ -1,0 +1,24 @@
+{
+  "id": "Wide_Grip_Dumbbell_Row",
+  "name": "Wide Grip Dumbbell Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Rhomboids",
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Horizontal Pull"
+}

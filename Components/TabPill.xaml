@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.TabPill"
+    x:DataType="components:TabPill">
+
+    <Grid x:Name="RootGrid">
+        <Grid.Behaviors>
+            <toolkit:TouchBehavior
+                PressedScale="0.95"
+                PressedOpacity="0.90" />
+        </Grid.Behaviors>
+
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding Source={x:Reference This}, Path=Command}"
+                CommandParameter="{Binding Source={x:Reference This}, Path=CommandParameter}" />
+        </Grid.GestureRecognizers>
+
+        <Border
+            Padding="18,12"
+            StrokeThickness="1"
+            InputTransparent="True">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="999" />
+            </Border.StrokeShape>
+
+            <Border.Triggers>
+                <DataTrigger TargetType="Border" Binding="{Binding Source={x:Reference This}, Path=IsSelected}" Value="True">
+                    <Setter Property="BackgroundColor" Value="{StaticResource AccentSurface}" />
+                    <Setter Property="Stroke" Value="{StaticResource AccentSoft}" />
+                    <Setter Property="Shadow">
+                        <Setter.Value>
+                            <Shadow
+                                Brush="#18000000"
+                                Offset="0,6"
+                                Radius="12"
+                                Opacity="0.10" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger TargetType="Border" Binding="{Binding Source={x:Reference This}, Path=IsSelected}" Value="False">
+                    <Setter Property="BackgroundColor" Value="{StaticResource SurfaceSoft}" />
+                    <Setter Property="Stroke" Value="{StaticResource StrokeSoft}" />
+                </DataTrigger>
+            </Border.Triggers>
+
+            <Label
+                Text="{Binding Source={x:Reference This}, Path=Text}"
+                FontFamily="OpenSansSemibold"
+                FontSize="13"
+                HorizontalTextAlignment="Center"
+                InputTransparent="True">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference This}, Path=IsSelected}" Value="True">
+                        <Setter Property="TextColor" Value="{StaticResource AccentText}" />
+                    </DataTrigger>
+
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference This}, Path=IsSelected}" Value="False">
+                        <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+        </Border>
+    </Grid>
+</ContentView>

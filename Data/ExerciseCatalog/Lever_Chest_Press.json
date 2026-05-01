@@ -1,0 +1,27 @@
+{
+  "id": "Lever_Chest_Press",
+  "name": "Lever Chest Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Sternal Pectoralis Major"
+  ],
+  "secondaryMuscles": [
+    "Anterior Deltoid",
+    "Triceps Lateral Head"
+  ],
+  "primaryMuscleCategories": [
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders",
+    "Triceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Chest Press"
+  ],
+  "movementPattern": "Horizontal Push"
+}

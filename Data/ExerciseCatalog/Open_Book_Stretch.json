@@ -1,0 +1,24 @@
+{
+  "id": "Open_Book_Stretch",
+  "name": "Open Book Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Thoracic Erectors",
+    "External Obliques"
+  ],
+  "secondaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Mid Back",
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

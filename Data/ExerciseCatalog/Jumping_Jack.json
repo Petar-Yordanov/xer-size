@@ -1,0 +1,26 @@
+{
+  "id": "Jumping_Jack",
+  "name": "Jumping Jack",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Medius"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

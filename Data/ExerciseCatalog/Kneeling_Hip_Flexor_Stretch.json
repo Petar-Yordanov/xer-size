@@ -1,0 +1,24 @@
+{
+  "id": "Kneeling_Hip_Flexor_Stretch",
+  "name": "Kneeling Hip Flexor Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Hip Flexors"
+  ],
+  "secondaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "Lever_High_Row",
+  "name": "Lever High Row",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Upper Trapezius",
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Rhomboids",
+    "Latissimus Dorsi"
+  ],
+  "primaryMuscleCategories": [
+    "Upper Back",
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back",
+    "Lats"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine High Row"
+  ],
+  "movementPattern": "Horizontal Pull"
+}

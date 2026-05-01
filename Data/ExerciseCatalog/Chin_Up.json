@@ -1,0 +1,27 @@
+{
+  "id": "Chin_Up",
+  "name": "Chin Up",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Biceps Long Head",
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Biceps",
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Chin-Up"
+  ],
+  "movementPattern": "Vertical Pull"
+}

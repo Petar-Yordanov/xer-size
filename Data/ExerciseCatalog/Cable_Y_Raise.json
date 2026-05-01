@@ -1,0 +1,26 @@
+{
+  "id": "Cable_Y_Raise",
+  "name": "Cable Y Raise",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Lower Trapezius",
+    "Serratus Anterior"
+  ],
+  "secondaryMuscles": [
+    "Supraspinatus",
+    "Infraspinatus"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Upper Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Rotator Cuff",
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Horizontal Pull"
+}

@@ -1,15 +1,16 @@
-﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui;
 using LiveChartsCore.SkiaSharpView.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using XerSize.Repositories.ActiveWorkout;
+using XerSize.Repositories.Catalog;
+using XerSize.Repositories.Common;
+using XerSize.Repositories.History;
+using XerSize.Repositories.Settings;
+using XerSize.Repositories.Workouts;
 using XerSize.Services;
-using XerSize.Services.Interfaces;
-using XerSize.ViewModels.Exercises;
-using XerSize.ViewModels.History;
-using XerSize.ViewModels.Routines;
-using XerSize.ViewModels.Settings;
-using XerSize.ViewModels.Statistics;
-using XerSize.ViewModels.Workouts;
+using XerSize.ViewModels;
 using XerSize.Views.Pages;
 
 namespace XerSize;
@@ -29,45 +30,89 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                fonts.AddFont("SegoeUI-Semibold.ttf", "SegoeUISemibold");
             });
 
-        builder.Services.AddTransient<AppShell>();
-
-        builder.Services.AddSingleton<IExerciseCatalogService, InMemoryExerciseCatalogService>();
-        builder.Services.AddSingleton<IRoutineService, InMemoryRoutineService>();
-        builder.Services.AddSingleton<IWorkoutHistoryService, InMemoryWorkoutHistoryService>();
-        builder.Services.AddSingleton<IStatisticsService, InMemoryStatisticsService>();
-        builder.Services.AddSingleton<IThemeService, ThemeService>();
-        builder.Services.AddSingleton<IActiveWorkoutService, InMemoryActiveWorkoutService>();
-
-        builder.Services.AddTransient<RoutinesPageViewModel>();
-        builder.Services.AddTransient<ExercisesPageViewModel>();
-        builder.Services.AddTransient<HistoryPageViewModel>();
-        builder.Services.AddTransient<StatisticsPageViewModel>();
-        builder.Services.AddTransient<SettingsPageViewModel>();
-        builder.Services.AddTransient<AddExercisePageViewModel>();
-        builder.Services.AddTransient<CatalogExercisePickerPageViewModel>();
-        builder.Services.AddTransient<RoutineEditorViewModel>();
-        builder.Services.AddTransient<RoutineManagerPageViewModel>();
-        builder.Services.AddTransient<WorkoutManagerPageViewModel>();
-        builder.Services.AddTransient<ActiveWorkoutPageViewModel>();
-
-        builder.Services.AddTransient<RoutinesPage>();
-        builder.Services.AddTransient<ExercisesPage>();
-        builder.Services.AddTransient<HistoryPage>();
-        builder.Services.AddTransient<StatisticsPage>();
-        builder.Services.AddTransient<AddExercisePage>();
-        builder.Services.AddTransient<CatalogExercisePickerPage>();
-        builder.Services.AddTransient<SettingsPage>();
-        builder.Services.AddTransient<RoutineManagerPage>();
-        builder.Services.AddTransient<WorkoutManagerPage>();
-        builder.Services.AddTransient<ActiveWorkoutPage>();
+        RegisterRepositories(builder.Services);
+        RegisterServices(builder.Services);
+        RegisterViewModels(builder.Services);
+        RegisterPages(builder.Services);
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
 
-        return builder.Build();
+#if ANDROID
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+        {
+            handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
+        });
+
+        Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+        {
+            handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
+        });
+#endif
+
+        var app = builder.Build();
+
+        return app;
+    }
+
+    private static void RegisterRepositories(IServiceCollection services)
+    {
+        services.AddSingleton<SqliteLocalStore>();
+
+        services.AddSingleton<WorkoutRepository>();
+        services.AddSingleton<WorkoutExerciseItemRepository>();
+        services.AddSingleton<WorkoutSetRepository>();
+
+        services.AddSingleton<ExerciseCatalogItemRepository>();
+
+        services.AddSingleton<HistoryWorkoutItemRepository>();
+        services.AddSingleton<HistoryExerciseItemRepository>();
+        services.AddSingleton<HistorySetItemRepository>();
+
+        services.AddSingleton<ActiveWorkoutSessionRepository>();
+        services.AddSingleton<ActiveWorkoutExerciseRepository>();
+        services.AddSingleton<ActiveWorkoutSetRepository>();
+
+        services.AddSingleton<UserSettingsRepository>();
+    }
+
+    private static void RegisterServices(IServiceCollection services)
+    {
+        services.AddSingleton<WorkoutService>();
+        services.AddSingleton<ExerciseCatalogService>();
+        services.AddSingleton<WorkoutSelectionService>();
+        services.AddSingleton<DashboardStatisticsService>();
+        services.AddSingleton<WorkoutHistoryService>();
+        services.AddSingleton<UserSettingsService>();
+        services.AddSingleton<ActiveWorkoutService>();
+        services.AddSingleton<TrainingAdviceService>();
+        services.AddSingleton(AudioManager.Current);
+    }
+
+    private static void RegisterViewModels(IServiceCollection services)
+    {
+        services.AddTransient<DashboardPageViewModel>();
+        services.AddTransient<WorkoutsPageViewModel>();
+        services.AddTransient<HistoryPageViewModel>();
+        services.AddTransient<SettingsPageViewModel>();
+        services.AddTransient<ManageWorkoutsPageViewModel>();
+        services.AddTransient<AddExercisePageViewModel>();
+        services.AddTransient<CatalogExercisePickerPageViewModel>();
+        services.AddTransient<StartWorkoutPageViewModel>();
+    }
+
+    private static void RegisterPages(IServiceCollection services)
+    {
+        services.AddTransient<DashboardPage>();
+        services.AddTransient<WorkoutsPage>();
+        services.AddTransient<HistoryPage>();
+        services.AddTransient<SettingsPage>();
+        services.AddTransient<ManageWorkoutsPage>();
+        services.AddTransient<AddExercisePage>();
+        services.AddTransient<CatalogExercisePickerPage>();
+        services.AddTransient<StartWorkoutPage>();
     }
 }

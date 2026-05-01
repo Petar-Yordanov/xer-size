@@ -1,0 +1,23 @@
+{
+  "id": "Single_Leg_Seated_Leg_Curl",
+  "name": "Single Leg Seated Leg Curl",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Biceps Femoris",
+    "Semitendinosus"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

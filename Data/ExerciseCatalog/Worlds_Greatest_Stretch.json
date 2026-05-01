@@ -1,0 +1,29 @@
+{
+  "id": "Worlds_Greatest_Stretch",
+  "name": "Worlds Greatest Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Iliopsoas",
+    "Hamstrings"
+  ],
+  "secondaryMuscles": [
+    "Thoracic Erectors",
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back",
+    "Glutes"
+  ],
+  "limbInvolvement": "Alternating",
+  "aliases": [
+    "World's Greatest Stretch"
+  ],
+  "movementPattern": "Stretching"
+}

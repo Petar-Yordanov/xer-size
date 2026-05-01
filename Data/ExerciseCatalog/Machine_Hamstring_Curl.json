@@ -1,0 +1,22 @@
+{
+  "id": "Machine_Hamstring_Curl",
+  "name": "Machine Hamstring Curl",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Hamstrings"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius"
+  ],
+  "primaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

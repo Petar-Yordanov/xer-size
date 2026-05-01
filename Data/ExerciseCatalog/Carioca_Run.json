@@ -1,0 +1,26 @@
+{
+  "id": "Carioca_Run",
+  "name": "Carioca Run",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Gluteus Medius",
+    "External Obliques"
+  ],
+  "secondaryMuscles": [
+    "Adductors",
+    "Quadriceps"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

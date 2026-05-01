@@ -1,0 +1,22 @@
+{
+  "id": "Kneeling_Tibialis_Stretch",
+  "name": "Kneeling Tibialis Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Tibialis Anterior"
+  ],
+  "secondaryMuscles": [
+    "Extensor Digitorum Longus"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

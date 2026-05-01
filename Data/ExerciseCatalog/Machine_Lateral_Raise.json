@@ -1,0 +1,23 @@
+{
+  "id": "Machine_Lateral_Raise",
+  "name": "Machine Lateral Raise",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Lateral Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Supraspinatus"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Rotator Cuff"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

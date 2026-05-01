@@ -1,0 +1,24 @@
+{
+  "id": "Cat_Cow_Stretch",
+  "name": "Cat Cow Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Thoracic Erectors",
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Lower Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Mid Back",
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "Lever_Back_Extension",
+  "name": "Lever Back Extension",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Erector Spinae",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings"
+  ],
+  "primaryMuscleCategories": [
+    "Lower Back",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Back Extension"
+  ],
+  "movementPattern": "Hinge"
+}

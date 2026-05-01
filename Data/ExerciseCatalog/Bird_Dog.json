@@ -1,0 +1,24 @@
+{
+  "id": "Bird_Dog",
+  "name": "Bird Dog",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Transverse Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Erector Spinae"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs",
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

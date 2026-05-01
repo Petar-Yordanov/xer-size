@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.ToggleField"
+    x:DataType="components:ToggleField">
+
+    <VerticalStackLayout Spacing="8">
+        <Label
+            Text="{Binding Source={x:Reference This}, Path=Label}"
+            Style="{StaticResource FieldLabelStyle}" />
+
+        <Border
+            Style="{StaticResource InputBorderStyle}"
+            BackgroundColor="{Binding Source={x:Reference This}, Path=FieldBackgroundColor}">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="2">
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=Title}"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="14" />
+
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=Subtitle}"
+                        Style="{StaticResource SectionSubtitleStyle}" />
+                </VerticalStackLayout>
+
+                <Border
+                    x:Name="ToggleTrack"
+                    Grid.Column="1"
+                    WidthRequest="54"
+                    HeightRequest="32"
+                    BackgroundColor="{Binding Source={x:Reference This}, Path=EffectiveTrackColor}"
+                    StrokeThickness="0"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="999" />
+                    </Border.StrokeShape>
+
+                    <Border.Behaviors>
+                        <toolkit:TouchBehavior
+                            PressedScale="0.97"
+                            PressedOpacity="0.92" />
+                    </Border.Behaviors>
+
+                    <Grid>
+                        <Border
+                            x:Name="ToggleThumb"
+                            WidthRequest="24"
+                            HeightRequest="24"
+                            BackgroundColor="{Binding Source={x:Reference This}, Path=EffectiveThumbColor}"
+                            StrokeThickness="0"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            Margin="4,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="999" />
+                            </Border.StrokeShape>
+
+                            <Border.Shadow>
+                                <Shadow
+                                    Brush="#22000000"
+                                    Offset="0,2"
+                                    Radius="8"
+                                    Opacity="0.18" />
+                            </Border.Shadow>
+                        </Border>
+                    </Grid>
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={x:Reference This}, Path=ToggleCommand}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </Grid>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

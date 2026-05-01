@@ -1,0 +1,26 @@
+{
+  "id": "Battle_Rope",
+  "name": "Battle Rope",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Anterior Deltoid",
+    "Forearm Flexors"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Quadriceps"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps",
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

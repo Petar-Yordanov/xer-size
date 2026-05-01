@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentView
+    x:Class="XerSize.Components.HorizontalBarChartCard"
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    xmlns:local="clr-namespace:XerSize.Components"
+    x:DataType="local:HorizontalBarChartCard">
+
+    <Border
+        Style="{StaticResource CardBorderStyle}"
+        BackgroundColor="{Binding Source={x:Reference This}, Path=CardBackgroundColor}">
+
+        <VerticalStackLayout Spacing="12">
+            <HorizontalStackLayout Spacing="8">
+                <Border
+                    WidthRequest="8"
+                    HeightRequest="8"
+                    VerticalOptions="Center"
+                    StrokeThickness="0"
+                    BackgroundColor="{Binding Source={x:Reference This}, Path=DotColor}"
+                    IsVisible="{Binding Source={x:Reference This}, Path=ShowDot}">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="999" />
+                    </Border.StrokeShape>
+                </Border>
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=Title}"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="16"
+                    LineBreakMode="TailTruncation" />
+            </HorizontalStackLayout>
+
+            <Grid
+                HeightRequest="{Binding Source={x:Reference This}, Path=ChartHeight}"
+                MinimumHeightRequest="{Binding Source={x:Reference This}, Path=ChartHeight}">
+
+                <lvc:CartesianChart
+                    HeightRequest="{Binding Source={x:Reference This}, Path=ChartHeight}"
+                    MinimumHeightRequest="{Binding Source={x:Reference This}, Path=ChartHeight}"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    BackgroundColor="{Binding Source={x:Reference This}, Path=ChartBackgroundColor}"
+                    Series="{Binding Source={x:Reference This}, Path=Series}"
+                    XAxes="{Binding Source={x:Reference This}, Path=XAxes}"
+                    YAxes="{Binding Source={x:Reference This}, Path=YAxes}"
+                    IsVisible="{Binding Source={x:Reference This}, Path=HasData}" />
+
+                <Border
+                    Padding="18"
+                    BackgroundColor="#44FFFFFF"
+                    Stroke="{StaticResource StrokeSoft}"
+                    StrokeThickness="1"
+                    IsVisible="{Binding Source={x:Reference This}, Path=HasNoData}">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22" />
+                    </Border.StrokeShape>
+
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=EmptyMessage}"
+                        Style="{StaticResource SectionSubtitleStyle}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Border>
+            </Grid>
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

@@ -1,0 +1,26 @@
+{
+  "id": "Runners_Lunge_Stretch",
+  "name": "Runners Lunge Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Iliopsoas",
+    "Rectus Femoris"
+  ],
+  "secondaryMuscles": [
+    "Adductors"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "aliases": [
+    "Runner's Lunge Stretch"
+  ],
+  "movementPattern": "Stretching"
+}

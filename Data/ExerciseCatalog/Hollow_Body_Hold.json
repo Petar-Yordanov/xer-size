@@ -1,0 +1,23 @@
+{
+  "id": "Hollow_Body_Hold",
+  "name": "Hollow Body Hold",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Calisthenics",
+  "primaryMuscles": [
+    "Transverse Abdominis"
+  ],
+  "secondaryMuscles": [
+    "Rectus Abdominis",
+    "Hip Flexors"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Core"
+}

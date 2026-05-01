@@ -1,0 +1,26 @@
+{
+  "id": "Sumo_Barbell_Deadlift",
+  "name": "Sumo Barbell Deadlift",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Erector Spinae"
+  ],
+  "secondaryMuscles": [
+    "Forearm Flexors",
+    "Upper Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes",
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Lower Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Hinge"
+}

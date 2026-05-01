@@ -1,0 +1,24 @@
+{
+  "id": "Thread_the_Needle_Stretch",
+  "name": "Thread the Needle Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Posterior Deltoid",
+    "Thoracic Erectors"
+  ],
+  "secondaryMuscles": [
+    "Rhomboids"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders",
+    "Mid Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

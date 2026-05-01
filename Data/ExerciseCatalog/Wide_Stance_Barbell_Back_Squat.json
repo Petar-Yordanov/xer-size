@@ -1,0 +1,26 @@
+{
+  "id": "Wide_Stance_Barbell_Back_Squat",
+  "name": "Wide Stance Barbell Back Squat",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Gluteus Maximus"
+  ],
+  "secondaryMuscles": [
+    "Hamstrings",
+    "Adductors"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Hamstrings",
+    "Adductors"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Squat"
+}

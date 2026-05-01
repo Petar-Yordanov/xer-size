@@ -1,0 +1,22 @@
+{
+  "id": "Tibialis_Raise",
+  "name": "Tibialis Raise",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Tibialis Anterior"
+  ],
+  "secondaryMuscles": [
+    "Extensor Digitorum Longus"
+  ],
+  "primaryMuscleCategories": [
+    "Calves"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

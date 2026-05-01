@@ -1,0 +1,23 @@
+{
+  "id": "90_90_Hip_Stretch",
+  "name": "90 90 Hip Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Gluteus Maximus",
+    "Piriformis"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Medius"
+  ],
+  "primaryMuscleCategories": [
+    "Glutes"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

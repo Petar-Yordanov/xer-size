@@ -1,0 +1,28 @@
+{
+  "id": "Lever_Seated_Dip",
+  "name": "Lever Seated Dip",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Triceps Lateral Head",
+    "Triceps Medial Head"
+  ],
+  "secondaryMuscles": [
+    "Sternal Pectoralis Major",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Chest",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Seated Dip"
+  ],
+  "movementPattern": "Horizontal Push"
+}

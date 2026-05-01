@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Name="This"
+    x:Class="XerSize.Components.AppDurationPickerPopup"
+    x:TypeArguments="system:Int32"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:DataType="components:AppDurationPickerPopup">
+
+    <Border
+        WidthRequest="350"
+        BackgroundColor="{StaticResource Surface}"
+        Stroke="{StaticResource StrokeSoft}"
+        StrokeThickness="1"
+        Padding="18">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="28" />
+        </Border.StrokeShape>
+
+        <Border.Shadow>
+            <Shadow
+                Brush="#22000000"
+                Offset="0,10"
+                Radius="24"
+                Opacity="0.18" />
+        </Border.Shadow>
+
+        <VerticalStackLayout Spacing="18">
+
+            <VerticalStackLayout Spacing="4">
+                <Label
+                    Text="Rest time"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="20"
+                    TextColor="{StaticResource TextPrimary}"
+                    HorizontalTextAlignment="Center" />
+
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=DurationText}"
+                    Style="{StaticResource SectionSubtitleStyle}"
+                    HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+
+                <Border
+                    Grid.Column="0"
+                    BackgroundColor="{StaticResource SurfaceSoft}"
+                    Stroke="{StaticResource StrokeSoft}"
+                    StrokeThickness="1"
+                    Padding="14">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            Text="Minutes"
+                            Style="{StaticResource FieldLabelStyle}"
+                            HorizontalTextAlignment="Center" />
+
+                        <components:QuickActionChip
+                            Size="38"
+                            IconSize="15"
+                            IconSource="expand_less.png"
+                            ChipBackgroundColor="{StaticResource AccentSurface}"
+                            Command="{Binding Source={x:Reference This}, Path=IncreaseMinutesCommand}"
+                            HorizontalOptions="Center" />
+
+                        <Label
+                            Text="{Binding Source={x:Reference This}, Path=MinutesText}"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="28"
+                            TextColor="{StaticResource TextPrimary}"
+                            HorizontalTextAlignment="Center" />
+
+                        <components:QuickActionChip
+                            Size="38"
+                            IconSize="15"
+                            IconSource="expand_more.png"
+                            ChipBackgroundColor="{StaticResource Surface}"
+                            Command="{Binding Source={x:Reference This}, Path=DecreaseMinutesCommand}"
+                            HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Grid.Column="1"
+                    BackgroundColor="{StaticResource SurfaceSoft}"
+                    Stroke="{StaticResource StrokeSoft}"
+                    StrokeThickness="1"
+                    Padding="14">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="22" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            Text="Seconds"
+                            Style="{StaticResource FieldLabelStyle}"
+                            HorizontalTextAlignment="Center" />
+
+                        <components:QuickActionChip
+                            Size="38"
+                            IconSize="15"
+                            IconSource="expand_less.png"
+                            ChipBackgroundColor="{StaticResource AccentSurface}"
+                            Command="{Binding Source={x:Reference This}, Path=IncreaseSecondsCommand}"
+                            HorizontalOptions="Center" />
+
+                        <Label
+                            Text="{Binding Source={x:Reference This}, Path=SecondsText}"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="28"
+                            TextColor="{StaticResource TextPrimary}"
+                            HorizontalTextAlignment="Center" />
+
+                        <components:QuickActionChip
+                            Size="38"
+                            IconSize="15"
+                            IconSource="expand_more.png"
+                            ChipBackgroundColor="{StaticResource Surface}"
+                            Command="{Binding Source={x:Reference This}, Path=DecreaseSecondsCommand}"
+                            HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <components:AppActionButton
+                    Grid.Column="0"
+                    Text="Cancel"
+                    ButtonBackgroundColor="{StaticResource SurfaceSoft}"
+                    ButtonStrokeColor="{StaticResource StrokeSoft}"
+                    ButtonStrokeThickness="1"
+                    TextColor="{StaticResource TextPrimary}"
+                    ShadowOpacity="0"
+                    PressedScale="0.97"
+                    Command="{Binding Source={x:Reference This}, Path=CancelCommand}" />
+
+                <components:AppActionButton
+                    Grid.Column="1"
+                    Text="Apply"
+                    ButtonBackgroundColor="{StaticResource Accent}"
+                    ButtonStrokeColor="Transparent"
+                    ButtonStrokeThickness="0"
+                    TextColor="{StaticResource White}"
+                    ShadowOpacity="0.10"
+                    PressedScale="0.96"
+                    Command="{Binding Source={x:Reference This}, Path=ApplyCommand}" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

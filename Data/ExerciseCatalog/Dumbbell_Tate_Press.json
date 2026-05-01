@@ -1,0 +1,23 @@
+{
+  "id": "Dumbbell_Tate_Press",
+  "name": "Dumbbell Tate Press",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Triceps Lateral Head"
+  ],
+  "secondaryMuscles": [
+    "Triceps Medial Head",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

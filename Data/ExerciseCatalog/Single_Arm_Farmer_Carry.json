@@ -1,0 +1,25 @@
+{
+  "id": "Single_Arm_Farmer_Carry",
+  "name": "Single Arm Farmer Carry",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Dumbbell",
+  "primaryMuscles": [
+    "Forearm Flexors",
+    "Brachioradialis"
+  ],
+  "secondaryMuscles": [
+    "Upper Trapezius",
+    "Rectus Abdominis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Upper Back",
+    "Abs"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Carry"
+}

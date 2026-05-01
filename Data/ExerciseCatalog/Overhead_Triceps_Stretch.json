@@ -1,0 +1,22 @@
+{
+  "id": "Overhead_Triceps_Stretch",
+  "name": "Overhead Triceps Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Long Head"
+  ],
+  "secondaryMuscles": [
+    "Latissimus Dorsi"
+  ],
+  "primaryMuscleCategories": [
+    "Triceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Lats"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

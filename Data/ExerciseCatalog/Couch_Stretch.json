@@ -1,0 +1,23 @@
+{
+  "id": "Couch_Stretch",
+  "name": "Couch Stretch",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Isolation",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Rectus Femoris",
+    "Iliopsoas"
+  ],
+  "secondaryMuscles": [
+    "Vastus Lateralis"
+  ],
+  "primaryMuscleCategories": [
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Quads"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Stretching"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "Rowing_Ergometer",
+  "name": "Rowing Ergometer",
+  "force": "Legs",
+  "bodyCategory": "Lower Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Latissimus Dorsi"
+  ],
+  "secondaryMuscles": [
+    "Rhomboids",
+    "Biceps Short Head"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Lats"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back",
+    "Biceps"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

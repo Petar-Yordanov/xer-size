@@ -1,0 +1,25 @@
+{
+  "id": "Lever_Ab_Crunch",
+  "name": "Lever Ab Crunch",
+  "force": "Legs",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Rectus Abdominis"
+  ],
+  "secondaryMuscles": [
+    "External Obliques"
+  ],
+  "primaryMuscleCategories": [
+    "Abs"
+  ],
+  "secondaryMuscleCategories": [
+    "Abs"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Ab Crunch"
+  ],
+  "movementPattern": "Core"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "Burpee",
+  "name": "Burpee",
+  "force": "Push",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Quadriceps",
+    "Sternal Pectoralis Major"
+  ],
+  "secondaryMuscles": [
+    "Triceps Lateral Head",
+    "Gluteus Maximus"
+  ],
+  "primaryMuscleCategories": [
+    "Quads",
+    "Chest"
+  ],
+  "secondaryMuscleCategories": [
+    "Triceps",
+    "Glutes"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Cardio"
+}

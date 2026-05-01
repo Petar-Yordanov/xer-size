@@ -1,0 +1,26 @@
+{
+  "id": "VersaClimber",
+  "name": "VersaClimber",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Cardio",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Quadriceps"
+  ],
+  "secondaryMuscles": [
+    "Gluteus Maximus",
+    "Anterior Deltoid"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Quads"
+  ],
+  "secondaryMuscleCategories": [
+    "Glutes",
+    "Shoulders"
+  ],
+  "limbInvolvement": "Alternating",
+  "movementPattern": "Cardio"
+}

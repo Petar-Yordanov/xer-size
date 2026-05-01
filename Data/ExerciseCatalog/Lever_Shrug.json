@@ -1,0 +1,25 @@
+{
+  "id": "Lever_Shrug",
+  "name": "Lever Shrug",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Upper Trapezius"
+  ],
+  "secondaryMuscles": [
+    "Levator Scapulae"
+  ],
+  "primaryMuscleCategories": [
+    "Upper Back"
+  ],
+  "secondaryMuscleCategories": [
+    "Neck"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Shrug"
+  ],
+  "movementPattern": "Isolation"
+}

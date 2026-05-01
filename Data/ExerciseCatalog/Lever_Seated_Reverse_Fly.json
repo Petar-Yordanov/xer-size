@@ -1,0 +1,26 @@
+{
+  "id": "Lever_Seated_Reverse_Fly",
+  "name": "Lever Seated Reverse Fly",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Machine",
+  "primaryMuscles": [
+    "Posterior Deltoid"
+  ],
+  "secondaryMuscles": [
+    "Rhomboids",
+    "Middle Trapezius"
+  ],
+  "primaryMuscleCategories": [
+    "Shoulders"
+  ],
+  "secondaryMuscleCategories": [
+    "Mid Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "aliases": [
+    "Machine Seated Reverse Fly"
+  ],
+  "movementPattern": "Horizontal Pull"
+}

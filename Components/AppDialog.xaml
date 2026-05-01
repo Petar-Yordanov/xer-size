@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    xmlns:behaviors="clr-namespace:XerSize.Behaviors"
+    x:Class="XerSize.Components.AppDialog"
+    x:DataType="components:AppDialog">
+
+    <ContentView.Behaviors>
+        <behaviors:AnimatedVisibilityBehavior
+            IsVisibleState="{Binding Source={x:Reference This}, Path=IsOpen}"
+            TranslationY="14"
+            Duration="160" />
+    </ContentView.Behaviors>
+
+    <Grid InputTransparent="False">
+        <BoxView
+            Color="{Binding Source={x:Reference This}, Path=OverlayColor}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={x:Reference This}, Path=DismissCommand}" />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Border
+            Margin="{Binding Source={x:Reference This}, Path=DialogMargin}"
+            Padding="{Binding Source={x:Reference This}, Path=DialogPadding}"
+            MaximumWidthRequest="{Binding Source={x:Reference This}, Path=MaximumDialogWidth}"
+            HorizontalOptions="Fill"
+            VerticalOptions="{Binding Source={x:Reference This}, Path=DialogVerticalOptions}"
+            BackgroundColor="{StaticResource Surface}"
+            Stroke="{StaticResource StrokeSoft}"
+            StrokeThickness="1">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="{Binding Source={x:Reference This}, Path=CornerRadius}" />
+            </Border.StrokeShape>
+
+            <Border.Shadow>
+                <Shadow
+                    Brush="#30000000"
+                    Offset="0,12"
+                    Radius="28"
+                    Opacity="0.24" />
+            </Border.Shadow>
+
+            <VerticalStackLayout Spacing="{Binding Source={x:Reference This}, Path=ContentSpacing}">
+                <Border
+                    WidthRequest="{Binding Source={x:Reference This}, Path=IconContainerSize}"
+                    HeightRequest="{Binding Source={x:Reference This}, Path=IconContainerSize}"
+                    HorizontalOptions="Center"
+                    BackgroundColor="{Binding Source={x:Reference This}, Path=IconBackgroundColor}"
+                    Stroke="{Binding Source={x:Reference This}, Path=IconStrokeColor}"
+                    StrokeThickness="{Binding Source={x:Reference This}, Path=IconStrokeThickness}"
+                    Padding="{Binding Source={x:Reference This}, Path=IconPadding}"
+                    IsVisible="{Binding Source={x:Reference This}, Path=ShowIcon}">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="999" />
+                    </Border.StrokeShape>
+
+                    <Image
+                        Source="{Binding Source={x:Reference This}, Path=IconSource}"
+                        WidthRequest="{Binding Source={x:Reference This}, Path=IconSize}"
+                        HeightRequest="{Binding Source={x:Reference This}, Path=IconSize}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Aspect="AspectFit" />
+                </Border>
+
+                <VerticalStackLayout Spacing="6">
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=Title}"
+                        FontFamily="OpenSansSemibold"
+                        FontSize="20"
+                        TextColor="{StaticResource TextPrimary}"
+                        HorizontalTextAlignment="Center" />
+
+                    <Label
+                        Text="{Binding Source={x:Reference This}, Path=Message}"
+                        Style="{StaticResource SectionSubtitleStyle}"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding Source={x:Reference This}, Path=HasMessage}" />
+                </VerticalStackLayout>
+
+                <ScrollView
+                    MaximumHeightRequest="{Binding Source={x:Reference This}, Path=DialogContentMaximumHeight}"
+                    IsVisible="{Binding Source={x:Reference This}, Path=HasDialogContent}">
+                    <ContentView x:Name="DialogContentHost" />
+                </ScrollView>
+
+                <Grid
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10"
+                    IsVisible="{Binding Source={x:Reference This}, Path=ShowButtons}">
+
+                    <components:AppActionButton
+                        Grid.Column="0"
+                        IsVisible="{Binding Source={x:Reference This}, Path=ShowSecondaryButton}"
+                        Text="{Binding Source={x:Reference This}, Path=SecondaryButtonText}"
+                        ButtonBackgroundColor="{Binding Source={x:Reference This}, Path=SecondaryButtonBackgroundColor}"
+                        ButtonStrokeColor="{Binding Source={x:Reference This}, Path=SecondaryButtonStrokeColor}"
+                        ButtonStrokeThickness="{Binding Source={x:Reference This}, Path=SecondaryButtonStrokeThickness}"
+                        TextColor="{Binding Source={x:Reference This}, Path=SecondaryButtonTextColor}"
+                        ShadowOpacity="{Binding Source={x:Reference This}, Path=SecondaryButtonShadowOpacity}"
+                        PressedScale="0.97"
+                        Command="{Binding Source={x:Reference This}, Path=SecondaryCommand}" />
+
+                    <components:AppActionButton
+                        Grid.Column="{Binding Source={x:Reference This}, Path=PrimaryButtonColumn}"
+                        Grid.ColumnSpan="{Binding Source={x:Reference This}, Path=PrimaryButtonColumnSpan}"
+                        IsVisible="{Binding Source={x:Reference This}, Path=ShowPrimaryButton}"
+                        Text="{Binding Source={x:Reference This}, Path=PrimaryButtonText}"
+                        ButtonBackgroundColor="{Binding Source={x:Reference This}, Path=PrimaryButtonBackgroundColor}"
+                        ButtonStrokeColor="{Binding Source={x:Reference This}, Path=PrimaryButtonStrokeColor}"
+                        ButtonStrokeThickness="{Binding Source={x:Reference This}, Path=PrimaryButtonStrokeThickness}"
+                        TextColor="{Binding Source={x:Reference This}, Path=PrimaryButtonTextColor}"
+                        ShadowOpacity="{Binding Source={x:Reference This}, Path=PrimaryButtonShadowOpacity}"
+                        PressedScale="0.96"
+                        Command="{Binding Source={x:Reference This}, Path=PrimaryCommand}" />
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentView>

@@ -1,0 +1,26 @@
+{
+  "id": "Downward_Dog_Stretch",
+  "name": "Downward Dog Stretch",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Compound",
+  "equipment": "Stretching",
+  "primaryMuscles": [
+    "Latissimus Dorsi",
+    "Hamstrings"
+  ],
+  "secondaryMuscles": [
+    "Gastrocnemius",
+    "Thoracic Erectors"
+  ],
+  "primaryMuscleCategories": [
+    "Lats",
+    "Hamstrings"
+  ],
+  "secondaryMuscleCategories": [
+    "Calves",
+    "Mid Back"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Stretching"
+}

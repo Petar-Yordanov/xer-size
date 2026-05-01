@@ -1,0 +1,23 @@
+{
+  "id": "Reverse_Wrist_Curl",
+  "name": "Reverse Wrist Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Barbell",
+  "primaryMuscles": [
+    "Forearm Extensors"
+  ],
+  "secondaryMuscles": [
+    "Brachioradialis"
+  ],
+  "primaryMuscleCategories": [
+    "Forearms"
+  ],
+  "secondaryMuscleCategories": [
+    "Biceps",
+    "Forearms"
+  ],
+  "limbInvolvement": "Bilateral",
+  "movementPattern": "Isolation"
+}

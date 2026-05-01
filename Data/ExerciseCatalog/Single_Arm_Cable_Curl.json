@@ -1,0 +1,23 @@
+{
+  "id": "Single_Arm_Cable_Curl",
+  "name": "Single Arm Cable Curl",
+  "force": "Pull",
+  "bodyCategory": "Upper Body",
+  "mechanic": "Isolation",
+  "equipment": "Cable",
+  "primaryMuscles": [
+    "Biceps Long Head",
+    "Biceps Short Head"
+  ],
+  "secondaryMuscles": [
+    "Brachialis"
+  ],
+  "primaryMuscleCategories": [
+    "Biceps"
+  ],
+  "secondaryMuscleCategories": [
+    "Forearms"
+  ],
+  "limbInvolvement": "Unilateral",
+  "movementPattern": "Isolation"
+}

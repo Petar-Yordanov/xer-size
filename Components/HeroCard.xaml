@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="This"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:XerSize.Components"
+    x:Class="XerSize.Components.HeroCard"
+    x:DataType="components:HeroCard">
+
+    <Border
+        BackgroundColor="{Binding Source={x:Reference This}, Path=CardBackgroundColor}"
+        StrokeThickness="0"
+        Padding="18">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="24" />
+        </Border.StrokeShape>
+
+        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="14">
+            <VerticalStackLayout Spacing="6">
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=Title}"
+                    TextColor="{Binding Source={x:Reference This}, Path=TitleColor}"
+                    FontFamily="OpenSansSemibold"
+                    FontSize="15" />
+                <Label
+                    Text="{Binding Source={x:Reference This}, Path=Subtitle}"
+                    TextColor="{Binding Source={x:Reference This}, Path=SubtitleColor}"
+                    FontSize="12" />
+            </VerticalStackLayout>
+
+            <Border
+                Grid.Column="1"
+                WidthRequest="40"
+                HeightRequest="40"
+                BackgroundColor="{Binding Source={x:Reference This}, Path=TopIconBackgroundColor}"
+                StrokeThickness="0"
+                Padding="10"
+                IsVisible="{Binding Source={x:Reference This}, Path=ShowTopIcon}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="999" />
+                </Border.StrokeShape>
+
+                <Image
+                    Source="{Binding Source={x:Reference This}, Path=TopIconSource}"
+                    WidthRequest="16"
+                    HeightRequest="16"
+                    Aspect="AspectFit" />
+            </Border>
+
+            <Grid
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="10">
+
+                <ContentPresenter Grid.Column="0" Content="{Binding Source={x:Reference This}, Path=SecondaryActionContent}" />
+                <ContentPresenter Grid.Column="1" Content="{Binding Source={x:Reference This}, Path=PrimaryActionContent}" />
+            </Grid>
+        </Grid>
+    </Border>
+</ContentView>
