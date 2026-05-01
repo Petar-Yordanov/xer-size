@@ -2,12 +2,65 @@ name: CI
 
 on:
   push:
-    branches:
+    branches: [main, master]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
+  read-version:
+    name: Read version
+    runs-on: windows-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read ApplicationDisplayVersion
+        id: version
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $projectPath = "XerSize.csproj"
+
+          if (-not (Test-Path $projectPath)) {
+            throw "XerSize.csproj not found"
+          }
+
+          [xml]$project = Get-Content $projectPath -Raw
+
+          $version = $project.Project.PropertyGroup |
+            ForEach-Object { $_.ApplicationDisplayVersion } |
+            Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+            Select-Object -First 1
+
+          if ([string]::IsNullOrWhiteSpace($version)) {
+            throw "ApplicationDisplayVersion not found in XerSize.csproj"
+          }
+
+          if ($version -notmatch '^\d+\.\d+\.\d+(-[A-Za-z0-9.-]+)?$') {
+            throw "ApplicationDisplayVersion must look like 1.0.0 or 1.0.0-preview.1. Current value: $version"
+          }
+
+          $tag = "v$version"
+
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+
+          Write-Host "Resolved version: $version"
+          Write-Host "Resolved tag: $tag"
+
   build-android:
     runs-on: windows-latest
+    needs: read-version
+
+    env:
+      APP_VERSION: ${{ needs.read-version.outputs.version }}
+      APP_TAG: ${{ needs.read-version.outputs.tag }}
 
     steps:
       - uses: actions/checkout@v4
@@ -45,9 +98,61 @@ jobs:
           -p:AndroidSigningKeyAlias="xersize"
           -p:AndroidSigningKeyPass="temp-store-pass-123"
 
+      - name: Rename APK
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $apk = Get-ChildItem -Path . -Recurse -Filter "*.apk" |
+            Where-Object { $_.FullName -like "*\bin\Release\net10.0-android\*" } |
+            Select-Object -First 1
+
+          if (-not $apk) {
+            Write-Host "=== APK search output ==="
+            Get-ChildItem -Path . -Recurse -Filter "*.apk" |
+              Select-Object FullName |
+              Format-Table -AutoSize |
+              Out-String -Width 4096 |
+              Write-Host
+
+            throw "Release APK not found"
+          }
+
+          Copy-Item $apk.FullName "XerSize-$env:APP_VERSION-android.apk" -Force
+
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: XerSize-android-release-apk
-          path: |
-            **/bin/Release/net10.0-android/**/*.apk
+          name: release-android
+          path: XerSize-${{ env.APP_VERSION }}-android.apk
+          if-no-files-found: error
+
+  release:
+    name: Create GitHub release
+    runs-on: ubuntu-latest
+    needs: [read-version, build-android]
+
+    steps:
+      - name: Download Android artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: release-android
+          path: release-assets
+
+      - name: Show downloaded assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          find release-assets -maxdepth 3 -type f -print
+
+      - name: Create or update GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.read-version.outputs.tag }}
+          name: XerSize ${{ needs.read-version.outputs.version }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          fail_on_unmatched_files: true
+          files: |
+            release-assets/**/*.apk

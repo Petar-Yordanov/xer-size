@@ -15,7 +15,7 @@
 
 		<ApplicationTitle>XerSize</ApplicationTitle>
 		<ApplicationId>com.companyname.xersize</ApplicationId>
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<WindowsPackageType>None</WindowsPackageType>
@@ -28,7 +28,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#16A34A" />
+		<MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#16A34A" />
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#16A34A" BaseSize="128,128" />
 
 		<MauiImage Include="Resources\Images\*" />
