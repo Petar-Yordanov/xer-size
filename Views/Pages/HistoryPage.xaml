@@ -50,9 +50,9 @@
 
                     <components:MetricTile
                         Grid.Column="2"
-                        Title="Volume"
-                        Value="{Binding TotalVolume}"
-                        Subtitle="Total"
+                        Title="Calories"
+                        Value="{Binding TotalCalories}"
+                        Subtitle="Estimated"
                         TileBackgroundColor="{StaticResource SuccessSurface}"
                         ValueColor="{StaticResource TextPrimary}" />
                 </Grid>
@@ -202,8 +202,8 @@
                                             </Border.StrokeShape>
 
                                             <VerticalStackLayout Spacing="4">
-                                                <Label Text="Completed" Style="{StaticResource FieldLabelStyle}" />
-                                                <Label Text="{Binding CompletedTimeText}" FontFamily="OpenSansSemibold" FontSize="13" />
+                                                <Label Text="Calories" Style="{StaticResource FieldLabelStyle}" />
+                                                <Label Text="{Binding CaloriesText}" FontFamily="OpenSansSemibold" FontSize="13" />
                                             </VerticalStackLayout>
                                         </Border>
 

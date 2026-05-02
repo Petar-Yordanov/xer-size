@@ -18,6 +18,8 @@ public sealed class WorkoutExerciseItemModel
 
     public string ImageSource { get; set; } = string.Empty;
 
+    public ExerciseTrackingMode TrackingMode { get; set; } = ExerciseTrackingMode.Strength;
+
     public ExerciseForce? Force { get; set; }
 
     public ExerciseBodyCategory? BodyCategory { get; set; }

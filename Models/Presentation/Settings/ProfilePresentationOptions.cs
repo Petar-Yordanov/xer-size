@@ -7,9 +7,7 @@ public static class ProfilePresentationOptions
     public static IReadOnlyList<GenderOption> Genders { get; } =
     [
         GenderOption.Male,
-        GenderOption.Female,
-        GenderOption.Other,
-        GenderOption.PreferNotToSay
+        GenderOption.Female
     ];
 
     public static IReadOnlyList<int> WeeklyGoalSessions { get; } =
@@ -29,15 +27,20 @@ public static class ProfilePresentationOptions
         InitialPageOption.Workouts
     ];
 
+    public static IReadOnlyList<AppThemeOption> Themes { get; } =
+    [
+        AppThemeOption.System,
+        AppThemeOption.Light,
+        AppThemeOption.Dark
+    ];
+
     public static string ToDisplayName(GenderOption value)
     {
         return value switch
         {
             GenderOption.Male => "Male",
             GenderOption.Female => "Female",
-            GenderOption.Other => "Other",
-            GenderOption.PreferNotToSay => "Prefer not to say",
-            _ => "Prefer not to say"
+            _ => "Male"
         };
     }
 
@@ -65,6 +68,16 @@ public static class ProfilePresentationOptions
             InitialPageOption.Dashboard => "Dashboard",
             InitialPageOption.Workouts => "Workouts",
             _ => "Dashboard"
+        };
+    }
+
+    public static string ToDisplayName(AppThemeOption value)
+    {
+        return value switch
+        {
+            AppThemeOption.Light => "Light",
+            AppThemeOption.Dark => "Dark",
+            _ => "System"
         };
     }
 }

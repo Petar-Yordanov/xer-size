@@ -15,31 +15,88 @@
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="20,18,20,130" Spacing="18">
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                    <components:QuickActionChip Grid.Column="0" Size="44" IconSize="18" IconSource="left.png" ChipBackgroundColor="{StaticResource Surface}" Command="{Binding BackCommand}" />
+                    <components:QuickActionChip
+                        Grid.Column="0"
+                        Size="44"
+                        IconSize="18"
+                        IconSource="left.png"
+                        ChipBackgroundColor="{StaticResource Surface}"
+                        Command="{Binding BackCommand}" />
 
                     <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                        <Label Text="Active workout" FontFamily="OpenSansSemibold" FontSize="26" TextColor="{StaticResource TextPrimary}" />
-                        <Label Text="{Binding ElapsedText}" Style="{StaticResource SectionSubtitleStyle}" />
+                        <Label
+                            Text="Active workout"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="26"
+                            TextColor="{StaticResource TextPrimary}" />
+
+                        <Label
+                            Text="{Binding ElapsedText}"
+                            Style="{StaticResource SectionSubtitleStyle}" />
                     </VerticalStackLayout>
 
-                    <components:QuickActionChip Grid.Column="2" Size="44" IconSize="18" IconSource="statistics.png" ChipBackgroundColor="{StaticResource AccentSurface}" Command="{Binding ShowProgressCommand}" IsVisible="{Binding HasExercises}" />
+                    <components:QuickActionChip
+                        Grid.Column="2"
+                        Size="44"
+                        IconSize="18"
+                        IconSource="statistics.png"
+                        ChipBackgroundColor="{StaticResource AccentSurface}"
+                        Command="{Binding ShowProgressCommand}"
+                        IsVisible="{Binding HasExercises}" />
                 </Grid>
 
-                <Border IsVisible="{Binding IsWorkoutEmpty}" Style="{StaticResource CardBorderStyle}" BackgroundColor="{StaticResource Surface}">
+                <Border
+                    IsVisible="{Binding IsWorkoutEmpty}"
+                    Style="{StaticResource CardBorderStyle}"
+                    BackgroundColor="{StaticResource Surface}">
+
                     <VerticalStackLayout Spacing="14">
                         <VerticalStackLayout Spacing="6">
-                            <Label Text="No exercises in this workout" FontFamily="OpenSansSemibold" FontSize="20" TextColor="{StaticResource TextPrimary}" HorizontalTextAlignment="Center" />
-                            <Label Text="Add at least one exercise before starting a session." Style="{StaticResource SectionSubtitleStyle}" HorizontalTextAlignment="Center" />
+                            <Label
+                                Text="No exercises in this workout"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="20"
+                                TextColor="{StaticResource TextPrimary}"
+                                HorizontalTextAlignment="Center" />
+
+                            <Label
+                                Text="Add at least one exercise before starting a session."
+                                Style="{StaticResource SectionSubtitleStyle}"
+                                HorizontalTextAlignment="Center" />
                         </VerticalStackLayout>
 
                         <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                            <components:AppActionButton Grid.Column="0" Text="Back" ButtonBackgroundColor="{StaticResource SurfaceSoft}" ButtonStrokeColor="{StaticResource StrokeSoft}" ButtonStrokeThickness="1" TextColor="{StaticResource TextPrimary}" ShadowOpacity="0" PressedScale="0.97" Command="{Binding BackCommand}" />
-                            <components:AppActionButton Grid.Column="1" Text="Add exercise" ButtonBackgroundColor="{StaticResource Accent}" ButtonStrokeColor="Transparent" ButtonStrokeThickness="0" TextColor="{StaticResource White}" ShadowOpacity="0.10" PressedScale="0.96" Command="{Binding AddExerciseCommand}" />
+                            <components:AppActionButton
+                                Grid.Column="0"
+                                Text="Back"
+                                ButtonBackgroundColor="{StaticResource SurfaceSoft}"
+                                ButtonStrokeColor="{StaticResource StrokeSoft}"
+                                ButtonStrokeThickness="1"
+                                TextColor="{StaticResource TextPrimary}"
+                                ShadowOpacity="0"
+                                PressedScale="0.97"
+                                Command="{Binding BackCommand}" />
+
+                            <components:AppActionButton
+                                Grid.Column="1"
+                                Text="Add exercise"
+                                ButtonBackgroundColor="{StaticResource Accent}"
+                                ButtonStrokeColor="Transparent"
+                                ButtonStrokeThickness="0"
+                                TextColor="{StaticResource White}"
+                                ShadowOpacity="0.10"
+                                PressedScale="0.96"
+                                Command="{Binding AddExerciseCommand}" />
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
 
-                <CollectionView IsVisible="{Binding HasExercises}" ItemsSource="{Binding Exercises}" ItemsLayout="HorizontalList" SelectionMode="None">
+                <CollectionView
+                    IsVisible="{Binding HasExercises}"
+                    ItemsSource="{Binding Exercises}"
+                    ItemsLayout="HorizontalList"
+                    SelectionMode="None">
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="active:ActiveWorkoutExercisePresentationModel">
                             <components:TabPill
@@ -59,16 +116,33 @@
                     </Grid.GestureRecognizers>
 
                     <VerticalStackLayout Spacing="14">
-                        <Label Text="{Binding CurrentExercise.Name}" FontFamily="OpenSansSemibold" FontSize="24" TextColor="{StaticResource TextPrimary}" />
+                        <Label
+                            Text="{Binding CurrentExercise.Name}"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="24"
+                            TextColor="{StaticResource TextPrimary}" />
 
-                        <Border HeightRequest="230" BackgroundColor="{StaticResource SurfaceSoft}" Stroke="{StaticResource StrokeSoft}" StrokeThickness="1" Padding="10">
+                        <Border
+                            HeightRequest="230"
+                            BackgroundColor="{StaticResource SurfaceSoft}"
+                            Stroke="{StaticResource StrokeSoft}"
+                            StrokeThickness="1"
+                            Padding="10">
+
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="28" />
                             </Border.StrokeShape>
-                            <Image Source="{Binding CurrentExercise.ImageSource}" Aspect="AspectFill" />
+
+                            <Image
+                                Source="{Binding CurrentExercise.ImageSource}"
+                                Aspect="AspectFill" />
                         </Border>
 
-                        <Border IsVisible="{Binding CurrentExercise.HasNotes}" Style="{StaticResource SoftCardBorderStyle}" BackgroundColor="{StaticResource SurfaceSoft}">
+                        <Border
+                            IsVisible="{Binding CurrentExercise.HasNotes}"
+                            Style="{StaticResource SoftCardBorderStyle}"
+                            BackgroundColor="{StaticResource SurfaceSoft}">
+
                             <VerticalStackLayout Spacing="6">
                                 <Label Text="Notes" Style="{StaticResource FieldLabelStyle}" />
                                 <Label Text="{Binding CurrentExercise.Notes}" Style="{StaticResource SectionSubtitleStyle}" />
@@ -76,8 +150,21 @@
                         </Border>
 
                         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                            <Label Grid.Column="0" Text="Sets" FontFamily="OpenSansSemibold" FontSize="18" TextColor="{StaticResource TextPrimary}" VerticalOptions="Center" />
-                            <components:QuickActionChip Grid.Column="1" Size="38" IconSize="16" IconSource="statistics.png" ChipBackgroundColor="{StaticResource AccentSurface}" Command="{Binding ShowProgressCommand}" />
+                            <Label
+                                Grid.Column="0"
+                                Text="Sets"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="18"
+                                TextColor="{StaticResource TextPrimary}"
+                                VerticalOptions="Center" />
+
+                            <components:QuickActionChip
+                                Grid.Column="1"
+                                Size="38"
+                                IconSize="16"
+                                IconSource="statistics.png"
+                                ChipBackgroundColor="{StaticResource AccentSurface}"
+                                Command="{Binding ShowProgressCommand}" />
                         </Grid>
 
                         <CollectionView ItemsSource="{Binding CurrentExercise.Sets}" SelectionMode="None">
@@ -111,24 +198,101 @@
                                         </Border.StrokeShape>
 
                                         <Grid ColumnDefinitions="Auto,*,*,Auto" ColumnSpacing="10">
-                                            <Border Grid.Column="0" WidthRequest="36" HeightRequest="36" BackgroundColor="{StaticResource AccentSurface}" Stroke="{StaticResource AccentSoft}" StrokeThickness="1" VerticalOptions="Center">
+                                            <Border
+                                                Grid.Column="0"
+                                                WidthRequest="36"
+                                                HeightRequest="36"
+                                                BackgroundColor="{StaticResource AccentSurface}"
+                                                Stroke="{StaticResource AccentSoft}"
+                                                StrokeThickness="1"
+                                                VerticalOptions="Center">
+
                                                 <Border.StrokeShape>
                                                     <RoundRectangle CornerRadius="999" />
                                                 </Border.StrokeShape>
-                                                <Label Text="{Binding SortNumberText}" FontFamily="OpenSansSemibold" FontSize="11" TextColor="{StaticResource AccentText}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                                                <Label
+                                                    Text="{Binding SortNumberText}"
+                                                    FontFamily="OpenSansSemibold"
+                                                    FontSize="11"
+                                                    TextColor="{StaticResource AccentText}"
+                                                    HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center" />
                                             </Border>
 
-                                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Spacing="4"
+                                                IsVisible="{Binding IsStrength}">
+
                                                 <Label Text="Reps" Style="{StaticResource FieldLabelStyle}" />
+
                                                 <Border Style="{StaticResource InputBorderStyle}" Padding="10,8">
-                                                    <Entry Text="{Binding Reps, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                                                    <Entry
+                                                        Text="{Binding Reps, Mode=TwoWay}"
+                                                        Keyboard="Numeric"
+                                                        HorizontalTextAlignment="Center" />
                                                 </Border>
                                             </VerticalStackLayout>
 
-                                            <VerticalStackLayout Grid.Column="2" Spacing="4">
+                                            <VerticalStackLayout
+                                                Grid.Column="2"
+                                                Spacing="4"
+                                                IsVisible="{Binding IsStrength}">
+
                                                 <Label Text="Kg" Style="{StaticResource FieldLabelStyle}" />
+
                                                 <Border Style="{StaticResource InputBorderStyle}" Padding="10,8">
-                                                    <Entry Text="{Binding WeightKg, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                                                    <Entry
+                                                        Text="{Binding WeightKg, Mode=TwoWay}"
+                                                        Keyboard="Numeric"
+                                                        HorizontalTextAlignment="Center" />
+                                                </Border>
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Grid.ColumnSpan="2"
+                                                Spacing="4"
+                                                IsVisible="{Binding IsTime}">
+
+                                                <Label Text="Seconds" Style="{StaticResource FieldLabelStyle}" />
+
+                                                <Border Style="{StaticResource InputBorderStyle}" Padding="10,8">
+                                                    <Entry
+                                                        Text="{Binding DurationSeconds, Mode=TwoWay}"
+                                                        Keyboard="Numeric"
+                                                        HorizontalTextAlignment="Center" />
+                                                </Border>
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Spacing="4"
+                                                IsVisible="{Binding IsTimeAndDistance}">
+
+                                                <Label Text="Seconds" Style="{StaticResource FieldLabelStyle}" />
+
+                                                <Border Style="{StaticResource InputBorderStyle}" Padding="10,8">
+                                                    <Entry
+                                                        Text="{Binding DurationSeconds, Mode=TwoWay}"
+                                                        Keyboard="Numeric"
+                                                        HorizontalTextAlignment="Center" />
+                                                </Border>
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout
+                                                Grid.Column="2"
+                                                Spacing="4"
+                                                IsVisible="{Binding IsTimeAndDistance}">
+
+                                                <Label Text="Km" Style="{StaticResource FieldLabelStyle}" />
+
+                                                <Border Style="{StaticResource InputBorderStyle}" Padding="10,8">
+                                                    <Entry
+                                                        Text="{Binding DistanceKm, Mode=TwoWay}"
+                                                        Keyboard="Numeric"
+                                                        HorizontalTextAlignment="Center" />
                                                 </Border>
                                             </VerticalStackLayout>
 
@@ -305,6 +469,7 @@
                         IsVisible="{Binding HasNoSelectedExerciseHistory}"
                         Style="{StaticResource SoftCardBorderStyle}"
                         BackgroundColor="{StaticResource SurfaceSoft}">
+
                         <Label
                             Text="No previous completed history found for this exercise yet."
                             Style="{StaticResource SectionSubtitleStyle}"
@@ -316,6 +481,7 @@
                         ItemsSource="{Binding SelectedExerciseHistoryItems}"
                         SelectionMode="None"
                         IsVisible="{Binding HasSelectedExerciseHistory}">
+
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                         </CollectionView.ItemsLayout>
@@ -327,6 +493,7 @@
                                     Stroke="{StaticResource StrokeSoft}"
                                     StrokeThickness="1"
                                     Padding="12">
+
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="18" />
                                     </Border.StrokeShape>
@@ -348,6 +515,7 @@
                                             Direction="Row"
                                             Wrap="Wrap"
                                             BindableLayout.ItemsSource="{Binding CompletedSets}">
+
                                             <BindableLayout.ItemTemplate>
                                                 <DataTemplate x:DataType="history:HistorySetPresentationModel">
                                                     <components:SetPill

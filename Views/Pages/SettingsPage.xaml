@@ -74,9 +74,9 @@
 
                     <components:MetricTile
                         Grid.Column="1"
-                        Title="Initial Page"
-                        Value="{Binding InitialPageValue}"
-                        Subtitle="Opens on app start"
+                        Title="Theme"
+                        Value="{Binding ThemeValue}"
+                        Subtitle="Appearance"
                         TileBackgroundColor="{StaticResource InfoSurface}"
                         ValueColor="{StaticResource TextPrimary}" />
                 </Grid>
@@ -167,14 +167,32 @@
                                 SelectItemCommand="{Binding SelectInitialPageCommand}"
                                 DropdownBackgroundColor="{StaticResource AccentSurface}" />
                         </Grid>
+                    </VerticalStackLayout>
+                </toolkit:Expander>
 
-                        <Border
-                            Style="{StaticResource SoftCardBorderStyle}"
-                            BackgroundColor="{StaticResource SurfaceSoft}">
-                            <Label
-                                Text="Initial page is applied when the app starts."
-                                Style="{StaticResource SectionSubtitleStyle}" />
-                        </Border>
+                <toolkit:Expander
+                    x:Name="AppearanceExpander"
+                    IsExpanded="{Binding IsAppearanceExpanded, Mode=TwoWay}">
+
+                    <toolkit:Expander.Header>
+                        <components:SectionExpanderHeader
+                            Title="Appearance"
+                            Subtitle="Light, dark, or follow system"
+                            IconSource="settings.png"
+                            HeaderBackgroundColor="{StaticResource Surface}"
+                            IconBackgroundColor="{StaticResource InfoSurface}"
+                            IsExpanded="{Binding Source={x:Reference AppearanceExpander}, Path=IsExpanded}" />
+                    </toolkit:Expander.Header>
+
+                    <VerticalStackLayout Padding="0,16,0,0" Spacing="16">
+                        <components:SingleSelectField
+                            Label="Theme"
+                            Placeholder="Select theme"
+                            SelectedText="{Binding SelectedTheme, Mode=TwoWay}"
+                            IsExpanded="{Binding IsThemeExpanded, Mode=TwoWay}"
+                            ItemsSource="{Binding ThemeOptions}"
+                            SelectItemCommand="{Binding SelectThemeCommand}"
+                            DropdownBackgroundColor="{StaticResource AccentSurface}" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
@@ -243,7 +261,7 @@
                     <toolkit:Expander.Header>
                         <components:SectionExpanderHeader
                             Title="Data"
-                            Subtitle="Import and export placeholders"
+                            Subtitle="Import and export backups"
                             IconSource="statistics.png"
                             HeaderBackgroundColor="{StaticResource Surface}"
                             IconBackgroundColor="{StaticResource SuccessSurface}"
@@ -257,12 +275,12 @@
 
                             <VerticalStackLayout Spacing="10">
                                 <Label
-                                    Text="These actions are placeholders for now."
+                                    Text="Import or export your local database."
                                     FontFamily="OpenSansSemibold"
                                     FontSize="15" />
 
                                 <Label
-                                    Text="Later this can hold real backup import and export flows."
+                                    Text="Export creates a copy you can share or store. Import replaces the current local database after making a backup."
                                     Style="{StaticResource SectionSubtitleStyle}" />
 
                                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
@@ -309,7 +327,7 @@
                 BarStrokeColor="{StaticResource StrokeSoft}"
                 BarShadowBrush="#18000000" />
         </Grid>
-        
+
         <components:AppDialog
             ZIndex="30"
             IsOpen="{Binding IsInfoDialogVisible}"

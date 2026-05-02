@@ -149,27 +149,27 @@
 
                                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
                                     <VerticalStackLayout Grid.Column="0" Spacing="2">
-                                        <Label Text="Reps" Style="{StaticResource FieldLabelStyle}" />
+                                        <Label Text="{Binding PrimaryMetricLabel}" Style="{StaticResource FieldLabelStyle}" />
                                         <Label
-                                            Text="{Binding RepsText}"
+                                            Text="{Binding PrimaryMetricText}"
                                             FontFamily="OpenSansSemibold"
                                             FontSize="13"
                                             TextColor="{StaticResource TextPrimary}" />
                                     </VerticalStackLayout>
 
                                     <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                        <Label Text="Weight" Style="{StaticResource FieldLabelStyle}" />
+                                        <Label Text="{Binding SecondaryMetricLabel}" Style="{StaticResource FieldLabelStyle}" />
                                         <Label
-                                            Text="{Binding WeightText}"
+                                            Text="{Binding SecondaryMetricText}"
                                             FontFamily="OpenSansSemibold"
                                             FontSize="13"
                                             TextColor="{StaticResource TextPrimary}" />
                                     </VerticalStackLayout>
 
                                     <VerticalStackLayout Grid.Column="2" Spacing="2">
-                                        <Label Text="Rest" Style="{StaticResource FieldLabelStyle}" />
+                                        <Label Text="{Binding TertiaryMetricLabel}" Style="{StaticResource FieldLabelStyle}" />
                                         <Label
-                                            Text="{Binding RestText}"
+                                            Text="{Binding TertiaryMetricText}"
                                             FontFamily="OpenSansSemibold"
                                             FontSize="13"
                                             TextColor="{StaticResource TextPrimary}" />

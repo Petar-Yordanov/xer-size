@@ -12,7 +12,7 @@ public sealed class UserSettingsModel
 
     public string Weight { get; set; } = string.Empty;
 
-    public GenderOption Gender { get; set; } = GenderOption.PreferNotToSay;
+    public GenderOption Gender { get; set; } = GenderOption.Male;
 
     public int WeeklyGoalSessions { get; set; } = 3;
 
@@ -21,6 +21,8 @@ public sealed class UserSettingsModel
     public UnitSystem Units { get; set; } = UnitSystem.Metric;
 
     public InitialPageOption InitialPage { get; set; } = InitialPageOption.Dashboard;
+
+    public AppThemeOption Theme { get; set; } = AppThemeOption.System;
 
     public bool KeepScreenAwakeDuringWorkout { get; set; } = true;
 

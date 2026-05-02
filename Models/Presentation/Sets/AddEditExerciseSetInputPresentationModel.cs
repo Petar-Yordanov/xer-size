@@ -8,6 +8,8 @@ public partial class AddEditExerciseSetInputPresentationModel : ObservableObject
     private int sortNumber;
     private string reps = "10";
     private string weightKg = "0";
+    private string durationSeconds = "60";
+    private string distanceKm = string.Empty;
     private string restSeconds = "90";
 
     public int SortNumber
@@ -46,6 +48,33 @@ public partial class AddEditExerciseSetInputPresentationModel : ObservableObject
         }
     }
 
+    public string DurationSeconds
+    {
+        get => durationSeconds;
+        set
+        {
+            if (SetProperty(ref durationSeconds, value))
+            {
+                OnPropertyChanged(nameof(DurationSecondsValue));
+                OnPropertyChanged(nameof(DurationText));
+            }
+        }
+    }
+
+    public string DistanceKm
+    {
+        get => distanceKm;
+        set
+        {
+            if (SetProperty(ref distanceKm, value))
+            {
+                OnPropertyChanged(nameof(DistanceKmValue));
+                OnPropertyChanged(nameof(DistanceMetersValue));
+                OnPropertyChanged(nameof(DistanceText));
+            }
+        }
+    }
+
     public string RestSeconds
     {
         get => restSeconds;
@@ -65,9 +94,35 @@ public partial class AddEditExerciseSetInputPresentationModel : ObservableObject
 
     public double? WeightKgValue => PresentationFormatting.ParseNonNegativeNullableDouble(WeightKg);
 
+    public int DurationSecondsValue => PresentationFormatting.ParseNonNegativeInt(DurationSeconds);
+
+    public double? DistanceKmValue => PresentationFormatting.ParseNonNegativeNullableDouble(DistanceKm);
+
+    public double? DistanceMetersValue => DistanceKmValue.HasValue
+        ? DistanceKmValue.Value * 1000d
+        : null;
+
     public int RestSecondsValue => PresentationFormatting.ParseNonNegativeInt(RestSeconds);
+
+    public string DurationText => FormatDuration(DurationSecondsValue);
+
+    public string DistanceText => DistanceKmValue.HasValue && DistanceKmValue.Value > 0
+        ? $"{DistanceKmValue.Value:0.##} km"
+        : "0 km";
 
     public string RestText => PresentationFormatting.FormatRestSeconds(RestSecondsValue);
 
     public double VolumeKg => PresentationFormatting.CalculateVolumeKg(RepsValue, WeightKgValue);
+
+    private static string FormatDuration(int seconds)
+    {
+        seconds = Math.Max(0, seconds);
+
+        var minutes = seconds / 60;
+        var remainingSeconds = seconds % 60;
+
+        return minutes > 0
+            ? $"{minutes}:{remainingSeconds:00}"
+            : $"{remainingSeconds}s";
+    }
 }

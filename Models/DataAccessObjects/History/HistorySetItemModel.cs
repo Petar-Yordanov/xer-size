@@ -12,6 +12,10 @@ public sealed class HistorySetItemModel
 
     public double? WeightKg { get; set; }
 
+    public int DurationSeconds { get; set; }
+
+    public double? DistanceMeters { get; set; }
+
     public int RestSeconds { get; set; }
 
     public bool IsCompleted { get; set; }

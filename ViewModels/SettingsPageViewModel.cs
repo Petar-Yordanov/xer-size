@@ -13,6 +13,7 @@ namespace XerSize.ViewModels;
 public partial class SettingsPageViewModel : ObservableObject
 {
     private readonly UserSettingsService userSettingsService;
+    private readonly SqliteLocalStore sqliteLocalStore;
     private bool isLoading;
 
     public SettingsPageViewModel(
@@ -33,6 +34,9 @@ public partial class SettingsPageViewModel : ObservableObject
 
         InitialPageOptions = new ObservableCollection<string>(
             ProfilePresentationOptions.InitialPages.Select(ProfilePresentationOptions.ToDisplayName));
+
+        ThemeOptions = new ObservableCollection<string>(
+            ProfilePresentationOptions.Themes.Select(ProfilePresentationOptions.ToDisplayName));
 
         DashboardNavItem = new BottomNavItemPresentationModel
         {
@@ -97,6 +101,10 @@ public partial class SettingsPageViewModel : ObservableObject
     public partial string SelectedInitialPage { get; set; } = string.Empty;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ThemeValue))]
+    public partial string SelectedTheme { get; set; } = string.Empty;
+
+    [ObservableProperty]
     public partial bool KeepScreenAwakeDuringWorkout { get; set; }
 
     [ObservableProperty]
@@ -110,6 +118,9 @@ public partial class SettingsPageViewModel : ObservableObject
 
     [ObservableProperty]
     public partial bool IsBehaviorExpanded { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsAppearanceExpanded { get; set; }
 
     [ObservableProperty]
     public partial bool IsNotificationsExpanded { get; set; }
@@ -128,6 +139,9 @@ public partial class SettingsPageViewModel : ObservableObject
 
     [ObservableProperty]
     public partial bool IsInitialPageExpanded { get; set; }
+
+    [ObservableProperty]
+    public partial bool IsThemeExpanded { get; set; }
 
     [ObservableProperty]
     public partial bool IsInfoDialogVisible { get; set; }
@@ -166,7 +180,7 @@ public partial class SettingsPageViewModel : ObservableObject
 
     public ObservableCollection<string> InitialPageOptions { get; }
 
-    private readonly SqliteLocalStore sqliteLocalStore;
+    public ObservableCollection<string> ThemeOptions { get; }
 
     public string WeeklyGoalValue => string.IsNullOrWhiteSpace(SelectedWeeklyGoal)
         ? "Not set"
@@ -179,12 +193,16 @@ public partial class SettingsPageViewModel : ObservableObject
         : SelectedUnits;
 
     public string GenderValue => string.IsNullOrWhiteSpace(SelectedGender)
-        ? "Not set"
+        ? "Male"
         : SelectedGender;
 
     public string InitialPageValue => string.IsNullOrWhiteSpace(SelectedInitialPage)
         ? "Dashboard"
         : SelectedInitialPage;
+
+    public string ThemeValue => string.IsNullOrWhiteSpace(SelectedTheme)
+        ? "System"
+        : SelectedTheme;
 
     public void SyncSelectedNav()
     {
@@ -239,6 +257,11 @@ public partial class SettingsPageViewModel : ObservableObject
         SaveSettings();
     }
 
+    partial void OnSelectedThemeChanged(string value)
+    {
+        SaveSettings();
+    }
+
     partial void OnKeepScreenAwakeDuringWorkoutChanged(bool value)
     {
         SaveSettings();
@@ -268,11 +291,14 @@ public partial class SettingsPageViewModel : ObservableObject
         WeeklyCalorieTarget = Math.Max(0, settings.WeeklyCalorieTarget).ToString(CultureInfo.InvariantCulture);
         SelectedUnits = ProfilePresentationOptions.ToDisplayName(settings.Units);
         SelectedInitialPage = ProfilePresentationOptions.ToDisplayName(settings.InitialPage);
+        SelectedTheme = ProfilePresentationOptions.ToDisplayName(settings.Theme);
         KeepScreenAwakeDuringWorkout = settings.KeepScreenAwakeDuringWorkout;
         AutoExpandExerciseCards = settings.AutoExpandExerciseCards;
         RestTimerSoundEnabled = settings.RestTimerSoundEnabled;
 
         isLoading = false;
+
+        userSettingsService.UpdateAppearance(settings.Theme);
     }
 
     private void SaveSettings()
@@ -289,6 +315,8 @@ public partial class SettingsPageViewModel : ObservableObject
             ParseWeeklyCalorieTarget(WeeklyCalorieTarget),
             ParseUnitSystem(SelectedUnits),
             ParseInitialPage(SelectedInitialPage));
+
+        userSettingsService.UpdateAppearance(ParseTheme(SelectedTheme));
 
         userSettingsService.UpdatePreferences(
             KeepScreenAwakeDuringWorkout,
@@ -337,6 +365,16 @@ public partial class SettingsPageViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void SelectTheme(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return;
+
+        SelectedTheme = value;
+        IsThemeExpanded = false;
+    }
+
+    [RelayCommand]
     private void ToggleKeepScreenAwake()
     {
         KeepScreenAwakeDuringWorkout = !KeepScreenAwakeDuringWorkout;
@@ -379,12 +417,12 @@ public partial class SettingsPageViewModel : ObservableObject
             {
                 PickerTitle = "Choose XerSize database backup",
                 FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
-            {
-                { DevicePlatform.Android, ["application/octet-stream", "application/x-sqlite3", "application/vnd.sqlite3"] },
-                { DevicePlatform.iOS, ["public.database", "public.data"] },
-                { DevicePlatform.MacCatalyst, ["public.database", "public.data"] },
-                { DevicePlatform.WinUI, [".db3", ".sqlite", ".sqlite3"] }
-            })
+                {
+                    { DevicePlatform.Android, ["application/octet-stream", "application/x-sqlite3", "application/vnd.sqlite3"] },
+                    { DevicePlatform.iOS, ["public.database", "public.data"] },
+                    { DevicePlatform.MacCatalyst, ["public.database", "public.data"] },
+                    { DevicePlatform.WinUI, [".db3", ".sqlite", ".sqlite3"] }
+                })
             });
 
             if (result is null)
@@ -431,25 +469,17 @@ public partial class SettingsPageViewModel : ObservableObject
         IsDataDialogVisible = false;
     }
 
-    private void ShowDataDialog(string title, string message)
-    {
-        DataDialogTitle = title;
-        DataDialogMessage = message;
-        IsDataDialogVisible = true;
-    }
-
     [RelayCommand]
     private void CloseInfoDialog()
     {
         IsInfoDialogVisible = false;
     }
 
-    private void ShowInfoDialog(string title, string message, string iconSource)
+    private void ShowDataDialog(string title, string message)
     {
-        InfoDialogTitle = title;
-        InfoDialogMessage = message;
-        InfoDialogIconSource = iconSource;
-        IsInfoDialogVisible = true;
+        DataDialogTitle = title;
+        DataDialogMessage = message;
+        IsDataDialogVisible = true;
     }
 
     private static GenderOption ParseGender(string? value)
@@ -458,7 +488,7 @@ public partial class SettingsPageViewModel : ObservableObject
             value,
             ProfilePresentationOptions.Genders,
             ProfilePresentationOptions.ToDisplayName,
-            GenderOption.PreferNotToSay);
+            GenderOption.Male);
     }
 
     private static UnitSystem ParseUnitSystem(string? value)
@@ -477,6 +507,15 @@ public partial class SettingsPageViewModel : ObservableObject
             ProfilePresentationOptions.InitialPages,
             ProfilePresentationOptions.ToDisplayName,
             InitialPageOption.Dashboard);
+    }
+
+    private static AppThemeOption ParseTheme(string? value)
+    {
+        return ParseDisplayName(
+            value,
+            ProfilePresentationOptions.Themes,
+            ProfilePresentationOptions.ToDisplayName,
+            AppThemeOption.System);
     }
 
     private static int ParseWeeklyGoalSessions(string? value)

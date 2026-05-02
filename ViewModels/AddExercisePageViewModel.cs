@@ -20,6 +20,7 @@ public partial class AddExercisePageViewModel : ObservableObject
     private Guid? editingWorkoutExerciseId;
     private string? selectedImagePath;
     private string selectedCatalogExerciseId = string.Empty;
+    private ExerciseTrackingMode trackingMode = ExerciseTrackingMode.Strength;
 
     public AddExercisePageViewModel(
         WorkoutService workoutService,
@@ -121,6 +122,29 @@ public partial class AddExercisePageViewModel : ObservableObject
 
     public string SaveButtonText => IsEditing ? "Save changes" : "Save exercise";
 
+    public ExerciseTrackingMode TrackingMode
+    {
+        get => trackingMode;
+        private set
+        {
+            if (SetProperty(ref trackingMode, value))
+                RefreshTrackingModeState();
+        }
+    }
+
+    public bool IsStrengthTracking => TrackingMode == ExerciseTrackingMode.Strength;
+
+    public bool IsTimeTracking => TrackingMode == ExerciseTrackingMode.Time;
+
+    public bool IsTimeAndDistanceTracking => TrackingMode == ExerciseTrackingMode.TimeAndDistance;
+
+    public string SetInputHelpText => TrackingMode switch
+    {
+        ExerciseTrackingMode.Time => "Track time for each set. Calories are estimated from saved history data.",
+        ExerciseTrackingMode.TimeAndDistance => "Track time and distance for each set. Calories are estimated from saved history data.",
+        _ => "Track reps and weight for each set. Volume and calories are calculated from saved history data."
+    };
+
     public ObservableCollection<MultiSelectOptionPresentationModel> PrimaryMuscleCategories { get; } =
         CreateMultiSelectOptions(
         [
@@ -191,7 +215,15 @@ public partial class AddExercisePageViewModel : ObservableObject
 
     public ObservableCollection<AddEditExerciseSetInputPresentationModel> Sets { get; } = new()
     {
-        new() { SortNumber = 0, Reps = "12", WeightKg = "0", RestSeconds = "90" }
+        new()
+        {
+            SortNumber = 0,
+            Reps = "12",
+            WeightKg = "0",
+            DurationSeconds = "60",
+            DistanceKm = string.Empty,
+            RestSeconds = "90"
+        }
     };
 
     public ObservableCollection<string> ForceOptions { get; } =
@@ -240,6 +272,8 @@ public partial class AddExercisePageViewModel : ObservableObject
         HasSelectedImage = false;
         RestSeconds = 90;
 
+        TrackingMode = ExerciseTrackingMode.Strength;
+
         SelectedForce = string.Empty;
         SelectedBodyCategory = string.Empty;
         SelectedMechanic = string.Empty;
@@ -253,13 +287,7 @@ public partial class AddExercisePageViewModel : ObservableObject
         ClearSelections(SecondaryMuscles);
 
         Sets.Clear();
-        Sets.Add(new AddEditExerciseSetInputPresentationModel
-        {
-            SortNumber = 0,
-            Reps = "12",
-            WeightKg = "0",
-            RestSeconds = RestSeconds.ToString(CultureInfo.InvariantCulture)
-        });
+        Sets.Add(CreateDefaultInputSet(0, TrackingMode, RestSeconds));
 
         NotifyModeChanged();
         RefreshMuscleCategoryState();
@@ -294,6 +322,8 @@ public partial class AddExercisePageViewModel : ObservableObject
         HasSelectedImage = !string.IsNullOrWhiteSpace(exercise.ImageSource) && exercise.ImageSource != "image.png";
         selectedImagePath = HasSelectedImage ? exercise.ImageSource : null;
 
+        TrackingMode = exercise.TrackingMode;
+
         SelectedForce = ToDisplayName(exercise.Force);
         SelectedBodyCategory = ToDisplayName(exercise.BodyCategory);
         SelectedMechanic = ToDisplayName(exercise.Mechanic);
@@ -317,24 +347,21 @@ public partial class AddExercisePageViewModel : ObservableObject
                 SortNumber = set.SortNumber,
                 Reps = set.Reps.ToString(CultureInfo.InvariantCulture),
                 WeightKg = set.WeightKg?.ToString("0.#", CultureInfo.InvariantCulture) ?? string.Empty,
+                DurationSeconds = set.DurationSeconds.ToString(CultureInfo.InvariantCulture),
+                DistanceKm = set.DistanceMeters.HasValue
+                    ? (set.DistanceMeters.Value / 1000d).ToString("0.##", CultureInfo.InvariantCulture)
+                    : string.Empty,
                 RestSeconds = set.RestSeconds.ToString(CultureInfo.InvariantCulture)
             });
         }
 
         if (Sets.Count == 0)
-        {
-            Sets.Add(new AddEditExerciseSetInputPresentationModel
-            {
-                SortNumber = 0,
-                Reps = "10",
-                WeightKg = "0",
-                RestSeconds = "90"
-            });
-        }
+            Sets.Add(CreateDefaultInputSet(0, TrackingMode, 90));
 
         RestSeconds = Sets[0].RestSecondsValue;
 
         NotifyModeChanged();
+        RefreshTrackingModeState();
         RefreshMuscleCategoryState();
         RefreshMuscleState();
     }
@@ -398,6 +425,24 @@ public partial class AddExercisePageViewModel : ObservableObject
     private async Task ChooseFrom()
     {
         await Shell.Current.GoToAsync(AppShell.CatalogExercisePickerRoute, true);
+    }
+
+    [RelayCommand]
+    private void SelectWeightSetType()
+    {
+        SetTrackingMode(ExerciseTrackingMode.Strength);
+    }
+
+    [RelayCommand]
+    private void SelectTimeSetType()
+    {
+        SetTrackingMode(ExerciseTrackingMode.Time);
+    }
+
+    [RelayCommand]
+    private void SelectTimeAndDistanceSetType()
+    {
+        SetTrackingMode(ExerciseTrackingMode.TimeAndDistance);
     }
 
     [RelayCommand]
@@ -473,13 +518,7 @@ public partial class AddExercisePageViewModel : ObservableObject
     [RelayCommand]
     private void AddSet()
     {
-        Sets.Add(new AddEditExerciseSetInputPresentationModel
-        {
-            SortNumber = Sets.Count,
-            Reps = "10",
-            WeightKg = "0",
-            RestSeconds = RestSeconds.ToString(CultureInfo.InvariantCulture)
-        });
+        Sets.Add(CreateDefaultInputSet(Sets.Count, TrackingMode, RestSeconds));
     }
 
     [RelayCommand]
@@ -492,7 +531,7 @@ public partial class AddExercisePageViewModel : ObservableObject
         {
             ShowValidationError(
                 "At least one set required",
-                "Keep one set on the exercise. You can edit its reps and kg.");
+                "Keep one set on the exercise. You can edit its values.");
             return;
         }
 
@@ -532,6 +571,7 @@ public partial class AddExercisePageViewModel : ObservableObject
             ImageSource = string.IsNullOrWhiteSpace(selectedImagePath)
                 ? "image.png"
                 : selectedImagePath,
+            TrackingMode = TrackingMode,
             Force = ParseDisplayName<ExerciseForce>(SelectedForce),
             BodyCategory = ParseDisplayName<ExerciseBodyCategory>(SelectedBodyCategory),
             Mechanic = ParseDisplayName<ExerciseMechanic>(SelectedMechanic),
@@ -582,6 +622,10 @@ public partial class AddExercisePageViewModel : ObservableObject
         ExerciseName = selected.Name.Trim();
         Notes = selected.Notes.Trim();
 
+        TrackingMode = InferTrackingMode(selected.Name);
+
+        NormalizeSetInputsForTrackingMode();
+
         if (!string.IsNullOrWhiteSpace(selected.ImageSource))
         {
             selectedImagePath = selected.ImageSource;
@@ -603,6 +647,7 @@ public partial class AddExercisePageViewModel : ObservableObject
 
         IsAdvancedExpanded = true;
 
+        RefreshTrackingModeState();
         RefreshMuscleCategoryState();
         RefreshMuscleState();
     }
@@ -628,34 +673,149 @@ public partial class AddExercisePageViewModel : ObservableObject
         {
             var set = Sets[index];
 
-            if (!int.TryParse(set.Reps?.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var reps))
-            {
-                errors.Add($"Set {index + 1}: reps must be a whole number.");
+            if (!TryParseStrengthFields(index, TrackingMode, set, errors, out var reps, out var weightKg))
                 continue;
-            }
 
-            if (reps <= 0)
-                errors.Add($"Set {index + 1}: reps must be at least 1.");
-
-            if (!TryParseFlexibleDouble(set.WeightKg, out var weightKg))
-            {
-                errors.Add($"Set {index + 1}: kg must be a number.");
+            if (!TryParseDurationFields(index, TrackingMode, set, errors, out var durationSeconds))
                 continue;
-            }
 
-            if (weightKg < 0)
-                errors.Add($"Set {index + 1}: kg cannot be negative.");
+            if (!TryParseDistanceFields(index, TrackingMode, set, errors, out var distanceMeters))
+                continue;
 
             parsedSets.Add(new WorkoutSetModel
             {
                 SortNumber = index,
-                Reps = Math.Max(0, reps),
+                Reps = reps,
                 WeightKg = weightKg,
+                DurationSeconds = durationSeconds,
+                DistanceMeters = distanceMeters,
                 RestSeconds = Math.Max(0, RestSeconds)
             });
         }
 
         return errors;
+    }
+
+    private void SetTrackingMode(ExerciseTrackingMode value)
+    {
+        if (TrackingMode == value)
+            return;
+
+        TrackingMode = value;
+        NormalizeSetInputsForTrackingMode();
+    }
+
+    private void NormalizeSetInputsForTrackingMode()
+    {
+        foreach (var set in Sets)
+        {
+            if (TrackingMode == ExerciseTrackingMode.Strength)
+            {
+                if (string.IsNullOrWhiteSpace(set.Reps) || set.RepsValue <= 0)
+                    set.Reps = "10";
+
+                if (string.IsNullOrWhiteSpace(set.WeightKg))
+                    set.WeightKg = "0";
+
+                continue;
+            }
+
+            if (set.DurationSecondsValue <= 0)
+                set.DurationSeconds = "60";
+
+            if (TrackingMode == ExerciseTrackingMode.TimeAndDistance &&
+                (!set.DistanceKmValue.HasValue || set.DistanceKmValue.Value <= 0))
+            {
+                set.DistanceKm = "1";
+            }
+        }
+    }
+
+    private static bool TryParseStrengthFields(
+        int index,
+        ExerciseTrackingMode trackingMode,
+        AddEditExerciseSetInputPresentationModel set,
+        List<string> errors,
+        out int reps,
+        out double? weightKg)
+    {
+        reps = 0;
+        weightKg = null;
+
+        if (trackingMode != ExerciseTrackingMode.Strength)
+            return true;
+
+        if (!int.TryParse(set.Reps?.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out reps))
+        {
+            errors.Add($"Set {index + 1}: reps must be a whole number.");
+            return false;
+        }
+
+        if (reps <= 0)
+            errors.Add($"Set {index + 1}: reps must be at least 1.");
+
+        if (!TryParseFlexibleDouble(set.WeightKg, out var parsedWeightKg))
+        {
+            errors.Add($"Set {index + 1}: kg must be a number.");
+            return false;
+        }
+
+        if (parsedWeightKg < 0)
+            errors.Add($"Set {index + 1}: kg cannot be negative.");
+
+        weightKg = parsedWeightKg;
+
+        return true;
+    }
+
+    private static bool TryParseDurationFields(
+        int index,
+        ExerciseTrackingMode trackingMode,
+        AddEditExerciseSetInputPresentationModel set,
+        List<string> errors,
+        out int durationSeconds)
+    {
+        durationSeconds = 0;
+
+        if (trackingMode == ExerciseTrackingMode.Strength)
+            return true;
+
+        if (!int.TryParse(set.DurationSeconds?.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out durationSeconds))
+        {
+            errors.Add($"Set {index + 1}: duration must be a whole number of seconds.");
+            return false;
+        }
+
+        if (durationSeconds <= 0)
+            errors.Add($"Set {index + 1}: duration must be at least 1 second.");
+
+        return true;
+    }
+
+    private static bool TryParseDistanceFields(
+        int index,
+        ExerciseTrackingMode trackingMode,
+        AddEditExerciseSetInputPresentationModel set,
+        List<string> errors,
+        out double? distanceMeters)
+    {
+        distanceMeters = null;
+
+        if (trackingMode != ExerciseTrackingMode.TimeAndDistance)
+            return true;
+
+        if (!TryParseFlexibleDouble(set.DistanceKm, out var distanceKm))
+        {
+            errors.Add($"Set {index + 1}: distance must be a number.");
+            return false;
+        }
+
+        if (distanceKm <= 0)
+            errors.Add($"Set {index + 1}: distance must be greater than 0 km.");
+
+        distanceMeters = Math.Max(0, distanceKm) * 1000d;
+
+        return true;
     }
 
     private void ShowValidationError(string title, string message)
@@ -671,6 +831,15 @@ public partial class AddExercisePageViewModel : ObservableObject
         OnPropertyChanged(nameof(PageTitle));
         OnPropertyChanged(nameof(PageSubtitle));
         OnPropertyChanged(nameof(SaveButtonText));
+    }
+
+    private void RefreshTrackingModeState()
+    {
+        OnPropertyChanged(nameof(TrackingMode));
+        OnPropertyChanged(nameof(IsStrengthTracking));
+        OnPropertyChanged(nameof(IsTimeTracking));
+        OnPropertyChanged(nameof(IsTimeAndDistanceTracking));
+        OnPropertyChanged(nameof(SetInputHelpText));
     }
 
     private void SubscribeToOptionChanges(IEnumerable<MultiSelectOptionPresentationModel> options)
@@ -802,6 +971,77 @@ public partial class AddExercisePageViewModel : ObservableObject
         }
 
         return null;
+    }
+
+    private static AddEditExerciseSetInputPresentationModel CreateDefaultInputSet(
+        int sortNumber,
+        ExerciseTrackingMode trackingMode,
+        int restSeconds)
+    {
+        return new AddEditExerciseSetInputPresentationModel
+        {
+            SortNumber = sortNumber,
+            Reps = trackingMode == ExerciseTrackingMode.Strength ? "10" : "0",
+            WeightKg = trackingMode == ExerciseTrackingMode.Strength ? "0" : string.Empty,
+            DurationSeconds = trackingMode == ExerciseTrackingMode.Strength ? "0" : "60",
+            DistanceKm = trackingMode == ExerciseTrackingMode.TimeAndDistance ? "1" : string.Empty,
+            RestSeconds = Math.Max(0, restSeconds).ToString(CultureInfo.InvariantCulture)
+        };
+    }
+
+    private static ExerciseTrackingMode InferTrackingMode(string exerciseName)
+    {
+        var name = Normalize(exerciseName);
+
+        if (ContainsAny(
+                name,
+                "walk",
+                "run",
+                "jog",
+                "sprint",
+                "cycling",
+                "cycle",
+                "bike",
+                "row",
+                "ergometer",
+                "elliptical",
+                "swim",
+                "hiking",
+                "hike",
+                "rucking",
+                "ruck",
+                "treadmill",
+                "stair",
+                "climber",
+                "versaclimber",
+                "jacobsladder",
+                "skierg"))
+        {
+            return ExerciseTrackingMode.TimeAndDistance;
+        }
+
+        if (ContainsAny(
+                name,
+                "stretch",
+                "plank",
+                "hold",
+                "wallsit",
+                "battlerope",
+                "shadowboxing",
+                "heavybag",
+                "speedbag",
+                "jumprope",
+                "yoga"))
+        {
+            return ExerciseTrackingMode.Time;
+        }
+
+        return ExerciseTrackingMode.Strength;
+    }
+
+    private static bool ContainsAny(string value, params string[] terms)
+    {
+        return terms.Any(term => value.Contains(Normalize(term), StringComparison.OrdinalIgnoreCase));
     }
 
     private static string ToDisplayName(ExerciseForce? value)

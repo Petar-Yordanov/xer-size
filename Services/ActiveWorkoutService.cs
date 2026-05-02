@@ -1,4 +1,5 @@
-﻿using XerSize.Models.DataAccessObjects.ActiveWorkout;
+﻿using System.Globalization;
+using XerSize.Models.DataAccessObjects.ActiveWorkout;
 using XerSize.Models.DataAccessObjects.Workouts;
 using XerSize.Repositories.ActiveWorkout;
 
@@ -11,19 +12,22 @@ public sealed class ActiveWorkoutService
     private readonly ActiveWorkoutSetRepository activeSets;
     private readonly WorkoutService workoutService;
     private readonly WorkoutHistoryService workoutHistoryService;
+    private readonly UserSettingsService userSettingsService;
 
     public ActiveWorkoutService(
         ActiveWorkoutSessionRepository activeSessions,
         ActiveWorkoutExerciseRepository activeExercises,
         ActiveWorkoutSetRepository activeSets,
         WorkoutService workoutService,
-        WorkoutHistoryService workoutHistoryService)
+        WorkoutHistoryService workoutHistoryService,
+        UserSettingsService userSettingsService)
     {
         this.activeSessions = activeSessions;
         this.activeExercises = activeExercises;
         this.activeSets = activeSets;
         this.workoutService = workoutService;
         this.workoutHistoryService = workoutHistoryService;
+        this.userSettingsService = userSettingsService;
     }
 
     public bool Exists(Guid activeWorkoutSessionId)
@@ -103,7 +107,9 @@ public sealed class ActiveWorkoutService
             RemainingRestSeconds = 0,
             IsResting = false,
             RestStartedAt = null,
-            RestDurationSeconds = 0
+            RestDurationSeconds = 0,
+            WeightKgAtTime = null,
+            AgeAtTime = null
         });
 
         foreach (var workoutExercise in workoutExercises)
@@ -171,12 +177,16 @@ public sealed class ActiveWorkoutService
         Guid activeWorkoutSetId,
         int reps,
         double? weightKg,
+        int durationSeconds,
+        double? distanceMeters,
         int restSeconds)
     {
         var set = GetRequiredSet(activeWorkoutSetId);
 
         set.Reps = Math.Max(0, reps);
         set.WeightKg = weightKg.HasValue ? Math.Max(0, weightKg.Value) : null;
+        set.DurationSeconds = Math.Max(0, durationSeconds);
+        set.DistanceMeters = distanceMeters.HasValue ? Math.Max(0, distanceMeters.Value) : null;
         set.RestSeconds = Math.Max(0, restSeconds);
 
         activeSets.Update(set.Id, set);
@@ -186,6 +196,8 @@ public sealed class ActiveWorkoutService
         Guid activeWorkoutSetId,
         int? reps = null,
         double? weightKg = null,
+        int? durationSeconds = null,
+        double? distanceMeters = null,
         int? restSeconds = null)
     {
         var set = GetRequiredSet(activeWorkoutSetId);
@@ -195,6 +207,12 @@ public sealed class ActiveWorkoutService
 
         if (weightKg.HasValue)
             set.WeightKg = Math.Max(0, weightKg.Value);
+
+        if (durationSeconds.HasValue)
+            set.DurationSeconds = Math.Max(0, durationSeconds.Value);
+
+        if (distanceMeters.HasValue)
+            set.DistanceMeters = Math.Max(0, distanceMeters.Value);
 
         if (restSeconds.HasValue)
             set.RestSeconds = Math.Max(0, restSeconds.Value);
@@ -236,6 +254,8 @@ public sealed class ActiveWorkoutService
         if (exercises.Count == 0)
             throw new ServiceValidationException("Cannot complete an active workout with no exercises.");
 
+        CaptureProfileSnapshot(session);
+
         session.CompletedAt = DateTime.Now;
         session.IsCompleted = true;
         session.IsPartial = isPartial;
@@ -255,6 +275,8 @@ public sealed class ActiveWorkoutService
                     activeSet.SortNumber,
                     activeSet.Reps,
                     activeSet.WeightKg,
+                    activeSet.DurationSeconds,
+                    activeSet.DistanceMeters,
                     activeSet.RestSeconds);
             }
         }
@@ -326,6 +348,54 @@ public sealed class ActiveWorkoutService
         activeSessions.Update(session.Id, session);
     }
 
+    private void CaptureProfileSnapshot(ActiveWorkoutSessionModel session)
+    {
+        var settings = userSettingsService.GetOrCreate();
+
+        session.WeightKgAtTime = TryReadWeightKg(settings.Weight, settings.Units, out var weightKg)
+            ? weightKg
+            : null;
+
+        session.AgeAtTime = int.TryParse(
+            settings.Age?.Trim(),
+            NumberStyles.Integer,
+            CultureInfo.InvariantCulture,
+            out var age)
+            && age > 0
+                ? age
+                : null;
+    }
+
+    private static bool TryReadWeightKg(string? value, Models.Definitions.UnitSystem units, out double weightKg)
+    {
+        weightKg = 0;
+
+        if (!TryParseFlexibleDouble(value, out var parsedWeight) || parsedWeight <= 0)
+            return false;
+
+        weightKg = units == Models.Definitions.UnitSystem.Imperial
+            ? parsedWeight * 0.45359237d
+            : parsedWeight;
+
+        return weightKg > 0;
+    }
+
+    private static bool TryParseFlexibleDouble(string? value, out double result)
+    {
+        var text = value?.Trim();
+
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            result = 0;
+            return false;
+        }
+
+        var normalized = text.Replace(',', '.');
+
+        return double.TryParse(normalized, NumberStyles.Float, CultureInfo.InvariantCulture, out result)
+            || double.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out result);
+    }
+
     private static void ClearRestState(ActiveWorkoutSessionModel session)
     {
         session.RemainingRestSeconds = 0;
@@ -347,6 +417,7 @@ public sealed class ActiveWorkoutService
             Name = workoutExercise.Name,
             ImageSource = workoutExercise.ImageSource,
             Notes = workoutExercise.Notes,
+            TrackingMode = workoutExercise.TrackingMode,
             Force = workoutExercise.Force,
             BodyCategory = workoutExercise.BodyCategory,
             Mechanic = workoutExercise.Mechanic,
@@ -370,6 +441,8 @@ public sealed class ActiveWorkoutService
             SortNumber = workoutSet.SortNumber,
             Reps = workoutSet.Reps,
             WeightKg = workoutSet.WeightKg,
+            DurationSeconds = workoutSet.DurationSeconds,
+            DistanceMeters = workoutSet.DistanceMeters,
             RestSeconds = workoutSet.RestSeconds,
             IsCompleted = false,
             IsSkipped = false

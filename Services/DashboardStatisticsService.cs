@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using XerSize.Core;
 using XerSize.Models.DataAccessObjects.History;
 using XerSize.Models.Definitions;
 using XerSize.Models.Presentation.Options;
@@ -71,23 +72,22 @@ public sealed class DashboardStatisticsService
         };
     }
 
+    public double CalculateEstimatedWorkoutCalories(HistoryWorkoutItemModel workout)
+    {
+        if (!TryGetUserProfileForCalories(workout, out var weightKg, out var heightCm, out var age, out var sex))
+            return 0;
+
+        var bmr = CalorieCalculator.CalculateBmrMifflin(weightKg, heightCm, age, sex);
+
+        return CalculateEstimatedWorkoutCalories(workout, bmr);
+    }
+
     private List<double> CalculateEstimatedCaloriesByWorkout(IReadOnlyList<HistoryWorkoutItemModel> history)
     {
-        if (!TryGetUserProfileForCalories(
-            out var weightKg,
-            out var heightCm,
-            out var age,
-            out var sex))
-        {
-            return [];
-        }
-
-        var bmr = CalculateBmrMifflin(weightKg, heightCm, age, sex);
-
         return history
             .Where(workout => !workout.ExcludeMetadataFromMetrics)
             .Where(workout => !workout.ExcludeCaloriesFromMetrics)
-            .Select(workout => CalculateEstimatedWorkoutCalories(workout, bmr))
+            .Select(workout => CalculateEstimatedWorkoutCalories(workout))
             .Where(calories => calories > 0)
             .ToList();
     }
@@ -98,20 +98,208 @@ public sealed class DashboardStatisticsService
     {
         var exercises = workoutHistoryService.GetExercises(workout.Id).ToList();
 
-        var sets = exercises
+        var estimatedCalories = 0d;
+
+        foreach (var exercise in exercises)
+        {
+            var completedSets = workoutHistoryService
+                .GetSets(exercise.Id)
+                .Where(set => set.IsCompleted && !set.IsSkipped)
+                .ToList();
+
+            if (completedSets.Count == 0)
+                continue;
+
+            estimatedCalories += exercise.TrackingMode switch
+            {
+                ExerciseTrackingMode.Time => CalculateTimeBasedCalories(exercise, completedSets, bmr),
+                ExerciseTrackingMode.TimeAndDistance => CalculateTimeAndDistanceCalories(exercise, completedSets, bmr),
+                _ => 0
+            };
+        }
+
+        var strengthSets = exercises
+            .Where(exercise => exercise.TrackingMode == ExerciseTrackingMode.Strength)
             .SelectMany(exercise => workoutHistoryService.GetSets(exercise.Id))
             .Where(set => set.IsCompleted && !set.IsSkipped)
             .ToList();
 
-        if (sets.Count == 0)
+        if (strengthSets.Count > 0)
+        {
+            var strengthExercises = exercises
+                .Where(exercise => exercise.TrackingMode == ExerciseTrackingMode.Strength)
+                .ToList();
+
+            estimatedCalories += CalculateStrengthCalories(workout, strengthExercises, strengthSets, bmr);
+        }
+
+        return Math.Max(0, estimatedCalories);
+    }
+
+    private static double CalculateTimeBasedCalories(
+        HistoryExerciseItemModel exercise,
+        IReadOnlyList<HistorySetItemModel> sets,
+        double bmr)
+    {
+        var activeMinutes = sets.Sum(set => Math.Max(0, set.DurationSeconds)) / 60d;
+
+        if (activeMinutes <= 0)
             return 0;
 
+        var met = InferMetFromExerciseName(exercise.Name, ExerciseTrackingMode.Time);
+
+        return CalorieCalculator.CalculateWorkoutCaloriesActiveOnly(bmr, met, activeMinutes);
+    }
+
+    private static double CalculateTimeAndDistanceCalories(
+        HistoryExerciseItemModel exercise,
+        IReadOnlyList<HistorySetItemModel> sets,
+        double bmr)
+    {
+        var activeMinutes = sets.Sum(set => Math.Max(0, set.DurationSeconds)) / 60d;
+        var distanceMeters = sets.Sum(set => Math.Max(0, set.DistanceMeters ?? 0));
+
+        if (activeMinutes <= 0)
+            return 0;
+
+        var initialMet = InferMetFromExerciseName(exercise.Name, ExerciseTrackingMode.TimeAndDistance);
+        var speedKmh = distanceMeters > 0
+            ? (distanceMeters / 1000d) / (activeMinutes / 60d)
+            : 0;
+
+        var adjustedMet = EstimateDistanceAdjustedMet(exercise.Name, initialMet, speedKmh);
+
+        return CalorieCalculator.CalculateWorkoutCaloriesActiveOnly(bmr, adjustedMet, activeMinutes);
+    }
+
+    private static double CalculateStrengthCalories(
+        HistoryWorkoutItemModel workout,
+        IReadOnlyList<HistoryExerciseItemModel> exercises,
+        IReadOnlyList<HistorySetItemModel> sets,
+        double bmr)
+    {
         var totalRestMinutes = sets.Sum(set => Math.Max(0, set.RestSeconds)) / 60d;
         var activeMinutes = Math.Max(1, workout.DurationMinutes - totalRestMinutes);
         var met = EstimateResistanceTrainingMet(exercises, sets, activeMinutes);
-        var restingKcalPerMinute = bmr / 1440d;
 
-        return Math.Max(0, met - 1d) * restingKcalPerMinute * activeMinutes;
+        return CalorieCalculator.CalculateWorkoutCaloriesActiveOnly(bmr, met, activeMinutes);
+    }
+
+    private static double InferMetFromExerciseName(string exerciseName, ExerciseTrackingMode trackingMode)
+    {
+        var name = Normalize(exerciseName);
+
+        if (ContainsAny(name, "stretch", "mobility", "yoga"))
+            return 2.3;
+
+        if (ContainsAny(name, "plank", "hold", "wallsit"))
+            return 3.3;
+
+        if (ContainsAny(name, "walk"))
+            return 3.5;
+
+        if (ContainsAny(name, "run", "jog", "sprint"))
+            return 7.0;
+
+        if (ContainsAny(name, "cycling", "cycle", "bike"))
+            return 6.0;
+
+        if (ContainsAny(name, "row", "ergometer", "skierg"))
+            return 7.0;
+
+        if (ContainsAny(name, "swim"))
+            return 6.0;
+
+        if (ContainsAny(name, "stair", "climber", "versaclimber", "jacobsladder"))
+            return 8.0;
+
+        if (ContainsAny(name, "elliptical"))
+            return 5.0;
+
+        if (ContainsAny(name, "hiking", "hike", "rucking", "ruck"))
+            return 6.0;
+
+        return trackingMode switch
+        {
+            ExerciseTrackingMode.Time => 3.0,
+            ExerciseTrackingMode.TimeAndDistance => 4.0,
+            _ => 4.0
+        };
+    }
+
+    private static double EstimateDistanceAdjustedMet(string exerciseName, double initialMet, double speedKmh)
+    {
+        if (speedKmh <= 0)
+            return initialMet;
+
+        var name = Normalize(exerciseName);
+
+        if (ContainsAny(name, "walk", "treadmillwalk", "outdoorwalk", "powerwalk"))
+        {
+            if (speedKmh >= 7.0)
+                return Math.Max(initialMet, 6.3);
+
+            if (speedKmh >= 6.0)
+                return Math.Max(initialMet, 5.0);
+
+            if (speedKmh >= 5.0)
+                return Math.Max(initialMet, 4.3);
+
+            if (speedKmh >= 4.0)
+                return Math.Max(initialMet, 3.5);
+
+            return Math.Max(initialMet, 2.8);
+        }
+
+        if (ContainsAny(name, "run", "jog", "sprint"))
+        {
+            if (speedKmh >= 16.0)
+                return Math.Max(initialMet, 14.0);
+
+            if (speedKmh >= 13.0)
+                return Math.Max(initialMet, 11.5);
+
+            if (speedKmh >= 11.0)
+                return Math.Max(initialMet, 10.0);
+
+            if (speedKmh >= 9.5)
+                return Math.Max(initialMet, 8.3);
+
+            if (speedKmh >= 8.0)
+                return Math.Max(initialMet, 7.0);
+
+            return Math.Max(initialMet, 6.0);
+        }
+
+        if (ContainsAny(name, "cycling", "cycle", "bike"))
+        {
+            if (speedKmh >= 32.0)
+                return Math.Max(initialMet, 12.0);
+
+            if (speedKmh >= 25.0)
+                return Math.Max(initialMet, 10.0);
+
+            if (speedKmh >= 20.0)
+                return Math.Max(initialMet, 8.0);
+
+            if (speedKmh >= 16.0)
+                return Math.Max(initialMet, 6.8);
+
+            return Math.Max(initialMet, 4.0);
+        }
+
+        if (ContainsAny(name, "row", "ergometer"))
+        {
+            if (speedKmh >= 14.0)
+                return Math.Max(initialMet, 10.0);
+
+            if (speedKmh >= 10.0)
+                return Math.Max(initialMet, 8.5);
+
+            return Math.Max(initialMet, 6.0);
+        }
+
+        return initialMet;
     }
 
     private static double EstimateResistanceTrainingMet(
@@ -121,8 +309,8 @@ public sealed class DashboardStatisticsService
     {
         var completedSets = sets.Count;
         var totalReps = sets.Sum(set => Math.Max(0, set.Reps));
-        var totalVolumeKg = sets.Sum(set => Math.Max(0, set.Reps) * Math.Max(0, set.WeightKg ?? 0));
-        var volumeDensity = activeMinutes <= 0 ? 0 : totalVolumeKg / activeMinutes;
+        var computedStrengthLoadKg = sets.Sum(set => Math.Max(0, set.Reps) * Math.Max(0, set.WeightKg ?? 0));
+        var loadDensity = activeMinutes <= 0 ? 0 : computedStrengthLoadKg / activeMinutes;
         var setDensity = activeMinutes <= 0 ? 0 : completedSets / activeMinutes;
         var hasCompoundWork = exercises.Any(exercise => IsCompound(exercise) || exercise.PrimaryMuscleCategories.Count > 1 || exercise.PrimaryMuscles.Count > 2);
         var averageReps = completedSets == 0 ? 0 : totalReps / (double)completedSets;
@@ -132,11 +320,11 @@ public sealed class DashboardStatisticsService
         if (hasCompoundWork)
             met += 0.6d;
 
-        if (volumeDensity >= 700)
+        if (loadDensity >= 700)
             met += 0.8d;
-        else if (volumeDensity >= 400)
+        else if (loadDensity >= 400)
             met += 0.5d;
-        else if (volumeDensity >= 200)
+        else if (loadDensity >= 200)
             met += 0.25d;
 
         if (setDensity >= 0.5)
@@ -144,7 +332,7 @@ public sealed class DashboardStatisticsService
         else if (setDensity >= 0.35)
             met += 0.25d;
 
-        if (averageReps <= 6 && volumeDensity >= 250)
+        if (averageReps <= 6 && loadDensity >= 250)
             met += 0.35d;
 
         return Math.Clamp(met, 3.0d, 6.5d);
@@ -328,66 +516,63 @@ public sealed class DashboardStatisticsService
     }
 
     private bool TryGetUserProfileForCalories(
+        HistoryWorkoutItemModel workout,
         out double weightKg,
         out double heightCm,
         out int age,
-        out DashboardSex sex)
+        out Sex sex)
     {
         weightKg = 0;
         heightCm = 0;
         age = 0;
-        sex = DashboardSex.Unknown;
+        sex = Sex.Male;
 
         var settings = userSettingsService.GetOrCreate();
 
-        if (!int.TryParse(settings.Age?.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out age))
+        if (workout.AgeAtTime.HasValue && workout.AgeAtTime.Value > 0)
+        {
+            age = workout.AgeAtTime.Value;
+        }
+        else if (!int.TryParse(settings.Age?.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out age))
+        {
             return false;
+        }
 
         if (age <= 0)
             return false;
 
-        if (!TryParseFlexibleDouble(settings.Weight, out var weight))
-            return false;
+        if (workout.WeightKgAtTime.HasValue && workout.WeightKgAtTime.Value > 0)
+        {
+            weightKg = workout.WeightKgAtTime.Value;
+        }
+        else
+        {
+            if (!TryParseFlexibleDouble(settings.Weight, out var weight))
+                return false;
+
+            if (weight <= 0)
+                return false;
+
+            weightKg = settings.Units == UnitSystem.Imperial
+                ? weight * 0.45359237d
+                : weight;
+        }
 
         if (!TryParseFlexibleDouble(settings.Height, out var height))
             return false;
 
-        if (weight <= 0 || height <= 0)
+        if (height <= 0)
             return false;
 
-        var isImperial = settings.Units.ToString().Contains("Imperial", StringComparison.OrdinalIgnoreCase);
+        heightCm = settings.Units == UnitSystem.Imperial
+            ? height * 2.54d
+            : height;
 
-        weightKg = isImperial ? weight * 0.45359237d : weight;
-        heightCm = isImperial ? height * 2.54d : height;
-        sex = ParseSex(settings.Gender);
+        sex = settings.Gender == GenderOption.Female
+            ? Sex.Female
+            : Sex.Male;
 
-        return sex is DashboardSex.Male or DashboardSex.Female;
-    }
-
-    private static double CalculateBmrMifflin(
-        double weightKg,
-        double heightCm,
-        int age,
-        DashboardSex sex)
-    {
-        var bmr = 10.0 * weightKg + 6.25 * heightCm - 5.0 * age;
-
-        return sex == DashboardSex.Male
-            ? bmr + 5.0
-            : bmr - 161.0;
-    }
-
-    private static DashboardSex ParseSex(GenderOption gender)
-    {
-        var normalized = Normalize(gender.ToString());
-
-        if (normalized is "male" or "man")
-            return DashboardSex.Male;
-
-        if (normalized is "female" or "woman")
-            return DashboardSex.Female;
-
-        return DashboardSex.Unknown;
+        return weightKg > 0 && heightCm > 0;
     }
 
     private static double CalculateSessionsPerWeek(int completedWorkoutCount, DateTime from, DateTime to)
@@ -423,6 +608,11 @@ public sealed class DashboardStatisticsService
         return value.HasValue ? ExercisePresentationOptions.ToDisplayName(value.Value) : "Unknown";
     }
 
+    private static bool ContainsAny(string value, params string[] terms)
+    {
+        return terms.Any(term => value.Contains(Normalize(term), StringComparison.OrdinalIgnoreCase));
+    }
+
     private static string Normalize(string value)
     {
         return new string(
@@ -431,13 +621,6 @@ public sealed class DashboardStatisticsService
                 .Where(char.IsLetterOrDigit)
                 .Select(char.ToLowerInvariant)
                 .ToArray());
-    }
-
-    private enum DashboardSex
-    {
-        Unknown,
-        Male,
-        Female
     }
 }
 

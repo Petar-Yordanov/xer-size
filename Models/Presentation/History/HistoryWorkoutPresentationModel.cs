@@ -25,33 +25,21 @@ public sealed partial class HistoryWorkoutPresentationModel : ObservableObject
     private DateTime startedAt;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CompletedAtText))]
-    [NotifyPropertyChangedFor(nameof(CompletedTimeText))]
     private DateTime completedAt;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(DurationText))]
-    [NotifyPropertyChangedFor(nameof(SummaryText))]
     private int durationMinutes;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CompletionStatus))]
-    [NotifyPropertyChangedFor(nameof(SetsText))]
     private bool isPartial;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(SetsText))]
-    [NotifyPropertyChangedFor(nameof(SummaryText))]
     private int plannedSetCount;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(VolumeTrendIconSource))]
-    [NotifyPropertyChangedFor(nameof(VolumeTrendColor))]
-    [NotifyPropertyChangedFor(nameof(HasVolumeTrendIcon))]
-    private double volumeTrendDeltaKg;
+    private double estimatedCaloriesBurned;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(HasNotes))]
     private string notes = string.Empty;
 
     [ObservableProperty]
@@ -60,7 +48,7 @@ public sealed partial class HistoryWorkoutPresentationModel : ObservableObject
 
     public ObservableCollection<HistoryExercisePresentationModel> Exercises { get; } = new();
 
-    public int ExerciseCount => Exercises.Count;
+    public bool HasNotes => !string.IsNullOrWhiteSpace(Notes);
 
     public int CompletedSetCount => Exercises.Sum(exercise => exercise.CompletedSetCount);
 
@@ -68,68 +56,38 @@ public sealed partial class HistoryWorkoutPresentationModel : ObservableObject
 
     public double TotalVolumeKg => Exercises.Sum(exercise => exercise.TotalVolumeKg);
 
-    public string VolumeTrendIconSource
-    {
-        get
-        {
-            if (VolumeTrendDeltaKg > 0)
-                return "expand_less.png";
-
-            if (VolumeTrendDeltaKg < 0)
-                return "expand_more.png";
-
-            return string.Empty;
-        }
-    }
-
-    public Color VolumeTrendColor
-    {
-        get
-        {
-            if (VolumeTrendDeltaKg > 0)
-                return Colors.Green;
-
-            if (VolumeTrendDeltaKg < 0)
-                return Colors.Red;
-
-            return Colors.Transparent;
-        }
-    }
-
-    public bool HasVolumeTrendIcon => !string.IsNullOrWhiteSpace(VolumeTrendIconSource);
-
-    public bool HasExercises => Exercises.Count > 0;
-
-    public bool HasNotes => !string.IsNullOrWhiteSpace(Notes);
-
-    public string CompletionStatus => IsPartial ? "Partial" : "Completed";
+    public string CompletionStatus => IsPartial
+        ? "Partial"
+        : "Complete";
 
     public string CompletedAtText => CompletedAt.ToString("dd MMM yyyy");
 
-    public string CompletedTimeText => CompletedAt.ToString("HH:mm");
+    public string DurationText => FormatMinutes(DurationMinutes);
 
-    public string DurationText => $"{DurationMinutes} min";
-
-    public string ExercisesText => ExerciseCount == 1
-        ? "1 exercise"
-        : $"{ExerciseCount} exercises";
-
-    public string SetsText
-    {
-        get
-        {
-            if (IsPartial && PlannedSetCount > CompletedSetCount)
-                return $"{CompletedSetCount}/{PlannedSetCount} sets";
-
-            return CompletedSetCount == 1
-                ? "1 set"
-                : $"{CompletedSetCount} sets";
-        }
-    }
+    public string CaloriesText => EstimatedCaloriesBurned <= 0
+        ? "0 kcal"
+        : $"{EstimatedCaloriesBurned:0} kcal";
 
     public string VolumeText => PresentationFormatting.FormatVolumeKg(TotalVolumeKg);
 
-    public string SummaryText => $"{ExercisesText} • {SetsText} • {DurationText}";
+    public string SummaryText
+    {
+        get
+        {
+            var setText = PlannedSetCount == 1
+                ? "1 planned set"
+                : $"{PlannedSetCount} planned sets";
+
+            var doneText = CompletedSetCount == 1
+                ? "1 done"
+                : $"{CompletedSetCount} done";
+
+            if (SkippedSetCount > 0)
+                return $"{CompletedAtText} • {DurationText} • {doneText} • {SkippedSetCount} skipped • {setText}";
+
+            return $"{CompletedAtText} • {DurationText} • {doneText} • {setText}";
+        }
+    }
 
     public string ExpandIconSource => IsExpanded
         ? "expand_less.png"
@@ -137,51 +95,65 @@ public sealed partial class HistoryWorkoutPresentationModel : ObservableObject
 
     public void NotifyCalculatedPropertiesChanged()
     {
-        OnPropertyChanged(nameof(ExerciseCount));
+        OnPropertyChanged(nameof(HasNotes));
         OnPropertyChanged(nameof(CompletedSetCount));
         OnPropertyChanged(nameof(SkippedSetCount));
         OnPropertyChanged(nameof(TotalVolumeKg));
-        OnPropertyChanged(nameof(VolumeTrendIconSource));
-        OnPropertyChanged(nameof(VolumeTrendColor));
-        OnPropertyChanged(nameof(HasVolumeTrendIcon));
-        OnPropertyChanged(nameof(HasExercises));
-        OnPropertyChanged(nameof(HasNotes));
         OnPropertyChanged(nameof(CompletionStatus));
         OnPropertyChanged(nameof(CompletedAtText));
-        OnPropertyChanged(nameof(CompletedTimeText));
         OnPropertyChanged(nameof(DurationText));
-        OnPropertyChanged(nameof(ExercisesText));
-        OnPropertyChanged(nameof(SetsText));
+        OnPropertyChanged(nameof(CaloriesText));
         OnPropertyChanged(nameof(VolumeText));
         OnPropertyChanged(nameof(SummaryText));
     }
 
-    private void OnExercisesChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    partial void OnNotesChanged(string value)
     {
-        if (e.OldItems is not null)
-        {
-            foreach (var item in e.OldItems.OfType<HistoryExercisePresentationModel>())
-                item.PropertyChanged -= OnExercisePropertyChanged;
-        }
+        OnPropertyChanged(nameof(HasNotes));
+    }
 
-        if (e.NewItems is not null)
-        {
-            foreach (var item in e.NewItems.OfType<HistoryExercisePresentationModel>())
-                item.PropertyChanged += OnExercisePropertyChanged;
-        }
-
+    partial void OnCompletedAtChanged(DateTime value)
+    {
         NotifyCalculatedPropertiesChanged();
     }
 
-    private void OnExercisePropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    partial void OnDurationMinutesChanged(int value)
     {
-        if (e.PropertyName is nameof(HistoryExercisePresentationModel.CompletedSetCount)
-            or nameof(HistoryExercisePresentationModel.SkippedSetCount)
-            or nameof(HistoryExercisePresentationModel.TotalVolumeKg)
-            or nameof(HistoryExercisePresentationModel.SummaryText)
-            or nameof(HistoryExercisePresentationModel.SetsText))
-        {
-            NotifyCalculatedPropertiesChanged();
-        }
+        NotifyCalculatedPropertiesChanged();
+    }
+
+    partial void OnEstimatedCaloriesBurnedChanged(double value)
+    {
+        NotifyCalculatedPropertiesChanged();
+    }
+
+    partial void OnIsPartialChanged(bool value)
+    {
+        NotifyCalculatedPropertiesChanged();
+    }
+
+    partial void OnPlannedSetCountChanged(int value)
+    {
+        NotifyCalculatedPropertiesChanged();
+    }
+
+    private void OnExercisesChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        NotifyCalculatedPropertiesChanged();
+    }
+
+    private static string FormatMinutes(int minutes)
+    {
+        minutes = Math.Max(0, minutes);
+
+        if (minutes < 60)
+            return $"{minutes} min";
+
+        var hours = minutes / 60;
+        var remainingMinutes = minutes % 60;
+
+        return remainingMinutes == 0
+            ? $"{hours}h"
+            : $"{hours}h {remainingMinutes}m";
     }
 }

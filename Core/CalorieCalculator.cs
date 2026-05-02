@@ -31,7 +31,7 @@ public static class CalorieCalculator
         double activeMinutes)
     {
         var restingKcalPerMinute = bmr / 1440.0;
-        return met * restingKcalPerMinute * activeMinutes;
+        return met * restingKcalPerMinute * Math.Max(0, activeMinutes);
     }
 
     // Calculates extra calories burned because of the workout, excluding normal resting burn.
@@ -42,20 +42,19 @@ public static class CalorieCalculator
         double activeMinutes)
     {
         var restingKcalPerMinute = bmr / 1440.0;
-        return Math.Max(0.0, met - 1.0) * restingKcalPerMinute * activeMinutes;
+        return Math.Max(0.0, met - 1.0) * restingKcalPerMinute * Math.Max(0, activeMinutes);
+    }
+
+    // Estimates calories from duration and distance by adjusting the supplied base MET
+    // using a caller-provided speed-adjusted MET.
+    public static double CalculateWorkoutCaloriesFromAdjustedMet(
+        double bmr,
+        double adjustedMet,
+        double activeMinutes)
+    {
+        return CalculateWorkoutCaloriesActiveOnly(
+            bmr,
+            adjustedMet,
+            activeMinutes);
     }
 }
-
-
-/*
- var bmr = CalorieCalculator.CalculateBmrMifflin(
-    weightKg,
-    heightCm,
-    age,
-    Sex.Male);
-
-var calories = CalorieCalculator.CalculateWorkoutCaloriesActiveOnly(
-    bmr,
-    met,
-    activeMinutes);
- */

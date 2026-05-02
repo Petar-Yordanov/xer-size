@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using XerSize.Models.DataAccessObjects.ActiveWorkout;
 using XerSize.Models.DataAccessObjects.History;
+using XerSize.Models.Definitions;
 using XerSize.Models.Presentation.ActiveWorkouts;
 using XerSize.Models.Presentation.ExerciseMetadata;
 using XerSize.Models.Presentation.History;
@@ -394,6 +395,8 @@ public partial class StartWorkoutPageViewModel : ObservableObject
             set.Id,
             set.RepsValue,
             set.WeightKgValue,
+            set.DurationSecondsValue,
+            set.DistanceMetersValue,
             set.RestSeconds);
 
         set.IsCompleted = true;
@@ -835,6 +838,7 @@ public partial class StartWorkoutPageViewModel : ObservableObject
             Name = $"{historyWorkout.CompletedAt:dd MMM yyyy} • {historyWorkout.WorkoutName}",
             Notes = model.Notes,
             ImageSource = model.ImageSource,
+            TrackingMode = model.TrackingMode,
             Metadata = metadata,
             CompletedAt = model.CompletedAt,
             IsExpanded = true
@@ -846,9 +850,12 @@ public partial class StartWorkoutPageViewModel : ObservableObject
             {
                 Id = set.Id,
                 HistoryExerciseId = set.HistoryExerciseId,
+                TrackingMode = model.TrackingMode,
                 SortNumber = set.SortNumber,
                 Reps = set.Reps,
                 WeightKg = set.WeightKg,
+                DurationSeconds = set.DurationSeconds,
+                DistanceMeters = set.DistanceMeters,
                 RestSeconds = set.RestSeconds,
                 IsCompleted = set.IsCompleted,
                 IsSkipped = set.IsSkipped,
@@ -907,6 +914,7 @@ public partial class StartWorkoutPageViewModel : ObservableObject
             Name = model.Name,
             ImageSource = string.IsNullOrWhiteSpace(model.ImageSource) ? "image.png" : model.ImageSource,
             Notes = model.Notes,
+            TrackingMode = model.TrackingMode,
             Metadata = metadata
         };
 
@@ -916,9 +924,14 @@ public partial class StartWorkoutPageViewModel : ObservableObject
             {
                 Id = set.Id,
                 ActiveWorkoutExerciseId = set.ActiveWorkoutExerciseId,
+                TrackingMode = model.TrackingMode,
                 SortNumber = set.SortNumber,
                 Reps = set.Reps.ToString(CultureInfo.InvariantCulture),
                 WeightKg = set.WeightKg?.ToString("0.#", CultureInfo.InvariantCulture) ?? string.Empty,
+                DurationSeconds = set.DurationSeconds.ToString(CultureInfo.InvariantCulture),
+                DistanceKm = set.DistanceMeters.HasValue
+                    ? (set.DistanceMeters.Value / 1000d).ToString("0.##", CultureInfo.InvariantCulture)
+                    : string.Empty,
                 RestSeconds = set.RestSeconds,
                 IsCompleted = set.IsCompleted,
                 IsSkipped = set.IsSkipped

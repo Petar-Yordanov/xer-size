@@ -22,7 +22,9 @@ public sealed class HistoryWorkoutItemModel
 
     public int SkippedSetCount { get; set; }
 
-    public double TotalVolumeKg { get; set; }
+    public double? WeightKgAtTime { get; set; }
+
+    public int? AgeAtTime { get; set; }
 
     public bool ExcludeVolumeFromMetrics { get; set; }
 

@@ -1,6 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using CommunityToolkit.Mvvm.ComponentModel;
+using XerSize.Models.Definitions;
 using XerSize.Models.Presentation.Common;
 using XerSize.Models.Presentation.ExerciseMetadata;
 
@@ -43,6 +44,10 @@ public sealed partial class ActiveWorkoutExercisePresentationModel : ObservableO
     private string notes = string.Empty;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(TrackingModeText))]
+    private ExerciseTrackingMode trackingMode = ExerciseTrackingMode.Strength;
+
+    [ObservableProperty]
     private ExerciseMetadataPresentationModel metadata = new();
 
     [ObservableProperty]
@@ -51,6 +56,13 @@ public sealed partial class ActiveWorkoutExercisePresentationModel : ObservableO
     public ObservableCollection<ActiveWorkoutSetPresentationModel> Sets { get; } = new();
 
     public bool HasNotes => !string.IsNullOrWhiteSpace(Notes);
+
+    public string TrackingModeText => TrackingMode switch
+    {
+        ExerciseTrackingMode.Time => "Time",
+        ExerciseTrackingMode.TimeAndDistance => "Time + Distance",
+        _ => "Reps / Weight"
+    };
 
     public string SortNumberText => PresentationFormatting.FormatPosition(SortNumber);
 
@@ -67,6 +79,7 @@ public sealed partial class ActiveWorkoutExercisePresentationModel : ObservableO
     public void NotifyCalculatedPropertiesChanged()
     {
         OnPropertyChanged(nameof(HasNotes));
+        OnPropertyChanged(nameof(TrackingModeText));
         OnPropertyChanged(nameof(SortNumberText));
         OnPropertyChanged(nameof(BreadcrumbText));
         OnPropertyChanged(nameof(CompletedSetCount));

@@ -170,7 +170,7 @@ public sealed class WorkoutService
         exercise.WorkoutId = existingExercise.WorkoutId;
 
         ValidateWorkoutExercise(exercise);
-        ValidateWorkoutSets(sets);
+        ValidateWorkoutSets(exercise.TrackingMode, sets);
 
         workoutExercises.Update(workoutExerciseId, exercise);
         ReplaceSets(workoutExerciseId, sets);
@@ -224,6 +224,8 @@ public sealed class WorkoutService
         int sortNumber,
         int reps,
         double? weightKg,
+        int durationSeconds,
+        double? distanceMeters,
         int restSeconds)
     {
         var plannedSet = workoutSets
@@ -238,6 +240,8 @@ public sealed class WorkoutService
 
         plannedSet.Reps = Math.Max(0, reps);
         plannedSet.WeightKg = weightKg.HasValue ? Math.Max(0, weightKg.Value) : null;
+        plannedSet.DurationSeconds = Math.Max(0, durationSeconds);
+        plannedSet.DistanceMeters = distanceMeters.HasValue ? Math.Max(0, distanceMeters.Value) : null;
         plannedSet.RestSeconds = Math.Max(0, restSeconds);
 
         workoutSets.Update(plannedSet.Id, plannedSet);
@@ -248,13 +252,14 @@ public sealed class WorkoutService
         WorkoutExerciseItemModel exercise,
         IEnumerable<WorkoutSetModel>? sets)
     {
-        var materializedSets = sets?.ToList() ?? CreateDefaultSets();
+        ValidateWorkoutExercise(exercise);
+
+        var materializedSets = sets?.ToList() ?? CreateDefaultSets(exercise.TrackingMode);
 
         exercise.WorkoutId = workoutId;
         exercise.SortNumber = GetExercises(workoutId).Count;
 
-        ValidateWorkoutExercise(exercise);
-        ValidateWorkoutSets(materializedSets);
+        ValidateWorkoutSets(exercise.TrackingMode, materializedSets);
 
         var createdExercise = workoutExercises.Create(exercise);
 
@@ -289,6 +294,8 @@ public sealed class WorkoutService
         Guid workoutId,
         ExerciseCatalogItemModel catalogItem)
     {
+        var trackingMode = InferTrackingMode(catalogItem.Name);
+
         return new WorkoutExerciseItemModel
         {
             WorkoutId = workoutId,
@@ -296,6 +303,7 @@ public sealed class WorkoutService
             Name = catalogItem.Name,
             Notes = catalogItem.Notes,
             ImageSource = catalogItem.ImageSource,
+            TrackingMode = trackingMode,
             Force = catalogItem.Force,
             BodyCategory = catalogItem.BodyCategory,
             Mechanic = catalogItem.Mechanic,
@@ -309,15 +317,17 @@ public sealed class WorkoutService
         };
     }
 
-    private static List<WorkoutSetModel> CreateDefaultSets()
+    private static List<WorkoutSetModel> CreateDefaultSets(ExerciseTrackingMode trackingMode)
     {
         return
         [
             new WorkoutSetModel
             {
                 SortNumber = 0,
-                Reps = 10,
-                WeightKg = 0,
+                Reps = trackingMode == ExerciseTrackingMode.Strength ? 10 : 0,
+                WeightKg = trackingMode == ExerciseTrackingMode.Strength ? 0 : null,
+                DurationSeconds = trackingMode == ExerciseTrackingMode.Strength ? 0 : 60,
+                DistanceMeters = trackingMode == ExerciseTrackingMode.TimeAndDistance ? 1000 : null,
                 RestSeconds = 90
             }
         ];
@@ -344,7 +354,7 @@ public sealed class WorkoutService
         exercise.Notes = exercise.Notes.Trim();
     }
 
-    private static void ValidateWorkoutSets(IEnumerable<WorkoutSetModel> sets)
+    private static void ValidateWorkoutSets(ExerciseTrackingMode trackingMode, IEnumerable<WorkoutSetModel> sets)
     {
         var materializedSets = sets.ToList();
 
@@ -361,6 +371,89 @@ public sealed class WorkoutService
 
             if (set.WeightKg < 0)
                 throw new ServiceValidationException("Set weight cannot be negative.");
+
+            if (set.DurationSeconds < 0)
+                throw new ServiceValidationException("Set duration cannot be negative.");
+
+            if (set.DistanceMeters < 0)
+                throw new ServiceValidationException("Set distance cannot be negative.");
+
+            if (trackingMode == ExerciseTrackingMode.Time && set.DurationSeconds <= 0)
+                throw new ServiceValidationException("Time sets require a duration.");
+
+            if (trackingMode == ExerciseTrackingMode.TimeAndDistance)
+            {
+                if (set.DurationSeconds <= 0)
+                    throw new ServiceValidationException("Time + distance sets require a duration.");
+
+                if (!set.DistanceMeters.HasValue || set.DistanceMeters.Value <= 0)
+                    throw new ServiceValidationException("Time + distance sets require a distance.");
+            }
         }
+    }
+
+    private static ExerciseTrackingMode InferTrackingMode(string exerciseName)
+    {
+        var name = Normalize(exerciseName);
+
+        if (ContainsAny(
+                name,
+                "walk",
+                "run",
+                "jog",
+                "sprint",
+                "cycling",
+                "cycle",
+                "bike",
+                "row",
+                "ergometer",
+                "elliptical",
+                "swim",
+                "hiking",
+                "hike",
+                "rucking",
+                "ruck",
+                "treadmill",
+                "stair",
+                "climber",
+                "versaclimber",
+                "jacobsladder",
+                "skierg"))
+        {
+            return ExerciseTrackingMode.TimeAndDistance;
+        }
+
+        if (ContainsAny(
+                name,
+                "stretch",
+                "plank",
+                "hold",
+                "wallsit",
+                "battlerope",
+                "shadowboxing",
+                "heavybag",
+                "speedbag",
+                "jumprope",
+                "yoga"))
+        {
+            return ExerciseTrackingMode.Time;
+        }
+
+        return ExerciseTrackingMode.Strength;
+    }
+
+    private static bool ContainsAny(string value, params string[] terms)
+    {
+        return terms.Any(term => value.Contains(Normalize(term), StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static string Normalize(string value)
+    {
+        return new string(
+            value
+                .Trim()
+                .Where(char.IsLetterOrDigit)
+                .Select(char.ToLowerInvariant)
+                .ToArray());
     }
 }

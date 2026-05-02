@@ -23,9 +23,18 @@ public sealed class UserSettingsService
         var existingSettings = userSettings.Get().FirstOrDefault();
 
         if (existingSettings is not null)
-            return existingSettings;
+        {
+            NormalizeSettings(existingSettings);
+            userSettings.Update(existingSettings.Id, existingSettings);
+            ApplyTheme(existingSettings.Theme);
 
-        return userSettings.Create(new UserSettingsModel());
+            return existingSettings;
+        }
+
+        var createdSettings = userSettings.Create(new UserSettingsModel());
+        ApplyTheme(createdSettings.Theme);
+
+        return createdSettings;
     }
 
     public void UpdateProfile(
@@ -43,13 +52,23 @@ public sealed class UserSettingsService
         settings.Age = age.Trim();
         settings.Height = height.Trim();
         settings.Weight = weight.Trim();
-        settings.Gender = gender;
+        settings.Gender = NormalizeGender(gender);
         settings.WeeklyGoalSessions = Math.Clamp(weeklyGoalSessions, 1, 7);
         settings.WeeklyCalorieTarget = Math.Max(0, weeklyCalorieTarget);
         settings.Units = units;
         settings.InitialPage = initialPage;
 
         userSettings.Update(settings.Id, settings);
+    }
+
+    public void UpdateAppearance(AppThemeOption theme)
+    {
+        var settings = GetOrCreate();
+
+        settings.Theme = NormalizeTheme(theme);
+
+        userSettings.Update(settings.Id, settings);
+        ApplyTheme(settings.Theme);
     }
 
     public void UpdatePreferences(
@@ -84,5 +103,48 @@ public sealed class UserSettingsService
     public InitialPageOption InitialPage()
     {
         return GetOrCreate().InitialPage;
+    }
+
+    public AppThemeOption Theme()
+    {
+        return GetOrCreate().Theme;
+    }
+
+    private static void ApplyTheme(AppThemeOption theme)
+    {
+        if (Application.Current is null)
+            return;
+
+        Application.Current.UserAppTheme = NormalizeTheme(theme) switch
+        {
+            AppThemeOption.Light => AppTheme.Light,
+            AppThemeOption.Dark => AppTheme.Dark,
+            _ => AppTheme.Unspecified
+        };
+    }
+
+    private static void NormalizeSettings(UserSettingsModel settings)
+    {
+        settings.Gender = NormalizeGender(settings.Gender);
+        settings.WeeklyGoalSessions = Math.Clamp(settings.WeeklyGoalSessions, 1, 7);
+        settings.WeeklyCalorieTarget = Math.Max(0, settings.WeeklyCalorieTarget);
+        settings.Theme = NormalizeTheme(settings.Theme);
+    }
+
+    private static GenderOption NormalizeGender(GenderOption gender)
+    {
+        return gender == GenderOption.Female
+            ? GenderOption.Female
+            : GenderOption.Male;
+    }
+
+    private static AppThemeOption NormalizeTheme(AppThemeOption theme)
+    {
+        return theme switch
+        {
+            AppThemeOption.Light => AppThemeOption.Light,
+            AppThemeOption.Dark => AppThemeOption.Dark,
+            _ => AppThemeOption.System
+        };
     }
 }

@@ -184,8 +184,36 @@
                     <VerticalStackLayout Spacing="14">
                         <VerticalStackLayout Spacing="3">
                             <Label Text="Sets" FontFamily="OpenSansSemibold" FontSize="18" TextColor="{StaticResource TextPrimary}" />
-                            <Label Text="Set reps, weight, and one shared rest time" Style="{StaticResource SectionSubtitleStyle}" />
+                            <Label Text="{Binding SetInputHelpText}" Style="{StaticResource SectionSubtitleStyle}" />
                         </VerticalStackLayout>
+
+                        <CollectionView ItemsLayout="HorizontalList" SelectionMode="None">
+                            <CollectionView.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>dummy</x:String>
+                                </x:Array>
+                            </CollectionView.ItemsSource>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <components:TabPill
+                                            Text="Weight"
+                                            IsSelected="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.IsStrengthTracking}"
+                                            Command="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.SelectWeightSetTypeCommand}" />
+
+                                        <components:TabPill
+                                            Text="Time"
+                                            IsSelected="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.IsTimeTracking}"
+                                            Command="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.SelectTimeSetTypeCommand}" />
+
+                                        <components:TabPill
+                                            Text="Time + Distance"
+                                            IsSelected="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.IsTimeAndDistanceTracking}"
+                                            Command="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.SelectTimeAndDistanceSetTypeCommand}" />
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
                         <components:AppDurationField
                             Label="Rest time for all sets"
@@ -210,17 +238,38 @@
                                         </Border.StrokeShape>
 
                                         <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
-                                            <VerticalStackLayout Grid.Column="0" Spacing="6">
+                                            <VerticalStackLayout Grid.Column="0" Spacing="6" IsVisible="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.IsStrengthTracking}">
                                                 <Label Text="Reps" Style="{StaticResource FieldLabelStyle}" />
                                                 <Border Style="{StaticResource InputBorderStyle}" Padding="10,8" BackgroundColor="{StaticResource Surface}">
                                                     <Entry Text="{Binding Reps, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
                                                 </Border>
                                             </VerticalStackLayout>
 
-                                            <VerticalStackLayout Grid.Column="1" Spacing="6">
+                                            <VerticalStackLayout Grid.Column="1" Spacing="6" IsVisible="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.IsStrengthTracking}">
                                                 <Label Text="Kg" Style="{StaticResource FieldLabelStyle}" />
                                                 <Border Style="{StaticResource InputBorderStyle}" Padding="10,8" BackgroundColor="{StaticResource Surface}">
                                                     <Entry Text="{Binding WeightKg, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                                                </Border>
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout Grid.Column="0" Spacing="6" IsVisible="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.IsTimeTracking}">
+                                                <Label Text="Seconds" Style="{StaticResource FieldLabelStyle}" />
+                                                <Border Style="{StaticResource InputBorderStyle}" Padding="10,8" BackgroundColor="{StaticResource Surface}">
+                                                    <Entry Text="{Binding DurationSeconds, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                                                </Border>
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout Grid.Column="0" Spacing="6" IsVisible="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.IsTimeAndDistanceTracking}">
+                                                <Label Text="Seconds" Style="{StaticResource FieldLabelStyle}" />
+                                                <Border Style="{StaticResource InputBorderStyle}" Padding="10,8" BackgroundColor="{StaticResource Surface}">
+                                                    <Entry Text="{Binding DurationSeconds, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
+                                                </Border>
+                                            </VerticalStackLayout>
+
+                                            <VerticalStackLayout Grid.Column="1" Spacing="6" IsVisible="{Binding Source={x:Reference AddExercisePageRoot}, Path=BindingContext.IsTimeAndDistanceTracking}">
+                                                <Label Text="Km" Style="{StaticResource FieldLabelStyle}" />
+                                                <Border Style="{StaticResource InputBorderStyle}" Padding="10,8" BackgroundColor="{StaticResource Surface}">
+                                                    <Entry Text="{Binding DistanceKm, Mode=TwoWay}" Keyboard="Numeric" HorizontalTextAlignment="Center" />
                                                 </Border>
                                             </VerticalStackLayout>
 

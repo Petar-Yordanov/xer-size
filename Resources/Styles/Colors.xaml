@@ -6,7 +6,7 @@
     <!-- App base -->
     <Color x:Key="AppBackground">#EEF8F1</Color>
 
-    <!-- Surfaces: warmer/brighter green-tinted cards, not grey-muted -->
+    <!-- Surfaces -->
     <Color x:Key="Surface">#FFFFFF</Color>
     <Color x:Key="SurfaceSoft">#F0FBF4</Color>
     <Color x:Key="SurfaceMuted">#DDF3E5</Color>
@@ -22,7 +22,7 @@
     <Color x:Key="IconMuted">#53675A</Color>
     <Color x:Key="IconPrimary">#0F1712</Color>
 
-    <!-- Main theme: stronger gym green -->
+    <!-- Main theme -->
     <Color x:Key="Accent">#16A34A</Color>
     <Color x:Key="AccentPressed">#12813B</Color>
     <Color x:Key="AccentSoft">#74E59A</Color>
@@ -30,14 +30,13 @@
     <Color x:Key="AccentSurfaceStrong">#BFF7D2</Color>
     <Color x:Key="AccentText">#0E7436</Color>
 
-    <!-- Green-adjacent support colors -->
+    <!-- Support colors -->
     <Color x:Key="SuccessColor">#19A463</Color>
     <Color x:Key="SuccessSurface">#D8FBE8</Color>
 
     <Color x:Key="InfoColor">#0D9488</Color>
     <Color x:Key="InfoSurface">#D9FAF3</Color>
 
-    <!-- Exceptions: keep warning/error distinct -->
     <Color x:Key="WarningColor">#D99A12</Color>
     <Color x:Key="WarningSurface">#FFF0BE</Color>
 
@@ -58,7 +57,7 @@
     <Color x:Key="MidnightBlue">#0F1712</Color>
     <Color x:Key="OffBlack">#0F1712</Color>
 
-    <!-- Neutral scale, green-tinted -->
+    <!-- Neutral scale -->
     <Color x:Key="Gray100">#F0FBF4</Color>
     <Color x:Key="Gray200">#DDF3E5</Color>
     <Color x:Key="Gray300">#C7E3CF</Color>

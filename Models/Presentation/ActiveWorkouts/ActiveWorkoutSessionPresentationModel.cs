@@ -47,6 +47,12 @@ public sealed partial class ActiveWorkoutSessionPresentationModel : ObservableOb
     [ObservableProperty]
     private bool isResting;
 
+    [ObservableProperty]
+    private double? weightKgAtTime;
+
+    [ObservableProperty]
+    private int? ageAtTime;
+
     public ObservableCollection<ActiveWorkoutExercisePresentationModel> Exercises { get; } = new();
 
     public int ElapsedSeconds => Math.Max(0, (int)(DateTime.Now - StartedAt).TotalSeconds);

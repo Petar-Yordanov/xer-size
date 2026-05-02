@@ -25,4 +25,8 @@ public sealed class ActiveWorkoutSessionModel
     public DateTime? RestStartedAt { get; set; }
 
     public int RestDurationSeconds { get; set; }
+
+    public double? WeightKgAtTime { get; set; }
+
+    public int? AgeAtTime { get; set; }
 }

@@ -12,5 +12,9 @@ public sealed class WorkoutSetModel
 
     public double? WeightKg { get; set; }
 
+    public int DurationSeconds { get; set; }
+
+    public double? DistanceMeters { get; set; }
+
     public int RestSeconds { get; set; }
 }

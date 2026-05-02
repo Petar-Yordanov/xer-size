@@ -514,6 +514,7 @@ public partial class WorkoutsPageViewModel : ObservableObject
             Name = $"{historyWorkout.CompletedAt:dd MMM yyyy} • {historyWorkout.WorkoutName}",
             Notes = model.Notes,
             ImageSource = model.ImageSource,
+            TrackingMode = model.TrackingMode,
             Metadata = metadata,
             CompletedAt = model.CompletedAt,
             IsExpanded = true
@@ -525,9 +526,12 @@ public partial class WorkoutsPageViewModel : ObservableObject
             {
                 Id = set.Id,
                 HistoryExerciseId = set.HistoryExerciseId,
+                TrackingMode = model.TrackingMode,
                 SortNumber = set.SortNumber,
                 Reps = set.Reps,
                 WeightKg = set.WeightKg,
+                DurationSeconds = set.DurationSeconds,
+                DistanceMeters = set.DistanceMeters,
                 RestSeconds = set.RestSeconds,
                 IsCompleted = set.IsCompleted,
                 IsSkipped = set.IsSkipped,
@@ -585,6 +589,7 @@ public partial class WorkoutsPageViewModel : ObservableObject
             Notes = model.Notes,
             SortNumber = model.SortNumber,
             ImageSource = string.IsNullOrWhiteSpace(model.ImageSource) ? "image.png" : model.ImageSource,
+            TrackingMode = model.TrackingMode,
             Metadata = metadata
         };
 
@@ -594,9 +599,12 @@ public partial class WorkoutsPageViewModel : ObservableObject
             {
                 Id = set.Id,
                 WorkoutExerciseId = set.WorkoutExerciseId,
+                TrackingMode = model.TrackingMode,
                 SortNumber = set.SortNumber,
                 Reps = set.Reps,
                 WeightKg = set.WeightKg,
+                DurationSeconds = set.DurationSeconds,
+                DistanceMeters = set.DistanceMeters,
                 RestSeconds = set.RestSeconds
             });
         }

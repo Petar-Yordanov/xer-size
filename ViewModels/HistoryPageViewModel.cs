@@ -12,10 +12,14 @@ namespace XerSize.ViewModels;
 public partial class HistoryPageViewModel : ObservableObject
 {
     private readonly WorkoutHistoryService workoutHistoryService;
+    private readonly DashboardStatisticsService dashboardStatisticsService;
 
-    public HistoryPageViewModel(WorkoutHistoryService workoutHistoryService)
+    public HistoryPageViewModel(
+        WorkoutHistoryService workoutHistoryService,
+        DashboardStatisticsService dashboardStatisticsService)
     {
         this.workoutHistoryService = workoutHistoryService;
+        this.dashboardStatisticsService = dashboardStatisticsService;
 
         ApplyDateFilter();
         SyncSelectedNav();
@@ -32,6 +36,9 @@ public partial class HistoryPageViewModel : ObservableObject
 
     [ObservableProperty]
     public partial string TotalVolume { get; set; } = "0 kg";
+
+    [ObservableProperty]
+    public partial string TotalCalories { get; set; } = "0 kcal";
 
     public ObservableCollection<HistoryWorkoutPresentationModel> HistoryItems { get; } = [];
 
@@ -153,12 +160,41 @@ public partial class HistoryPageViewModel : ObservableObject
 
         HistoryItems.Clear();
 
+        var totalCalories = 0d;
+
         foreach (var workout in history)
-            HistoryItems.Add(ToPresentationModel(workout));
+        {
+            var presentation = ToPresentationModel(workout);
+            totalCalories += presentation.EstimatedCaloriesBurned;
+
+            HistoryItems.Add(presentation);
+        }
 
         CompletedWorkouts = history.Count.ToString();
         TotalTrainingTime = FormatMinutes(history.Sum(workout => Math.Max(0, workout.DurationMinutes)));
-        TotalVolume = $"{history.Where(workout => !workout.ExcludeVolumeFromMetrics).Sum(workout => workout.TotalVolumeKg):0.#} kg";
+        TotalVolume = $"{CalculateComputedVolumeKg(history):0.#} kg";
+        TotalCalories = $"{totalCalories:0} kcal";
+    }
+
+    private double CalculateComputedVolumeKg(IEnumerable<HistoryWorkoutItemModel> history)
+    {
+        var total = 0d;
+
+        foreach (var workout in history.Where(workout => !workout.ExcludeVolumeFromMetrics))
+        {
+            foreach (var exercise in workoutHistoryService.GetExercises(workout.Id))
+            {
+                foreach (var set in workoutHistoryService.GetSets(exercise.Id))
+                {
+                    if (!set.IsCompleted || set.IsSkipped)
+                        continue;
+
+                    total += Math.Max(0, set.Reps) * Math.Max(0, set.WeightKg ?? 0);
+                }
+            }
+        }
+
+        return total;
     }
 
     private HistoryWorkoutPresentationModel ToPresentationModel(HistoryWorkoutItemModel model)
@@ -173,6 +209,9 @@ public partial class HistoryPageViewModel : ObservableObject
             DurationMinutes = model.DurationMinutes,
             IsPartial = model.IsPartial,
             PlannedSetCount = model.PlannedSetCount,
+            EstimatedCaloriesBurned = model.ExcludeCaloriesFromMetrics
+                ? 0
+                : dashboardStatisticsService.CalculateEstimatedWorkoutCalories(model),
             Notes = model.Notes
         };
 
@@ -210,6 +249,7 @@ public partial class HistoryPageViewModel : ObservableObject
             Name = model.Name,
             Notes = model.Notes,
             ImageSource = model.ImageSource,
+            TrackingMode = model.TrackingMode,
             Metadata = metadata,
             CompletedAt = model.CompletedAt
         };
@@ -220,9 +260,12 @@ public partial class HistoryPageViewModel : ObservableObject
             {
                 Id = set.Id,
                 HistoryExerciseId = set.HistoryExerciseId,
+                TrackingMode = model.TrackingMode,
                 SortNumber = set.SortNumber,
                 Reps = set.Reps,
                 WeightKg = set.WeightKg,
+                DurationSeconds = set.DurationSeconds,
+                DistanceMeters = set.DistanceMeters,
                 RestSeconds = set.RestSeconds,
                 IsCompleted = set.IsCompleted,
                 IsSkipped = set.IsSkipped,
